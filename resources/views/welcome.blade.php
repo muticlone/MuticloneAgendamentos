@@ -148,17 +148,33 @@
  
 </div>  
 
+
 <div class="row g-12 pt-2">
-  <div class="col-lg-3 col-sm-12 col-md-12 pt-2">
-    <div class="card" style="width: 12rem;">
-      <img src="img/mcdonalds-logo.png " class="card-img-top pt-1" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+  @foreach ($Cadastro_empresa as $index => $empresa)
+    <div class="col-lg-2 col-sm-6 col-md-6 pt-2">
+      <div class="card" style="width: 10rem ;">
+        <img src="img/logo_empresas/{{$empresa->image}} " class="img-thumbnail" class="img-logo"  alt="{{($empresa->razaoSocial)}}">
+        <div class="card-body txt">
+          <p class="card-text">{{($empresa->nomeFantasia)}}</p> 
+          {{-- <p class="card-title">{{mb_substr($empresa->razaoSocial, 0, 24) . (mb_strlen($empresa->razaoSocial) > 24 ? '...' : '') }}</p> --}}
+          <p class="card-text">{{($empresa->area_atuacao)}}</p> 
+          
+          <a href="#" class="btn  btn-sm btn-primary btg">Saber mais +</a>
+        </div>
       </div>
     </div>
-  </div>
+
+    @if (($index + 1) % 4 == 0)
+      </div>
+      <div class="row g-12 pt-2">
+    @endif
+
+  @endforeach
+</div>
+
+    
+
+
 
   
   

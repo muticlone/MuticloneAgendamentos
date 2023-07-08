@@ -10,7 +10,7 @@
         <div class="row g-12">
             <div class="form-group">
                 <label for="formFile" class="form-label">Adicionar logotipo da empresa:</label>
-                <input class="form-control" type="file" id="formFile">
+                <input class="form-control" type="file" id="image" name="image" required>
             </div>
            
                 
@@ -92,13 +92,13 @@
             <div class="col-lg-12 col-sm-12 col-md-12 pt-2 "> 
                 <div class="form-group">
                     <label for="area-atuacao" class="form-label">Área de Atuação</label>
-                    <select class="form-select" id="area-atuacao" name="area-atuacao" onchange="mostrarOutro()" required>
+                    <select class="form-select" id="area-atuacao" name="area_atuacao" onchange="mostrarOutro()" required>
                     <option value="">Selecione uma opção</option>
                     <option value="Beleza e Saúde Feminina">Beleza e Saúde Feminina</option>
                     <option value="Barbearia">Barbearia</option>
                     <option value="Costureira">Costureira</option>
                     <option value="Estúdio de tatuagem">Estúdio de tatuagem</option>
-                    <option value="Restaurantes/Lanchonetes">Restaurantes/Lanchonetes</option>
+                    <option value="Restaurantes/Lanchonetes">Restaurantes</option>
                     <option value="Advogado">Advogado</option>
                     <option value="Mecânico">Mecânico</option>
                     <option value="Engenharia Civil">Engenharia Civil</option>

@@ -17,19 +17,35 @@ class CadastroEmpresaController extends Controller
    
     $data = $request->all();
 
+    //img uploud
+
+    if($request ->hasFile('image') && $request->file('image')->isValid()){
+
+        
+        $requestImage =  $request->image;
+
+        $extensao = $requestImage->extension();
+
+        $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extensao;
+
+        $requestImage->move(public_path('img/logo_empresas'), $imageName);
+
+        $data['image'] =  $imageName;
+    }
+
     $existingEmpresa = $Cadastro_empresa->where('cnpj', $data['cnpj'])->first();
 
     if ($existingEmpresa) {
         return redirect()->route('home')->with('msgErro', 'Essa empresa já possui cadastro!');
     }
 
-    $areaAtuacao = $request->input('area-atuacao');
+    $areaAtuacao = $request->input('area_atuacao');
 
     if ($areaAtuacao === 'Outro') {
         $areaAtuacao = $request->input('outra-area');
     }
 
-    $data['area-atuacao'] = $areaAtuacao;
+    $data['area_atuacao'] = $areaAtuacao;
 
     $Cadastro_empresa->create($data);
 

@@ -23,7 +23,8 @@ class cadastro_de_empresa extends Model
         'bairro',
         'cidade',
         'uf',
-        'area-atuacao',
+        'area_atuacao',
+        'image',
        
     ];
 }
