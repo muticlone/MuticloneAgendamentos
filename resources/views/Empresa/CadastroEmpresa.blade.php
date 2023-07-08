@@ -89,6 +89,35 @@
                     <input type ="text" class="form-control" id="uf" name="uf" placeholder ="Uf"required/>
                 </div>
             </div>
+            <div class="col-lg-12 col-sm-12 col-md-12 pt-2 "> 
+                <div class="form-group">
+                    <label for="area-atuacao" class="form-label">Área de Atuação</label>
+                    <select class="form-select" id="area-atuacao" name="area-atuacao" onchange="mostrarOutro()" required>
+                    <option value="">Selecione uma opção</option>
+                    <option value="Beleza e Saúde Feminina">Beleza e Saúde Feminina</option>
+                    <option value="Barbearia">Barbearia</option>
+                    <option value="Costureira">Costureira</option>
+                    <option value="Estúdio de tatuagem">Estúdio de tatuagem</option>
+                    <option value="Restaurantes/Lanchonetes">Restaurantes/Lanchonetes</option>
+                    <option value="Advogado">Advogado</option>
+                    <option value="Mecânico">Mecânico</option>
+                    <option value="Engenharia Civil">Engenharia Civil</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Recursos Humanos">Recursos Humanos</option>
+                    <option value="Saúde">Saúde</option>
+                    <option value="Limpeza e higienização">Limpeza e higienização</option>
+                    <option value="Outro">Outro</option>
+                    </select>
+
+                    <div class="col-12 pt-2" id="div-outro" style="display: none;">
+                    <div class="form-group">
+                        <label for="outra-area">Outras Áreas de Atuação:</label>
+                        <input type="text" class="form-control" id="outra-area" name="outra-area" placeholder="Digite sua Área de Atuação">
+                        <input type="hidden" id="area-atuacao-hidden" name="area-atuacao-hidden" value="">
+                    </div>
+                    </div>
+
+
 
             
             <div class="col-lg-12 col-sm-12 col-md-12 pt-2  "align="center"> 
@@ -100,6 +129,8 @@
        
     </form>
 </div>
+
+
 
 
 

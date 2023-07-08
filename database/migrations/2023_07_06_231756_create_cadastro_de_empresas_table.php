@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('bairro');
             $table->string('cidade');
             $table->string('uf');
+            $table->string('area-atuacao');
+            
         });
     }
 

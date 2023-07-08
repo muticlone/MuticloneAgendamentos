@@ -147,15 +147,23 @@
 
  
 </div>  
-<div class="pt-2">
-  <div class="card" style="width: 13rem;">
-    <img src="img/mcdonalds-logo.png" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+
+<div class="row g-12 pt-2">
+  <div class="col-lg-3 col-sm-12 col-md-12 pt-2">
+    <div class="card" style="width: 12rem;">
+      <img src="img/mcdonalds-logo.png " class="card-img-top pt-1" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
     </div>
   </div>
+
+  
+  
+  
+  
 </div>
 
 
