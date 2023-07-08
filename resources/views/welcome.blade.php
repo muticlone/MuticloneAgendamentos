@@ -52,17 +52,20 @@
             <p>Some representative placeholder content for the second slide.</p> --}}
           </div>
         </div>
+
+        
         <div class="carousel-item" data-bs-interval="8000">
           <div class="conteiner.img">
-              <img src="img/tratamento_pele.png" class="d-block w-100" alt="...">
+              <img src="img/tatuagem.png" class="d-block w-100" alt="...">
               
           </div>
-          
+        
           <div class="carousel-caption d-none d-md-block">
-            {{-- <h5>Second slide label</h5>
-            <p>Some representative placeholder content for the second slide.</p> --}}
+            {{-- <h5>Third slide label</h5>
+            <p>Some representative placeholder content for the third slide.</p> --}}
           </div>
         </div>
+       
         
 
         <div class="carousel-item" data-bs-interval="8000">
@@ -126,6 +129,7 @@
         </div>
 
 
+
        
 
         
@@ -140,7 +144,20 @@
         <span class="visually-hidden">Next</span>
       </button>
   </div>
+
+ 
 </div>  
+<div class="pt-2">
+  <div class="card" style="width: 13rem;">
+    <img src="img/mcdonalds-logo.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+</div>
+
 
 
 
