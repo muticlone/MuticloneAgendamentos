@@ -8,7 +8,17 @@
 
 
   <div class=" conteiner-search  col-8">
-    <input type="text" class="form-control" id="search" name="search" placeholder="Procurar...">
+    <form action="/" method="GET">
+    
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" id="search" name="search" placeholder="Procurar...">
+        <button class="btn btn-outline-secondary custom-btn" type="submit">
+          <ion-icon name="search-outline" class="iconCentralizar"></ion-icon>
+          Buscar
+        </button>
+      </div>
+    </form>
+    
   </div>
 
 
@@ -148,10 +158,15 @@
  
 </div>  
 
+@if($search)
+  <h2 class="pt-1">Buscando por : {{$search}}</h2>
+@else
+@endif
+
 
 <div class="row g-12 pt-2">
   @foreach ($Cadastro_empresa as $index => $empresa)
-    <div class="col-lg-2 col-sm-6 col-md-6 pt-2">
+    <div class="col-auto pt-2">
       <div class="card" style="width: 10rem ;">
         <img src="img/logo_empresas/{{$empresa->image}} " class="img-thumbnail" class="img-logo"  alt="{{($empresa->razaoSocial)}}">
         <div class="card-body txt">
@@ -170,6 +185,19 @@
     @endif
 
   @endforeach
+
+
+    @if(count($Cadastro_empresa)==0 && $search) 
+      <div class="alert alert-warning pt-2" role="alert">
+      Não foi possível encontrar nenhuma empresa ou serviço com: {{$search}}! <a href="/">Ver todos</a>
+      </div>
+    @elseif(count($Cadastro_empresa)==0)
+      <div class="alert alert--warning pt-2" role="alert">
+          Não a enventos disponíveis
+      </div>
+
+
+    @endif
 </div>
 
     

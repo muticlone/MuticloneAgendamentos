@@ -41,7 +41,20 @@ footer p{
  font-size: 20px;
   color: #f2a340;
   margin-right: 5px;
+  vertical-align: middle;
  
+}
+
+.iconCentralizar{
+  vertical-align: middle;
+  font-size: 20px;
+  color: #f2a340;
+  margin-right: 5px;
+
+}
+
+.custom-btn {
+  color: #f2a340;
 }
 
 .carousel img{
@@ -106,6 +119,4 @@ footer p{
   }
 
 
-  .teste{
-    
-  }
+  

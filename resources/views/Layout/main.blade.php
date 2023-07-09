@@ -50,7 +50,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown" id ='info-container'>
                         <a class="nav-link dropdown-toggle current-theme tema" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                            <ion-icon name="copy-outline"></ion-icon>
+                            <ion-icon name="copy-outline"></ion-icon> Tema
                         </a>
                        
                         <ul class="dropdown-menu themes-list">
