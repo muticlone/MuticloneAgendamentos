@@ -127,7 +127,7 @@
     </main>
 
    
-    <footer class="site-footer">
+    <footer class="site-footer pt-5">
         <p>Muticlone &copy; 2023</p>
         
     </footer>    
