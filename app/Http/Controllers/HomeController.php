@@ -22,7 +22,7 @@ class HomeController extends Controller
                       ->orWhere('nomeFantasia', 'like', '%' . $search . '%')
                       ->orWhere('area_atuacao', 'like', '%' . $search . '%');
                      
-            })->get();
+            })->paginate(10);
 
         }else{
             // $Cadastro_empresa = cadastro_de_empresa::all()->reverse();

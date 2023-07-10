@@ -160,6 +160,7 @@
 
 @if($search)
   <h2 class="pt-1">Buscando por : {{$search}}</h2>
+  
 @else
 
 @endif
@@ -187,18 +188,18 @@
   @endforeach
  
 </div>
-@if(!$search)
-{{-- paginação  --}}
-<div class="py-4  d-flex justify-content-center" >
+
+{{-- paginação --}}
+<div class="py-4 d-flex justify-content-center">
   <ul class="pagination">
       {{-- <!-- Página Anterior --> --}}
-      @if ($Cadastro_empresa->onFirstPage())
+      @if ($Cadastro_empresa->appends(['search' => $search])->onFirstPage())
           <li class="page-item disabled">
               <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
           </li>
       @else
           <li class="page-item">
-              <a class="page-link" href="{{ $Cadastro_empresa->previousPageUrl() }}">Anterior</a>
+              <a class="page-link" href="{{ $Cadastro_empresa->appends(['search' => $search])->previousPageUrl() }}">Anterior</a>
           </li>
       @endif
 
@@ -210,15 +211,15 @@
               </li>
           @else
               <li class="page-item">
-                  <a class="page-link" href="{{ $Cadastro_empresa->url($i) }}">{{ $i }}</a>
+                  <a class="page-link" href="{{ $Cadastro_empresa->appends(['search' => $search])->url($i) }}">{{ $i }}</a>
               </li>
           @endif
       @endfor
 
       {{-- <!-- Próxima Página --> --}}
-      @if ($Cadastro_empresa->hasMorePages())
+      @if ($Cadastro_empresa->appends(['search' => $search])->hasMorePages())
           <li class="page-item">
-              <a class="page-link" href="{{ $Cadastro_empresa->nextPageUrl() }}">Próxima</a>
+              <a class="page-link" href="{{ $Cadastro_empresa->appends(['search' => $search])->nextPageUrl() }}">Próxima</a>
           </li>
       @else
           <li class="page-item disabled">
@@ -226,11 +227,8 @@
           </li>
       @endif
   </ul>
-</div> 
+</div>
 
-@else
-
-@endif
 
 
 
