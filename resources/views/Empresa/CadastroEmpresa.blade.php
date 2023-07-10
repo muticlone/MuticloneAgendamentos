@@ -98,7 +98,7 @@
                     <option value="Barbearia">Barbearia</option>
                     <option value="Costureira">Costureira</option>
                     <option value="Estúdio de tatuagem">Estúdio de tatuagem</option>
-                    <option value="Restaurantes/Lanchonetes">Restaurantes</option>
+                    <option value="Restaurantes">Restaurantes</option>
                     <option value="Advogado">Advogado</option>
                     <option value="Mecânico">Mecânico</option>
                     <option value="Engenharia Civil">Engenharia Civil</option>
@@ -115,7 +115,17 @@
                         <input type="text" class="form-control" id="outra-area" name="outra-area" placeholder="Digite sua Área de Atuação">
                         <input type="hidden" id="area-atuacao-hidden" name="area-atuacao-hidden" value="">
                     </div>
+                
+                
+                </div>
+
+                <div class="col-lg-12 col-sm-12 col-md-12 pt-2 "> 
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1" class="form-label">Descrição: </label>
+                        
+                        <textarea class="form-control" name="descricao" rows="3"placeholder="Descrição sobre seu negócio"  required></textarea>
                     </div>
+                </div>
 
 
 

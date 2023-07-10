@@ -9,12 +9,13 @@ use App\Http\Controllers\ProxyController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
-Route::get('/empresas/dados', [HomeController::class, 'store'])->name('dados');
+Route::get('/empresas/dados/{id}', [HomeController::class, 'show']);
 
 
-Route::get('/cadastrar/agentamentos', [AgendamentoController::class, 'create'])->name('cadastrar.Agentamentos');
 
-Route::get('/cadastrar/empresa', [CadastroEmpresaController::class, 'create'])->name('pag.cadastrar.Empresa');
+Route::get('/cadastrar/agentamentos', [AgendamentoController::class, 'create'])->name('cadastrar.Agentamentos')->middleware('auth');
+
+Route::get('/cadastrar/empresa', [CadastroEmpresaController::class, 'create'])->name('pag.cadastrar.Empresa')->middleware('auth');
 
 Route::post('/cadastrar/empresa',[CadastroEmpresaController::class, 'store'])->name('cadastrar.Empresa');
 

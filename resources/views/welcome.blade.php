@@ -166,38 +166,75 @@
 
 <div class="row g-12 pt-2">
   @foreach ($Cadastro_empresa as $index => $empresa)
-    <div class="col-auto pt-2">
+    <div class="col-auto">
       <div class="card" style="width: 10rem ;">
-        <img src="img/logo_empresas/{{$empresa->image}} " class="img-thumbnail" class="img-logo"  alt="{{($empresa->razaoSocial)}}">
+        <img src="img/logo_empresas/{{$empresa->image}}" class="img-thumbnail" class="img-logo" alt="{{($empresa->razaoSocial)}}">
         <div class="card-body txt">
           <p class="card-text">{{($empresa->nomeFantasia)}}</p> 
-          {{-- <p class="card-title">{{mb_substr($empresa->razaoSocial, 0, 24) . (mb_strlen($empresa->razaoSocial) > 24 ? '...' : '') }}</p> --}}
           <p class="card-text">{{($empresa->area_atuacao)}}</p> 
           
-          <a href="{{route('dados');}}" class="btn  btn-sm btn-primary btg">Saber mais +</a>
+          <a href="/empresas/dados/{{$empresa->id}}" class="btn btn-sm btn-primary btg">Saber mais +</a>
         </div>
       </div>
     </div>
 
-    @if (($index + 1) % 4 == 0)
+    @if (($index + 1) % 8 == 0)
       </div>
       <div class="row g-12 pt-2">
     @endif
 
   @endforeach
+ 
+  <div class="py-4">
+    <ul class="pagination">
+        <!-- Página Anterior -->
+        @if ($Cadastro_empresa->onFirstPage())
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+            </li>
+        @else
+            <li class="page-item">
+                <a class="page-link" href="{{ $Cadastro_empresa->previousPageUrl() }}">Anterior</a>
+            </li>
+        @endif
+
+        <!-- Números de página -->
+        @for ($i = 1; $i <= $Cadastro_empresa->lastPage(); $i++)
+            @if ($i == $Cadastro_empresa->currentPage())
+                <li class="page-item active" aria-current="page">
+                    <span class="page-link">{{ $i }}</span>
+                </li>
+            @else
+                <li class="page-item">
+                    <a class="page-link" href="{{ $Cadastro_empresa->url($i) }}">{{ $i }}</a>
+                </li>
+            @endif
+        @endfor
+
+        <!-- Próxima Página -->
+        @if ($Cadastro_empresa->hasMorePages())
+            <li class="page-item">
+                <a class="page-link" href="{{ $Cadastro_empresa->nextPageUrl() }}">Próxima</a>
+            </li>
+        @else
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Próxima</a>
+            </li>
+        @endif
+    </ul>
+</div>
 
 
-    @if(count($Cadastro_empresa)==0 && $search) 
-      <div class="alert alert-warning pt-2" role="alert">
+
+  @if(count($Cadastro_empresa)==0 && $search) 
+    <div class="alert alert-warning pt-2" role="alert">
       Não foi possível encontrar nenhuma empresa ou serviço com: {{$search}}! <a href="/">Ver todos</a>
-      </div>
-    @elseif(count($Cadastro_empresa)==0)
-      <div class="alert alert--warning pt-2" role="alert">
-          Não a enventos disponíveis
-      </div>
-
-
-    @endif
+    </div>
+  @elseif(count($Cadastro_empresa)==0)
+    <div class="alert alert--warning pt-2" role="alert">
+      Não há eventos disponíveis
+    </div>
+  @endif
 </div>
 
     

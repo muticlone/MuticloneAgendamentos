@@ -25,6 +25,7 @@ class cadastro_de_empresa extends Model
         'uf',
         'area_atuacao',
         'image',
+        'descricao',
        
     ];
 }

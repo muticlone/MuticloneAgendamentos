@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\cadastro_de_empresa;
 
+
 class CadastroEmpresaController extends Controller
 {
     public function create(){
