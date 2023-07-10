@@ -35,4 +35,8 @@ class HomeController extends Controller
 
 
     }
+
+    public function store(){
+        return view('Empresa.DadosEmpresa');
+    }
 }

@@ -174,7 +174,7 @@
           {{-- <p class="card-title">{{mb_substr($empresa->razaoSocial, 0, 24) . (mb_strlen($empresa->razaoSocial) > 24 ? '...' : '') }}</p> --}}
           <p class="card-text">{{($empresa->area_atuacao)}}</p> 
           
-          <a href="#" class="btn  btn-sm btn-primary btg">Saber mais +</a>
+          <a href="{{route('dados');}}" class="btn  btn-sm btn-primary btg">Saber mais +</a>
         </div>
       </div>
     </div>

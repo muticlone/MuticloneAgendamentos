@@ -8,6 +8,10 @@ use App\Http\Controllers\ProxyController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+
+Route::get('/empresas/dados', [HomeController::class, 'store'])->name('dados');
+
+
 Route::get('/cadastrar/agentamentos', [AgendamentoController::class, 'create'])->name('cadastrar.Agentamentos');
 
 Route::get('/cadastrar/empresa', [CadastroEmpresaController::class, 'create'])->name('pag.cadastrar.Empresa');
