@@ -184,10 +184,10 @@
     @endif
 
   @endforeach
- 
-  <div class="py-4">
+ {{-- paginação  --}}
+  <div class="py-4  d-flex justify-content-center" >
     <ul class="pagination">
-        <!-- Página Anterior -->
+        {{-- <!-- Página Anterior --> --}}
         @if ($Cadastro_empresa->onFirstPage())
             <li class="page-item disabled">
                 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
@@ -198,7 +198,7 @@
             </li>
         @endif
 
-        <!-- Números de página -->
+        {{-- <!-- Números de página --> --}}
         @for ($i = 1; $i <= $Cadastro_empresa->lastPage(); $i++)
             @if ($i == $Cadastro_empresa->currentPage())
                 <li class="page-item active" aria-current="page">
@@ -211,7 +211,7 @@
             @endif
         @endfor
 
-        <!-- Próxima Página -->
+        {{-- <!-- Próxima Página --> --}}
         @if ($Cadastro_empresa->hasMorePages())
             <li class="page-item">
                 <a class="page-link" href="{{ $Cadastro_empresa->nextPageUrl() }}">Próxima</a>
@@ -222,7 +222,7 @@
             </li>
         @endif
     </ul>
-</div>
+  </div>
 
 
 
