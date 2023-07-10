@@ -168,7 +168,7 @@
   @foreach ($Cadastro_empresa as $index => $empresa)
     <div class="col-auto">
       <div class="card" style="width: 10rem ;">
-        <img src="img/logo_empresas/{{$empresa->image}}" class="img-thumbnail" class="img-logo" alt="{{($empresa->razaoSocial)}}">
+        <img src="img/logo_empresas/{{$empresa->image}}" class=" img_tela_home" class="img-logo" alt="{{($empresa->razaoSocial)}}">
         <div class="card-body txt">
           <p class="card-text">{{($empresa->nomeFantasia)}}</p> 
           <p class="card-text">{{($empresa->area_atuacao)}}</p> 

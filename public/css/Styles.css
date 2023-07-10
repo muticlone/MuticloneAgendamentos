@@ -62,8 +62,7 @@ footer p{
 
 .carousel img{
  
-     
-    /* height: 320px; */
+    
    
     border-radius: 10px;
    
@@ -112,6 +111,8 @@ footer p{
 .card {
     
     height: 100%;
+    
+    border-radius: 12px;
   }
 
 .row {
@@ -122,6 +123,29 @@ footer p{
   .btg {
     margin-top: auto;
   }
+
+
+.txt_dados_empresa{
+  text-align: justify;
+}
+
+
+.img_dados_empresa {
+  min-width: 450px;
+  min-height: 300px;
+  max-width: 450px;
+  max-height: 300px;
+  border-radius: 10px  ;
+}
+
+.img_tela_home {
+  min-width: 158px;
+  min-height: 120px;
+  max-width: 158px;
+  max-height: 120px;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden
+}
 
 
   
