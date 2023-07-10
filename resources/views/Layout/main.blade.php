@@ -31,20 +31,41 @@
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{route('home');}}">Home</a>
                   </li>
+                  @auth
                   <li class="nav-item">
                     <a class="nav-link" href="{{route('pag.cadastrar.Empresa');}}">Novo Cadastro Empresa</a>
                   </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Dropdown
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+                
+
+                 
+                  <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Meu serviços</a>
                   </li>
+
+                  <li class="nav-item">
+                   <form action="/logout" method="POST">
+                    @csrf
+                        <a class="nav-link" href="/logout"
+                            onclick="event.preventDefault(); this.closest('form').submit();">
+                            Sair</a>
+                    </form>
+                  </li>
+
+                  
+                      
+                  @endauth
+
+                  @guest
+                      
+                  <li class="nav-item">
+                    <a class="nav-link" href="/login">Entrar</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/register">Cadastrar</a>
+                  </li>
+                  
+                  @endguest
+
                  
                 </ul>
                 <ul class="navbar-nav">
