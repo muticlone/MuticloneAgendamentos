@@ -1,5 +1,5 @@
 @extends('Layout.main')
-
+@section('logo','logo_cadastro.png')
 @section('title','Cadastrar Empresa')
 
 @section('conteudo')
@@ -123,7 +123,7 @@
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1" class="form-label">Descrição: </label>
                         
-                        <textarea class="form-control" name="descricao" rows="3"placeholder="Descrição sobre seu negócio"  required></textarea>
+                        <textarea class="form-control" name="descricao" rows="3"placeholder="Descrição sobre seu negócio" minlength="63" maxlength="250"  required ></textarea>
                     </div>
                 </div>
 

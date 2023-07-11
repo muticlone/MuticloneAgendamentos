@@ -1,6 +1,6 @@
 @extends('Layout.main')
-
-@section('title','home')
+@section('logo','logo_home.png')
+@section('title','Home')
 
 @section('conteudo')
 

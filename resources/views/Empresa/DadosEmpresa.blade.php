@@ -1,5 +1,5 @@
 @extends('Layout.main')
-
+@section('logo','logo_empresa.png')
 @section('title',$empresa->nomeFantasia)
 
 @section('conteudo')

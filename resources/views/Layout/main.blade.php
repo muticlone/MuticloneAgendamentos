@@ -6,6 +6,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
+        <link type="image/png" sizes="148x148" rel="icon" href="/img/logo_ico/@yield('logo')">
+        
         <title>@yield('title')</title>
 
         <!-- fonte do google -->
