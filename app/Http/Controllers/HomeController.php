@@ -49,4 +49,18 @@ class HomeController extends Controller
 
         return view('Empresa.DadosEmpresa',['empresa' => $empresa,'Admempresa' =>  $Admempresa]);
     }
+
+    public function dashboard(){
+        
+        $user = auth()->user();
+
+        $empresa = $user->empresas;
+
+
+
+        
+        return view('dashboard' ,['empresa' => $empresa  ]);
+
+        
+    }
 }

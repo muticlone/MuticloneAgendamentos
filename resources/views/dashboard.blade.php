@@ -1,15 +1,58 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('Layout.main')
+@section('logo','logo_empresa.png')
+@section('title','Dashboard')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-welcome />
+@section('conteudo')
+
+@if(count($empresa)>0)
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Suas empresa</th>
+       
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+        @foreach ($empresa as $empresa)
+
+        
+            
+       
+      <tr>
+        <th scope="row">{{$loop->index+1}}</th>
+        <td> 
+            <div class="list-group">
+                <a class="list-group-item list-group-item-action" href="/empresas/dados/{{$empresa->id}}">{{$empresa->nomeFantasia}}
             </div>
-        </div>
-    </div>
-</x-app-layout>
+           
+        
+        </td>
+       
+        <td>
+            <a href="" class="btn btn-sm btn-warning">Editar</a>
+        </td>
+      </tr>
+      
+     
+      @endforeach
+    </tbody>
+  </table>
+@else
+<div class="alert alert-warning pt-2" role="alert">
+    Voce não tem empresas cadastradas <a href="{{route('pag.cadastrar.Empresa');}}">Cadastrar uma empresa</a>
+</div>
+@endif
+
+
+
+
+    
+
+
+
+
+
+
+@endsection

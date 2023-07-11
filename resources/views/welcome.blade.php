@@ -237,7 +237,7 @@
       Não foi possível encontrar nenhuma empresa ou serviço com: {{$search}}! <a href="/">Ver todos</a>
     </div>
   @elseif(count($Cadastro_empresa)==0)
-    <div class="alert alert--warning pt-2" role="alert">
+    <div class="alert alert-warning pt-2" role="alert">
       Não há eventos disponíveis
     </div>
   @endif
