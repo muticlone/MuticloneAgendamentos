@@ -56,7 +56,12 @@ footer p{
 
 }
 
-
+.vertical-align-middle {
+  
+  display: flex; 
+  align-items: center;
+ 
+}
 
 
 

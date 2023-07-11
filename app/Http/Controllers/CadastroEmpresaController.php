@@ -48,6 +48,10 @@ class CadastroEmpresaController extends Controller
 
     $data['area_atuacao'] = $areaAtuacao;
 
+    $user = auth()->user();
+    
+    $data['user_id'] = $user->id;
+
     $Cadastro_empresa->create($data);
 
     return redirect()->route('home')->with('msg', 'Empresa cadastrada com sucesso!');

@@ -6,6 +6,8 @@ use App\Models\cadastro_de_empresa;
 
 use Illuminate\Http\Request;
 
+use App\Models\User;
+
 class HomeController extends Controller
 {
     public function index(){
@@ -42,6 +44,9 @@ class HomeController extends Controller
 
         $empresa = cadastro_de_empresa::findOrfail($id);
 
-        return view('Empresa.DadosEmpresa',['empresa' => $empresa]);
+         
+         $Admempresa = User::where('id', $empresa->user_id)->first()->toArray();
+
+        return view('Empresa.DadosEmpresa',['empresa' => $empresa,'Admempresa' =>  $Admempresa]);
     }
 }

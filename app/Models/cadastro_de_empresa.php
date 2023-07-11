@@ -26,6 +26,11 @@ class cadastro_de_empresa extends Model
         'area_atuacao',
         'image',
         'descricao',
+        'user_id',
        
     ];
+
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
 }
