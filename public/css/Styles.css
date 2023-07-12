@@ -67,6 +67,9 @@ footer p{
 svg{
   cursor: pointer;
 }
+.cursor{
+  cursor: pointer;
+}
 
 
 
@@ -153,6 +156,18 @@ svg{
   max-height: 300px;
   border-radius: 10px  ;
 }
+
+.img_edit {
+ 
+  min-width: 100px;
+  min-height: 100px;
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 10px  ;
+  
+}
+
+
 
 .img_tela_home {
   min-width: 158px;

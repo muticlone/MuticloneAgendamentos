@@ -4,17 +4,27 @@
 
 @section('conteudo')
 
-<div class="col-md-7 offset-md-3 pt-2"> 
-    <form action="#" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+<div class="col-md-8 offset-md-2 pt-2"> 
+    <form action="/empresa/edit/{{ $empresa->id}}" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
         @csrf
+        @method('PUT')
         <div class="row g-12">
+
+          
+            <div class="col-lg-12 col-sm-12 col-md-12 pt-2"  align = "center"> 
+                <img src="/img/logo_empresas/{{ $empresa->image}}" class="img-fluid  img_edit" alt="{{$empresa->razaoSocial}}">
+            </div>
+            <div class="alert alert-light" role="alert" align = "center">
+                Editando cadastro {{$empresa->nomeFantasia}}
+            </div>
             
-           
-            <div class="form-group">
+            <div class="form-group pt-2">
+                
+                
                 <label for="formFile" class="form-label">Adicionar logotipo da empresa:</label>
-                <input class="form-control" type="file" id="image" name="image" 
                
-                required>
+                <input class="form-control" value="" type="file" id="image" name="image">
+                
                 
             </div>
   
@@ -23,7 +33,7 @@
                     <div class="form-group">
                         <label for="title">
                            
-                            Cnpj
+                            CNPJ/CPF
                             
 
                         </label>
@@ -35,15 +45,16 @@
                                  <path d="M3 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h3v-3.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V16h3a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H3Zm1 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM7.5 5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 8h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5Z"/>
                                 </svg>
                             </span>
-                            <input type ="text" class="form-control" id="cnpj" name="cnpj"
+                            <input type ="text" class="form-control" id="cnpj" name="cnpj_cpf"
                             placeholder ="Cnpj"  maxlength="18" 
                             OnKeyPress="formatar('##.###.###/####-##', this)" 
-                            value="{{$empresa->cnpj}}"
+                            value="{{$empresa->cnpj_cpf}}"
                             aria-describedby="validationTooltipUsernamePrepend"
                             required/>
                             <div class="invalid-tooltip">
-                                Por favor Digite o seu cnpj
+                                Por favor, digite o seu cnpj/cpf
                             </div>
+                            
                             
                         </div>
                        
@@ -73,7 +84,7 @@
                         value="{{$empresa->razaoSocial}}"
                         />
                         <div class="invalid-tooltip">
-                            Por favor Digite sua razão Social
+                            Por favor, digite sua razão Social
                         </div>
                     </div>
                     
@@ -100,7 +111,7 @@
                         value="{{$empresa->nomeFantasia}}"
                         />
                         <div class="invalid-tooltip">
-                            Por favor Digite seu nome Fantasia
+                            Por favor, digite seu nome Fantasia
                         </div>
                     </div>
                     
@@ -124,9 +135,13 @@
                             </svg>
                         </span>
                         <input type ="tel" class="form-control" id="telefone" 
-                        name="telefone" placeholder ="Telefone" required
+                        name="telefone" placeholder ="Telefone" 
+                        aria-describedby="validationTooltipUsernamePrepend" required
                         value="{{$empresa->telefone}}"
                         />
+                        <div class="invalid-tooltip">
+                            Por favor, digite seu número de telefone
+                        </div>
                     </div>
                     
                 </div>
@@ -152,9 +167,12 @@
                         <input type="tel" class="form-control" id="Celular" 
                         name="celular" placeholder ="Celular" maxlength="13"
                         onkeypress="formatar('##-#####-###', this)" 
-                        value="{{$empresa->celular}}"
-                        
-                        />
+                        aria-describedby="validationTooltipUsernamePrepend"
+                        required
+                        value="{{$empresa->celular}}"/>
+                        <div class="invalid-tooltip">
+                            Por favor, digite seu número do celular da sua empresa. Esse número será usado para interações com WhatsApp
+                        </div>
                     </div>
                    
                 </div>
@@ -174,7 +192,11 @@
                         name="cep" placeholder ="Cep"  onblur="pesquisacep(this.value);"
                          OnKeyPress="formatar('#####-###', this)" size="10" maxlength="9" 
                          value="{{$empresa->cep}}"
+                         aria-describedby="validationTooltipUsernamePrepend"
                          required/>
+                         <div class="invalid-tooltip">
+                            Por favor, digite seu número do seu cep
+                        </div>
                     </div>
                     
                 </div>
@@ -194,7 +216,11 @@
                         <input type ="text" class="form-control" id="logradouro" 
                         name="logradouro" placeholder ="Logradouro"required
                         value="{{$empresa->logradouro}}"
+                        aria-describedby="validationTooltipUsernamePrepend"
                         />
+                        <div class="invalid-tooltip">
+                            Por favor, digite mome da sua rua 
+                        </div>
                     </div>
                     
                 </div>
@@ -234,9 +260,14 @@
                             </svg>
                         </span>
                         <input type ="text" class="form-control" id="bairro" name="bairro" 
-                        placeholder ="Bairro" required
+                        placeholder ="Bairro" 
+                        aria-describedby="validationTooltipUsernamePrepend" required
                         value="{{$empresa->bairro}}"
+                       
                         />
+                        <div class="invalid-tooltip">
+                            Por favor, digite mome do seu bairro
+                        </div>
                     </div>
                    
                 </div>
@@ -254,30 +285,37 @@
                             </svg>
                         </span>
                         <input type ="text" class="form-control" id="cidade" name="cidade" 
-                        placeholder ="Cidade" required
+                        placeholder ="Cidade" aria-describedby="validationTooltipUsernamePrepend" required
+
                         value="{{$empresa->cidade}}"/>
+                        <div class="invalid-tooltip">
+                            Por favor, digite mome da sua cidade
+                        </div>
                     </div>
                    
                 </div>
             </div>
 
             <div class="col-lg-3 col-sm-12 col-md-12 pt-2 "> 
-                <div class="form-group">
+               <div class="form-group">
                     <label for="title">Numero</label>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">
                             <svg
                                 data-bs-toggle="tooltip" data-bs-placement="bottom" 
-                                data-bs-title="Digite numero do local, caso não tenha use 's/n'"   
+                                 data-bs-title="Digite numero do local, caso não tenha use 's/n'"   
                                 xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-geo-fill" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z"/>
                             </svg>
                         </span>
                         <input type ="txt" class="form-control" id="numero_endereco" 
                         name="numero_endereco" placeholder ="N°"required
-                        
+                        aria-describedby="validationTooltipUsernamePrepend"
                         value="{{$empresa->numero_endereco}}"
                         />
+                        <div class="invalid-tooltip">
+                            Por favor, digite numero do local, caso não tenha use 's/n'
+                        </div>
                     </div>
                   
                 </div>
@@ -298,9 +336,12 @@
                             </svg>
                         </span>
                         <input type ="text" class="form-control" id="uf" maxlength="2" name="uf"
-                        placeholder ="Uf"required
+                        placeholder ="Uf" aria-describedby="validationTooltipUsernamePrepend" required
                         value="{{$empresa->uf}}"
                         />
+                        <div class="invalid-tooltip">
+                            Por favor, digite a sigla do seu estado, por exemplo, 'BA'.
+                        </div>
                     </div>
                     
                 </div>
@@ -340,9 +381,16 @@
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1" class="form-label">Descrição: </label>
                         
-                        <textarea class="form-control" name="descricao" rows="3"
-                        placeholder="Descrição sobre seu negócio" minlength="63" maxlength="250"  
-                        required >{{$empresa->descricao}}</textarea>
+                 
+                        <div class="input-group mb-3"> 
+                            <textarea class="form-control" name="descricao" rows="3"
+                            placeholder="Descrição sobre seu negócio" minlength="63" maxlength="250" 
+                            aria-describedby="validationTooltipUsernamePrepend"
+                            required >{{$empresa->descricao}}</textarea>
+                            <div class="invalid-tooltip">
+                                Por favor, digite uma breve descrição sobre o seu negócio
+                            </div>
+                        </div>
                     </div>
                 </div>
 

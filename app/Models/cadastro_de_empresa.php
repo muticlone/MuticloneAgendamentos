@@ -11,7 +11,7 @@ class cadastro_de_empresa extends Model
 
     protected $fillable = [
         
-        'cnpj',
+        'cnpj_cpf',
         'razaoSocial',
         'nomeFantasia',
         'telefone',

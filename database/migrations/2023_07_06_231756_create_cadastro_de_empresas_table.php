@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('cadastro_de_empresas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('cnpj');
+            $table->string('cnpj_cpf');
             $table->string('razaoSocial');
             $table->string('nomeFantasia')->nullable();
             $table->string('telefone');

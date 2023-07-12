@@ -36,11 +36,11 @@ class CadastroEmpresaController extends Controller
         $data['image'] =  $imageName;
     }
 
-    $existingEmpresa = $Cadastro_empresa->where('cnpj', $data['cnpj'])->first();
+    // $existingEmpresa = $Cadastro_empresa->where('cnpj-cpf', $data['cnpj-cpf'])->first();
 
-    if ($existingEmpresa) {
-        return redirect()->route('home')->with('msgErro', 'Essa empresa já possui cadastro!');
-    }
+    // if ($existingEmpresa) {
+    //     return redirect()->route('home')->with('msgErro', 'Essa empresa já possui cadastro!');
+    // }
 
     $areaAtuacao = $request->input('area_atuacao');
 
@@ -72,6 +72,29 @@ public function edit($id){
 
     return view('Empresa.CadastroEmpresaedit', ['empresa' => $empresa]);
 
+}
+
+public function update(Request $request){
+
+    $empresa = cadastro_de_empresa::findOrFail($request->id);
+    $data = $request->all();
+
+
+ if ($request->hasFile('image') && $request->file('image')->isValid()) {
+
+    unlink(public_path('img/logo_empresas/' . $empresa->image));
+    $requestImage = $request->image;
+    $extension = $requestImage->extension();
+    $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+    $requestImage->move(public_path('img/logo_empresas'), $imageName);
+    $data['image'] = $imageName;
+}
+
+    cadastro_de_empresa::findOrFail($empresa->id)->update($data);
+
+ return redirect('/dashboard')->with('msg', 'Atualizado com sucesso!');
+
+    
 }
 
 

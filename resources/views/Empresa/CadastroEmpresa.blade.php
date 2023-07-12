@@ -4,7 +4,7 @@
 
 @section('conteudo')
 
-<div class="col-md-7 offset-md-3 pt-2"> 
+<div class="col-md-7 offset-md-3 pt-4"> 
     <form action="{{route('cadastrar.Empresa');}}" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
         @csrf
         <div class="row g-12">
@@ -19,8 +19,11 @@
                     
                     
                     <div class="form-group">
-                       
-                        <label for="title">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input cursor" type="checkbox"  role="switch" id="flexSwitchCheckChecked" onchange="changeInputType()">
+                            <label class="form-check-label cursor" for="flexSwitchCheckChecked" id ="check">Pessoa Física</label>
+                        </div>
+                        <label for="title" id="labelCnpj">
                             
                             Cnpj
 
@@ -33,7 +36,7 @@
                                     <path d="M3 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h3v-3.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V16h3a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H3Zm1 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM7.5 5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 8h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5Z"/>
                                 </svg>
                             </span>
-                            <input type ="text" class="form-control" id="cnpj" name="cnpj"
+                            <input type ="text" class="form-control" id="cnpj" name="cnpj_cpf"
                             placeholder ="Cnpj"  maxlength="18"  minlength="18"
 
                             OnKeyPress="formatar('##.###.###/####-##', this)" 
@@ -41,10 +44,16 @@
                             required/>
                            
                             <div class="invalid-tooltip">
-                                  Por favor Digite o seu cnpj
+                                  Por favor, digite o seu CNPJ OU CPF
                             </div>
+                            <script>
+                               
+                            </script>
+
+                           
                               
                         </div>
+                       
                         
                     </div>
                 </div>
@@ -52,6 +61,9 @@
            
             <div class="col-lg-7 col-sm-12 col-md-12 pt-2 "> 
                 <div class="form-group">
+                    <div class="form-check form-switch">
+                        
+                    </div>
                     <label for="title ">
                        
                         Razão Social
@@ -74,7 +86,7 @@
                         
     
                         <div class="invalid-tooltip">
-                            Por favor Digite sua razão Social
+                            Por favor, digite sua razão Social
                         </div>
                         
                     </div>
@@ -101,7 +113,7 @@
                         aria-describedby="validationTooltipUsernamePrepend"
                         required />
                         <div class="invalid-tooltip">
-                            Por favor Digite seu nome Fantasia
+                            Por favor, digite seu nome Fantasia
                         </div>
                     </div>
                    
@@ -126,7 +138,13 @@
                             </svg>
                         </span>
                         <input type ="tel" class="form-control" id="telefone" 
-                        name="telefone" placeholder ="Telefone" required/>
+                        name="telefone" placeholder ="Telefone" 
+                        aria-describedby="validationTooltipUsernamePrepend"
+                        required/>
+                        <div class="invalid-tooltip">
+                            Por favor, digite seu número de telefone
+                        </div>
+                        
                     </div>
                    
                 </div>
@@ -152,7 +170,13 @@
                         <input type="tel" class="form-control" id="Celular" 
                         name="celular" placeholder ="Celular" maxlength="13"
                         onkeypress="formatar('##-#####-###', this)" 
+                        aria-describedby="validationTooltipUsernamePrepend"
+                        required
                         />
+                        <div class="invalid-tooltip">
+                            Por favor, digite seu número do celular da sua empresa. Esse número será usado para interações com WhatsApp
+                        </div>
+
                     </div>
                     
                    
@@ -172,7 +196,11 @@
                         <input type="text" class="form-control" id="cep" 
                         name="cep" placeholder ="Cep"  onblur="pesquisacep(this.value);"
                          OnKeyPress="formatar('#####-###', this)" size="10" maxlength="9" 
+                         aria-describedby="validationTooltipUsernamePrepend"
                          required/>
+                         <div class="invalid-tooltip">
+                            Por favor, digite seu número do seu cep
+                        </div>
                     </div>
                     
                 </div>
@@ -190,8 +218,11 @@
                             </svg>
                         </span>
                         <input type ="text" class="form-control" id="logradouro" 
-                        name="logradouro" placeholder ="Logradouro"required/>
-
+                        name="logradouro" placeholder ="Logradouro"required
+                        aria-describedby="validationTooltipUsernamePrepend"/>
+                        <div class="invalid-tooltip">
+                            Por favor, digite mome da sua rua 
+                        </div>
                     </div>
                     
                 </div>
@@ -228,7 +259,12 @@
                             </svg>
                         </span>
                         <input type ="text" class="form-control" id="bairro" name="bairro" 
-                        placeholder ="Bairro" required/>
+                        placeholder ="Bairro" 
+                        aria-describedby="validationTooltipUsernamePrepend"
+                        required/>
+                        <div class="invalid-tooltip">
+                            Por favor, digite mome do seu bairro
+                        </div>
                     </div>
                     
                 </div>
@@ -246,7 +282,10 @@
                             </svg>
                         </span>
                         <input type ="text" class="form-control" id="cidade" name="cidade" 
-                        placeholder ="Cidade" required/>
+                        placeholder ="Cidade" aria-describedby="validationTooltipUsernamePrepend" required/>
+                        <div class="invalid-tooltip">
+                            Por favor, digite mome da sua cidade
+                        </div>
                     </div>
                     
                 </div>
@@ -264,7 +303,11 @@
                             </svg>
                         </span>
                         <input type ="text" class="form-control" id="numero_endereco" 
-                         name="numero_endereco" placeholder ="N°"required/>
+                         name="numero_endereco" placeholder ="N°" 
+                         aria-describedby="validationTooltipUsernamePrepend" required/>
+                         <div class="invalid-tooltip">
+                            Por favor, digite numero do local, caso não tenha use 's/n'
+                        </div>
                     </div>
                     
                 </div>
@@ -284,7 +327,11 @@
                             </svg>
                         </span>
                         <input type ="text" class="form-control" id="uf" maxlength="2" name="uf"
-                        placeholder ="Uf"required/>
+                        placeholder ="Uf"required
+                        aria-describedby="validationTooltipUsernamePrepend" required/>
+                        <div class="invalid-tooltip">
+                            Por favor, digite a sigla do seu estado, por exemplo, 'BA'.
+                        </div>
                     </div>
                    
                 </div>
@@ -322,15 +369,25 @@
                 <div class="col-lg-12 col-sm-12 col-md-12 pt-2 "> 
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1" class="form-label">Descrição: </label>
-                        
-                        <textarea class="form-control" name="descricao" rows="3"placeholder="Descrição sobre seu negócio" minlength="63" maxlength="250"  required ></textarea>
+                        <div class="input-group mb-3"> 
+                            <textarea class="form-control" name="descricao" rows="3"
+                            placeholder="Descrição sobre seu negócio" minlength="63" maxlength="250" 
+                            aria-describedby="validationTooltipUsernamePrepend"
+                            required ></textarea>
+                            <div class="invalid-tooltip ">
+                                Por favor, digite uma breve descrição sobre o seu negócio de mo minimo sessenta e três caracteres 
+
+                            </div>
+                        </div>
+                    
+
                     </div>
                 </div>
 
 
 
             
-            <div class="col-lg-12 col-sm-12 col-md-12 pt-2  "align="center"> 
+            <div class="col-lg-12 col-sm-12 col-md-12 pt-4  "align="center"> 
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
             </div>
             

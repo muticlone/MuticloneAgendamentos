@@ -11,7 +11,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/empresas/dados/{id}', [HomeController::class, 'show']);
 
-Route::get('/dashboard/edit/{id}', [CadastroEmpresaController::class, 'edit']);
+Route::get('/dashboard/edit/{id}', [CadastroEmpresaController::class, 'edit'])->middleware('auth');
+
+Route::put('/empresa/edit/{id}', [CadastroEmpresaController::class, 'update'])->middleware('auth');
 
 
 
@@ -19,7 +21,7 @@ Route::get('/cadastrar/agentamentos', [AgendamentoController::class, 'create'])-
 
 Route::get('/cadastrar/empresa', [CadastroEmpresaController::class, 'create'])->name('pag.cadastrar.Empresa')->middleware('auth');
 
-Route::post('/cadastrar/empresa',[CadastroEmpresaController::class, 'store'])->name('cadastrar.Empresa');
+Route::post('/cadastrar/empresa',[CadastroEmpresaController::class, 'store'])->name('cadastrar.Empresa')->middleware('auth');
 
 
 Route::get('/dashboard',[HomeController::class,'dashboard'] )->middleware('auth');
