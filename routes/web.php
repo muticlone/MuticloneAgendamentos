@@ -11,6 +11,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/empresas/dados/{id}', [HomeController::class, 'show']);
 
+Route::get('/dashboard/edit/{id}', [CadastroEmpresaController::class, 'edit']);
+
 
 
 Route::get('/cadastrar/agentamentos', [AgendamentoController::class, 'create'])->name('cadastrar.Agentamentos')->middleware('auth');

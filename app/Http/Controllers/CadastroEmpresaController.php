@@ -18,6 +18,8 @@ class CadastroEmpresaController extends Controller
    
     $data = $request->all();
 
+   
+
     //img uploud
 
     if($request ->hasFile('image') && $request->file('image')->isValid()){
@@ -55,6 +57,21 @@ class CadastroEmpresaController extends Controller
     $Cadastro_empresa->create($data);
 
     return redirect()->route('home')->with('msg', 'Empresa cadastrada com sucesso!');
+}
+
+public function edit($id){
+    $user = auth()->user();
+
+    $empresa = cadastro_de_empresa::findOrFail($id);
+
+    
+
+    if($user->id != $empresa->user_id) {
+        return redirect('/dashboard');
+    }
+
+    return view('Empresa.CadastroEmpresaedit', ['empresa' => $empresa]);
+
 }
 
 

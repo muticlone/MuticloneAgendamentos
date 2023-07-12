@@ -35,30 +35,48 @@
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{route('home');}}">Home</a>
                   </li>
+                  
                   @auth
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{route('pag.cadastrar.Empresa');}}">Novo Cadastro Empresa</a>
-                  </li>
                 
-
+                   
                  
-                  <li class="nav-item">
-                    <a class="nav-link" href="/dashboard">Meu serviços</a>
-                  </li>
-
-                  <li class="nav-item">
-                   <form action="/logout" method="POST">
-                    @csrf
-                        <a class="nav-link" href="/logout"
-                            onclick="event.preventDefault(); this.closest('form').submit();">
-                            Sair</a>
-                    </form>
-                  </li>
 
                   
                       
-                  @endauth
+                  
 
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Empresa
+                    </a>
+                    <ul class="dropdown-menu">
+
+                        
+                       
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('pag.cadastrar.Empresa');}}">Novo Cadastro Empresa</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">Minhas empresas</a>
+                        </li>
+        
+                         
+                        
+        
+                        <li class="nav-item">
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                        <form action="/logout" method="POST">
+                            @csrf
+                                <a class="nav-link" href="/logout"
+                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                    Sair</a>
+                        </form>
+                    </li>   
+                  @endauth
+                  
                   @guest
                       
                   <li class="nav-item">
@@ -136,13 +154,44 @@
    
    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+          tooltipTriggerList.forEach(function(tooltipTriggerEl) {
+            new bootstrap.Tooltip(tooltipTriggerEl);
+          });
+        });
+      </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var liveToastBtn = document.getElementById('liveToastBtn');
+      var liveToast = document.getElementById('liveToast');
+  
+      liveToastBtn.addEventListener('click', function() {
+        var toast = new bootstrap.Toast(liveToast);
+        toast.show();
+      });
+    });
+  </script>
+
+ 
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+   
+
+   
     <script  type = "module"  src = "https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" > </script> 
     <script  nomodule  src = "https://unpkg .com/ionicons@7.1.0/dist/ionicons/ionicons.js" > </script>
+   
     <script src="/js/trocaTema.js"></script>
     <script src="/js/buscacep.js"></script>
     <script src="/js/buscacnpj.js"></script>
     <script src="/js/mascara.js"></script>
+    <script src="/js/validacaoformulario.js"></script>
  
 
     

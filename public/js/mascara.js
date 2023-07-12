@@ -21,7 +21,8 @@ function formatar(mascara, documento){
       });
 
 
-      // outra ramo de atauação 
+      // cadastro de empresa e edit ramo de atauação ativar opção otros adicona
+      //um inpunt 
       
       function mostrarOutro() {
         var selectElement = document.getElementById("area-atuacao");
@@ -39,6 +40,8 @@ function formatar(mascara, documento){
           hiddenInput.value = selectElement.value;
         }
       }
+
+     
       
       
       
