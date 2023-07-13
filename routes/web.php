@@ -24,4 +24,5 @@ Route::get('/cadastrar/empresa', [CadastroEmpresaController::class, 'create'])->
 Route::post('/cadastrar/empresa',[CadastroEmpresaController::class, 'store'])->name('cadastrar.Empresa')->middleware('auth');
 
 
-Route::get('/dashboard',[HomeController::class,'dashboard'] )->middleware('auth');
+Route::get('/dashboard',[HomeController::class,'dashboard'] )->name('dashboard')->middleware('auth');
+

@@ -23,7 +23,7 @@ footer p{
      margin-bottom: 0;
 }
 
-#navbar img{
+.imgnavbar{
     width: 150px;
     
     
@@ -33,6 +33,19 @@ footer p{
     filter: invert(1);
 }
 
+
+.second-ul {
+  margin-right: auto;
+  margin-left: 340%;
+}
+
+@media (max-width: 768px) {
+  /* Regras de estilo quando a tela tem até 768px de largura */
+  .second-ul {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
 
 
 #info-container {
