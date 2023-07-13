@@ -36,11 +36,11 @@ class CadastroEmpresaController extends Controller
         $data['image'] =  $imageName;
     }
 
-    // $existingEmpresa = $Cadastro_empresa->where('cnpj-cpf', $data['cnpj-cpf'])->first();
+     $existingEmpresa = $Cadastro_empresa->where('cnpj_cpf', $data['cnpj_cpf'])->first();
 
-    // if ($existingEmpresa) {
-    //     return redirect()->route('home')->with('msgErro', 'Essa empresa já possui cadastro!');
-    // }
+     if ($existingEmpresa) {
+            return redirect()->route('home')->with('msgErro', 'Essa empresa já possui cadastro!');
+     }
 
     $areaAtuacao = $request->input('area_atuacao');
 
@@ -56,7 +56,7 @@ class CadastroEmpresaController extends Controller
 
     $Cadastro_empresa->create($data);
 
-    return redirect()->route('home')->with('msg', 'Empresa cadastrada com sucesso!');
+    return redirect('/dashboard')->with('msg', 'Empresa cadastrada com sucesso!');
 }
 
 public function edit($id){
@@ -95,6 +95,11 @@ public function update(Request $request){
  return redirect('/dashboard')->with('msg', 'Atualizado com sucesso!');
 
     
+}
+
+
+public function createServico(){
+    return view('Empresa.CadastroServico');
 }
 
 

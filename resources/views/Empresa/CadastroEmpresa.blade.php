@@ -4,10 +4,13 @@
 
 @section('conteudo')
 
-<div class="col-md-7 offset-md-3 pt-4"> 
+<div class="col-md-8 offset-md-2 pt-4"> 
     <form action="{{route('cadastrar.Empresa');}}" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
         @csrf
         <div class="row g-12">
+            <div class="alert alert-light" role="alert" align = "center">
+                Cadastrar nova empresa
+            </div>
             <div class="form-group">
                 <label for="formFile" class="form-label">Adicionar logotipo da empresa:</label>
                 <input class="form-control" type="file" id="image" name="image" required>

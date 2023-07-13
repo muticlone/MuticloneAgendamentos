@@ -26,3 +26,5 @@ Route::post('/cadastrar/empresa',[CadastroEmpresaController::class, 'store'])->n
 
 Route::get('/dashboard',[HomeController::class,'dashboard'] )->name('dashboard')->middleware('auth');
 
+
+Route::get('/cadastro/servicos',[CadastroEmpresaController::class,'createServico'] )->name('cadastro.servicos')->middleware('auth');
