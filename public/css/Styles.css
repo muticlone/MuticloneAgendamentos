@@ -34,18 +34,66 @@ footer p{
 }
 
 
+
+
 .second-ul {
   margin-right: auto;
-  margin-left: 340%;
+  margin-left: 250%;
 }
 
-@media (max-width: 768px) {
+.linha {
+
+    
+ 
+  border-bottom: 1px solid #c0c0c0
+
+ 
+ 
+ 
+  
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+.navbar .offcanvas a:hover{
+  color: #1E90FF
+}
+
+
+@media (max-width: 1000px) {
   /* Regras de estilo quando a tela tem até 768px de largura */
   .second-ul {
     margin-right: 0;
     margin-left: 0;
   }
+
+  .navbar li {
+
+    
+ 
+    border-bottom: 1px solid black;
+
+    padding: 15px;
+   
+   
+    
+  }
+  
+  .navbar li:last-child {
+    border-bottom: none;
+  }
+
+
+  .linha{
+    border-bottom: none
+  }
+ 
+  
 }
+
+
 
 
 #info-container {
@@ -190,6 +238,31 @@ svg{
   border-radius: 10px 10px 0 0;
   overflow: hidden
 }
+
+/*largura da barra de rolagem */
+::-webkit-scrollbar{
+  width: 8px;
+  
+  
+  
+}
+
+
+
+
+
+::-webkit-scrollbar-thumb{
+
+  border-radius: 15px; /*borda da rolagem la ele */
+}
+
+/*mudar de cor ao encostar na rolagem la ele */
+::-webkit-scrollbar-thumb:hover{
+  background-color: #11101d;
+ 
+}
+
+
 
 
 
