@@ -17,7 +17,7 @@ class CadastroEmpresaController extends Controller
   public function store(Request $request, cadastro_de_empresa $Cadastro_empresa){
    
     $data = $request->all();
-
+   
    
 
     //img uploud
@@ -53,6 +53,8 @@ class CadastroEmpresaController extends Controller
     $user = auth()->user();
     
     $data['user_id'] = $user->id;
+
+    
 
     $Cadastro_empresa->create($data);
 
@@ -98,9 +100,7 @@ public function update(Request $request){
 }
 
 
-public function createServico(){
-    return view('Empresa.CadastroServico');
-}
+
 
 
 

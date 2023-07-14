@@ -5,12 +5,16 @@
 @section('conteudo')
 
 <div class="col-md-8 offset-md-2 pt-5"> 
-    <form action="#" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+    <form action="/cadastrar/servico/{{$empresa->id}}" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
         @csrf
         <div class="row g-12">
 
+            <div class="col-lg-12 col-sm-12 col-md-12 pt-2"  align = "center"> 
+                <img src="/img/logo_empresas/{{ $empresa->image}}" class="img-fluid  img_edit" alt="{{$empresa->razaoSocial}}">
+            </div>
+            
             <div class="alert alert-light" role="alert" align = "center">
-                Cradastrar novo serviço
+                Cradastrar novo serviço {{strtolower($empresa->nomeFantasia)}}
             </div>
             {{-- imagem para o serviço --}}
             <div class="form-group">
@@ -37,7 +41,7 @@
                             <path d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434L7.752.066ZM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567L4.25 7.504ZM7.5 9.933l-2.75 1.571v3.134l2.75-1.571V9.933Zm1 3.134 2.75 1.571v-3.134L8.5 9.933v3.134Zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567-2.742 1.567Zm2.242-2.433V3.504L8.5 5.076V8.21l2.75-1.572ZM7.5 8.21V5.076L4.75 3.504v3.134L7.5 8.21ZM5.258 2.643 8 4.21l2.742-1.567L8 1.076 5.258 2.643ZM15 9.933l-2.75 1.571v3.134L15 13.067V9.933ZM3.75 14.638v-3.134L1 9.933v3.134l2.75 1.571Z"/>
                           </svg>
                     </span>
-                    <input type ="text" class="form-control" id="NomeServico" name="NomeServico"
+                    <input type ="text" class="form-control" id="NomeServico" name="nomeServico"
                     placeholder ="Nome do serviço" 
                   
                     aria-describedby="validationTooltipUsernamePrepend"
@@ -272,9 +276,10 @@
                                 <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
                               </svg>
                         </span>
-                        <textarea class="form-control" name="descricao" rows="3"
+                        <textarea class="form-control" name="descricaosevico" rows="3"
                         placeholder="Descrição sobre seu negócio" minlength="15" maxlength="250" 
                         aria-describedby="validationTooltipUsernamePrepend"
+                    
                         required ></textarea>
                         <div class="invalid-tooltip ">
                             Por favor, digite uma breve descrição sobre o serviço de mo minimo quize caracteres 
@@ -292,7 +297,7 @@
         </div>
 
         <div class="col-lg-12 col-sm-12 col-md-12 pt-2  "align="center"> 
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button  type="submit" class="btn btn-primary">Salvar</button>
         </div>
         
     </form>

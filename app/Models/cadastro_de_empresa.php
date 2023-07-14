@@ -33,4 +33,10 @@ class cadastro_de_empresa extends Model
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
+
+    public function sevicos(){
+        return $this->hasMany('App\Models\cadastro_de_servico.php');
+    }
+
+   
 }

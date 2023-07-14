@@ -71,6 +71,29 @@
         
     </div>
     <div class="row g-12"> 
+        <div class="col-lg-12 col-sm-12 col-md-12 pt-2 pt-3 "  > 
+            <h5>Todos os serviços</h5>
+           
+            <div class="form-group">
+                @foreach ($servico as $servicos)
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" value="{{$servicos->nomeServico}}" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        {{$servicos->nomeServico}}
+                    </label>
+                </div>
+                @endforeach
+            </div>
+            
+           
+         
+        </div>
+    </div>
+
+
+    <div class="row g-12"> 
+
+
         
         <div class="col-lg-6 col-sm-12 col-md-12 pt-2 pt-3 "  > 
             

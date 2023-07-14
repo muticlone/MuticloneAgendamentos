@@ -32,7 +32,7 @@
        
         <td>
             <a href="/dashboard/edit/{{$empresa->id}}" class="btn btn-sm btn-warning">Editar</a>
-            <a href="/cadastro/servicos" class="btn btn-sm btn-info">Criar um serviço</a>
+            <a href="/cadastro/servicos/{{$empresa->id}}" class="btn btn-sm btn-info">Criar um serviço</a>
         </td>
       </tr>
       

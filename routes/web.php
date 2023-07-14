@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AgendamentoController;
 use App\Http\Controllers\CadastroEmpresaController;
+use App\Http\Controllers\CadastroServicoController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProxyController;
@@ -24,7 +25,10 @@ Route::get('/cadastrar/empresa', [CadastroEmpresaController::class, 'create'])->
 Route::post('/cadastrar/empresa',[CadastroEmpresaController::class, 'store'])->name('cadastrar.Empresa')->middleware('auth');
 
 
+
+
 Route::get('/dashboard',[HomeController::class,'dashboard'] )->name('dashboard')->middleware('auth');
 
 
-Route::get('/cadastro/servicos',[CadastroEmpresaController::class,'createServico'] )->name('cadastro.servicos')->middleware('auth');
+Route::get('/cadastro/servicos/{id}',[CadastroServicoController::class,'create'] )->name('cadastro.servicos')->middleware('auth');
+Route::post('/cadastrar/servico/{id}',[CadastroServicoController::class, 'store'])->name('cadastrar.servico')->middleware('auth');

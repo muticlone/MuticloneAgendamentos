@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\cadastro_de_empresa;
+use App\Models\cadastro_de_servico;
 
 use Illuminate\Http\Request;
 
@@ -44,10 +45,14 @@ class HomeController extends Controller
 
         $empresa = cadastro_de_empresa::findOrfail($id);
 
+        $servico = cadastro_de_servico::where('cadastro_de_empresas_id', $id)->get();
+        
+      
+       
          
          $Admempresa = User::where('id', $empresa->user_id)->first()->toArray();
 
-        return view('Empresa.DadosEmpresa',['empresa' => $empresa,'Admempresa' =>  $Admempresa]);
+        return view('Empresa.DadosEmpresa',['empresa' => $empresa,'Admempresa' =>  $Admempresa ,'servico' => $servico]);
     }
 
     public function dashboard(){
