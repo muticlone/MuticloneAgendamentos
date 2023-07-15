@@ -51,9 +51,16 @@ class CadastroServicoController extends Controller
 
     public function show($id){
 
-       $servico = cadastro_de_servico::findOrFail($id);
+      
+    
 
-        return view('Empresa.DadosServico',['servico' => $servico]);
+        $servico = cadastro_de_servico::findOrFail($id);
+        $id_empresa = $servico->cadastro_de_empresas_id;
+        $empresa = cadastro_de_empresa::findOrFail($id_empresa);
+
+        
+
+        return view('Empresa.DadosServico',['servico' => $servico ,'empresa' => $empresa]);
 
     }
 

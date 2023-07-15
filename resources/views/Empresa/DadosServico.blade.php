@@ -25,7 +25,7 @@
                   <div class="listadepagamentos">
                     @if($formadepagamento == "Dinheiro")
                       <x-dinheiro width="20" height="20" margin="5px" />
-                    @elseif($formadepagamento == "pix") 
+                    @elseif($formadepagamento == "Pix") 
                         <x-pix width="20" height="20" margin="5px"/>
                     @elseif($formadepagamento == "Cartão de débito")
                         <x-cartao-de-depito width="20" height="20" margin="5px"/>
@@ -45,8 +45,26 @@
                 @endforeach
               </ul>
               
+              
 
         </div>
+     
+        <div class="col-lg-12 col-sm-12 col-md-12">
+          
+          <x-contato 
+          id="{{$servico->cadastro_de_empresas_id}}"
+          nomefantasia="{{ strtolower($empresa->nomeFantasia)}}"
+          telefone="{{ $empresa->telefone}}" 
+          celular="{{ $empresa->celular}}" 
+          Whatsapp="{{$numeroCelular = str_replace(['-', ' '], '', $empresa->celular);}}"
+          
+         />
+        
+        </div>
+
+       
+       
+        
 
 
 
