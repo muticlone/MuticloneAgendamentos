@@ -23,11 +23,9 @@ class CadastroServicoController extends Controller
     public function store(Request $request, cadastro_de_servico $cadastro_de_servico , $id){
         
         $empresa = cadastro_de_empresa::findOrFail($id);
-        $nome = $empresa->nomeFantasia;
-
-        
-        
-        $nome_da_pasta = $nome . '_' . $id;
+        // $nome = $empresa->nomeFantasia;
+        // $nome_da_pasta = $nome . '_' . $id;
+        // $requestImage->move(public_path('img/logo_serviços/' . $nome_da_pasta), $imageName);
 
     $data = $request->all();
 
@@ -35,7 +33,7 @@ class CadastroServicoController extends Controller
         $requestImage = $request->file('imageservico');
         $extensao = $requestImage->extension();
         $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extensao;
-        $requestImage->move(public_path('img/logo_serviços/' . $nome_da_pasta), $imageName);
+        $requestImage->move(public_path('img/logo_servicos'), $imageName);
         $data['imageservico'] = $imageName;
     }
 
@@ -49,6 +47,15 @@ class CadastroServicoController extends Controller
 
     return redirect('/dashboard')->with('msg', 'serviço criado com sucesso!');
     }   
+
+
+    public function show($id){
+
+       $servico = cadastro_de_servico::findOrFail($id);
+
+        return view('Empresa.DadosServico',['servico' => $servico]);
+
+    }
 
     
 }

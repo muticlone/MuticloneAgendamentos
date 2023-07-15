@@ -3,6 +3,10 @@
  
 }
 
+ul {
+  list-style-type: none; /* Remove o ponto/bullet point */
+}
+
 
 body{
     min-height: 100vh;
@@ -58,6 +62,10 @@ li:last-child {
 }
 
 .navbar .offcanvas a:hover{
+  color: #1E90FF
+}
+
+.cor{
   color: #1E90FF
 }
 
@@ -205,17 +213,20 @@ svg{
 
 .txt_dados_empresa{
   text-align: justify;
+  text-indent: 30px;  
 }
 
 
 
 
 .img_dados_empresa {
-  min-width: 450px;
-  min-height: 300px;
-  max-width: 450px;
-  max-height: 300px;
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 200px;
+  max-height: 200px;
   border-radius: 10px  ;
+ 
+  
 }
 
 .img_edit {
@@ -261,6 +272,14 @@ svg{
   background-color: #11101d;
  
 }
+
+.listadepagamentos{
+  display: inline-flex; 
+  align-items: center;
+}
+
+
+
 
 
 
