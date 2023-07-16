@@ -155,10 +155,11 @@
             </ul>
             
             <x-contato 
-                
+                nome="Contato"
                 telefone="{{ $empresa->telefone}}" 
                 celular="{{ $empresa->celular}}" 
                 Whatsapp="{{$numeroCelular = str_replace(['-', ' '], '', $empresa->celular);}}"
+                
             />
         </div>
     </div>
