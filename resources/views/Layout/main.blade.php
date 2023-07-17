@@ -17,6 +17,13 @@
 
         <!-- css da aplicação -->
         <link href="/css/Styles.css"  rel="stylesheet"/>
+
+       
+        <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
+    
+        
+
        
     </head>
     <body class="container">
@@ -216,7 +223,6 @@
     });
   </script>
 
- 
 
     
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -227,12 +233,21 @@
     <script  type = "module"  src = "https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" > </script> 
     <script  nomodule  src = "https://unpkg .com/ionicons@7.1.0/dist/ionicons/ionicons.js" > </script>
    
+
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/star-rating.min.js" type="text/javascript"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.js"></script>
+    <script src="/js/locales/star-rating_locale_pt-BR.js"></script>
+
+    
+
+
     <script src="/js/trocaTema.js"></script>
     <script src="/js/buscacep.js"></script>
     <script src="/js/buscacnpj.js"></script>
     <script src="/js/mascara.js"></script>
     <script src="/js/validacaoformulario.js"></script>
- 
+    
 
     
     </body>

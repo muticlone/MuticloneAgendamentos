@@ -2,9 +2,11 @@
  font-family: Roboto;
  
 }
-a{
+a {
   text-decoration: none;
+
 }
+
 
 ul {
   list-style-type: none; /* Remove o ponto/bullet point */
@@ -265,9 +267,11 @@ svg{
 
 
 
-::-webkit-scrollbar-thumb{
-
-  border-radius: 15px; /*borda da rolagem la ele */
+::-webkit-scrollbar-thumb {
+  height: 20px; /* Defina a altura desejada aqui */
+  border-radius: 15px;
+  background-color: #11101d;
+  
 }
 
 /*mudar de cor ao encostar na rolagem la ele */
@@ -281,6 +285,12 @@ svg{
   align-items: center;
 }
 
+
+.coment {
+  max-height: 175px; /* Ajuste a altura máxima conforme necessário */
+  min-height: 175px;
+  overflow: auto;
+}
 
 
 

@@ -13,23 +13,71 @@
           <div class="col-lg-6 col-sm-12 col-md-12 pt-2 "> 
             <img src="/img/logo_servicos/{{ $servico->imageservico}}" class="img-fluid  img_dados_empresa" alt="{{$servico->nomeServico}}">
           </div>
+
+        
+          
+        
+
+       
+        
           
           <div class="col-lg-12 col-sm-12 col-md-12 pt-2 "> 
             <div class="card">
               <div class="card-header">
-                Featured
+                Avaliação
               </div>
               <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <input id="input-6" name="input-6" class="rating rating-loading" value="3.5" data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-star-captions="pt-BR">
+
+
+             
+                {{-- <input id = "input-1" name = "input-1" class = "rating rating-loading" data-min = "0" data-max = "5" data-step = "1" >       --}}
+               
               </div>
             </div>
           </div> 
 
-           
-           
-           
+          <div class="col-lg-12 col-sm-12 col-md-12 pt-2 "> 
+            <div class="card ">
+              <div class="card-header">
+               Comentário
+              </div>
+              <div class="card-body coment">
+                <div class="list-group-item">
+                  <p> Nome do usúario,  comentario 
+                    <input id="input-6" name="input-6" class="rating rating-loading" value="3.5" data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-star-captions="pt-BR" data-size="xs">
+                  
+                  </p>
+                </div>
+                
+                <p> Nome do usúario,  comentario 
+                  <input id="input-6" name="input-6" class="rating rating-loading" value="3.5" data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-star-captions="pt-BR" data-size="xs">
+                
+                </p>
+                <p> Nome do usúario,  comentario 
+                  <input id="input-6" name="input-6" class="rating rating-loading" value="3.5" data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-star-captions="pt-BR" data-size="xs">
+                
+                </p>
+                <p> Nome do usúario,  comentario 
+                  <input id="input-6" name="input-6" class="rating rating-loading" value="3.5" data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-star-captions="pt-BR" data-size="xs">
+                
+                </p>
+                <p> Nome do usúario,  comentario 
+                  <input id="input-6" name="input-6" class="rating rating-loading" value="3.5" data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-star-captions="pt-BR" data-size="xs">
+                
+                </p>
+                <p> Nome do usúario,  comentario 
+                  <input id="input-6" name="input-6" class="rating rating-loading" value="3.5" data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-star-captions="pt-BR" data-size="xs">
+                
+                </p>
+
+              </div>
+            </div>
+          </div> 
+
+
+
+          
            
             
         </div>
@@ -38,7 +86,7 @@
               <div class="card">
                 <h5 class="card-header">{{$servico->nomeServico}}</h5>
                 <div class="card-body">
-                  <h5 class="card-title">R${{$servico->valorDoServico}}</h5>
+                  <h5 class="card-title">R$ {{$servico->valorDoServico}}</h5>
                   <h5 class="card-title">Descrição do serviço</h5>
                   <p class="card-text">{{$servico->descricaosevico}}</p>
                   
@@ -80,8 +128,6 @@
                   </p>
 
                   
-
-                  
                   <x-contato 
                   nome="Contato"
                  
@@ -90,6 +136,8 @@
                   Whatsapp="{{$numeroCelular = str_replace(['-', ' '], '', $empresa->celular);}}"
                   
                  />
+                  
+                 
       
                 
                  
@@ -114,6 +162,7 @@
         
     </div>
 </div>
+
 
 
 
