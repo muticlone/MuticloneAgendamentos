@@ -9,6 +9,11 @@ class cadastro_de_empresa extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'formaDePagamento' => 'array'
+    ];
+
+
     protected $fillable = [
         
         'cnpj_cpf',
@@ -27,6 +32,7 @@ class cadastro_de_empresa extends Model
         'image',
         'descricao',
         'user_id',
+        'formaDePagamento',
        
     ];
 

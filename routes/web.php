@@ -18,7 +18,7 @@ Route::put('/empresa/edit/{id}', [CadastroEmpresaController::class, 'update'])->
 
 
 
-Route::get('/cadastrar/agentamentos', [AgendamentoController::class, 'create'])->name('cadastrar.Agentamentos')->middleware('auth');
+Route::POST('/cadastrar/agentamentos', [AgendamentoController::class, 'create'])->name('cadastrar.Agentamentos')->middleware('auth');
 
 Route::get('/cadastrar/empresa', [CadastroEmpresaController::class, 'create'])->name('pag.cadastrar.Empresa')->middleware('auth');
 
@@ -35,3 +35,4 @@ Route::post('/cadastrar/servico/{id}',[CadastroServicoController::class, 'store'
 
 
 Route::get('/dados/servicos/{id}',[CadastroServicoController::class, 'show']);
+

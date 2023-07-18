@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('duracaohoras');
             $table->string('duracaominutos');
             $table->text('descricaosevico');
-            $table->json('formaDePagamento');
+            
             $table->string('imageservico');
             $table->foreignId('cadastro_de_empresas_id')->constrained();
 

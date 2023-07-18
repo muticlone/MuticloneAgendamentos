@@ -13,10 +13,7 @@ class cadastro_de_servico extends Model
 
    
 
-    protected $casts = [
-        'formaDePagamento' => 'array'
-    ];
-
+    
 
 
     protected $fillable = [
@@ -27,7 +24,6 @@ class cadastro_de_servico extends Model
         'duracaohoras',
         'duracaominutos',
         'descricaosevico',
-        'formaDePagamento',
         'imageservico',
         'cadastro_de_empresas_id',
 

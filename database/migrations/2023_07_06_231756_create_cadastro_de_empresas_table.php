@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('uf');
             $table->string('area_atuacao');
             $table->string('image');
+            $table->json('formaDePagamento');
             
         });
     }

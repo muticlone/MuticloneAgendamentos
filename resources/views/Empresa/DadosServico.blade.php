@@ -20,7 +20,7 @@
 
        
         
-          
+          {{-- Avaliação --}}
           <div class="col-lg-12 col-sm-12 col-md-12 pt-2 "> 
             <div class="card">
               <div class="card-header">
@@ -36,6 +36,8 @@
               </div>
             </div>
           </div> 
+
+          {{-- comentarios --}}
 
           <div class="col-lg-12 col-sm-12 col-md-12 pt-2 "> 
             <div class="card ">
@@ -90,10 +92,9 @@
                   <h5 class="card-title">Descrição do serviço</h5>
                   <p class="card-text">{{$servico->descricaosevico}}</p>
                   
-                  
                   <h5  class="card-title">Formas de Pagamento</h5>
                   <ul id="items-list">
-                    @foreach($servico->formaDePagamento as $formadepagamento)
+                    @foreach( $empresa->formaDePagamento as $formadepagamento)
                     <li>
                       <div class="listadepagamentos">
                         @if($formadepagamento == "Dinheiro")
@@ -117,14 +118,19 @@
                     </li>
                     @endforeach
                   </ul>
+                
                   <button class="btn btn-primary">Agendar</button>
-                  <p class="card-text pt-2">Prestadora do serviço: 
+                  <p class="card-text pt-2">Prestadora do serviço:
+                  
                     <a class="card-text" href="/empresas/dados/{{$servico->cadastro_de_empresas_id}}" 
                       class=" rounded float-end vertical-align-middle mx-1" 
                       data-bs-toggle="tooltip" data-bs-placement="bottom" 
                       data-bs-title="Clique para mais informações sobre a empresa {{$empresa->nomeFantasia}}">
+                     
+                      <img src="/img/logo_empresas/{{ $empresa->image}}" class="img-fluid  img_logoDadosServico" alt="{{$empresa->razaoSocial}}">
                       {{$empresa->nomeFantasia}} 
                     </a>
+                 
                   </p>
 
                   

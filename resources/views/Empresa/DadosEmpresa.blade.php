@@ -68,19 +68,27 @@
                     <h5>Todos os serviços</h5>
                         
                     <div class="form-group">
-                        @foreach ($servico as $servicos)
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" style="font-size: 18px;" type="checkbox" value="{{$servicos->nomeServico}}" id="flexCheckDefault">
-                                <a class="cor" href="/dados/servicos/{{$servicos->id}}">
-                                   
-                                    <label class="form-check-label" style="font-size: 18px;   cursor: pointer;"> 
-                                        {{$servicos->nomeServico}}
-                                    </label>
-                                </a>
-                               
-                            </div>
-                        @endforeach
+                      
+
+                             
+                                @foreach ($servico as $servicos)
+                                <form action="{{route('cadastrar.Agentamentos');}}" method="POST">
+                                    @csrf
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" style="font-size: 18px;" type="checkbox" value="{{$servicos->nomeServico}}"  name="servico[{{$servicos->id}}]">
+                                       <input type="hidden" name="idempresa" value="{{$servicos->cadastro_de_empresas_id}}">
+                                        <a class="cor" href="/dados/servicos/{{$servicos->id}}">
+                                        
+                                            <label class="form-check-label" style="font-size: 18px;   cursor: pointer;"> 
+                                                {{$servicos->nomeServico}}
+                                            </label>
+                                        </a>
+                                        
+                                    </div>
+                                @endforeach
                     </div>
+                                 <button type="submit" class="btn btn-info">Agendar</button>
+                          </form>
                 </li>
             </ul>
         </div>
