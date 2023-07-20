@@ -314,6 +314,11 @@ svg{
   text-overflow: ellipsis;
 }
 
+#valorTotal {
+  background-color: #f8f8f8;
+  pointer-events: none;
+}
+
 
 
 

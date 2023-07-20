@@ -10,7 +10,8 @@
 @endphp
 
 
-<form action="#" method="POST"> 
+<form action="/cadastrar/agentamento" method="POST">
+    <input type="hidden" name="empresaid" value="{{$empresa->id}}">
     <div class="col-md-8 offset-md-2 pt-1"> 
         <div class="row g-12 ">
             <table class="table  table-hover">
@@ -27,8 +28,12 @@
 
                     
                     
-                        <tr class="textagendamento">
-                            <td>{{ $servico->nomeServico}}</td>
+                        <tr class="textagendamento" name="produtos">
+                            <td>
+                                {{ $servico->nomeServico}}
+                                <input type="hidden" name="nomeServiçoAgendamento[]" value="{{$servico->nomeServico}}">
+                            
+                            </td>
                             <td> 
                                 {{ $servico->duracaohoras}} 
                                 @if( $servico->duracaohoras == "1")
@@ -38,10 +43,16 @@
                                 @endif  
                                 {{$servico->duracaominutos}} 
                                 minutos
+                                <input type="hidden" name="duracaohorasAgendamento[]" value="{{  $servico->duracaohoras}}">
+                                <input type="hidden" name="duracaominutosAgendamento[]" value="{{ $servico->duracaominutos}}">
                             </td>
-                            <td class="truncate-cell">{{ $servico->descricaosevico}}</td>
-                         
-                            <td>R$ {{ $servico->valorDoServico}}</td>
+                            <td class="truncate-cell">{{ $servico->descricaosevico}}
+                                <input type="hidden" name="descricaoservicoAgendamento[]" value="{{ $servico->descricaosevico}}">
+                            </td>
+                          
+                            <td>R$ {{ $servico->valorDoServico}}
+                                <input type="hidden" name="valorUnitatio[]" value="{{ $servico->valorDoServico}}">
+                            </td>
                         </tr>
                         @php
                         $somaValores += $servico->valorDoServico;
@@ -60,7 +71,12 @@
                     @foreach($empresa->formaDePagamento as $formadepagamento)
                     <li>
                       <div class="listadepagamentos">
-                        <input id="teste" class="form-check-input" style="margin-right: 10px;"  type="radio" name="FormaDepagamento" value="{{$formadepagamento}}">
+                        <input id="teste" class="form-check-input" style="margin-right:10px;" 
+                        type="radio" name="formaDepagamento" 
+                        value="{{$formadepagamento}}" 
+                        @if ($loop->first) 
+                            checked 
+                        @endif>
                         @if($formadepagamento == "Dinheiro")
                           <x-dinheiro width="20" height="20" margin="10px" />
                         @elseif($formadepagamento == "Pix") 
@@ -95,7 +111,16 @@
                         console.log(selectedValue);
                       });
                     });
+
+                        $(document).ready(function() {
+                        $('#valorTotal').on('keydown paste', function(e) {
+                            e.preventDefault();
+                        });
+                    });
+
                   </script>
+
+                  
                   
 
                  
@@ -106,9 +131,9 @@
 
             <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
                 <label for="valor">Valor total</label>
-                <fieldset disabled>
-                    <input type="text" name="NomeDoServiço" class="form-control" value="{{ $somaValores}}">
-                </fieldset>
+             
+                <input type="text" name="valorTotal" id="valorTotal" class="form-control" value="{{$somaValores}}">
+             
                 
                 <div class="col-lg-12 col-sm-12 col-md-12 pt-2">
                     <label for="title">Data e horário</label>
@@ -127,8 +152,22 @@
                     </div>
                 </div>
                 <div class="col-lg-12 col-sm-12 col-md-12 pt-2">
+                  
+                   
                     <button type="submit" class="btn btn-info" >Agendar</button>
+                    
+            
+                
+              
+
+                   
+                  
+                    
+
+                   
                 </div>
+
+               
 
             </div>
         </div>

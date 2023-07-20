@@ -19,6 +19,7 @@ Route::put('/empresa/edit/{id}', [CadastroEmpresaController::class, 'update'])->
 
 
 Route::POST('/cadastrar/agentamentos', [AgendamentoController::class, 'create'])->name('cadastrar.Agentamentos')->middleware('auth');
+Route::post('/cadastrar/agentamento',[AgendamentoController::class, 'store'])->name('cadastrar.agendamento')->middleware('auth');
 
 Route::get('/cadastrar/empresa', [CadastroEmpresaController::class, 'create'])->name('pag.cadastrar.Empresa')->middleware('auth');
 
