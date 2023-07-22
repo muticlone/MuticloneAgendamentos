@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\cadastro_de_empresa;
 use App\Models\cadastro_de_servico;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -43,18 +44,18 @@ class HomeController extends Controller
     public function showServicos()
     {
         $search = request('search');
-    
+
         $query = cadastro_de_servico::query();
-    
+
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->where('nomeServico', 'like', '%' . $search . '%')
                     ->orWhere('descricaosevico', 'like', '%' . $search . '%');
             });
         }
-    
+
         $servico = $query->paginate(10);
-    
+
         $paginatedItems = new LengthAwarePaginator(
             $servico->items(),
             $servico->total(),
@@ -62,11 +63,11 @@ class HomeController extends Controller
             $servico->currentPage(),
             ['path' => route('home.servicos'), 'query' => ['search' => $search]]
         );
-    
-        return view('Empresa.homeservicos', compact('search', 'paginatedItems' ,'servico'));
+
+        return view('Empresa.homeservicos', compact('search', 'paginatedItems', 'servico'));
     }
 
-    
+
 
 
     public function show($id)
@@ -88,16 +89,19 @@ class HomeController extends Controller
     public function dashboard()
     {
 
+
         $user = auth()->user();
 
-        $empresa = $user->empresas;
+
+
+        
 
 
 
+       
+       
+        $empresa = $user->empresas()->paginate(10);
 
         return view('dashboard', ['empresa' => $empresa]);
     }
-
-   
-    
 }

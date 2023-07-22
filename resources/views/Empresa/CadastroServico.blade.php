@@ -115,7 +115,7 @@
                     
                 <div class="col-lg-4 col-sm-12 col-md-12 pt-1">
                     <select class="form-select" id="horas" name="duracaohoras" required>
-                    <option value="">Horas</option>
+                    <option value="0">Horas</option>
                     <option value="1">1 hora</option>
                     <option value="2">2 horas</option>
                     <option value="3">3 horas</option>

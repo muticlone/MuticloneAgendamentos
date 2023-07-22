@@ -8,7 +8,7 @@
 
 
     <div class=" conteiner-search  col-8">
-      <form action="/home/servicos" method="GET">
+      <form action="/" method="GET">
       
         <div class="input-group mb-3">
           <input type="text" class="form-control" id="search" name="search" placeholder="Procurar...">
@@ -39,7 +39,7 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active" data-bs-interval="8000">
-            <div class="conteiner.img">
+            <div class="container-img">
                 <img src="/img/barbearia.png" class="d-block w-100 " alt="...">
               
                 
@@ -47,94 +47,89 @@
           
             
             <div class="carousel-caption d-none d-md-block">
-              {{-- <h5>First slide label</h5>
-              <p>Some representative placeholder content for the first slide.</p> --}}
+              
+               
+                <h5 class="pHome">Faça uma busca personalizada por serviços que atendam às suas preferências.</h5>
             </div>
           </div>
           <div class="carousel-item" data-bs-interval="8000">
-            <div class="conteiner.img">
+            <div class="conteiner-img">
                 <img src="/img/saoBeleza.png" class="d-block w-100" alt="...">
                 
             </div>
             
             <div class="carousel-caption d-none d-md-block">
-              {{-- <h5>Second slide label</h5>
-              <p>Some representative placeholder content for the second slide.</p> --}}
+                <h5 class="pHome">Encontre os melhores serviços para suas necessidades!</h5>
             </div>
           </div>
   
           
           <div class="carousel-item" data-bs-interval="8000">
-            <div class="conteiner.img">
+            <div class="container-img">
                 <img src="/img/tatuagem.png" class="d-block w-100" alt="...">
                 
             </div>
           
             <div class="carousel-caption d-none d-md-block">
-              {{-- <h5>Third slide label</h5>
-              <p>Some representative placeholder content for the third slide.</p> --}}
+                <h5 class="pHome">Encontre profissionais altamente qualificados para atender às suas demandas.</h5>
             </div>
           </div>
          
           
   
           <div class="carousel-item" data-bs-interval="8000">
-            <div class="conteiner.img">
+            <div class="container-img">
                 <img src="/img/ateliedecostura.png" class="d-block w-100" alt="...">
               
             </div>
           
             <div class="carousel-caption d-none d-md-block">
-              {{-- <h5>Third slide label</h5>
-              <p>Some representative placeholder content for the third slide.</p> --}}
+                <h5 class="pHome">Busque serviços especializados para otimizar o seu dia a dia.</h5>
             </div>
           </div>
   
           <div class="carousel-item" data-bs-interval="8000">
-            <div class="conteiner.img">
+            <div class="container-img">
                 <img src="/img/restaurante.png" class="d-block w-100" alt="...">
               
             </div>
           
             <div class="carousel-caption d-none d-md-block">
-              {{-- <h5>Third slide label</h5>
-              <p>Some representative placeholder content for the third slide.</p> --}}
+                <h5 class="pHome">Aqui você encontra tudo o que precisa em um só lugar: serviços de qualidade, confiança e variedade.</h5>
             </div>
           </div>
   
           <div class="carousel-item" data-bs-interval="8000">
-            <div class="conteiner.img">
+            <div class="container-img">
                 <img src="/img/mecanico.png" class="d-block w-100" alt="...">
                 
             </div>
           
             <div class="carousel-caption d-none d-md-block">
-              {{-- <h5>Third slide label</h5>
-              <p>Some representative placeholder content for the third slide.</p> --}}
+                <h5 class="pHome">Encontre profissionais altamente qualificados para atender às suas demandas.</h5>
             </div>
           </div>
   
           <div class="carousel-item" data-bs-interval="8000">
-            <div class="conteiner.img">
+            <div class="container-img">
                 <img src="/img/serviçosgereais.png" class="d-block w-100" alt="...">
                 
             </div>
           
             <div class="carousel-caption d-none d-md-block">
-              {{-- <h5>Third slide label</h5>
-              <p>Some representative placeholder content for the third slide.</p> --}}
+          
+             <h5 class="pHome">Encontre profissionais especializados em diversos setores.</h5>
             </div>
           </div>
   
           <div class="carousel-item" data-bs-interval="8000">
-            <div class="conteiner.img">
+            <div class="container-img">
                 <img src="/img/advogado.png" class="d-block w-100" alt="...">
                 
             </div>
           
             <div class="carousel-caption d-none d-md-block">
-              {{-- <h5>Third slide label</h5>
-              <p>Some representative placeholder content for the third slide.</p> --}}
+                <h5 class="pHome">Busque serviços especializados para otimizar o seu dia a dia.</h5>
             </div>
           </div>
   
@@ -154,28 +149,38 @@
           <span class="visually-hidden">Next</span>
         </button>
     </div>
+
+   
   
    
   </div>  
+
+ 
   
   @if($search)
     <h2 class="pt-1">Buscando por : {{$search}}</h2>
     
   @else
+  <div class="pt-1">
+    <h4 class="">Todos os serviços disponíveis</h4>
+    
+  </div>
+ 
   
   @endif
   
   
   <div class="row g-12 pt-2">
+    
     @foreach ( $servico as $index => $servico)
       <div class="col-auto">
         <div class="card" style="width: 10rem ;">
           <img src="/img/logo_servicos/{{$servico->imageservico}}" class=" img_tela_home" class="img-logo" alt="{{($servico->nomeServico)}}">
           <div class="card-body txt">
             <p class="card-text">{{($servico->nomeServico)}}</p> 
-            <p class="card-text">{{($servico->descricaosevico)}}</p> 
+            <p class="card-text paragrafo-limitado" id="meu-paragrafo">{{($servico->descricaosevico)}}</p> 
             
-            <a href="/empresas/dados/{{$servico->id}}" class="btn btn-sm btn-primary btg">Saber mais +</a>
+            <a href="/dados/servicos/{{$servico->id}}" class="btn btn-sm btn-primary btg">Saiba mais +</a>
           </div>
         </div>
       </div>
@@ -188,6 +193,10 @@
     @endforeach
    
   </div>
+
+  <script>
+ 
+  </script>
 
   {{-- paginação --}}
 
@@ -225,7 +234,7 @@
             </li>
         @endif
     </ul>
-</div>
+  </div>
 
 
 

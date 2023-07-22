@@ -102,6 +102,13 @@ li:last-child {
   .linha{
     border-bottom: none
   }
+
+  .btndashboard {
+ 
+   
+    margin-top: 10px;
+    
+  }
  
   
 }
@@ -159,17 +166,23 @@ svg{
    
 }
 
+
+
 .container-img{
     position: relative;
    
+   
 }
+
+
 
 .conteiner-search {
     position: relative;
     z-index: 2;
-    top: 73%;
+    top: 70%;
     transform: translateY(-50%);
     left: 20%;
+    
     
 }
 
@@ -318,6 +331,58 @@ svg{
   background-color: #f8f8f8;
   pointer-events: none;
 }
+
+
+.paragrafo-limitado {
+    
+   
+  overflow: hidden;
+      
+      text-overflow: ellipsis;
+    
+  }
+
+
+.pHome{
+  color: #f2a340;
+  position: absolute;
+  top: -30px;
+  left: -200px;
+  width: 150%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Cor do fundo com transparência */
+  backdrop-filter: blur(5px); /* Propriedade para aplicar o desfoque */
+  -webkit-backdrop-filter: blur(5px); /* Suporte para navegadores baseados em Webkit, como o Safari */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+.btndashboard {
+ 
+  color: black;
+  border-color: #D3D3D3; /* Cor do contorno do botão btn-outline-info */
+  display: inline-block;
+  min-width: 150px;
+ 
+  text-align: center;
+  
+  
+}
+
+.btndashboardservico{
+ 
+ 
+  justify-content: center; /* Centraliza o texto horizontalmente */
+  align-items: center; /* Centraliza o texto verticalmente */
+  color: black;
+  border-color: #D3D3D3;
+  margin-top: 5px;
+}
+
+
 
 
 

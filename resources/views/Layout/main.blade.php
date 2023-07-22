@@ -56,23 +56,24 @@
                 <ul class="navbar-nav">
                   <li class="nav-item">
                     
-                    <a class="nav-link active" aria-current="page" href="{{ route('home') }}">
+                    <a class="nav-link active" aria-current="page" href="{{ route('home.servicos') }}">
                       
-                      Home
+                      Serviços
                     </a>
                   </li>
                   
                   <li class="nav-item">
                     
-                    <a class="nav-link active" aria-current="page" href="{{ route('home.servicos') }}">
+                    <a class="nav-link active" aria-current="page" href="{{ route('home') }}">
                       
-                     Serviços 
+                      Empresas
                     </a>
                   </li>
                   @auth
+                  
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Empresa
+                      Business
                     </a>
                     <ul class="dropdown-menu">
                       <li class="nav-item linha">

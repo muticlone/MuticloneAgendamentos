@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Models\cadastro_de_servico;
 use App\Models\cadastro_de_empresa;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 
 class CadastroServicoController extends Controller
 {
@@ -62,6 +64,20 @@ class CadastroServicoController extends Controller
 
         return view('Empresa.DadosServico',['servico' => $servico ,'empresa' => $empresa]);
 
+    }
+
+    public function showMeusServicos($id){
+        
+
+        $registrosPorPagina = 10; 
+
+        $servicos = cadastro_de_servico::where('cadastro_de_empresas_id', $id)->paginate($registrosPorPagina);
+       
+       
+
+        
+
+        return view('Empresa.MeusServico',['servicos' => $servicos ]);
     }
 
     

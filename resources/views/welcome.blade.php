@@ -8,7 +8,7 @@
 
 
   <div class=" conteiner-search  col-8">
-    <form action="/" method="GET">
+    <form action="/home/empresas" method="GET">
     
       <div class="input-group mb-3">
         <input type="text" class="form-control" id="search" name="search" placeholder="Procurar...">
@@ -40,7 +40,7 @@
       <div class="carousel-inner">
         <div class="carousel-item active" data-bs-interval="8000">
           <div class="conteiner.img">
-              <img src="img/barbearia.png" class="d-block w-100 " alt="...">
+              <img src="/img/barbearia.png" class="d-block w-100 " alt="...">
             
               
           </div>
@@ -53,7 +53,7 @@
         </div>
         <div class="carousel-item" data-bs-interval="8000">
           <div class="conteiner.img">
-              <img src="img/saoBeleza.png" class="d-block w-100" alt="...">
+              <img src="/img/saoBeleza.png" class="d-block w-100" alt="...">
               
           </div>
           
@@ -66,7 +66,7 @@
         
         <div class="carousel-item" data-bs-interval="8000">
           <div class="conteiner.img">
-              <img src="img/tatuagem.png" class="d-block w-100" alt="...">
+              <img src="/img/tatuagem.png" class="d-block w-100" alt="...">
               
           </div>
         
@@ -80,7 +80,7 @@
 
         <div class="carousel-item" data-bs-interval="8000">
           <div class="conteiner.img">
-              <img src="img/ateliedecostura.png" class="d-block w-100" alt="...">
+              <img src="/img/ateliedecostura.png" class="d-block w-100" alt="...">
             
           </div>
         
@@ -92,7 +92,7 @@
 
         <div class="carousel-item" data-bs-interval="8000">
           <div class="conteiner.img">
-              <img src="img/restaurante.png" class="d-block w-100" alt="...">
+              <img src="/img/restaurante.png" class="d-block w-100" alt="...">
             
           </div>
         
@@ -104,7 +104,7 @@
 
         <div class="carousel-item" data-bs-interval="8000">
           <div class="conteiner.img">
-              <img src="img/mecanico.png" class="d-block w-100" alt="...">
+              <img src="/img/mecanico.png" class="d-block w-100" alt="...">
               
           </div>
         
@@ -116,7 +116,7 @@
 
         <div class="carousel-item" data-bs-interval="8000">
           <div class="conteiner.img">
-              <img src="img/serviçosgereais.png" class="d-block w-100" alt="...">
+              <img src="/img/serviçosgereais.png" class="d-block w-100" alt="...">
               
           </div>
         
@@ -128,7 +128,7 @@
 
         <div class="carousel-item" data-bs-interval="8000">
           <div class="conteiner.img">
-              <img src="img/advogado.png" class="d-block w-100" alt="...">
+              <img src="/img/advogado.png" class="d-block w-100" alt="...">
               
           </div>
         
@@ -163,6 +163,11 @@
   
 @else
 
+<div class="pt-1">
+  <h4>Todos os empresas disponíveis</h4>
+  
+</div>
+
 @endif
 
 
@@ -170,7 +175,7 @@
   @foreach ($Cadastro_empresa as $index => $empresa)
     <div class="col-auto">
       <div class="card" style="width: 10rem ;">
-        <img src="img/logo_empresas/{{$empresa->image}}" class=" img_tela_home" class="img-logo" alt="{{($empresa->razaoSocial)}}">
+        <img src="/img/logo_empresas/{{$empresa->image}}" class=" img_tela_home" class="img-logo" alt="{{($empresa->razaoSocial)}}">
         <div class="card-body txt">
           <p class="card-text">{{($empresa->nomeFantasia)}}</p> 
           <p class="card-text">{{($empresa->area_atuacao)}}</p> 
