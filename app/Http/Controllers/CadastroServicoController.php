@@ -69,15 +69,39 @@ class CadastroServicoController extends Controller
     public function showMeusServicos($id){
         
 
-        $registrosPorPagina = 10; 
+        $search = request('search');
 
-        $servicos = cadastro_de_servico::where('cadastro_de_empresas_id', $id)->paginate($registrosPorPagina);
+        $registrosPorPagina = 10; 
+        if ($search) {
+
+            $servicos = cadastro_de_servico::where(function ($query) use ($search) {
+                $query->where('nomeServico', 'like', '%' . $search . '%');
+                   
+            })->paginate($registrosPorPagina);
+        } else {
+            $servicos = cadastro_de_servico::where('cadastro_de_empresas_id', $id)->paginate($registrosPorPagina);
+        }
+
+        
+
+     
        
        
 
         
 
-        return view('Empresa.MeusServico',['servicos' => $servicos ]);
+        return view('Empresa.MeusServico',['servicos' => $servicos ,'search' => $search]);
+    }
+
+    public function edit($id){
+
+        $servico = cadastro_de_servico::findOrfail($id);
+        $id_empresa = $servico->cadastro_de_empresas_id;
+        $empresa = cadastro_de_empresa::findOrFail($id_empresa);
+
+
+
+        return view('Empresa.EditmeusServico',['servico' =>  $servico ,  'empresa' => $empresa] );
     }
 
     

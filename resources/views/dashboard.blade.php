@@ -19,7 +19,7 @@
           @foreach ($empresa as $emp)
         <tr>
           <th scope="row">{{$loop->index+1}}</th>
-          <td  style=" width: 50%;"> 
+          <td  class="tabelas"> 
               <div class="list-group">
                   <a   class="list-group-item list-group-item-action" href="/empresas/dados/{{$emp->id}}">{{$emp->nomeFantasia}}</a>
               </div>

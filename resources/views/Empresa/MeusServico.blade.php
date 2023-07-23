@@ -4,6 +4,21 @@
 
 @section('conteudo')
 
+<div class="row g-12">
+    <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+        <form action="#" method="GET">
+    
+            <div class="input-group mb-3">
+              <input type="search" class="form-control" id="search" name="search" placeholder="Pesquise pelo nome...">
+              <button class="btn btn-outline-secondary custom-btn" type="submit">
+                <ion-icon name="search-outline" class="iconCentralizar"></ion-icon>
+                Buscar
+              </button>
+            </div>
+          </form>
+    </div>
+</div>
+
 <table class="table">
   <thead>
       <tr>
@@ -16,13 +31,13 @@
       @foreach ($servicos as $servico)
           <tr>
               <th scope="row">{{ $loop->index + 1 }}</th>
-              <td>
+              <td class="tabelas">
                   <div class="list-group">
                       <a class="list-group-item list-group-item-action" href="">{{ $servico->nomeServico }}</a>
                   </div>
               </td>
               <td>
-                  <a href="#" class="btn btn-sm btn-outline-warning btndashboardservico">Editar</a>
+                  <a href="/edit/servicos/{{$servico->id}}" class="btn btn-sm btn-outline-warning btndashboardservico">Editar</a>
                   <a href="#" class="btn btn-sm btn-outline-danger btndashboardservico">Apagar</a>
                   <a href="#" class="btn btn-sm btn-outline-info btndashboardservico">Criar um serviço</a>
               </td>

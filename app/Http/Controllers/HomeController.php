@@ -104,4 +104,6 @@ class HomeController extends Controller
 
         return view('dashboard', ['empresa' => $empresa]);
     }
+
+    
 }
