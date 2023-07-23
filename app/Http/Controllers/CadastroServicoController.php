@@ -76,8 +76,7 @@ class CadastroServicoController extends Controller
 
             $servicos = cadastro_de_servico::where(function ($query) use ($search) {
                 $query->where('nomeServico', 'like', '%' . $search . '%');
-                   
-            })->paginate($registrosPorPagina);
+            })->where('cadastro_de_empresas_id', $id)->paginate($registrosPorPagina);
         } else {
             $servicos = cadastro_de_servico::where('cadastro_de_empresas_id', $id)->paginate($registrosPorPagina);
         }

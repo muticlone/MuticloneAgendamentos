@@ -19,6 +19,20 @@
     </div>
 </div>
 
+@if($search)
+<h2>Buscando por : {{$search}}</h2>
+@else
+@endif
+{{-- @if(count($servicos->toArray())==0 && $search)
+    <div class="alert alert-danger" role="alert">
+        Não foi possível encontrar nenhum envento com {{$search}}! <a href="/">Ver todos</a>
+    </div>
+@elseif(count($servicos->toArray())==0)
+    <div class="alert alert-danger" role="alert">
+        Não há eventos disponíveis
+    </div>
+@endif --}}
+
 <table class="table">
   <thead>
       <tr>
@@ -83,6 +97,9 @@
       @endif
   </ul>
 </div>
+
+
+
 
 
 
