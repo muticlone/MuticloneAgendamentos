@@ -371,12 +371,17 @@
 
                 <div class="col-lg-12 col-sm-12 col-md-12 pt-2 "> 
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1" class="form-label">Descrição: </label>
+                        <label for="exampleFormControlTextarea1" class="form-label">Descrição: 
+                            
+                        </label>
+                        
                         <div class="input-group mb-3"> 
-                            <textarea class="form-control" name="descricao" rows="3"
-                            placeholder="Descrição sobre seu negócio" minlength="63" maxlength="250" 
-                            aria-describedby="validationTooltipUsernamePrepend"
-                            required ></textarea>
+                           
+                            <textarea class="form-control" id="result" name="descricao" rows="3"
+                            placeholder="Descrição sobre seu negócio" minlength="63" maxlength="250"
+                            aria-describedby="validationTooltipUsernamePrepend" required></textarea>
+                           
+                            
                             <div class="invalid-tooltip ">
                                 Por favor, digite uma breve descrição sobre o seu negócio de mo minimo sessenta e três caracteres 
 
@@ -386,6 +391,16 @@
 
                     </div>
                 </div>
+                <button type="button" class="btn btn-success" id="generateDescription"
+                        data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title="Escolha uma área de Atuação é digite nome fantasia, depois gere aqui uma descrição automática para o seu negócio">
+                        <span id ="nomeDesci" style="margin-right: 10px;">Gere uma descrição</span>                    
+                        <span id="loadingMessage" style="display: none;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                   
+                </button>
+
+
                 
                 <div class="col-lg-6 col-sm-12 col-md-12 pt-2 ">
                 

@@ -387,6 +387,16 @@ svg{
    width: 50%;
 }
 
+#generateDescription {
+  display: flex;
+  align-items: center;
+  margin-right: 5px
+}
+
+#loadingMessage {
+  margin-right: 5px; /* Adjust the margin as needed to separate the icon from the text */
+}
+
 
 
 

@@ -70,6 +70,7 @@ class CadastroServicoController extends Controller
         
 
         $search = request('search');
+        
 
         $registrosPorPagina = 10; 
         if ($search) {
@@ -82,9 +83,7 @@ class CadastroServicoController extends Controller
         }
 
         
-
-     
-       
+      
        
 
         

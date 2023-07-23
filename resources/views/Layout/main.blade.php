@@ -257,7 +257,7 @@
     <script src="/js/buscacnpj.js"></script>
     <script src="/js/mascara.js"></script>
     <script src="/js/validacaoformulario.js"></script>
-    
+    <script src="/js/gbt.js"></script>
 
     
     </body>

@@ -19,19 +19,42 @@
     </div>
 </div>
 
-@if($search)
-<h2>Buscando por : {{$search}}</h2>
-@else
+
+@php
+    $link = null;
+    $link2 = 1;
+@endphp
+
+@foreach ($servicos as $se)
+    @php
+        $link = $se->cadastro_de_empresas_id;
+        $link2 = $se->cadastro_de_empresas_id;
+    @endphp
+    
+    @break
+@endforeach
+
+@if($search && $link !== null)
+    <p>
+        Resultado da busca: {{$search}}
+        <a href="/dados/servicos/{{ $link }}">
+            Ver todos os Serviços 
+        </a>
+    </p>
+@elseif($search && $link == null)
+    <p>
+        Buscando por {{$search}} Nenhum resultado encontrado
+        <a href="/dados/servicos/{{ $link2 }}">
+            Ver todos os Serviços
+           
+        </a>
+    </p>
 @endif
-{{-- @if(count($servicos->toArray())==0 && $search)
-    <div class="alert alert-danger" role="alert">
-        Não foi possível encontrar nenhum envento com {{$search}}! <a href="/">Ver todos</a>
-    </div>
-@elseif(count($servicos->toArray())==0)
-    <div class="alert alert-danger" role="alert">
-        Não há eventos disponíveis
-    </div>
-@endif --}}
+
+
+
+
+
 
 <table class="table">
   <thead>
@@ -43,6 +66,7 @@
   </thead>
   <tbody>
       @foreach ($servicos as $servico)
+       
           <tr>
               <th scope="row">{{ $loop->index + 1 }}</th>
               <td class="tabelas">
