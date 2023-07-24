@@ -392,10 +392,21 @@ svg{
   align-items: center;
   margin-right: 5px
 }
-
-#loadingMessage {
-  margin-right: 5px; /* Adjust the margin as needed to separate the icon from the text */
+#generateDescriptionSevico {
+  display: flex;
+  align-items: center;
+  margin-right: 5px
 }
+#loadingMessage {
+  margin-right: 3px; /* Adjust the margin as needed to separate the icon from the text */
+}
+
+#loadingMessageservico {
+  margin-right: 3px; /* Adjust the margin as needed to separate the icon from the text */
+}
+
+
+
 
 
 

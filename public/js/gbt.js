@@ -11,7 +11,7 @@ generateButton.addEventListener("click", () => {
     if (selectedValue) SendQuestion(selectedValue , nomeFantasiaValue);
 });
 
-const OPENAI_API_KEY = "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";
+let OPENAI_API_KEY = "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";
 
 // ...
 
@@ -64,7 +64,7 @@ function SendQuestion(area, nomeFantasiaValue) {
       nomeDesci.textContent = "Gere uma descrição";
     })
     .finally(() => {
-      inputQuestion.value = "";
+      
       inputQuestion.disabled = false;
       inputQuestion.focus();
     });

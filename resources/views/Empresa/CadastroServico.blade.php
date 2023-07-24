@@ -38,7 +38,7 @@
                                
                       
                     </span>
-                    <input type ="text" class="form-control" id="NomeServico" name="nomeServico"
+                    <input type ="text" class="form-control" id="nomeservico" name="nomeServico"
                     placeholder ="Nome do serviço" 
                   
                     aria-describedby="validationTooltipUsernamePrepend"
@@ -163,7 +163,7 @@
                            
                             
                         </span>
-                        <textarea class="form-control" name="descricaosevico" rows="3"
+                        <textarea class="form-control" name="descricaosevico" id="resutservico" rows="3"
                         placeholder="Descrição sobre seu negócio" minlength="15" maxlength="250" 
                         aria-describedby="validationTooltipUsernamePrepend"
                     
@@ -176,10 +176,22 @@
                 
 
                 </div>
+                <button type="button" class="btn btn-success"  id="generateDescriptionSevico"
+                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Digite nome do serviço, depois gere aqui uma descrição automática para o seu serviço">
+                <span id ="nomeDesciservico"  style="margin-right: 10px;">Gere uma descrição</span>                    
+                <span id="loadingMessageservico" style="display: none;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+           
+                </button>
                 </div>
             
            
             </div>
+            
+           
+
+           
 
         </div>
 

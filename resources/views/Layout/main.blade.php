@@ -258,6 +258,7 @@
     <script src="/js/mascara.js"></script>
     <script src="/js/validacaoformulario.js"></script>
     <script src="/js/gbt.js"></script>
+    <script src="/js/gbtCadastroServico.js"></script>
 
     
     </body>
