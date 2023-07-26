@@ -67,8 +67,17 @@ class CadastroServicoController extends Controller
     }
 
     public function showMeusServicos($id){
-        
 
+        $user = auth()->user();
+
+        $empresa = cadastro_de_empresa::findOrFail($id);
+
+       
+
+        if($user->id != $empresa->user_id) {
+            return redirect('/dashboard');
+        }
+        
         $search = request('search');
         
 
@@ -93,13 +102,40 @@ class CadastroServicoController extends Controller
 
     public function edit($id){
 
+
+
         $servico = cadastro_de_servico::findOrfail($id);
         $id_empresa = $servico->cadastro_de_empresas_id;
         $empresa = cadastro_de_empresa::findOrFail($id_empresa);
 
+        $user = auth()->user();
+
+        if ($user->id != $empresa->user_id && $empresa->user_id != $empresa->id && $empresa->id != $servico->cadastro_de_empresas_idd) {
+            return redirect('/dashboard');
+        }
+        
+
+       // dd($user->id ,$empresa->id,$servico->cadastro_de_empresas_id);
+
+        
+
 
 
         return view('Empresa.EditmeusServico',['servico' =>  $servico ,  'empresa' => $empresa] );
+    }
+
+    public function update(Request $request,$id){
+
+        $servico = cadastro_de_servico::findOrFail($request->id);
+        $data = $request->all();
+
+
+        
+
+        cadastro_de_servico::findOrFail(  $servico->id)->update($data);
+
+        return redirect('/dashboard')->with('msg', 'Atualizado com sucesso!');
+
     }
 
     

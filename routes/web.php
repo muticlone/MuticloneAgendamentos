@@ -23,6 +23,7 @@ Route::post('/cadastrar/agentamento', [AgendamentoController::class, 'store'])->
 
 Route::get('/cadastro/servicos/{id}', [CadastroServicoController::class, 'create'])->name('cadastro.servicos')->middleware('auth');
 Route::post('/cadastrar/servico/{id}', [CadastroServicoController::class, 'store'])->name('cadastrar.servico')->middleware('auth');
-Route::get('/dados/servicos/{id}', [CadastroServicoController::class, 'show']);
+Route::get('/servicos/dados/{id}', [CadastroServicoController::class, 'show']);
 Route::get('/dados/servicos/{id}', [CadastroServicoController::class, 'showMeusServicos'])->middleware('auth');
 Route::get('/edit/servicos/{id}', [CadastroServicoController::class, 'edit'])->middleware('auth');
+Route::put('/edit/servicos/{id}', [CadastroServicoController::class, 'update'])->middleware('auth');

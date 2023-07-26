@@ -180,7 +180,7 @@
             <p class="card-text">{{($servico->nomeServico)}}</p> 
             <p class="card-text paragrafo-limitado" id="meu-paragrafo">{{($servico->descricaosevico)}}</p> 
             
-            <a href="/dados/servicos/{{$servico->id}}" class="btn btn-sm btn-primary btg">Saiba mais +</a>
+            <a href="/servicos/dados/{{$servico->id}}" class="btn btn-sm btn-primary btg">Saiba mais +</a>
           </div>
         </div>
       </div>

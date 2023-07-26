@@ -77,7 +77,7 @@
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" style="font-size: 18px;" type="checkbox" value="{{$servicos->nomeServico}}"  name="servico[{{$servicos->id}}]">
                                        <input type="hidden" name="idempresa" value="{{$servicos->cadastro_de_empresas_id}}">
-                                        <a class="cor" href="/dados/servicos/{{$servicos->id}}">
+                                        <a class="cor" href="/servicos/dados/{{$servicos->id}}">
                                         
                                             <label class="form-check-label" style="font-size: 18px;   cursor: pointer;"> 
                                                 {{$servicos->nomeServico}}

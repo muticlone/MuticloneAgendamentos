@@ -66,8 +66,7 @@ public function edit($id){
 
     $empresa = cadastro_de_empresa::findOrFail($id);
 
-    
-
+   
     if($user->id != $empresa->user_id) {
         return redirect('/dashboard');
     }
@@ -98,6 +97,7 @@ public function update(Request $request){
 
     
 }
+
 
 
 

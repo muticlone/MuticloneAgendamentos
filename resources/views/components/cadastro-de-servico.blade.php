@@ -4,11 +4,11 @@
         'label_img' => '', 'valueNome' => '', 'ValuevalorDoservico' => '',
         'valueHorarioIncio' => '', 'valueHorariofinal' => '',
         'selectValuePadrao' => '', 'selectValuePadrao2' => '',
-        'descricao' => '', 'action' => '#',  'method' => 'POST',
+        'descricao' => '',
 
    ])
 
-<form action="{{$action}}" method="{{$method}}" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+
     <div class="col-md-8 offset-md-2 pt-5"> 
         <div class="row g-12">
 
@@ -190,7 +190,7 @@
             </div>
         </div>
    </div>
-</form>
+
    
     
 </div>

@@ -4,7 +4,9 @@
 
 @section('conteudo')
   
-
+<form action="/edit/servicos/{{$servico->id}}" method="POST" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+    @csrf
+    @method('PUT')
     {{-- editar serviços --}}
     <x-cadastro-de-servico 
     img="/img/logo_servicos/{{$servico->imageservico}}"
@@ -20,6 +22,8 @@
     selectValuePadrao2="{{$servico->duracaominutos}} Minutos"
     descricao="{{$servico->descricaosevico}}"
     />
+</form>
+
     
    
    
