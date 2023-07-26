@@ -18,8 +18,8 @@
     ValuevalorDoservico="{{$servico->valorDoServico}}"
     valueHorarioIncio="{{$servico->horario_incial_atedimento}}"
     valueHorariofinal="{{$servico->horario_final_atedimento}}"
-    selectValuePadrao="{{$servico->duracaohoras}} Horas"
-    selectValuePadrao2="{{$servico->duracaominutos}} Minutos"
+    selectValuePadrao="{{$servico->duracaohoras}}"
+    selectValuePadrao2="{{$servico->duracaominutos}}"
     descricao="{{$servico->descricaosevico}}"
     />
 </form>

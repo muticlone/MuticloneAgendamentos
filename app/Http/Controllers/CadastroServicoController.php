@@ -115,7 +115,7 @@ class CadastroServicoController extends Controller
         }
         
 
-       // dd($user->id ,$empresa->id,$servico->cadastro_de_empresas_id);
+     
 
         
 
@@ -127,14 +127,29 @@ class CadastroServicoController extends Controller
     public function update(Request $request,$id){
 
         $servico = cadastro_de_servico::findOrFail($request->id);
-        $data = $request->all();
 
+       
+        $data = $request->all();
+       
+   
+        
+        if ($request->hasFile('imageservico') && $request->file('imageservico')->isValid()) {
+
+            unlink(public_path('img/logo_servicos/' . $servico->imageservico));
+            $requestImage = $request->imageservico;
+            $extension = $requestImage->extension();
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+            $requestImage->move(public_path('img/logo_servicos'), $imageName);
+            $data['imageservico'] = $imageName;
+        }
 
         
 
         cadastro_de_servico::findOrFail(  $servico->id)->update($data);
+       
 
-        return redirect('/dashboard')->with('msg', 'Atualizado com sucesso!');
+
+        return redirect('/dados/servicos/'. $servico->cadastro_de_empresas_id)->with('msg', 'Atualizado com sucesso!');
 
     }
 

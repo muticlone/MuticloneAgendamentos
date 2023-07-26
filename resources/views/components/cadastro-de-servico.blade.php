@@ -13,7 +13,7 @@
         <div class="row g-12">
 
             <div class="col-lg-12 col-sm-12 col-md-12 pt-2"  align = "center"> 
-                <img src="{{$img}}" class="img-fluid  img_edit" alt="{{$altimg}}">
+                <img src="{{$img}}" name="imageservico" class="img-fluid  img_edit" alt="{{$altimg}}">
             </div>
             
             <div class="alert alert-light" role="alert" align = "center">
@@ -120,7 +120,7 @@
                     
                 <div class="col-lg-4 col-sm-12 col-md-12 pt-1">
                     <select class="form-select" id="horas" name="duracaohoras" required>
-                    <option value="0">{{$selectValuePadrao}}</option>
+                    <option value="{{$selectValuePadrao}}">{{$selectValuePadrao}}</option>
                     <option value="1">1 hora</option>
                     <option value="2">2 horas</option>
                     <option value="3">3 horas</option>
@@ -137,7 +137,7 @@
                 </div>
                 <div class="col-lg-4 col-sm-12 col-md-12 pt-1">
                     <select class="form-select" id="minutos" name="duracaominutos" required>
-                    <option value="0">{{$selectValuePadrao2}}</option>
+                    <option value="{{$selectValuePadrao2}}">{{$selectValuePadrao2}}</option>
                     <option value="5">5 minutos</option>
                     <option value="10">10 minutos</option>
                     <option value="15">15 minutos</option>
