@@ -27,3 +27,4 @@ Route::get('/servicos/dados/{id}', [CadastroServicoController::class, 'show']);
 Route::get('/dados/servicos/{id}', [CadastroServicoController::class, 'showMeusServicos'])->middleware('auth');
 Route::get('/edit/servicos/{id}', [CadastroServicoController::class, 'edit'])->middleware('auth');
 Route::put('/edit/servicos/{id}', [CadastroServicoController::class, 'update'])->middleware('auth');
+Route::delete('/apagar/servicos/{id}',[CadastroServicoController::class,'destroy'])->middleware('auth');

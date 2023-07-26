@@ -365,9 +365,10 @@ svg{
   color: black;
   border-color: #D3D3D3; /* Cor do contorno do botão btn-outline-info */
   display: inline-block;
-  min-width: 150px;
+ 
  
   text-align: center;
+  min-width: 110px
   
   
 }
@@ -380,6 +381,7 @@ svg{
   color: black;
   border-color: #D3D3D3;
   margin-top: 5px;
+  
 }
 
 
@@ -404,8 +406,6 @@ svg{
 #loadingMessageservico {
   margin-right: 3px; /* Adjust the margin as needed to separate the icon from the text */
 }
-
-
 
 
 

@@ -25,26 +25,29 @@
               </div>
           </td>
           <td>
-            <a href="/dashboard/edit/{{$emp->id}}" 
-              class="btn btn-sm btn-outline-warning btndashboard"
-              data-bs-toggle="tooltip" data-bs-placement="bottom"
-              data-bs-custom-class="custom-tooltip"
-              data-bs-title="Edite o cadastro da empresa">
-              Editar
-            </a>
-            <a href="/dados/servicos/{{$emp->id}}" class="btn btn-sm btn-outline-info btndashboard "
-              data-bs-toggle="tooltip" data-bs-placement="bottom"
-              data-bs-custom-class="custom-tooltip"
-              data-bs-title="Veja seus serviços ">
-              Meus serviços
-            </a>
-            <a href="/cadastro/servicos/{{$emp->id}}" 
-              class="btn btn-sm btn-outline-success btndashboard"
-              data-bs-toggle="tooltip" data-bs-placement="bottom"
-              data-bs-custom-class="custom-tooltip"
-              data-bs-title="Crie um novo serviço ">
-              Novo serviço
-            </a>
+           
+              <a href="/dashboard/edit/{{$emp->id}}" 
+                class="btn btn-sm btn-outline-warning btndashboard bt"
+                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Edite o cadastro da empresa">
+                Editar
+              </a>
+              <a href="/dados/servicos/{{$emp->id}}" class="btn btn-sm btn-outline-info btndashboard bt"
+                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Veja seus serviços ">
+                Meus serviços
+              </a>
+              <a href="/cadastro/servicos/{{$emp->id}}" 
+                class="btn btn-sm btn-outline-success btndashboard bt"
+                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Crie um novo serviço ">
+                Novo serviço
+              </a>
+            
+           
           </td>
         </tr>
         @endforeach

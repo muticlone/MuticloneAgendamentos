@@ -5,7 +5,7 @@
 @section('conteudo')
 
 <div class="row g-12">
-    <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+    <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
         <form action="#" method="GET">
     
             <div class="input-group mb-3">
@@ -67,19 +67,36 @@
   <tbody>
       @foreach ($servicos as $servico)
        
-          <tr>
-              <th scope="row">{{ $loop->index + 1 }}</th>
-              <td class="tabelas">
-                  <div class="list-group">
-                      <a class="list-group-item list-group-item-action" href="">{{ $servico->nomeServico }}</a>
-                  </div>
-              </td>
-              <td>
-                  <a href="/edit/servicos/{{$servico->id}}" class="btn btn-sm btn-outline-warning btndashboardservico">Editar</a>
-                  <a href="#" class="btn btn-sm btn-outline-danger btndashboardservico">Apagar</a>
-                  <a href="#" class="btn btn-sm btn-outline-info btndashboardservico">Criar um serviço</a>
-              </td>
-          </tr>
+        <tr>
+            <th scope="row">{{ $loop->index + 1 }}</th>
+            <td class="tabelas">
+                <div class="list-group">
+                    <a class="list-group-item list-group-item-action" href="/servicos/dados/{{$servico->id}}">{{ $servico->nomeServico }}</a>
+                </div>
+            </td>
+            <td>
+
+                <div class="btn-group" role="group" aria-label="Basic example ">
+                    <form action="/apagar/servicos/{{$servico->id}}" method="POST">
+                        <a href="/edit/servicos/{{$servico->id}}" class="btn btn-sm btn-outline-warning btndashboardservico mr-3">Editar</a>
+                    
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-outline-info btndashboardservico mr-3 ">
+                               
+                                Deletar
+                              
+                            </button>
+                        <a href="/cadastro/servicos/{{$servico->cadastro_de_empresas_id}}" class="btn btn-sm btn-outline-info btndashboardservico">Novo serviço</a>
+                    </form>
+                    
+                   
+                </div>
+            </td>
+        </tr>
+        {{----}}
+    
+    
       @endforeach
   </tbody>
 </table>

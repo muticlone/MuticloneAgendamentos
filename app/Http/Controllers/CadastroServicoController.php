@@ -47,7 +47,7 @@ class CadastroServicoController extends Controller
 
     $cadastro_de_servico->create($data); 
 
-    return redirect('/dashboard')->with('msg', 'serviço criado com sucesso!');
+    return redirect('/dados/servicos/'. $empresa->id)->with('msg', 'serviço criado com sucesso!');
     }   
 
 
@@ -150,6 +150,16 @@ class CadastroServicoController extends Controller
 
 
         return redirect('/dados/servicos/'. $servico->cadastro_de_empresas_id)->with('msg', 'Atualizado com sucesso!');
+
+    }
+
+    public function destroy($id) {
+
+        $servico = cadastro_de_servico::findOrFail($id);
+
+        cadastro_de_servico::findOrFail($id)->delete();
+
+        return redirect('/dados/servicos/'. $servico->cadastro_de_empresas_id)->with('msg', 'Evento excluído com sucesso!');
 
     }
 
