@@ -4,8 +4,28 @@ use App\Http\Controllers\AgendamentoController;
 use App\Http\Controllers\CadastroEmpresaController;
 use App\Http\Controllers\CadastroServicoController;
 use App\Http\Controllers\HomeController;
+
+use Illuminate\Support\Facades\Http;
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProxyController;
+
+use App\Http\Controllers\OpenAIController;
+
+
+// api de busca cnpj
+Route::get('/get-cnpj/{cnpj}', function ($cnpj) {
+    $url = "https://www.receitaws.com.br/v1/cnpj/{$cnpj}";
+    
+  
+    $response = Http::get($url);
+    
+   
+    return $response->json();
+});
+
+
+
+
 
 Route::get('/home/empresas', [HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->middleware('auth');
@@ -28,3 +48,15 @@ Route::get('/dados/servicos/{id}', [CadastroServicoController::class, 'showMeusS
 Route::get('/edit/servicos/{id}', [CadastroServicoController::class, 'edit'])->middleware('auth');
 Route::put('/edit/servicos/{id}', [CadastroServicoController::class, 'update'])->middleware('auth');
 Route::delete('/apagar/servicos/{id}',[CadastroServicoController::class,'destroy'])->middleware('auth');
+
+// rota de teste da geração img
+// Route::get('/generate-image', [OpenAIController::class, 'generateImage']);
+
+
+
+
+
+
+
+
+

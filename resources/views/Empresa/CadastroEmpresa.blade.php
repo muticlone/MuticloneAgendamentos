@@ -15,7 +15,25 @@
                 <label for="formFile" class="form-label">Adicionar logotipo da empresa:</label>
                 <input class="form-control" type="file" id="image" name="image" required>
                
-            </div>
+                
+               
+            </div>  
+            {{-- <div class="col-lg-12 col-sm-12 col-md-12 pt-2"> 
+            
+                <button type="button" class="btn btn-sm btn-success" id="genelogo"
+                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Escolha uma área de Atuação é digite nome fantasia, depois gere aqui uma descrição automática para o seu negócio"
+                >
+                <span id="nomelogo" style="margin-right: 10px;">Gere uma logo</span>                    
+                <span id="loadinglogo" style="display: none;" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                </button>
+                <img id="generatedImage" style="display: none;" alt="Generated Image">
+              
+               
+
+              
+            </div> --}}
            
                 
                 <div class="col-lg-5 col-sm-12 col-md-12 pt-2"> 

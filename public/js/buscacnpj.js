@@ -40,8 +40,11 @@
  
    
    if (cnpj.length === 14) {
+    BuscaCnpjRazãoSocial.value = 'Buscando...';
+    BuscaCnpjNOmeFantacia.value = 'Buscando...';
+    
     try {
-      const response = await fetch(`https://www.receitaws.com.br/v1/cnpj/${cnpj}?timestamp=${new Date().getTime()}`, {
+      const response = await fetch(`http://localhost:8989/get-cnpj/${cnpj}`, {
       headers: {
         'Cache-Control': 'no-cache'
       
