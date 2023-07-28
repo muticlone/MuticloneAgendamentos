@@ -262,6 +262,7 @@ svg{
   max-width: 100px;
   max-height: 100px;
   border-radius: 10px  ;
+  border: 1px solid #D3D3D3;
   
 }
 
@@ -275,6 +276,18 @@ svg{
   border-radius: 10px 10px 0 0;
   overflow: hidden
 }
+
+.imgtabela {
+  margin-left: 0px;
+  margin-right: 5px;
+  min-width: 30px;
+  min-height: 30px;
+  max-width: 30px;
+  max-height: 30px;
+  border-radius: 10px;
+  border: 1px solid #D3D3D3;
+}
+
 
 /*largura da barra de rolagem */
 ::-webkit-scrollbar{
@@ -406,6 +419,7 @@ svg{
 #loadingMessageservico {
   margin-right: 3px; /* Adjust the margin as needed to separate the icon from the text */
 }
+
 
 
 

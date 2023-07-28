@@ -81,15 +81,18 @@ class CadastroServicoController extends Controller
         $search = request('search');
         
 
-        $registrosPorPagina = 10; 
+        $registrosPorPagina = 4; 
         if ($search) {
 
             $servicos = cadastro_de_servico::where(function ($query) use ($search) {
                 $query->where('nomeServico', 'like', '%' . $search . '%');
             })->where('cadastro_de_empresas_id', $id)->paginate($registrosPorPagina);
         } else {
+            
             $servicos = cadastro_de_servico::where('cadastro_de_empresas_id', $id)->paginate($registrosPorPagina);
         }
+
+
 
         
       
@@ -97,7 +100,7 @@ class CadastroServicoController extends Controller
 
         
 
-        return view('Empresa.MeusServico',['servicos' => $servicos ,'search' => $search]);
+        return view('Empresa.MeusServico',['servicos' => $servicos ,'search' => $search , 'empresa' => $empresa]);
     }
 
     public function edit($id){

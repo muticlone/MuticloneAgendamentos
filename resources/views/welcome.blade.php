@@ -195,44 +195,47 @@
 </div>
 
 {{-- paginação --}}
-<div class="py-4 d-flex justify-content-center">
-  <ul class="pagination">
-      {{-- <!-- Página Anterior --> --}}
-      @if ($Cadastro_empresa->appends(['search' => $search])->onFirstPage())
-          <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-          </li>
-      @else
-          <li class="page-item">
-              <a class="page-link" href="{{ $Cadastro_empresa->appends(['search' => $search])->previousPageUrl() }}">Anterior</a>
-          </li>
-      @endif
-
-      {{-- <!-- Números de página --> --}}
-      @for ($i = 1; $i <= $Cadastro_empresa->lastPage(); $i++)
-          @if ($i == $Cadastro_empresa->currentPage())
-              <li class="page-item active" aria-current="page">
-                  <span class="page-link">{{ $i }}</span>
-              </li>
-          @else
-              <li class="page-item">
-                  <a class="page-link" href="{{ $Cadastro_empresa->appends(['search' => $search])->url($i) }}">{{ $i }}</a>
-              </li>
-          @endif
-      @endfor
-
-      {{-- <!-- Próxima Página --> --}}
-      @if ($Cadastro_empresa->appends(['search' => $search])->hasMorePages())
-          <li class="page-item">
-              <a class="page-link" href="{{ $Cadastro_empresa->appends(['search' => $search])->nextPageUrl() }}">Próxima</a>
-          </li>
-      @else
-          <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Próxima</a>
-          </li>
-      @endif
-  </ul>
+<div class="pagination-container"> 
+  <div class="py-4 d-flex justify-content-center">
+    <ul class="pagination">
+        {{-- <!-- Página Anterior --> --}}
+        @if ($Cadastro_empresa->appends(['search' => $search])->onFirstPage())
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+            </li>
+        @else
+            <li class="page-item">
+                <a class="page-link" href="{{ $Cadastro_empresa->appends(['search' => $search])->previousPageUrl() }}">Anterior</a>
+            </li>
+        @endif
+  
+        {{-- <!-- Números de página --> --}}
+        @for ($i = 1; $i <= $Cadastro_empresa->lastPage(); $i++)
+            @if ($i == $Cadastro_empresa->currentPage())
+                <li class="page-item active" aria-current="page">
+                    <span class="page-link">{{ $i }}</span>
+                </li>
+            @else
+                <li class="page-item">
+                    <a class="page-link" href="{{ $Cadastro_empresa->appends(['search' => $search])->url($i) }}">{{ $i }}</a>
+                </li>
+            @endif
+        @endfor
+  
+        {{-- <!-- Próxima Página --> --}}
+        @if ($Cadastro_empresa->appends(['search' => $search])->hasMorePages())
+            <li class="page-item">
+                <a class="page-link" href="{{ $Cadastro_empresa->appends(['search' => $search])->nextPageUrl() }}">Próxima</a>
+            </li>
+        @else
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Próxima</a>
+            </li>
+        @endif
+    </ul>
+  </div>
 </div>
+
 
 
 

@@ -9,16 +9,18 @@
    ])
 
 
-    <div class="col-md-8 offset-md-2 pt-5"> 
+    <div class="col-md-8 offset-md-2"> 
         <div class="row g-12">
 
             <div class="col-lg-12 col-sm-12 col-md-12 pt-2"  align = "center"> 
                 <img src="{{$img}}" name="imageservico" class="img-fluid  img_edit" alt="{{$altimg}}">
             </div>
-            
-            <div class="alert alert-light" role="alert" align = "center">
-            {{$titulo}} {{strtolower($tituloNome)}}
+            <div class="pt-2">
+                <div class="alert alert-light" role="alert" align = "center">
+                    {{$titulo}} {{strtolower($tituloNome)}}
+                </div>
             </div>
+            
             {{-- imagem para o serviço --}}
             <div class="form-group">
                 <label for="formFile" class="form-label">{{$label_img}}</label>
