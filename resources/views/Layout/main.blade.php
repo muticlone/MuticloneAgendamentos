@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <link type="image/png" sizes="148x148" rel="icon" href="/img/logo_ico/@yield('logo')">
+        <link type="image/png"  rel="icon" href="/img/logo_ico/logo_muticlone.png">
         
         <title>@yield('title')</title>
 
@@ -58,7 +58,7 @@
                     
                     <a class="nav-link active" aria-current="page" href="{{ route('home.servicos') }}">
                       
-                      Serviços
+                      Início
                     </a>
                   </li>
                   
@@ -66,25 +66,19 @@
                     
                     <a class="nav-link active" aria-current="page" href="{{ route('home') }}">
                       
-                      Empresas
+                      Empresas 
                     </a>
                   </li>
                   @auth
-                  
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <li class="nav-item">
+                    
+                    <a class="nav-link active" aria-current="page" href="/dashboard">
+                      
                       Business
                     </a>
-                    <ul class="dropdown-menu">
-                      <li class="nav-item linha">
-                        <a class="nav-link tamnhofonte" href="{{ route('pag.cadastrar.Empresa') }}">Novo Cadastro</a>
-                      </li>
-                      
-                      <li class="nav-item tamnhofonte">
-                        <a class="nav-link" href="/dashboard">Minhas empresas</a>
-                      </li>
-                    </ul>
                   </li>
+                  
+                  
                   
                  
                   @endauth

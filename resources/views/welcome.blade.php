@@ -154,21 +154,32 @@
         <span class="visually-hidden">Next</span>
       </button>
   </div>
+  @if(count($Cadastro_empresa)>0)
 
+    @if($search)
+      
+      <div class="pt-1">
+        <div class="alert alert-success" role="alert"> 
+          Buscando por : "{{$search}}"  <a href="/home/empresas">Ver todos</a>
+        </div>
+      </div> 
+    
+    @else
+
+      <div class="pt-1">
+        <div class="alert alert-light" role="alert" align = "center"> 
+          Todos os empresas disponíveis
+        </div>
+    
+      
+      </div>
+
+    @endif
+  @endif
  
 </div>  
 
-@if($search)
-  <h2 class="pt-1">Buscando por : {{$search}}</h2>
-  
-@else
 
-<div class="pt-1">
-  <h4>Todos os empresas disponíveis</h4>
-  
-</div>
-
-@endif
 
 
 <div class="row g-12 pt-2">
@@ -242,7 +253,7 @@
 
   @if(count($Cadastro_empresa)==0 && $search) 
     <div class="alert alert-warning pt-2" role="alert">
-      Não foi possível encontrar nenhuma empresa ou serviço com: {{$search}}! <a href="/">Ver todos</a>
+      Não foi possível encontrar nenhuma empresa ou serviço com: "{{$search}}" <a href="/home/empresas">Ver todos</a>
     </div>
   @elseif(count($Cadastro_empresa)==0)
     <div class="alert alert-warning pt-2" role="alert">

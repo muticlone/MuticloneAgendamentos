@@ -14,9 +14,12 @@
             <div class="col-lg-12 col-sm-12 col-md-12 pt-2"  align = "center"> 
                 <img src="/img/logo_empresas/{{ $empresa->image}}" class="img-fluid  img_edit" alt="{{$empresa->razaoSocial}}">
             </div>
-            <div class="alert alert-light" role="alert" align = "center">
-                Editando cadastro {{$empresa->nomeFantasia}}
+            <div class="pt-2">
+                <div class="alert alert-light" role="alert" align = "center">
+                    Editando cadastro {{$empresa->nomeFantasia}}
+                </div>
             </div>
+          
             
             <div class="form-group pt-2">
                 

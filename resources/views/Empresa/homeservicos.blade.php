@@ -149,25 +149,34 @@
           <span class="visually-hidden">Next</span>
         </button>
     </div>
-
+    @if(count( $servico)>0)
    
+    @if($search)
+      <div class="pt-1">
+        <div class="alert alert-success" role="alert">
+        Buscando por : "{{$search}}" <a href="/">Ver todos</a>
+        </div>
+      </div>
+    
+    @else
+      <div class="pt-1">
+        
+        <div class="alert alert-light" role="alert" align = "center">
+          Todos os serviços disponíveis
+        </div>
+    
+      
+      </div>
+ 
   
-   
+    @endif
+  
+  @endif 
   </div>  
 
  
   
-  @if($search)
-    <h2 class="pt-1">Buscando por : {{$search}}</h2>
-    
-  @else
-  <div class="pt-1">
-    <h4 class="">Todos os serviços disponíveis</h4>
-    
-  </div>
  
-  
-  @endif
   
   
   <div class="row g-12 pt-2">
@@ -243,7 +252,7 @@
 
   @if($servico->count() === 0 && $search) 
   <div class="alert alert-warning pt-2" role="alert">
-      Não foi possível encontrar nenhuma serviço com: {{$search}}! <a href="/home/servicos">Ver todos</a>
+      Não foi possível encontrar nenhuma serviço com: "{{$search}}" <a href="/">Ver todos</a>
   </div>
 @elseif($servico->count() === 0)
   <div class="alert alert-warning pt-2" role="alert">

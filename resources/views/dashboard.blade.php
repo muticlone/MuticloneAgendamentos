@@ -1,10 +1,45 @@
 @extends('Layout.main')
-@section('logo','logo_empresa.png')
+
 @section('title','Dashboard')
 
 @section('conteudo')
 
+<div class="col-lg-12 col-sm-12 col-md-12 pt-2" align="center"> 
+  <div class="btn-group" role="group" aria-label="Basic example">
+      <a href="/" class="btn btn-sm btn-outline-info btndashboardservico">Home</a>
+      {{-- <a  href="/dashboard" class="btn btn-sm btn-outline-info btndashboardservico">Meu negócios</a> --}}
+    
+     
+      <a href="/cadastrar/empresa" class="btn btn-sm btn-outline-info btndashboardservico">Cadastrar nova empresa</a>
+    
+     
+  </div>
+</div>
+
+<div class="col-lg-5 col-sm-12 col-md-12 pt-2">
+  <form action="#" method="GET">
+
+      <div class="input-group mb-3">
+        <input type="search" class="form-control" id="search" name="search" placeholder="Busque pelo nome nome da empresa...">
+        <button class="btn btn-outline-secondary custom-btn" type="submit">
+          <ion-icon name="search-outline" class="iconCentralizar"></ion-icon>
+          Buscar
+        </button>
+      </div>
+    </form>
+</div>
+
+
+
+
   @if(count($empresa)>0)
+    @if($search) 
+        
+    <div class="alert alert-success" role="alert">
+      Buscando por:  "{{$search}}" <a href="/dashboard">Visualizar todas as suas empresas</a>
+    </div>
+    @endif
+ 
   <div class="table-responsive">
     <table class="table align-middle">
       <thead>
@@ -21,7 +56,10 @@
           <th scope="row">{{$loop->index+1}}</th>
           <td  class="tabelas"> 
               <div class="list-group">
-                  <a   class="list-group-item list-group-item-action" href="/empresas/dados/{{$emp->id}}">{{$emp->nomeFantasia}}</a>
+                  <a   class="list-group-item list-group-item-action" href="/empresas/dados/{{$emp->id}}">
+                    <img src="/img/logo_empresas/{{ $emp->image}}" alt="{{ $emp->nomeServico }}" class="imgtabela">
+                    {{$emp->nomeFantasia}}
+                  </a>
               </div>
           </td>
           <td>
@@ -39,13 +77,7 @@
                 data-bs-title="Veja seus serviços ">
                 Meus serviços
               </a>
-              <a href="/cadastro/servicos/{{$emp->id}}" 
-                class="btn btn-sm btn-outline-success btndashboard bt"
-                data-bs-toggle="tooltip" data-bs-placement="bottom"
-                data-bs-custom-class="custom-tooltip"
-                data-bs-title="Crie um novo serviço ">
-                Novo serviço
-              </a>
+             
             
            
           </td>
@@ -99,6 +131,14 @@
 
   @else
     <!-- Se não houver empresas, exiba alguma mensagem de aviso ou tratamento adequado -->
+    @if($search) 
+      
+      <div class="alert alert-warning" role="alert">
+        A busca não localizou nenhuma empresas cadastradas com nome de:  "{{$search}}" <a href="/dashboard">Visualizar todas as suas empresas</a>
+      </div>
+    @endif
+
+    
   @endif
 
 

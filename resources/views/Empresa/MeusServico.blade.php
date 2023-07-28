@@ -50,21 +50,23 @@
 @endforeach
 
 @if($search && $link !== null)
-    <p>
-        Resultado da busca: {{$search}}
+    <div class="alert alert-success" role="alert">
+        Resultado da busca: "{{$search}}"
         <a href="/dados/servicos/{{ $link }}">
             Ver todos os Serviços 
         </a>
-    </p>
+    </div>
+   
 @elseif($search && $link == null)
-    <p>
-        Buscando por {{$search}} Nenhum resultado encontrado
+
+    <div class="alert alert-warning" role="alert">
+        Buscando por: "{{$search}}" Nenhum resultado encontrado
         <a href="/dados/servicos/{{ $link2 }}">
             Ver todos os Serviços
            
         </a>
-    </p>
-
+    </div>
+    
 @endif
 
 
