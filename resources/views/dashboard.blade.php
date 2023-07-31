@@ -69,13 +69,26 @@
                 data-bs-toggle="tooltip" data-bs-placement="bottom"
                 data-bs-custom-class="custom-tooltip"
                 data-bs-title="Edite o cadastro da empresa">
-                Editar
+               
+                <x-svg-edit width="14" height="14" margin="3px"/>
+                
               </a>
+              
+              <a href="#" class="btn btn-sm btn-outline-danger btndashboard bt "
+                data-bs-toggle="tooltip" data-bs-placement="bottom"
+                data-bs-custom-class="custom-tooltip"
+                data-bs-title="Apagar empresa">
+                
+                <x-svg-deletar width="14" height="14" margin="3px"/>
+               
+              </a>
+           
               <a href="/dados/servicos/{{$emp->id}}" class="btn btn-sm btn-outline-info btndashboard bt"
                 data-bs-toggle="tooltip" data-bs-placement="bottom"
                 data-bs-custom-class="custom-tooltip"
                 data-bs-title="Veja seus serviços ">
-                Meus serviços
+               
+                <x-svg-meusservicos width="14" height="14" margin="3px"/>
               </a>
              
             

@@ -7,6 +7,11 @@ a {
 
 }
 
+samp{
+  font-family: Roboto;
+  font-size: 15px;
+}
+
 
 ul {
   list-style-type: none; /* Remove o ponto/bullet point */
@@ -419,6 +424,8 @@ svg{
 #loadingMessageservico {
   margin-right: 3px; /* Adjust the margin as needed to separate the icon from the text */
 }
+
+
 
 
 

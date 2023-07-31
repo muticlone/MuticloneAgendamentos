@@ -108,13 +108,19 @@
 
                 <div class="btn-group" role="group" aria-label="Basic example ">
                     <form action="/apagar/servicos/{{$servico->id}}" method="POST">
-                        <a href="/edit/servicos/{{$servico->id}}" class="btn btn-sm btn-outline-warning btndashboardservico mr-3">Editar</a>
+                       
+                
+                        <a href="/edit/servicos/{{$servico->id}}" class="btn btn-sm btn-outline-warning btndashboardservico mr-3">
+                            {{-- editar --}}
+                            <x-svg-edit width="14" height="14" margin="3px"/>
+                        </a>
+                      
                     
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-outline-danger btndashboardservico mr-3 ">
-                               
-                                Deletar
+                               {{-- apagar --}}
+                                <x-svg-deletar width="14" height="14" margin="3px"/>
                               
                             </button>
   

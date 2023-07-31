@@ -4,7 +4,7 @@
         'label_img' => '', 'valueNome' => '', 'ValuevalorDoservico' => '',
         'valueHorarioIncio' => '', 'valueHorariofinal' => '',
         'selectValuePadrao' => '', 'selectValuePadrao2' => '',
-        'descricao' => '',
+        'descricao' => '', 'linkpx' => '', 'linkAnterior' => '' ,
 
    ])
 
@@ -13,7 +13,19 @@
         <div class="row g-12">
 
             <div class="col-lg-12 col-sm-12 col-md-12 pt-2"  align = "center"> 
+                <a href="{{$linkAnterior}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
+                    </svg>
+                </a>
+                
                 <img src="{{$img}}" name="imageservico" class="img-fluid  img_edit" alt="{{$altimg}}">
+                <a href="{{$linkpx}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8Zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5Z"/>
+                    </svg>
+                </a>
+                
             </div>
             <div class="pt-2">
                 <div class="alert alert-light" role="alert" align = "center">
