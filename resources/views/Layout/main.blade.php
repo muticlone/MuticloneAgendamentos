@@ -205,8 +205,16 @@
    
    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    
     <script>
+      $(document).ready(function() {
+      $(".pt-br").rating({
+      language: 'pt-BR'
+        });
+    });
+
+    </script>
+    
+   <script>
         document.addEventListener('DOMContentLoaded', function() {
           const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
           tooltipTriggerList.forEach(function(tooltipTriggerEl) {
@@ -225,7 +233,7 @@
         toast.show();
       });
     });
-  </script>
+  </script> 
 
 
     
@@ -238,22 +246,26 @@
     <script  nomodule  src = "https://unpkg .com/ionicons@7.1.0/dist/ionicons/ionicons.js" > </script>
    
 
+  
+
+    <!-- Load Bootstrap Star Rating CSS -->
+    <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
+
+    <!-- Load Bootstrap Star Rating JS -->
     <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/star-rating.min.js" type="text/javascript"></script>
+    <!-- Load Portuguese language file -->
+  <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/locales/pt-BR.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.js"></script>
-    <script src="/js/locales/star-rating_locale_pt-BR.js"></script>
+  
 
-    
+ 
 
 
     <script src="/js/trocaTema.js"></script>
-    <script src="/js/buscacep.js"></script>
-    <script src="/js/buscacnpj.js"></script>
+    
     <script src="/js/mascara.js"></script>
     <script src="/js/validacaoformulario.js"></script>
-    <script src="/js/gbt.js"></script>
-    <script src="/js/gbtCadastroServico.js"></script>
-    <script src="/js/img/generateImage.js"></script>
+
 
     
     </body>

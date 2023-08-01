@@ -502,7 +502,12 @@
     </form>
 </div>
 
+<script src="/js/buscacep.js"></script>
+<script src="/js/buscacnpj.js"></script>
 
+<script src="/js/gbt.js"></script>
+
+{{-- <script src="/js/img/generateImage.js"></script> --}}
 
 
 

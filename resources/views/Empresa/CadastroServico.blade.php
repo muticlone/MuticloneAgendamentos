@@ -1,5 +1,5 @@
 @extends('Layout.main')
-@section('logo','logo_cadastro.png')
+
 @section('title','Cadastrar Empresa')
 
 @section('conteudo')
@@ -9,12 +9,13 @@
         @csrf
         <div class="row g-12">
 
-            <div class="col-lg-12 col-sm-12 col-md-12 pt-2"  align = "center"> 
+            <div class="col-lg-12 col-sm-12 col-md-12"  align = "center"> 
                 <img src="/img/logo_empresas/{{ $empresa->image}}" class="img-fluid  img_edit" alt="{{$empresa->razaoSocial}}">
             </div>
-            
-            <div class="alert alert-light" role="alert" align = "center">
-                Cradastrar novo serviço {{strtolower($empresa->nomeFantasia)}}
+            <div class="pt-2">
+                <div class="alert alert-light" role="alert" align = "center">
+                    Cradastrar novo serviço {{strtolower($empresa->nomeFantasia)}}
+                </div>
             </div>
             {{-- imagem para o serviço --}}
             <div class="form-group">
@@ -203,6 +204,8 @@
     
     
 </div>
+
+<script src="/js/gbtCadastroServico.js"></script>
 
 
 @endsection

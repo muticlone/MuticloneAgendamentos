@@ -185,12 +185,17 @@
 <div class="row g-12 pt-2">
   @foreach ($Cadastro_empresa as $index => $empresa)
     <div class="col-auto">
-      <div class="card" style="width: 10rem ;">
+      <div class="card" style="width: 12rem ;">
         <img src="/img/logo_empresas/{{$empresa->image}}" class=" img_tela_home" class="img-logo" alt="{{($empresa->razaoSocial)}}">
+        <div class="image-and-rating"> 
+          <input id="input-6" name="input-6" 
+          class="rating rating-loading pt-br" value="3.5" data-min="0" data-max="5" data-step="0.1"
+          data-readonly="true" data-show-clear="false" data-size="xs">
+        </div>
         <div class="card-body txt">
           <p class="card-text">{{($empresa->nomeFantasia)}}</p> 
           <p class="card-text">{{($empresa->area_atuacao)}}</p> 
-          
+         
           <a href="/empresas/dados/{{$empresa->id}}" class="btn btn-sm btn-primary btg">Saber mais +</a>
         </div>
       </div>

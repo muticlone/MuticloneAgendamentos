@@ -54,7 +54,7 @@ class HomeController extends Controller
             });
         }
 
-        $servico = $query->paginate(10);
+        $servico = $query->paginate(5);
 
         $paginatedItems = new LengthAwarePaginator(
             $servico->items(),

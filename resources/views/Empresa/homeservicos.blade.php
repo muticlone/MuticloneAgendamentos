@@ -183,12 +183,29 @@
     
     @foreach ( $servico as $index => $servico)
       <div class="col-auto">
-        <div class="card" style="width: 10rem ;">
-          <img src="/img/logo_servicos/{{$servico->imageservico}}" class=" img_tela_home" class="img-logo" alt="{{($servico->nomeServico)}}">
+        <div class="card" style="width: 12rem ;">
+         
+            <img src="/img/logo_servicos/{{$servico->imageservico}}" class=" img_tela_home" class="img-logo" alt="{{($servico->nomeServico)}}">
+         
+           
+            <div class="image-and-rating"> 
+             
+              
+              <input id="input6" name="input-6" class="rating rating-loading pt-br" value="5" data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-show-clear="false"   data-size="xs">
+            
+              
+            </div>
+
+            
+
+    
+           
+         
+          
           <div class="card-body txt">
             <p class="card-text">{{($servico->nomeServico)}}</p> 
-            <p class="card-text paragrafo-limitado" id="meu-paragrafo">{{($servico->descricaosevico)}}</p> 
-            
+            {{-- <p class="card-text paragrafo-limitado " id="meu-paragrafo">{{($servico->descricaosevico)}}</p>  --}}
+           
             <a href="/servicos/dados/{{$servico->id}}" class="btn btn-sm btn-primary btg">Saiba mais +</a>
           </div>
         </div>
@@ -203,9 +220,8 @@
    
   </div>
 
-  <script>
- 
-  </script>
+  
+
 
   {{-- paginação --}}
   
@@ -254,12 +270,12 @@
   <div class="alert alert-warning pt-2" role="alert">
       Não foi possível encontrar nenhuma serviço com: "{{$search}}" <a href="/">Ver todos</a>
   </div>
-@elseif($servico->count() === 0)
-  <div class="alert alert-warning pt-2" role="alert">
-      Não há eventos disponíveis
-  </div>
-@endif
-  
+  @elseif($servico->count() === 0)
+    <div class="alert alert-warning pt-2" role="alert">
+        Não há eventos disponíveis
+    </div>
+  @endif
+    
   
 
       

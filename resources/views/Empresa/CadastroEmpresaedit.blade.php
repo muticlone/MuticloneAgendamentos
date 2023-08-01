@@ -409,6 +409,11 @@
         
     </form>
 
+
+    
+<script src="/js/buscacep.js"></script>
+<script src="/js/buscacnpj.js"></script>
+
     
  
 

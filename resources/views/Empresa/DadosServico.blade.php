@@ -27,7 +27,7 @@
                 Avaliação
               </div>
               <div class="card-body">
-                <input id="input-6" name="input-6" class="rating rating-loading" value="3.5" data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-star-captions="pt-BR">
+                <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="3.5" data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-star-captions="pt-BR">
 
 
              
@@ -47,13 +47,13 @@
               <div class="card-body coment">
                 <div class="list-group-item">
                   <p> Nome do usúario,  comentario 
-                    <input id="input-6" name="input-6" class="rating rating-loading" value="3.5" data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-star-captions="pt-BR" data-size="xs">
+                    <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="3.5" data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-star-captions="pt-BR" data-size="xs">
                   
                   </p>
                 </div>
                 
                 <p> Nome do usúario,  comentario 
-                  <input id="input-6" name="input-6" class="rating rating-loading" value="3.5" data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-star-captions="pt-BR" data-size="xs">
+                  <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="3.5" data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-star-captions="pt-BR" data-size="xs">
                 
                 </p>
                 <p> Nome do usúario,  comentario 

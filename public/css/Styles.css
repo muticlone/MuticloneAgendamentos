@@ -1,5 +1,6 @@
 *{
  font-family: Roboto;
+ text-transform: capitalize;
  
 }
 a {
@@ -11,6 +12,7 @@ samp{
   font-family: Roboto;
   font-size: 15px;
 }
+
 
 
 ul {
@@ -90,7 +92,7 @@ li:last-child {
   .navbar li {
 
     
- 
+
     border-bottom: 1px solid black;
 
     padding: 15px;
@@ -141,6 +143,7 @@ li:last-child {
   margin-right: 5px;
 
 }
+
 
 .vertical-align-middle {
   
@@ -217,12 +220,7 @@ svg{
 
 
 
-.card {
-    
-    height: 100%;
-    
-    border-radius: 12px;
-  }
+
 
 .row {
     display: flex;
@@ -274,12 +272,36 @@ svg{
 
 
 .img_tela_home {
-  min-width: 158px;
-  min-height: 120px;
-  max-width: 158px;
-  max-height: 120px;
-  border-radius: 10px 10px 0 0;
-  overflow: hidden
+  margin-top: 15px;
+  margin-left: 8px;
+  
+  min-width: 65px;
+  min-height: 65px;
+  max-width: 65px;
+  max-height: 65px;
+  border-radius: 10px ;
+  border: 1px solid #F8F8FF;
+  overflow: hidden;
+  
+}
+
+.image-and-rating {
+  display: flex; 
+  align-items: center;
+  margin-bottom: 10px;  
+  margin-left: 80px;
+  margin-top: -50px;
+  
+}
+
+
+
+.card {
+    
+  height: 100%;
+  
+  border-radius: 10px;
+ 
 }
 
 .imgtabela {
@@ -290,7 +312,7 @@ svg{
   max-width: 30px;
   max-height: 30px;
   border-radius: 10px;
-  border: 1px solid #D3D3D3;
+  border: 1px solid #F8F8FF;
 }
 
 
@@ -350,15 +372,6 @@ svg{
   pointer-events: none;
 }
 
-
-.paragrafo-limitado {
-    
-   
-  overflow: hidden;
-      
-      text-overflow: ellipsis;
-    
-  }
 
 
 .pHome{
