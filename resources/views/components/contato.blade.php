@@ -7,7 +7,7 @@
     
     <h5 class="pt-2 vertical-align-middle" >
         <span class="vertical-align-middle " >
-            <x-svg-contato width="20" height="20" margin="2px"/>
+           
             
             {{$nome}}
           
