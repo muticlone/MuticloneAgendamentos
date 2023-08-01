@@ -6,6 +6,8 @@ use App\Models\cadastro_de_empresa;
 use App\Models\cadastro_de_servico;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 
 
 
@@ -76,7 +78,9 @@ class HomeController extends Controller
 
         $empresa = cadastro_de_empresa::findOrfail($id);
 
-        $servico = cadastro_de_servico::where('cadastro_de_empresas_id', $id)->get();
+        $itensPorPagina = 1;
+
+        $servico = cadastro_de_servico::where('cadastro_de_empresas_id', $id)->paginate($itensPorPagina);
 
 
 
@@ -85,6 +89,8 @@ class HomeController extends Controller
 
         return view('Empresa.DadosEmpresa', ['empresa' => $empresa, 'Admempresa' =>  $Admempresa, 'servico' => $servico]);
     }
+
+   
 
     public function dashboard()
     {

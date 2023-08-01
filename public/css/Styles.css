@@ -257,6 +257,9 @@ svg{
   min-height: 25px;
   max-width: 25px;
   max-height: 25px;
+  border-radius: 10px;
+ 
+  border: 1px solid #D3D3D3;
   
 
 }
@@ -297,6 +300,12 @@ svg{
   
 }
 
+.paginação {
+  position: relative;
+    top: 70px; 
+    float: right;
+  
+}
 
 
 .card {

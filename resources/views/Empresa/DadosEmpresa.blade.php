@@ -18,12 +18,13 @@
                     Avaliação
                   </div>
                   <div class="card-body">
-                    <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="3.5" data-min="0" data-max="5" data-step="0.1" data-readonly="true"  data-show-clear="false" >
+                  
+                    <input id="input-6" name="input-6" class="rating rating-loading pt-br" 
+                    value="3.5" data-min="0" data-max="5" data-step="0.1" data-readonly="true" 
+                    data-show-clear="false"  >
 
-    
-                 
                    
-                   
+           
                   </div>
                 </div>
               </div> 
@@ -40,7 +41,7 @@
                     
                     @if($empresa->descricao)
                     <h5 class="vertical-align-middle">
-                        <x-svg-person-vcard width="20" height="20" margin="2px"/>
+                        
                         Quem Somos
                     </h5>
                     <p class="txt_dados_empresa">{{ $empresa->descricao}}</p>
@@ -48,7 +49,7 @@
                     @if($empresa->area_atuacao)
            
                     <h5 class="vertical-align-middle">
-                        <x-svgcard-checklist width="20" height="20" margin="2px"/>
+                       
                         Ramo de atividade
                         
                       
@@ -57,11 +58,12 @@
                     <p>{{ $empresa->area_atuacao}}</p>
 
                     @endif
-                    <span class="vertical-align-middle">
+                    <h5 class="vertical-align-middle">
                 
-                        <x-svgadm width="20" height="20" margin="2px"/>
-                        Administrador: {{$Admempresa['name']}}
-                    </span>
+                       
+                        Administrador
+                    </h5>
+                    <p>{{$Admempresa['name']}}</p>
                     
                 </div>
               
@@ -91,23 +93,80 @@
                         @csrf
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" style="font-size: 18px;" type="checkbox" value="{{$servicos->nomeServico}}"  name="servico[{{$servicos->id}}]">
-                           <input type="hidden" name="idempresa" value="{{$servicos->cadastro_de_empresas_id}}">
+                            <input type="hidden" name="idempresa" value="{{$servicos->cadastro_de_empresas_id}}">
                             <a class="cor" href="/servicos/dados/{{$servicos->id}}">
-                            
+                                <img src="/img/logo_servicos/{{ $servicos->imageservico}}" alt="{{ $servicos->nomeServico }}" class="imgtabela">
                                 <label class="form-check-label" style="font-size: 18px;   cursor: pointer;"> 
                                     {{$servicos->nomeServico}}
                                 </label>
+                                
                             </a>
+                            <div class="resultado">
+                                <!-- Aqui você coloca o conteúdo inicial que será exibido na página -->
+                            </div>
                             
                         </div>
                     @endforeach
+
+                    
                         <button type="submit" class="btn btn-info">Agendar</button>
+                        {{-- paginação --}}
+                        <div class="paginação">
+                    
+                      
+                            <div class="py-5 d-flex justify-content-center">
+                                <ul class="pagination">
+                                    @if ($servico->onFirstPage())
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                                        </li>
+                                    @else
+                                        <li class="page-item">
+                                            <a class="page-link" href="{{ $servico->previousPageUrl() }}" aria-label="Anterior">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                    @endif
+                            
+                                    @foreach ($servico->getUrlRange(1, $servico->lastPage()) as $page => $url)
+                                        @if ($page == $servico->currentPage())
+                                            <li class="page-item active" aria-current="page">
+                                                <span class="page-link">{{ $page }}</span>
+                                            </li>
+                                        @else
+                                            <li class="page-item">
+                                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                            
+                                    @if ($servico->hasMorePages())
+                                        <li class="page-item">
+                                            <a class="page-link" href="{{ $servico->nextPageUrl() }}" aria-label="Próxima">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Próxima</a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </div>
+
+                        
+
+                       
+                        
                      </form>
                 </div>
               </div>
             </div> 
             
         </div>
+
+        
         
             
             
@@ -137,67 +196,7 @@
             
         </div>
         <div class="col-lg-6 col-sm-12 col-md-12 pt-5 ">
-            {{-- <div class="card">
-                <div class="card-header">
-
-                    Endereço 
-
-                </div>
-                <div class="card-body">
-
-                 
-                   
-
-                    <span class="vertical-align-middle">
-                        <x-svglcursor width="20" height="20" margin="2px"/>
-                        RUA: {{ $empresa->logradouro}}
-                    </span> 
-
-                  
-                   
-                    <span class="vertical-align-middle">
-                        <x-svglcursor width="20" height="20" margin="2px"/>
-                        N°: {{ $empresa->numero_endereco }}
-                    </span>
-    
-                    
-            
-                   
-                    <span class="vertical-align-middle">
-                        <x-svglcursor width="20" height="20" margin="2px"/>
-                        BAIRRO: {{ $empresa->bairro }}
-                    </span>
-    
-                    
-                                
-                   
-                    <span class="vertical-align-middle">
-                         <x-svglcursor width="20" height="20" margin="2px"/>
-                        CIDADE:{{ $empresa->cidade }}
-                    </span>
-                                                     
-                    
-        
-                   
-                    <span class="vertical-align-middle">
-                     <x-svglcursor width="20" height="20" margin="2px"/>
-                            
-                     UF:{{ $empresa->uf }}
-                           
-                    </span>
-
-                   
-
-                    
-                        
-                    
-                   
-               
-                  
-                </div>
-                 
-              
-            </div>  --}}
+           
 
             <div class="card">
                 <div class="card-header">

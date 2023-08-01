@@ -127,8 +127,9 @@
                       data-bs-toggle="tooltip" data-bs-placement="bottom" 
                       data-bs-title="Clique para mais informações sobre a empresa {{$empresa->nomeFantasia}}">
                      
-                      <img src="/img/logo_empresas/{{ $empresa->image}}" class="img-fluid  img_logoDadosServico" alt="{{$empresa->razaoSocial}}">
+                     
                       {{$empresa->nomeFantasia}} 
+                      <img src="/img/logo_empresas/{{ $empresa->image}}" class="img-fluid  img_logoDadosServico" alt="{{$empresa->razaoSocial}}">
                     </a>
                  
                   </p>
