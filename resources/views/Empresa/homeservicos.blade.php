@@ -296,5 +296,5 @@
     
     
   
-
+  <script src="/js/carrosel.js"></script>
 @endsection

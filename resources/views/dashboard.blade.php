@@ -162,6 +162,6 @@
 
 
 
-
+  <script src="/js/Tooltips.js"></script>
 
 @endsection

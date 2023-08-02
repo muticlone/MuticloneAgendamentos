@@ -9,16 +9,7 @@ function formatar(mascara, documento) {
 
 }
 
-//carrosel modo aultomatico
 
-document.addEventListener('DOMContentLoaded', function () {
-  var carousel = document.getElementById('carouselExampleDark');
-  var button = carousel.querySelector('.carousel-control-next');
-
-  setTimeout(function () {
-    button.click();
-  }, 8000); // 8 segundos em milissegundos
-});
 
 
 // cadastro de empresa e edit ramo de atauação ativar opção otros adicona
@@ -41,22 +32,7 @@ function mostrarOutro() {
   }
 }
 
-// Defina o número máximo de palavras que você deseja permitir no parágrafo
-// pagina /home/servicos
-const numeroMaximoPalavras = 8;
 
-// Selecionar todos os elementos com a classe 'paragrafo-limitado'
-const paragrafos = document.querySelectorAll('.paragrafo-limitado');
-
-paragrafos.forEach(paragrafo => {
-  const textoOriginal = paragrafo.innerText;
-  const palavras = textoOriginal.split(' ');
-
-  if (palavras.length > numeroMaximoPalavras) {
-    const textoLimitado = palavras.slice(0, numeroMaximoPalavras).join(' ');
-    paragrafo.innerText = textoLimitado + '...';
-  }
-});
 
 
 
