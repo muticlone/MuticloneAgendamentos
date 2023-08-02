@@ -94,7 +94,9 @@ class CadastroServicoController extends Controller
             })->where('cadastro_de_empresas_id', $id)->paginate($registrosPorPagina);
         } else {
 
-            $servicos = cadastro_de_servico::where('cadastro_de_empresas_id', $id)->paginate($registrosPorPagina);
+            $servicos = cadastro_de_servico::where('cadastro_de_empresas_id', $id)
+            ->orderBy('id', 'desc') 
+            ->paginate($registrosPorPagina);
         }
 
 

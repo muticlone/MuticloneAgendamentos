@@ -60,5 +60,3 @@ Route::delete('/apagar/servicos/{id}',[CadastroServicoController::class,'destroy
 
 
 
-
-

@@ -302,7 +302,7 @@ svg{
 
 .paginação {
   position: relative;
-    top: 70px; 
+     
     float: right;
   
 }
@@ -364,7 +364,17 @@ svg{
   min-height: 260px;
   overflow: auto;
 }
+.comentDadosEmpresa {
+  max-height: 180px; 
+  min-height: 180px;
+  overflow: auto;
+}
 
+.label-ckeck-dados-empresa {
+  cursor: pointer;
+  max-width: 200px; 
+  min-width: 200px;
+}
 .textagendamento{
   font-size: 14px;
 }

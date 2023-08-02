@@ -35,17 +35,18 @@
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">
                         <x-svg_caixas width="16" height="16" 
-                        title="Digite o horário de início do atendimento para esse serviço" />
+                        title="Digite Nome do serviço" />
                                
                       
                     </span>
                     <input type ="text" class="form-control" id="nomeservico" name="nomeServico"
                     placeholder ="Nome do serviço" 
-                  
+                    maxlength="25"  minlength="3"
                     aria-describedby="validationTooltipUsernamePrepend"
                     required/>
                     <div class="invalid-tooltip">
-                        Por favor, digite o nome do serviço
+                        Por favor, digite o nome do serviço de no minimo três caracteres
+
                     </div>
                 </div>
                

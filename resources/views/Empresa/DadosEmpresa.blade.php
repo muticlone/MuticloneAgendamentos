@@ -1,4 +1,7 @@
 @extends('Layout.main')
+
+
+
 @section('logo','logo_empresa.png')
 @section('title',$empresa->nomeFantasia)
 
@@ -87,7 +90,7 @@
                 <div class="card-header">
                     Todos os serviços
                 </div>
-                <div class="card-body">
+                <div class="card-body comentDadosEmpresa">
                     @foreach ($servico as $servicos)
                     <form action="{{route('cadastrar.Agentamentos');}}" method="POST">
                         @csrf
@@ -96,7 +99,7 @@
                             <input type="hidden" name="idempresa" value="{{$servicos->cadastro_de_empresas_id}}">
                             <a class="cor" href="/servicos/dados/{{$servicos->id}}">
                                 <img src="/img/logo_servicos/{{ $servicos->imageservico}}" alt="{{ $servicos->nomeServico }}" class="imgtabela">
-                                <label class="form-check-label" style="font-size: 18px;   cursor: pointer;"> 
+                                <label class="form-check-label label-ckeck-dados-empresa"> 
                                     {{$servicos->nomeServico}}
                                 </label>
                                 
@@ -109,7 +112,7 @@
                     @endforeach
 
                     
-                        <button type="submit" class="btn btn-info">Agendar</button>
+                       
                         {{-- paginação --}}
                         <div class="paginação">
                     
@@ -159,12 +162,19 @@
 
                        
                         
-                     </form>
+                     
                 </div>
               </div>
             </div> 
             
         </div>
+        <div class="col-lg-4 pt-1 "> 
+            <button type="submit" class="btn btn-info">Agendar</button>
+        </div> 
+            
+        </form>
+        
+            
 
         
         

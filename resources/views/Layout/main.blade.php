@@ -22,7 +22,7 @@
         <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
         <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
     
-        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
        
     </head>
@@ -204,7 +204,7 @@
     </footer>    
    
    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+   
     <script>
       $(document).ready(function() {
       $(".pt-br").rating({
@@ -254,7 +254,7 @@
     <!-- Load Bootstrap Star Rating JS -->
     <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/star-rating.min.js" type="text/javascript"></script>
     <!-- Load Portuguese language file -->
-  <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/locales/pt-BR.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/locales/pt-BR.js"></script>
 
   
 
@@ -267,6 +267,6 @@
     <script src="/js/validacaoformulario.js"></script>
 
 
-    
+
     </body>
 </html>

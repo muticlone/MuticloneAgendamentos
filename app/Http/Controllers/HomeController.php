@@ -72,23 +72,32 @@ class HomeController extends Controller
 
 
 
-    public function show($id)
-    {
+    public function show($id){
 
 
         $empresa = cadastro_de_empresa::findOrfail($id);
 
-        $itensPorPagina = 1;
+        $itensPorPagina = 50;
 
-        $servico = cadastro_de_servico::where('cadastro_de_empresas_id', $id)->paginate($itensPorPagina);
+     
+        $servico = cadastro_de_servico::where('cadastro_de_empresas_id', $id)
+        ->orderBy('id', 'desc') 
+        ->paginate($itensPorPagina);
 
-
-
+        
 
         $Admempresa = User::where('id', $empresa->user_id)->first()->toArray();
 
         return view('Empresa.DadosEmpresa', ['empresa' => $empresa, 'Admempresa' =>  $Admempresa, 'servico' => $servico]);
     }
+
+    
+
+  
+
+   
+
+   
 
    
 
