@@ -1,9 +1,10 @@
 
-FROM php:8.1-fpm
+FROM php:-f8pm.1
 
 # set your user name, ex: user=bernardo
 # Changed ARG user to ARG username to match the ARG value inside the Dockerfile
-ARG username=muticloneARG uid=1000
+ARG username=muticloneARG 
+ARG uid=1000
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -13,9 +14,8 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip
-
-apt-get install -y sudo  # Added installation of sudo package
+    unzip \
+    sudo  # Added installation of sudo package
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
