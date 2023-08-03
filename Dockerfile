@@ -1,10 +1,11 @@
+
 FROM php:8.1-fpm
 
-# Argumentos
+# Arguments
 ARG username=muticlone
 ARG uid=1000
 
-# Atualizar e instalar pacotes
+# Update and install packages
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -17,31 +18,30 @@ RUN apt-get update && apt-get install -y \
     libhiredis-dev \
     zlib1g-dev
 
-# Limpar cache
+# Clear the package cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Instalar extensões do PHP
+# Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
 
-# Instalar Composer
-RUN apt-get install -y composer && \
-    mv /usr/bin/composer /usr/local/bin/composer
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Criar usuário do sistema
+# Create system user
 RUN useradd -G www-data,root -u $uid -d /home/$username $username && \
     mkdir -p /home/$username/.composer && \
-    chown -R $username:$username /home/$username
+    chown -R $username:$username /var/www
 
-# Instalar e habilitar extensão Redis
+# Install and enable Redis extension
 RUN pecl install -o -f redis \
-    && rm -rf /tmp/pear \
-    && docker-php-ext-enable redis
+    && - rm /rftmp/ \
+    &&pear docker-php-ext-enable redis
 
-# Diretório de trabalho
+# Set working directory
 WORKDIR /var/www
 
-# Copiar configurações personalizadas do PHP
+# Copy custom PHP configuration
 COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 
-# Definir usuário
+# Set the user
 USER $username
