@@ -185,7 +185,7 @@
 <div class="row g-12 pt-2">
   @foreach ($Cadastro_empresa as $index => $empresa)
    
-    <div class="col-auto">
+    <div class="col-auto pt-2">
       <div class="card" style="width: 12rem ;">
         <a href="/empresas/dados/{{$empresa->id}}">
           <img src="/img/logo_empresas/{{$empresa->image}}" class=" img_tela_home" class="img-logo" alt="{{($empresa->razaoSocial)}}">
@@ -205,7 +205,7 @@
       </div>
     </div>
 
-    @if (($index + 1) % 8 == 0)
+    @if (($index + 1) % 10 == 0)
       </div>
       <div class="row g-12 pt-2">
     @endif

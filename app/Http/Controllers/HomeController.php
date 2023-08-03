@@ -35,7 +35,8 @@ class HomeController extends Controller
             })->paginate(10);
         } else {
             // $Cadastro_empresa = cadastro_de_empresa::all()->reverse();
-            $Cadastro_empresa = cadastro_de_empresa::paginate(10);
+            $Cadastro_empresa = cadastro_de_empresa::orderBy('id', 'desc')->paginate(20);
+            
         }
 
 
@@ -56,7 +57,7 @@ class HomeController extends Controller
             });
         }
 
-        $servico = $query->paginate(5);
+        $servico = $query->orderBy('id', 'desc')->paginate(20);
 
         $paginatedItems = new LengthAwarePaginator(
             $servico->items(),

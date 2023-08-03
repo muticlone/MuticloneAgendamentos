@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-br"  data-bs-theme="light">
     <head>
@@ -29,9 +27,10 @@
     <body class="container">
     <header>
        
-       
+    
 
       <nav class="navbar navbar-expand-lg bg-light-tertiary">
+        
           <div class="container-fluid">
             
             <a href="{{route('home');}}">
@@ -42,6 +41,9 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
               <span class="navbar-toggler-icon"></span>
             </button>
+            
+          
+            
 
             <div class="offcanvas offcanvas-start " tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
               <div class="offcanvas-header">
@@ -53,6 +55,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
               </div>
               <div class="offcanvas-body">
+                
                 <ul class="navbar-nav">
                   <li class="nav-item">
                     
@@ -91,6 +94,8 @@
                   </li>
                   @endguest
                   @auth 
+                  
+                  
                   <ul class="navbar-nav second-ul">
                   
                     <li class="nav-item dropdown" id ='info-container'>
@@ -100,6 +105,13 @@
                           </svg> 
                           Ajustes
                         </a>
+
+                        
+
+                        
+
+
+
 
                         
                        

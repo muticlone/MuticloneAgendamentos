@@ -179,10 +179,10 @@
  
   
   
-  <div class="row g-12 pt-2">
+  <div class="row g-12 pt-2" >
     
     @foreach ( $servico as $index => $servico)
-      <div class="col-auto">
+      <div class="col-auto pt-2" >
         <div class="card" style="width: 12rem ;">
          
             <img src="/img/logo_servicos/{{$servico->imageservico}}" class=" img_tela_home" class="img-logo" alt="{{($servico->nomeServico)}}">
@@ -220,7 +220,7 @@
         </div>
       </div>
   
-      @if (($index + 1) % 8 == 0)
+      @if (($index + 1) % 10 == 0)
         </div>
         <div class="row g-12 pt-2">
       @endif
