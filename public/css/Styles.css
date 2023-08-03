@@ -97,7 +97,7 @@ li:last-child {
   .navbar li {
 
     
-
+    
     border-bottom: 1px solid black;
 
     padding: 15px;
@@ -106,6 +106,9 @@ li:last-child {
    
     
   }
+
+ 
+
 
  
   
@@ -361,10 +364,10 @@ svg{
  
 }
 
-/* #offcanvasRight{
+ /* #offcanvasRight{
   color: white;
   background-color: #11101d;
-} */
+}  */
 
 .listadepagamentos{
   display: inline-flex; 
