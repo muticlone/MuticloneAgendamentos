@@ -48,9 +48,6 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-
-
-
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                     aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
@@ -136,7 +133,8 @@
             </div>
         </nav>
         {{-- Ajustes --}}
-        <div class="offcanvas  offcanvas-top " data-bs-backdrop="false" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" >
+        <div class="offcanvas  offcanvas-top " data-bs-backdrop="false" tabindex="-1" id="offcanvasRight"
+            aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasRightLabel">Ajustes</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -153,9 +151,6 @@
                     </a>
                 </div>
 
-
-
-
                 <div class="col-12 pt-2">
                     <form action="/logout" method="POST">
                         <a class="dropdown-item" href="/logout"
@@ -171,11 +166,11 @@
                     </form>
 
                 </div>
-                
+
             </div>
         </div>
 
-    
+
 
 
 

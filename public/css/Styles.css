@@ -1,14 +1,15 @@
-*{
- font-family: Roboto;
- text-transform: capitalize;
- 
+* {
+  font-family: Roboto;
+  text-transform: capitalize;
+
 }
+
 a {
   text-decoration: none;
 
 }
 
-samp{
+samp {
   font-family: Roboto;
   font-size: 15px;
 
@@ -16,42 +17,43 @@ samp{
 
 
 ul {
-  list-style-type: none; /* Remove o ponto/bullet point */
+  list-style-type: none;
+  /* Remove o ponto/bullet point */
 }
 
 
-body{
-    min-height: 100vh;
-    padding-bottom: 100px;
-    position: relative;
+body {
+  min-height: 100vh;
+  padding-bottom: 100px;
+  position: relative;
 }
 
-footer{
-    text-align: center;
-    
-    padding: 30px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+footer {
+  text-align: center;
+
+  padding: 30px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
-footer p{
-     margin-bottom: 0;
+footer p {
+  margin-bottom: 0;
 }
 
-.imgnavbar{
-    width: 150px;
-    
-    
+.imgnavbar {
+  width: 150px;
+
+
 }
 
 #navbar img.dark-theme {
-    filter: invert(1);
+  filter: invert(1);
 }
 
-.colorspancadastrodeempresa{
- color: white;
- min-width: 120px;
+.colorspancadastrodeempresa {
+  color: white;
+  min-width: 120px;
 }
 
 
@@ -64,30 +66,26 @@ footer p{
 
 .linha {
 
-    
- 
-  border-bottom: 1px solid #c0c0c0
 
- 
- 
- 
-  
+
+  border-bottom: 1px solid #c0c0c0
 }
 
 li:last-child {
   border-bottom: none;
 }
 
-.navbar .offcanvas a:hover{
+.navbar .offcanvas a:hover {
   color: #1E90FF
 }
 
-.cor{
+.cor {
   color: #1E90FF
 }
 
 
 @media (max-width: 1000px) {
+
   /* Regras de estilo quando a tela tem até 768px de largura */
   .second-ul {
     margin-right: 0;
@@ -96,39 +94,39 @@ li:last-child {
 
   .navbar li {
 
-    
-    
+
+
     border-bottom: 1px solid black;
 
     padding: 15px;
-    
-   
-   
-    
+
+
+
+
   }
 
- 
 
 
- 
-  
+
+
+
   .navbar li:last-child {
     border-bottom: none;
   }
 
 
-  .linha{
+  .linha {
     border-bottom: none
   }
 
   .btndashboard {
- 
-   
+
+
     margin-top: 10px;
-    
+
   }
- 
-  
+
+
 }
 
 
@@ -140,14 +138,14 @@ li:last-child {
 }
 
 #info-container ion-icon {
- font-size: 20px;
+  font-size: 20px;
   color: #f2a340;
   margin-right: 5px;
   vertical-align: middle;
- 
+
 }
 
-.iconCentralizar{
+.iconCentralizar {
   vertical-align: middle;
   font-size: 20px;
   color: #f2a340;
@@ -157,17 +155,19 @@ li:last-child {
 
 
 .vertical-align-middle {
-  
-  display: flex; 
+
+  display: flex;
   align-items: center;
- 
- 
- 
+
+
+
 }
-svg{
+
+svg {
   cursor: pointer;
 }
-.cursor{
+
+.cursor {
   cursor: pointer;
 }
 
@@ -177,47 +177,47 @@ svg{
   color: #f2a340;
 }
 
-.carousel img{
- 
-    
-   
-    border-radius: 10px;
-   
+.carousel img {
+
+
+
+  border-radius: 10px;
+
 }
 
 
 
-.container-img{
-    position: relative;
-   
-   
+.container-img {
+  position: relative;
+
+
 }
 
 
 
 .conteiner-search {
-    position: relative;
-    z-index: 2;
-    top: 55%;
-    transform: translateY(-50%);
-    left: 20%;
-    
-    
+  position: relative;
+  z-index: 2;
+  top: 55%;
+  transform: translateY(-50%);
+  left: 20%;
+
+
 }
 
-.img-logo{
-   
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        border-radius: 2px;
-        
-      
+.img-logo {
+
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 2px;
+
+
 }
 
 
 
-.txt{
+.txt {
   font-size: 12px;
   display: flex;
   flex-direction: column;
@@ -225,8 +225,8 @@ svg{
   height: 100%;
   text-transform: uppercase;
   font-weight: bold;
-  
-  
+
+
 }
 
 
@@ -234,18 +234,18 @@ svg{
 
 
 .row {
-    display: flex;
-  }
-
-  
-  .btg {
-    margin-top: auto;
-  }
+  display: flex;
+}
 
 
-.txt_dados_empresa{
+.btg {
+  margin-top: auto;
+}
+
+
+.txt_dados_empresa {
   text-align: justify;
-  text-indent: 30px;  
+  text-indent: 30px;
 }
 
 
@@ -257,33 +257,33 @@ svg{
   max-width: 200px;
   max-height: 200px;
   border-radius: 10px;
- 
+
   border: 1px solid #D3D3D3;
- 
-  
+
+
 }
 
-.img_logoDadosServico{
+.img_logoDadosServico {
   min-width: 25px;
   min-height: 25px;
   max-width: 25px;
   max-height: 25px;
   border-radius: 10px;
- 
+
   border: 1px solid #D3D3D3;
-  
+
 
 }
 
 .img_edit {
- 
+
   min-width: 100px;
   min-height: 100px;
   max-width: 100px;
   max-height: 100px;
-  border-radius: 10px  ;
+  border-radius: 10px;
   border: 1px solid #D3D3D3;
-  
+
 }
 
 
@@ -291,40 +291,40 @@ svg{
 .img_tela_home {
   margin-top: 15px;
   margin-left: 8px;
-  
+
   min-width: 65px;
   min-height: 65px;
   max-width: 65px;
   max-height: 65px;
-  border-radius: 10px ;
+  border-radius: 10px;
   border: 1px solid #D3D3D3;
   overflow: hidden;
-  
+
 }
 
 .image-and-rating {
-  display: flex; 
+  display: flex;
   align-items: center;
-  margin-bottom: 10px;  
+  margin-bottom: 10px;
   margin-left: 80px;
   margin-top: -50px;
-  
+
 }
 
 .paginação {
   position: relative;
-     
-    float: right;
-  
+
+  float: right;
+
 }
 
 
 .card {
-    
+
   height: 100%;
-  
+
   border-radius: 10px;
- 
+
 }
 
 .imgtabela {
@@ -340,11 +340,11 @@ svg{
 
 
 /*largura da barra de rolagem */
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 8px;
-  
-  
-  
+
+
+
 }
 
 
@@ -352,54 +352,67 @@ svg{
 
 
 ::-webkit-scrollbar-thumb {
-  height: 20px; /* Defina a altura desejada aqui */
+  height: 20px;
+  /* Defina a altura desejada aqui */
   border-radius: 15px;
   background-color: #11101d;
-  
+
 }
 
 /*mudar de cor ao encostar na rolagem la ele */
-::-webkit-scrollbar-thumb:hover{
+::-webkit-scrollbar-thumb:hover {
   background-color: #11101d;
- 
+
 }
 
- /* #offcanvasRight{
+/* #offcanvasRight{
   color: white;
   background-color: #11101d;
 }  */
 
-.listadepagamentos{
-  display: inline-flex; 
+.listadepagamentos {
+  display: inline-flex;
   align-items: center;
 }
 
 
 .coment {
-  max-height: 270px; /* Ajuste a altura máxima conforme necessário */
+  max-height: 270px;
+  /* Ajuste a altura máxima conforme necessário */
   min-height: 260px;
   overflow: auto;
 }
+
 .comentDadosEmpresa {
-  max-height: 180px; 
+  max-height: 180px;
   min-height: 180px;
   overflow: auto;
 }
 
+.comentavaliacaoEnpresa {
+  max-height: 130px;
+  min-height: 130px;
+  overflow: auto;
+}
+
+
 .label-ckeck-dados-empresa {
   cursor: pointer;
-  max-width: 200px; 
+  max-width: 200px;
   min-width: 200px;
 }
-.textagendamento{
+
+.textagendamento {
   font-size: 14px;
 }
 
-.tituloagendamento{
+.tituloagendamento {
   font-size: 18px;
 }
+
 .truncate-cell {
-  max-width: 400px; /* Defina a largura máxima desejada para a célula */
+  max-width: 400px;
+  /* Defina a largura máxima desejada para a célula */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -412,16 +425,19 @@ svg{
 
 
 
-.pHome{
+.pHome {
   color: #f2a340;
   position: absolute;
   top: -30px;
   left: -200px;
   width: 150%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Cor do fundo com transparência */
-  backdrop-filter: blur(5px); /* Propriedade para aplicar o desfoque */
-  -webkit-backdrop-filter: blur(5px); /* Suporte para navegadores baseados em Webkit, como o Safari */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Cor do fundo com transparência */
+  backdrop-filter: blur(5px);
+  /* Propriedade para aplicar o desfoque */
+  -webkit-backdrop-filter: blur(5px);
+  /* Suporte para navegadores baseados em Webkit, como o Safari */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -430,32 +446,33 @@ svg{
 
 
 .btndashboard {
- 
+
   color: black;
-  border-color: #D3D3D3; /* Cor do contorno do botão btn-outline-info */
+  border-color: #D3D3D3;
+  /* Cor do contorno do botão btn-outline-info */
   display: inline-block;
- 
- 
+
+
   text-align: center;
   min-width: 110px
-  
-  
 }
 
-.btndashboardservico{
- 
- 
-  justify-content: center; /* Centraliza o texto horizontalmente */
-  align-items: center; /* Centraliza o texto verticalmente */
+.btndashboardservico {
+
+
+  justify-content: center;
+  /* Centraliza o texto horizontalmente */
+  align-items: center;
+  /* Centraliza o texto verticalmente */
   color: black;
   border-color: #D3D3D3;
   margin-top: 5px;
-  
+
 }
 
 
-.tabelas{
-   width: 50%;
+.tabelas {
+  width: 50%;
 }
 
 #generateDescription {
@@ -463,29 +480,19 @@ svg{
   align-items: center;
   margin-right: 5px
 }
+
 #generateDescriptionSevico {
   display: flex;
   align-items: center;
   margin-right: 5px
 }
+
 #loadingMessage {
-  margin-right: 3px; /* Adjust the margin as needed to separate the icon from the text */
+  margin-right: 3px;
+  /* Adjust the margin as needed to separate the icon from the text */
 }
 
 #loadingMessageservico {
-  margin-right: 3px; /* Adjust the margin as needed to separate the icon from the text */
+  margin-right: 3px;
+  /* Adjust the margin as needed to separate the icon from the text */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
