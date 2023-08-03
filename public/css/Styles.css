@@ -59,7 +59,7 @@ footer p{
 
 .second-ul {
   margin-right: auto;
-  margin-left: 170%;
+  margin-left: 190%;
 }
 
 .linha {
@@ -101,10 +101,13 @@ li:last-child {
     border-bottom: 1px solid black;
 
     padding: 15px;
+    
    
    
     
   }
+
+ 
   
   .navbar li:last-child {
     border-bottom: none;
@@ -357,6 +360,11 @@ svg{
   background-color: #11101d;
  
 }
+
+/* #offcanvasRight{
+  color: white;
+  background-color: #11101d;
+} */
 
 .listadepagamentos{
   display: inline-flex; 
