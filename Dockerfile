@@ -34,8 +34,8 @@ RUN useradd -G www-data,root -u $uid -d /home/$username $username && \
 
 # Install and enable Redis extension
 RUN pecl install -o -f redis \
-    && - rm /rftmp/ \
-    &&pear docker-php-ext-enable redis
+    && rm -rf /rftmp/ \
+    && docker-php-ext-enable redis
 
 # Set working directory
 WORKDIR /var/www
