@@ -36,8 +36,8 @@ RUN useradd -G www-data,root -u $uid -d /home/$username $username && \
     chown -R $username:$username /home/$username
 
 # Install redis
-# Added libhiredis-dev and zlib1g-dev before pecl install command as dependencies
-RUN apt-get install -y libhiredis-dev zlib1g-dev && \
+# Added libhiredis-dev and zlib1g-dev before pecl install command as
+ dependenciesRUN apt-get install -y libhiredis-dev zlib1g-dev && \
     pecl install -o -f redis \
     && rm -rf /tmp/pear \
     && docker-php-ext-enable redis
