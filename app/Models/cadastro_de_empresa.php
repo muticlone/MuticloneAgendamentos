@@ -33,6 +33,14 @@ class cadastro_de_empresa extends Model
         'descricao',
         'user_id',
         'formaDePagamento',
+        'instagram',
+        'youtube',
+        'facebook',
+        'tikTok',
+        'site',
+        'linkedin',
+        
+
        
     ];
 
