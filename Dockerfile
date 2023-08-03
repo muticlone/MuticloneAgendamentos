@@ -1,5 +1,5 @@
 
-FROM php:-f8pm.1
+FROM php:8.1-fpm
 
 # set your user name, ex: user=bernardo
 # Changed ARG user to ARG username to match the ARG value inside the Dockerfile
