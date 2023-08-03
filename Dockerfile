@@ -1,6 +1,7 @@
 FROM php:8.1-fpm
 
 # set your user name, ex: user=bernardo
+# Changed the user to 'muticlone' to match the ARG value
 ARG user=muticlone
 ARG uid=1000
 
@@ -29,7 +30,10 @@ RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
 # Install redis
-RUN pecl install -o -f redis \
+# Added libhiredis-dev to install redis-dev which is required for the redis extension installation
+# Also added zlib1g-dev which is a required dependency for the redis extension installation
+RUN apt-get install -y libhiredis-dev zlib1g-dev && \
+    pecl install -o -f redis \
     &&  rm -rf /tmp/pear \
     &&  docker-php-ext-enable redis
 
