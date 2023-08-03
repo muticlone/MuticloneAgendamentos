@@ -1,8 +1,8 @@
 FROM php:8.1-fpm
 
 # set your user name, ex: user=bernardo
-# Changed the user to 'muticlone' to match the ARG value
-ARG user=muticlone
+# Changed ARG user to ARG username to match the ARG value inside the Dockerfile
+ARG username=muticlone
 ARG uid=1000
 
 # Install system dependencies
@@ -22,16 +22,18 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
 
 # Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Remove --from=composer:latest and append "sudo" before "cp" as COPY command requires root privileges
+RUN apt-get install -y composer && \
+    sudo cp /usr/bin/composer /usr/bin/composer
 
 # Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
+# Change the username and home directory permissions to match the ARG values
+RUN useradd -G www-data,root -u $uid -d /home/$username $username && \
+    mkdir -p /home/$username/.composer && \
+    chown -R $username:$username /home/$username
 
 # Install redis
-# Added libhiredis-dev to install redis-dev which is required for the redis extension installation
-# Also added zlib1g-dev which is a required dependency for the redis extension installation
+# Added libhiredis-dev and zlib1g-dev before pecl install command as dependencies
 RUN apt-get install -y libhiredis-dev zlib1g-dev && \
     pecl install -o -f redis \
     &&  rm -rf /tmp/pear \
@@ -43,4 +45,4 @@ WORKDIR /var/www
 # Copy custom configurations PHP
 COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 
-USER $user
+USER $username
