@@ -1,6 +1,6 @@
 FROM php:8.1-fpm
 
-# set your user name, ex: user=bernardo
+# set your user name
 ARG user=muticlone
 ARG uid=1000
 
