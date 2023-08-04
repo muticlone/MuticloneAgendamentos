@@ -1,9 +1,6 @@
-
-
-
 FROM php:8.1-fpm
 
-# Set your user name
+# set your user name
 ARG user=muticlone
 ARG uid=1000
 
@@ -15,10 +12,10 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip \
-    nginx \
-    nodejs \
-    npm
+    unzip
+
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
@@ -26,27 +23,20 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Install redis extension
-RUN install - peclo -f redis && \
-    docker-php-ext-enable redis
+# Create system user to run Composer and Artisan Commands
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
 
-# Configure Nginx
-# Fixed typo: /etc/nginx instead of /etc/docs
-# Fixed missing directory: /etc/nginx/conf.d
-COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+# Install redis
+RUN pecl install -o -f redis \
+    &&  rm -rf /tmp/pear \
+    &&  docker-php-ext-enable redis
 
 # Set working directory
 WORKDIR /var/www
 
-# Copy start script and set permissions
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
-
-# Copy custom PHP configurations
+# Copy custom configurations PHP
 COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 
-# Create system user to run Composer and Artisan Commands
-# Fixed typo: mkdir && -p /home/$user should be mkdir -p /home/$user
-RUN useradd -G www-data,root -u $uid -d /home/$user $user \
-    && mkdir -p /home/$user \
-    && chown -R $user:$user /home/$user
+USER $user
