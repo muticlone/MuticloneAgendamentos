@@ -12,13 +12,28 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip
+    unzip \
+    libzip-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libwebp-dev \
+    libjpeg62-turbo-dev \
+    libxpm-dev \
+    libfreetype6 \
+    libxslt-dev \
+    libwebp-dev \
+    libfreetype6-dev \
+    xz-utils \
+    openssl
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath sockets \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+    && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-install zip fileinfo
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
