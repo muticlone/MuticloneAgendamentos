@@ -53,6 +53,8 @@ services:
         depends_on:
             - redis
             - app
+        ports:
+            - "9000:9000"    
         networks:
             - laravel
 
