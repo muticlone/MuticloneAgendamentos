@@ -25,7 +25,7 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Install redis extension
-RUN pecl install -o -f redis && \
+RUN install - peclo -f redis && \
     docker-php-ext-enable redis
 
 # Configure Nginx
