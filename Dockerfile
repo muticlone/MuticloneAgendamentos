@@ -1,3 +1,4 @@
+
 FROM php:8.1-fpm
 
 # Set your user name
@@ -41,9 +42,7 @@ RUN chmod +x /start.sh
 COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 
 # Create system user to run Composer and Artisan Commands
-# typo Fixed in the commented out line - replaced "$user" with "$uid"
-# Also added new line to create the home directory for the system user
-# including comments to explain the changes.
+# Fixed typo: $uid instead of $user
 RUN useradd -G www-data,root -u $uid -d /home/$user $user \
-    && mkdir -p /home/$user \
+    mkdir && -p /home/$user \
     && chown -R $user:$user /home/$user
