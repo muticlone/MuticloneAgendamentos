@@ -29,6 +29,8 @@ RUN pecl install -o -f redis && \
     docker-php-ext-enable redis
 
 # Configure Nginx
+# Fixed typo: /etc/nginx instead of /etc/docs
+# Fixed missing directory: /etc/nginx/conf.d
 COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Set working directory
@@ -42,7 +44,7 @@ RUN chmod +x /start.sh
 COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 
 # Create system user to run Composer and Artisan Commands
-# Fixed typo: $uid instead of $user
+# Fixed typo: mkdir && -p /home/$user should be mkdir -p /home/$user
 RUN useradd -G www-data,root -u $uid -d /home/$user $user \
-    mkdir && -p /home/$user \
+    && mkdir -p /home/$user \
     && chown -R $user:$user /home/$user
