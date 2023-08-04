@@ -1,15 +1,15 @@
 
 FROM php:8.1-fpm
 
-# Arguments
+#
 ARG username=muticlone
 ARG uid=1000
 
 # Update and install packages
 RUN apt-get update && apt-get install -y \
-    git \
+ git \
     curl \
-    libpng-dev \
+    lib-dev \
     libonig-dev \
     libxml2-dev \
     zip \
@@ -22,9 +22,9 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl gd
 
-# Install Composer
+ Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Create system user
