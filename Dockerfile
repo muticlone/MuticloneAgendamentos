@@ -12,7 +12,11 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip
+    unzip \
+    nginx \
+    default-mysql-server \
+    nodejs \
+    npm
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -35,6 +39,9 @@ RUN pecl install -o -f redis \
 
 # Set working directory
 WORKDIR /var/www
+
+# Configure Nginx
+RUN echo 'server { listen 80; location / { try_files $uri /index.php =404; fastcgi_split_path_info ^(.+\.php)(/.+)$; fastcgi_pass php-fpm:9000; fastcgi_index index.php; include fastcgi_params; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; fastcgi_param PATH_INFO $fastcgi_path_info; } }' > /etc/nginx/sites-available/default
 
 # Copy start script and set permissions
 COPY start.sh /start.sh
