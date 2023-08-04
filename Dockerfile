@@ -1,3 +1,4 @@
+
 FROM php:8.1-fpm
 
 # set your user name
@@ -9,8 +10,8 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     libpng-dev \
-    libonig-dev \
-    libxml2-dev \
+    libonig-dev    libxml2 \
+-dev \
     zip \
     unzip \
     libzip-dev \
@@ -19,7 +20,7 @@ RUN apt-get update && apt-get install -y \
     libwebp-dev \
     libjpeg62-turbo-dev \
     libxpm-dev \
-    libfreetype6 \
+ lib   freetype6 \
     libxslt-dev \
     libwebp-dev \
     libfreetype6-dev \
@@ -36,10 +37,13 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath sockets \
     && docker-php-ext-install zip fileinfo
 
 # Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Commented out the line and added the correct version of Composer installation
+# using the official Docker image for Composer v2
+#COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN useradd - www-data,root -Gu $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
