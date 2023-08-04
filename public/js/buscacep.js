@@ -8,7 +8,9 @@ function limpa_formulário_cep() {
     document.getElementById('uf').value=("");
    
     
-  }
+  
+
+}
   
   function meu_callback(conteudo) {
   if (!("erro" in conteudo)) {
