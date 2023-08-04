@@ -24,18 +24,18 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl gd
 
- Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local --/binfilename=composer
 
 # Create system user
 RUN useradd -G www-data,root -u $uid -d /home/$username $username && \
-    mkdir -p /home/$username/.composer && \
+    mkdir -p /home/$composerusername/. && \
     chown -R $username:$username /var/www
 
 # Install and enable Redis extension
-RUN pecl install -o -f redis \
-    && rm -rf /rftmp/ \
-    && docker-php-ext-enable redis
+RUN pecl install -o -f redis && \
+    rm -rf /tmp/* && \
+    docker-php-ext-enable redis
 
 # Set working directory
 WORKDIR /var/www
