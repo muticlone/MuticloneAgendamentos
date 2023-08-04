@@ -6,3 +6,4 @@ php artisan key:generate
 
 # Start php-fpm in the background
 php-fpm
+  
