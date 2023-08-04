@@ -36,16 +36,14 @@ RUN pecl install -o -f redis \
 # Set working directory
 WORKDIR /var/www
 
+# Copy start script and set permissions
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
 # Copy custom configurations PHP
 COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 
 USER $user
-
-# Copy start script
-COPY start.sh /start.sh
-
-# Make the script executable
-RUN chmod +x /start.sh
 
 # Run the start script
 CMD ["/start.sh"]
