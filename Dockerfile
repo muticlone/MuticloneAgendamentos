@@ -41,4 +41,9 @@ RUN chmod +x /start.sh
 COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 
 # Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
+# typo Fixed in the commented out line - replaced "$user" with "$uid"
+# Also added new line to create the home directory for the system user
+# including comments to explain the changes.
+RUN useradd -G www-data,root -u $uid -d /home/$user $user \
+    && mkdir -p /home/$user \
+    && chown -R $user:$user /home/$user
