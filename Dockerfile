@@ -1,8 +1,8 @@
 
-FROM php:8.1-fpm
+FROM php:8.1pm
 
 #
-ARG username=muticlone
+-fARG username=muticlone
 ARG uid=1000
 
 # Update and install packages
@@ -25,11 +25,13 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl gd
 
 # Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local --/binfilename=composer
+# Fixing a typo: corrected the typo '/binfilename' to '--filename'
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local --filename=composer
 
 # Create system user
+# Fixing a typo: corrected the typo '$composerusername' to '$username'
 RUN useradd -G www-data,root -u $uid -d /home/$username $username && \
-    mkdir -p /home/$composerusername/. && \
+    mkdir -p /home/$username/. && \
     chown -R $username:$username /var/www
 
 # Install and enable Redis extension
