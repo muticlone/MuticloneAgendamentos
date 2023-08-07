@@ -40,7 +40,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-6 col-md-6 pt-1 ">
-                <a href="">
+                <a href="{{ route('busca.sevico.categorias', ['categoria' => 'Costureira']) }}">
                     <div class="card">
                         <img src="/img/logo_categorias/costureira.png" class="img_categoria" 
                         alt="Costureiras">
@@ -52,7 +52,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-6 col-md-6 pt-1 ">
-                <a href="">
+                <a href="{{ route('busca.sevico.categorias', ['categoria' => 'Estúdio de tatuagem']) }}">
                     <div class="card">
                         <img src="/img/logo_categorias/tatuagem.png" class="img_categoria" 
                         alt="Estúdio de tatuagem">
@@ -64,7 +64,7 @@
                 </a>
             </div>
             <div class="col-lg-4 col-sm-6 col-md-6 pt-1 ">
-                <a href="">
+                <a href="{{ route('busca.sevico.categorias', ['categoria' => 'Restaurantes']) }}">
                     <div class="card">
                         <img src="/img/logo_categorias/restaurante.png" class="img_categoria" 
                         alt="Restaurantes">
@@ -77,7 +77,7 @@
 
             </div>
             <div class="col-lg-4 col-sm-6 col-md-6 pt-1 ">
-                <a href="">
+                <a href="{{ route('busca.sevico.categorias', ['categoria' => 'Advogado']) }}">
                     <div class="card">
                         <img src="/img/logo_categorias/Advogado.png" class="img_categoria" 
                         alt="Advogados">
@@ -90,7 +90,7 @@
 
             </div>
             <div class="col-lg-4 col-sm-6 col-md-6  pt-1 ">
-                <a href="">
+                <a href="{{ route('busca.sevico.categorias', ['categoria' => 'Mecânico']) }}">
                     <div class="card">
                         <img src="/img/logo_categorias/Mecanico.png" class="img_categoria" 
                         alt="Mecânicos">
@@ -103,7 +103,7 @@
 
             </div>
             <div class="col-lg-4 col-sm-6 col-md-6  pt-1 ">
-                <a href="">
+                <a href="{{ route('busca.sevico.categorias', ['categoria' => 'Engenheiro']) }}">
                     <div class="card">
                         <img src="/img/logo_categorias/engenheiros.png" class="img_categoria"
                          alt="Engenheiros">
@@ -116,7 +116,7 @@
 
             </div>
             <div class="col-lg-4 col-sm-6 col-md-6  pt-1 ">
-                <a href="">
+                <a href="{{ route('busca.sevico.categorias', ['categoria' => 'Jardineiro']) }}">
                     <div class="card">
                         <img src="/img/logo_categorias/Jardineiros.png" class="img_categoria" 
                         alt="Jardineiros">
@@ -129,7 +129,7 @@
 
             </div>
             <div class="col-lg-4 col-sm-6 col-md-6  pt-1 ">
-                <a href="">
+                <a href="{{ route('busca.sevico.categorias', ['categoria' => 'Professor(a) particular']) }}">
                     <div class="card">
                         <img src="/img/logo_categorias/Professorparticular.png" class="img_categoria"
                             alt="Professor(a) particular">
@@ -156,7 +156,7 @@
 
             </div>
             <div class="col-lg-4 col-sm-6 col-md-6  pt-1 ">
-                <a href="">
+                <a href="{{ route('busca.sevico.categorias', ['categoria' => 'Cuidador de Idosos']) }}">
                     <div class="card">
                         <img src="/img/logo_categorias/cuidadoradeidosos.png" class="img_categoria"
                             alt="Cuidador de Idoso">
@@ -170,7 +170,7 @@
             </div>
 
             <div class="col-lg-4 col-sm-6 col-md-6  pt-1 ">
-                <a href="">
+                <a href="{{ route('busca.sevico.categorias', ['categoria' => 'Saúde']) }}">
                     <div class="card">
                         <img src="/img/logo_categorias/saude.png" class="img_categoria" 
                         alt="Saúde">
@@ -184,7 +184,7 @@
             </div>
 
             <div class="col-lg-4 col-sm-6 col-md-6  pt-1 ">
-                <a href="">
+                <a href="{{ route('busca.sevico.categorias', ['categoria' => 'Consultoria']) }}">
                     <div class="card">
                         <img src="/img/logo_categorias/Marketing.png" class="img_categoria"
                             alt="Consultoria">
@@ -197,7 +197,7 @@
 
             </div>
             <div class="col-lg-4 col-sm-6 col-md-6  pt-1 ">
-                <a href="">
+                <a href="{{ route('busca.sevico.categorias', ['categoria' => 'Personal trainers']) }}">
                     <div class="card">
                         <img src="/img/logo_categorias/personal.png" class="img_categoria" alt="Personal trainers">
 

@@ -141,12 +141,15 @@ class HomeController extends Controller
 
     public function Showcategorias(Request $request){
         $categoria = $request->all();
+        $categoriaString = json_encode($categoria);
+
         $empresa =  cadastro_de_empresa::where('area_atuacao',  $categoria)->get();
+       
         $idsempresa = $empresa->pluck('id')->toArray();
       
         $servicos = cadastro_de_servico::where('cadastro_de_empresas_id',   $idsempresa)->get();
 
-        dd($servicos);
+        return view('ResuladobuscaCategoria', ['servicos' =>$servicos ,'empresa' => $empresa]);
 
         
     }
