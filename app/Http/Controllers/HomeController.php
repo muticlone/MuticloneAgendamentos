@@ -132,5 +132,12 @@ class HomeController extends Controller
         return view('dashboard', ['empresa' => $empresa,  'search' => $search]);
     }
 
+
+    public function categorias(){
+
+
+        return view('buscacategorias');
+    }
+
     
 }

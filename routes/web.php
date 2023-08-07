@@ -31,6 +31,7 @@ Route::get('/home/empresas', [HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 Route::get('/empresas/dados/{id}', [HomeController::class, 'show']);
 Route::get('/', [HomeController::class, 'showServicos'])->name('home.servicos');
+Route::get('/servicos/categorias', [HomeController::class, 'categorias'])->name('home.sevico.categorias');
 
 Route::get('/dashboard/edit/{id}', [CadastroEmpresaController::class, 'edit'])->middleware('auth');
 Route::put('/empresa/edit/{id}', [CadastroEmpresaController::class, 'update'])->middleware('auth');

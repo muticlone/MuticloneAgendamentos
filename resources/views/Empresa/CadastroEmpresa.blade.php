@@ -373,11 +373,14 @@
                             <option value="Estúdio de tatuagem">Estúdio de tatuagem</option>
                             <option value="Restaurantes">Restaurantes</option>
                             <option value="Advogado">Advogado</option>
+                            <option value="Professor(a) particular">Professor(a) particular</option>
                             <option value="Mecânico">Mecânico</option>
-                            <option value="Engenharia Civil">Engenharia Civil</option>
-                            <option value="Marketing">Marketing</option>
-                            <option value="Recursos Humanos">Recursos Humanos</option>
+                            <option value="Engenheiro">Engenheiro</option>
+                            <option value="Jardineiro">Jardineiro</option>
+                            <option value="Consultoria">Consultoria</option>
+                            <option value="Personal trainers">Personal trainers</option>
                             <option value="Saúde">Saúde</option>
+                            <option value="Cuidador de Idosos">Cuidador de Idosos</option>
                             <option value="Limpeza e higienização">Limpeza e higienização</option>
                             <option value="Outro">Outro</option>
                         </select>
