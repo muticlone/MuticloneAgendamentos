@@ -14,11 +14,11 @@
             </div>
 
             <div class="col-lg-4 col-sm-6 col-md-6  pt-1 ">
-                <a href="">
+                <a href="{{ route('busca.sevico.categorias', ['categoria' => 'Beleza e Saúde Feminina']) }}">
                     <div class="card">
                         <img src="/img/logo_categorias/BelezaeSaudeFeminina.png" class="img_categoria"
                             alt="Beleza e Saúde Feminina">
-
+                            
                         <div class="txtcategoria">
                             <p class="card-text">Beleza e Saúde Feminina</p>
                         </div>
@@ -27,12 +27,12 @@
 
             </div>
             <div class="col-lg-4 col-sm-6 col-md-6 pt-1 ">
-                <a href="">
+                <a href="{{ route('busca.sevico.categorias', ['categoria' => 'Barbearia']) }}">
                     <div class="card">
 
                         <img src="/img/logo_categorias/barbearia.png" class="img_categoria" 
                         alt="Barbearias">
-
+                       
                         <div class="txtcategoria">
                             <p class="card-text">Barbearias</p>
                         </div>
@@ -143,7 +143,7 @@
             </div>
 
             <div class="col-lg-4 col-sm-6 col-md-6  pt-1 ">
-                <a href="">
+                <a href="{{ route('busca.sevico.categorias', ['categoria' => 'Limpeza e higienização']) }}">
                     <div class="card">
                         <img src="/img/logo_categorias/diariesta.png" class="img_categoria" 
                         alt="Limpeza e higienização">
