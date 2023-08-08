@@ -39,9 +39,8 @@ WORKDIR /var/www
 # Copy custom configurations PHP
 COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 
-# Copy entrypoint script
-COPY entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
+# Expose port 9000
+EXPOSE 9000
 
-USER $user
+# Start Laravel server
+CMD ["php", "artisan", "serve", "--host", "0.0.0.0", "--port=9000"]
