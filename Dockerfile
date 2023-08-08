@@ -1,49 +1,40 @@
+#Dockerfile Example on running PHP Laravel app using Apache web server 
 
-FROM php:8.1-fpm
+FROM php:8.1-apache
 
-# set your user name
-ARG user=multiclone
-ARG uid=1000
-
-# Install system dependencies
+# Install necessary libraries
 RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
     libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip
-
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+    libzip-dev
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
+RUN docker-php-ext-install \
+    mbstring \
+    zip
+
+# Copy Laravel application
+COPY . /var/www/html
+
+# Set working directory
+WORKDIR /var/www/html
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/composer/. && \
-    chown -R $user:$user /home/$user
+# Install dependencies
+RUN composer install
 
-# Install redis
-RUN apt-get update && apt-get install -y \
-    libhiredis-dev \
-    && pecl install -o -f redis \
-    &&  rm -rf /tmp/pear \
-    &&  docker-php-ext-enable redis
+# Change ownership of our applications
+RUN chown -R www-data:www-data /var/www/html
 
-# Set working directory
-WORKDIR /var/www
+RUN docker-php-ext-install mbstring
 
-# Copy custom configurations PHP
-COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
+COPY .env.example .env
+RUN php artisan key:generate
 
-# Expose port 9000 
-EXPOSE 9000
+# Expose port 80
+EXPOSE 80
 
-# Start Laravel server
-CMD ["php", "artisan", "serve", "--host", "0.0.0.0", "--port=9000"]
+# Adjusting Apache configurations
+RUN a2enmod rewrite
+COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
