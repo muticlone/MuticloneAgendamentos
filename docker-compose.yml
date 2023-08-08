@@ -14,6 +14,7 @@ services:
             - redis
         networks:
             - laravel
+        entrypoint: ["/usr/local/bin/entrypoint.sh"]  # Adicione esta linha
 
     # nginx
     nginx:
