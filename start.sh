@@ -1,9 +1,8 @@
 #!/bin/bash
 
-cp .env.example .env
+# Execute os comandos ao iniciar o contêiner
 composer install
 php artisan key:generate
 
-# Start php-fpm in the background
+# Iniciar o PHP-FPM
 php-fpm
-  
