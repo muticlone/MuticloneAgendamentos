@@ -5,4 +5,4 @@ composer install
 php artisan key:generate
 
 # Iniciar o PHP-FPM
-php-fpm
+php-fpm --allow-to-run-as-root
