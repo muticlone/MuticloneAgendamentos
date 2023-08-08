@@ -170,6 +170,9 @@
                         Buscando por : "{{ $search }}" <a href="/">Ver todos</a>
                     </div>
                 </div>
+
+
+                
             @else
                 <div class="pt-1">
 
