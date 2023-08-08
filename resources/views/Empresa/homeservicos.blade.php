@@ -5,17 +5,50 @@
 @section('conteudo')
 
     <div class="row g-12">
-
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
         <div class=" conteiner-search  col-8">
-            <form action="/" method="GET">
+            <form action="/" method="GET" id="searchForm">
+                
 
+
+                
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="search" name="search" placeholder="Procurar...">
-                    <button class="btn btn-outline-secondary custom-btn" type="submit">
+                   
+                  
+                    {{-- <input type="text" list="suggestions" class="form-control" id="search" name="search" autocomplete="off" placeholder="Procurar..."> --}}
+
+                    {{-- <button class="btn btn-outline-secondary custom-btn " type="submit">
                         <ion-icon name="search-outline" class="iconCentralizar"></ion-icon>
                         Buscar
-                    </button>
+                    </button> --}}
+
+                    <select id="select-servico" class="js-example-basic-multiple" 
+                    name="search" style="width: 100%" >
+                        <option value="" disabled selected>Selecione um serviço</option>
+                        @foreach ($servico as $servicobusca)
+                            <option class="custom-option img-flag" value="{{ $servicobusca->nomeServico }}" data-img-src="/img/logo_servicos/{{ $servicobusca->imageservico }}">{{ $servicobusca->nomeServico }}</option>
+                        @endforeach
+                    </select>
+
+                    <style>
+                        /* Estilos personalizados para as opções do select2 */
+                        .custom-option {
+                            display: flex;
+                            align-items: center;
+                        }
+                    
+                        .img-flag {
+                            width: 30px; /* Largura da imagem */
+                            height: 30px; /* Altura da imagem */
+                            margin-right: 8px; /* Espaçamento à direita */
+                            border-radius: 50%; /* Borda circular (caso a imagem seja quadrada) */
+                        }
+                    </style>
+
+
+
                 </div>
             </form>
 
@@ -170,14 +203,12 @@
                         Buscando por : "{{ $search }}" <a href="/">Ver todos</a>
                     </div>
                 </div>
-
-
-
             @else
                 <div class="pt-1">
 
                     <div class="alert alert-light" role="alert" align="center">
-                        Todos os serviços disponíveis <a href="{{ route('home.sevico.categorias') }}">Link para Categorias</a>
+                        Todos os serviços disponíveis <a href="{{ route('home.sevico.categorias') }}">Link para
+                            Categorias</a>
 
                     </div>
 
@@ -313,4 +344,5 @@
 
 
     <script src="/js/carrosel.js"></script>
+    <script src="/js/select2.js"></script>
 @endsection
