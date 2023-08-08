@@ -22,7 +22,7 @@
         </div>
 
 
-        <div id="carouselExampleDark" class="carousel carousel-dark slide foto " data-bs-ride="carousel">
+        <div id="carouselExampleDark" class="carousel carousel-dark slide foto container-carousel " data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
@@ -55,7 +55,7 @@
                     </div>
 
 
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption d-none d-lg-block">
 
 
                         <h5 class="pHome">Faça uma busca personalizada por serviços que atendam às suas preferências.</h5>
@@ -67,7 +67,7 @@
 
                     </div>
 
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption d-none d-lg-block">
                         <h5 class="pHome">Encontre os melhores serviços para suas necessidades!</h5>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
 
                     </div>
 
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption d-none d-lg-block">
                         <h5 class="pHome">Encontre profissionais altamente qualificados para atender às suas demandas.</h5>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
 
                     </div>
 
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption d-none d-lg-block">
                         <h5 class="pHome">Busque serviços especializados para otimizar o seu dia a dia.</h5>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
 
                     </div>
 
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption d-none d-lg-block">
                         <h5 class="pHome">Aqui você encontra tudo o que precisa em um só lugar: serviços de qualidade,
                             confiança e variedade.</h5>
                     </div>
@@ -115,7 +115,7 @@
 
                     </div>
 
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption d-none d-lg-block">
                         <h5 class="pHome">Encontre profissionais altamente qualificados para atender às suas demandas.
                         </h5>
                     </div>
@@ -127,7 +127,7 @@
 
                     </div>
 
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption d-none d-lg-block">
 
                         <h5 class="pHome">Encontre profissionais especializados em diversos setores.</h5>
                     </div>
@@ -139,7 +139,7 @@
 
                     </div>
 
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption d-none d-lg-block">
                         <h5 class="pHome">Busque serviços especializados para otimizar o seu dia a dia.</h5>
                     </div>
                 </div>
@@ -172,12 +172,13 @@
                 </div>
 
 
-                
+
             @else
                 <div class="pt-1">
 
                     <div class="alert alert-light" role="alert" align="center">
-                        Todos os serviços disponíveis
+                        Todos os serviços disponíveis <a href="{{ route('home.sevico.categorias') }}">Link para Categorias</a>
+
                     </div>
 
 

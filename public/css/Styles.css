@@ -198,11 +198,15 @@ svg {
 .conteiner-search {
   position: relative;
   z-index: 2;
-  top: 55%;
+  top: 46%;
   transform: translateY(-50%);
   left: 20%;
 
 
+}
+
+.container-carousel{
+  margin-top: -50px;
 }
 
 .img-logo {
@@ -470,7 +474,7 @@ svg {
   position: absolute;
   top: -30px;
   left: -200px;
-  width: 150%;
+  width: 180%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   /* Cor do fundo com transparência */
