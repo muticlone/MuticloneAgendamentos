@@ -495,6 +495,19 @@ svg {
 
 }
 
+/* Estilos personalizados para as opções do select2 */
+.custom-option {
+  display: flex;
+  align-items: center;
+}
+
+.img-flag {
+  width: 30px; /* Largura da imagem */
+  height: 30px; /* Altura da imagem */
+  margin-right: 8px; /* Espaçamento à direita */
+  border-radius: 50%; /* Borda circular (caso a imagem seja quadrada) */
+}
+
 
 .btndashboard {
 

@@ -5,9 +5,7 @@
 @section('conteudo')
 
     <div class="row g-12">
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+        
         <div class=" conteiner-search  col-8">
             <form action="/" method="GET" id="searchForm">
                 
@@ -24,7 +22,7 @@
                         Buscar
                     </button> --}}
 
-                    <select id="select-servico" class="js-example-basic-multiple" 
+                    <select id="select-servico" class="js-buscacategoria" 
                     name="search" style="width: 100%" >
                         <option value="" disabled selected>Selecione um serviço</option>
                         @foreach ($servico as $servicobusca)
@@ -32,21 +30,7 @@
                         @endforeach
                     </select>
 
-                    <style>
-                        /* Estilos personalizados para as opções do select2 */
-                        .custom-option {
-                            display: flex;
-                            align-items: center;
-                        }
-                    
-                        .img-flag {
-                            width: 30px; /* Largura da imagem */
-                            height: 30px; /* Altura da imagem */
-                            margin-right: 8px; /* Espaçamento à direita */
-                            border-radius: 50%; /* Borda circular (caso a imagem seja quadrada) */
-                        }
-                    </style>
-
+                   
 
 
                 </div>

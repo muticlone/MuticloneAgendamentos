@@ -1,8 +1,17 @@
+
+
+
 // fazer o select dois funcinar
 $(document).ready(function() {
     $('.js-example-basic-multiple').select2();
+  
    
 });
+
+
+
+
+
 
 
  // Adicionar um evento subimit ao <select2>
