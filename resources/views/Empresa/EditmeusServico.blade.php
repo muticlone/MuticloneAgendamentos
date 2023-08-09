@@ -15,16 +15,31 @@
         @csrf
         @method('PUT')
         {{-- editar serviços --}}
+        <div class="col-md-8 offset-md-2"> 
+          <div class="col-lg-12 col-sm-12 col-md-12 pt-2" align="center">
 
-        <x-cadastro-de-servico img="/img/logo_servicos/{{ $servico->imageservico }}" altimg="{{ $empresa->nomeFantasia }}"
-            titulo="Editar serviço: " tituloNome="{{ $servico->nomeServico }}"
+
+            <img src="/img/logo_servicos/{{ $servico->imageservico }}" name="imageservico" class="img-fluid  img_edit"
+                alt="{{ $empresa->nomeFantasia }}">
+
+        </div>
+        <div class="pt-2">
+            <div class="alert alert-light" role="alert" align="center">
+              Editar serviço: {{ strtolower($servico->nomeServico) }}
+            </div>
+        </div>
+        </div>
+       
+        <x-cadastro-de-servico 
             label_img="Adicionar uma nova imagem para o serviço:" valueNome="{{ $servico->nomeServico }}"
             ValuevalorDoservico="{{ $servico->valorDoServico }}"
             valueHorarioIncio="{{ $servico->horario_incial_atedimento }}"
             valueHorariofinal="{{ $servico->horario_final_atedimento }}" selectValuePadrao="{{ $servico->duracaohoras }}"
             selectValuePadrao2="{{ $servico->duracaominutos }}" descricao="{{ $servico->descricaosevico }}" />
 
-
+        <div class="col-lg-12 col-sm-12 col-md-12 pt-2" align="center">
+            <button type="submit" class="btn btn-info">Atualizar</button>
+        </div>
 
     </form>
 

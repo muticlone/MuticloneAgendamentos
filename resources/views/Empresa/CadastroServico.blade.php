@@ -5,11 +5,13 @@
 @section('conteudo')
 
     <div class="col-md-8 offset-md-2 pt-5">
+       
         <form action="/cadastrar/servico/{{ $empresa->id }}" method="POST" enctype="multipart/form-data"
             class="row g-3 needs-validation" novalidate>
             @csrf
+           
             <div class="row g-12">
-
+               
                 <div class="col-lg-12 col-sm-12 col-md-12" align="center">
                     <img src="/img/logo_empresas/{{ $empresa->image }}" class="img-fluid  img_edit"
                         alt="{{ $empresa->razaoSocial }}">
@@ -180,11 +182,11 @@
                     </button>
                 </div>
 
+               
 
             </div>
 
-
-
+     
 
 
     </div>
