@@ -196,6 +196,7 @@ svg {
 
 .container-img {
   position: relative;
+  
 
 
 }
@@ -225,6 +226,8 @@ svg {
 .container-carousel {
   margin-top: -50px;
 }
+
+
 
 .img-logo {
 
@@ -493,13 +496,13 @@ svg {
 
 
 
-.pHome {
+.txt-carousel-caption {
   color: #f2a340;
   position: absolute;
-  top: -30px;
+  top: -70px;
   left: -308px;
   width: 180%;
-  height: 100%;
+  height: 130%;
   background-color: rgba(0, 0, 0, 0.5);
   /* Cor do fundo com transparência */
   backdrop-filter: blur(5px);

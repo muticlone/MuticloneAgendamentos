@@ -1,33 +1,26 @@
 
 
 
-// fazer o select dois funcinar
-$(document).ready(function() {
-    $('.js-example-basic-multiple').select2();
-  
-   
-});
+// Adicionar um evento subimit ao <select2>
+$(document).ready(function () {
 
-
-
-
-
-
-
- // Adicionar um evento subimit ao <select2>
-$(document).ready(function() {
-    $('.js-example-basic-multiple').select2();
-
-   
-    $('#select-servico').on('change', function() {
+    $('.js-buscacategoria').on('change', function () {
         $('#searchForm').submit(); // Envie o formulário quando uma opção é selecionada
     });
 });
 
 
-// img do select
-$(document).ready(function() {
-    $('#select-servico').select2({
+$(document).ready(function () {
+    $('.js-buscacategoria').select2({
+        theme: 'bootstrap-5',
+        placeholder: 'Selecione um serviço',
+        language: {
+            noResults: function () {
+                return "Nenhum resultado encontrado";
+            }
+        },
+
+
         templateResult: formatOption,
         templateSelection: formatOption
     });
@@ -38,7 +31,8 @@ $(document).ready(function() {
         var imgSrc = $(option.element).data('img-src');
         if (!imgSrc) return option.text;
 
-        var $option = $('<div><img src="' + imgSrc + '" class="img-flag" style="width: 16px; height: 16px; margin-right: 8px;" /> ' + option.text + '</div>');
+        var $option = $('<div><img src="' + imgSrc + '" class="img-flag" style="width: 25px; height: 25px; margin-right: 8px;" /> ' + option.text + '</div>');
         return $option;
     }
 });
+
