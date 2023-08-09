@@ -6,7 +6,7 @@
 
 <div class="row g-12">
         
-    <div class=" conteiner-search  col-8">
+    <div class=" conteiner-searchCategoria  col-8">
         <form action="/" method="GET" id="searchForm">
             
 

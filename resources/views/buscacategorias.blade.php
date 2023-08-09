@@ -5,7 +5,7 @@
 @section('conteudo')
 
 
-    <div class="col-md-8 offset-md-2 pt-3">
+    <div class="col-md-12 offset-md-0 pt-3">
         <div class="row g-12 pt-2">
             <div class="col-12 pt-1 ">
                 <div class="alert alert-light" role="alert" align="center">
@@ -21,6 +21,7 @@
                             
                         <div class="txtcategoria">
                             <p class="card-text">Beleza e Saúde Feminina</p>
+                            <p class="card-text describuscacategoria">Elevando a Beleza e Promovendo o Bem-Estar na Jornada da Saúde Feminina.</p>
                         </div>
                     </div>
                 </a>
@@ -35,6 +36,7 @@
                        
                         <div class="txtcategoria">
                             <p class="card-text">Barbearias</p>
+                            <p class="card-text describuscacategoria">Tradição e estilo únicos em cortes e barbas, onde a maestria do design se une. </p>
                         </div>
                     </div>
                 </a>
@@ -47,7 +49,10 @@
 
                         <div class="txtcategoria">
                             <p class="card-text">Costureiras</p>
+                            <p class="card-text describuscacategoria">Ajustes Impecáveis para elegância masculina e Feminina.</p>
+
                         </div>
+
                     </div>
                 </a>
             </div>
@@ -59,6 +64,7 @@
 
                         <div class="txtcategoria">
                             <p class="card-text">Estúdio de tatuagem</p>
+                            <p class="card-text describuscacategoria">Transformando histórias em arte, trazendo vida à pele.</p>
                         </div>
                     </div>
                 </a>
@@ -71,6 +77,7 @@
 
                         <div class="txtcategoria">
                             <p class="card-text">Restaurantes</p>
+                            <p class="card-text describuscacategoria">Delícias culinárias que encantam a cada mordida.</p>
                         </div>
                     </div>
                 </a>
@@ -84,6 +91,7 @@
 
                         <div class="txtcategoria">
                             <p class="card-text">Advogados</p>
+                            <p class="card-text describuscacategoria">Justiça e dedicação: defendendo seus direitos com determinação.</p>
                         </div>
                     </div>
                 </a>
@@ -97,6 +105,7 @@
 
                         <div class="txtcategoria">
                             <p class="card-text">Mecânicos</p>
+                            <p class="card-text describuscacategoria">Reparos precisos e performance: Sua máquina em ótimas mãos.</p>
                         </div>
                     </div>
                 </a>
@@ -110,6 +119,8 @@
 
                         <div class="txtcategoria">
                             <p class="card-text">Engenheiros</p>
+                            <p class="card-text describuscacategoria">Inovando soluções, construindo o futuro.</p>
+                         
                         </div>
                     </div>
                 </a>
@@ -123,6 +134,7 @@
 
                         <div class="txtcategoria">
                             <p class="card-text">Jardineiros</p>
+                            <p class="card-text describuscacategoria">Transformando jardins em obras de arte, um toque de natureza em cada canto.</p>
                         </div>
                     </div>
                 </a>
@@ -136,6 +148,8 @@
 
                         <div class="txtcategoria">
                             <p class="card-text">Professor(a) particular</p>
+                            <p class="card-text describuscacategoria"> Expandindo horizontes através do conhecimento</p>
+                          
                         </div>
                     </div>
                 </a>
@@ -150,6 +164,8 @@
 
                         <div class="txtcategoria">
                             <p class="card-text">Limpeza e higienização</p>
+                            <p class="card-text  describuscacategoria"> Limpeza e higienização: cuidando do seu espaço com zelo e qualidade</p>
+                           
                         </div>
                     </div>
                 </a>
@@ -163,6 +179,7 @@
 
                         <div class="txtcategoria">
                             <p class="card-text">Cuidador de Idosos</p>
+                            <p class="card-text  describuscacategoria">Cuidando com carinho e respeito: a companhia que os idosos merecem.</p>
                         </div>
                     </div>
                 </a>
@@ -177,6 +194,8 @@
 
                         <div class="txtcategoria">
                             <p class="card-text">Saúde</p>
+                            <p class="card-text  describuscacategoria"> Promovendo bem-estar e saúde com profissionalismo e empatia.</p>
+                           
                         </div>
                     </div>
                 </a>
@@ -191,6 +210,7 @@
 
                         <div class="txtcategoria">
                             <p class="card-text"> Consultoria</p>
+                            <p class="card-text  describuscacategoria"> Transformando desafios em oportunidades: sua parceria rumo ao sucesso.</p>
                         </div>
                     </div>
                 </a>
@@ -202,7 +222,8 @@
                         <img src="/img/logo_categorias/personal.png" class="img_categoria" alt="Personal trainers">
 
                         <div class="txtcategoria">
-                            <p class="card-text"> Personal trainers</p>
+                            <p class="card-text">Personal trainers</p>
+                            <p class="card-text  describuscacategoria">Alcance seu potencial máximo: treinamento personalizado para resultados incríveis. </p>
                         </div>
                     </div>
                 </a>

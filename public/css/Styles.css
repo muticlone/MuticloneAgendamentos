@@ -212,6 +212,16 @@ svg {
 
 }
 
+.conteiner-searchCategoria {
+  position: relative;
+  z-index: 2;
+  top: 41%;
+  transform: translateY(-50%);
+  left: 16%;
+
+
+}
+
 .container-carousel {
   margin-top: -50px;
 }
@@ -350,6 +360,13 @@ svg {
 
 
 }
+
+.describuscacategoria{
+  margin-top: -15px;
+  font-size: 12px;
+ 
+}
+
 
 
 
@@ -507,6 +524,7 @@ svg {
   margin-right: 8px; /* Espaçamento à direita */
   border-radius: 50%; /* Borda circular (caso a imagem seja quadrada) */
 }
+
 
 
 .btndashboard {
