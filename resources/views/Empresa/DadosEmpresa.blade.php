@@ -140,51 +140,10 @@
 
                         {{-- paginação --}}
                         <div class="paginação">
+                            
+                            <x-pagination :paginatedItems="$servico" />
 
-
-                            <div class="py-5 d-flex justify-content-center">
-                                <ul class="pagination">
-                                    @if ($servico->onFirstPage())
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1"
-                                                aria-disabled="true">Anterior</a>
-                                        </li>
-                                    @else
-                                        <li class="page-item">
-                                            <a class="page-link" href="{{ $servico->previousPageUrl() }}"
-                                                aria-label="Anterior">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                    @endif
-
-                                    @foreach ($servico->getUrlRange(1, $servico->lastPage()) as $page => $url)
-                                        @if ($page == $servico->currentPage())
-                                            <li class="page-item active" aria-current="page">
-                                                <span class="page-link">{{ $page }}</span>
-                                            </li>
-                                        @else
-                                            <li class="page-item">
-                                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                                            </li>
-                                        @endif
-                                    @endforeach
-
-                                    @if ($servico->hasMorePages())
-                                        <li class="page-item">
-                                            <a class="page-link" href="{{ $servico->nextPageUrl() }}"
-                                                aria-label="Próxima">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                    @else
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1"
-                                                aria-disabled="true">Próxima</a>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </div>
+                          
                         </div>
 
 

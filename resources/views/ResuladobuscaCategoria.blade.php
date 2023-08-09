@@ -108,41 +108,9 @@
 </div>
 
 
-<div class="py-4 d-flex justify-content-center">
-    <ul class="pagination">
-        @if ($servicos->onFirstPage())
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-            </li>
-        @else
-            <li class="page-item">
-                <a class="page-link" href="{{ $servicos->appends(['categoria' => $nomeDaCategoria, 'page' => $servicos->currentPage() - 1])->url($servicos->currentPage() - 1) }}">Anterior</a>
-            </li>
-        @endif
+<x-pagination :paginatedItems="$servicos" />
 
-        @foreach ($servicos->getUrlRange(1, $servicos->lastPage()) as $page => $url)
-            @if ($page == $servicos->currentPage())
-                <li class="page-item active" aria-current="page">
-                    <span class="page-link">{{ $page }}</span>
-                </li>
-            @else
-                <li class="page-item">
-                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                </li>
-            @endif
-        @endforeach
 
-        @if ($servicos->hasMorePages())
-            <li class="page-item">
-                <a class="page-link" href="{{ $servicos->appends(['categoria' => $nomeDaCategoria, 'page' => $servicos->currentPage() + 1])->url($servicos->currentPage() + 1) }}">Próxima</a>
-            </li>
-        @else
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Próxima</a>
-            </li>
-        @endif
-    </ul>
-</div>
 
 <script src="/js/carrosel.js"></script>
 <script src="/js/select2.js"></script>

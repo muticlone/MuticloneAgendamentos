@@ -104,41 +104,9 @@
 
         {{-- paginação --}}
 
-        <div class="py-4 d-flex justify-content-center">
-            <ul class="pagination">
-                @if ($empresa->onFirstPage())
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-                    </li>
-                @else
-                    <li class="page-item">
-                        <a class="page-link" href="{{ $empresa->previousPageUrl() }}">Anterior</a>
-                    </li>
-                @endif
+        <x-pagination :paginatedItems="$empresa" />
 
-                @foreach ($empresa->getUrlRange(1, $empresa->lastPage()) as $page => $url)
-                    @if ($page == $empresa->currentPage())
-                        <li class="page-item active" aria-current="page">
-                            <span class="page-link">{{ $page }}</span>
-                        </li>
-                    @else
-                        <li class="page-item">
-                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                        </li>
-                    @endif
-                @endforeach
-
-                @if ($empresa->hasMorePages())
-                    <li class="page-item">
-                        <a class="page-link" href="{{ $empresa->nextPageUrl() }}">Próxima</a>
-                    </li>
-                @else
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Próxima</a>
-                    </li>
-                @endif
-            </ul>
-        </div>
+       
     @else
         <!-- Se não houver empresas, exiba alguma mensagem de aviso ou tratamento adequado -->
         @if ($search)
