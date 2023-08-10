@@ -42,6 +42,9 @@ Route::post('/cadastrar/empresa', [CadastroEmpresaController::class, 'store'])->
 
 Route::POST('/cadastrar/agentamentos', [AgendamentoController::class, 'create'])->name('cadastrar.Agentamentos')->middleware('auth');
 Route::post('/cadastrar/agentamento', [AgendamentoController::class, 'store'])->name('cadastrar.agendamento')->middleware('auth');
+Route::get('/meus/agendamentos', [AgendamentoController::class, 'show'])->name('meus.agendamentos')->middleware('auth');
+
+
 
 Route::get('/cadastro/servicos/{id}', [CadastroServicoController::class, 'create'])->name('cadastro.servicos')->middleware('auth');
 Route::post('/cadastrar/servico/{id}', [CadastroServicoController::class, 'store'])->name('cadastrar.servico')->middleware('auth');

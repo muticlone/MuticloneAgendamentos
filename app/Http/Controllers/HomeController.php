@@ -7,10 +7,7 @@ use App\Models\cadastro_de_servico;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
-
-
-
+use App\Models\Agendamento;
 
 
 use App\Models\User;
@@ -35,7 +32,6 @@ class HomeController extends Controller
         } else {
             // $Cadastro_empresa = cadastro_de_empresa::all()->reverse();
             $Cadastro_empresa = cadastro_de_empresa::orderBy('id', 'desc')->paginate(20);
-            
         }
 
 
@@ -72,94 +68,87 @@ class HomeController extends Controller
 
 
 
-    public function show($id){
+    public function show($id)
+    {
 
 
         $empresa = cadastro_de_empresa::findOrfail($id);
 
         $itensPorPagina = 50;
 
-     
-        $servico = cadastro_de_servico::where('cadastro_de_empresas_id', $id)
-        ->orderBy('id', 'desc') 
-        ->paginate($itensPorPagina);
 
-        
+        $servico = cadastro_de_servico::where('cadastro_de_empresas_id', $id)
+            ->orderBy('id', 'desc')
+            ->paginate($itensPorPagina);
+
+
 
         $Admempresa = User::where('id', $empresa->user_id)->first()->toArray();
 
         return view('Empresa.DadosEmpresa', ['empresa' => $empresa, 'Admempresa' =>  $Admempresa, 'servico' => $servico]);
     }
 
-    
 
-  
 
-   
 
-   
 
-   
+
+
+
+
+
 
     public function dashboard()
-    {
+{
+    $user = auth()->user();
+    $search = request('search');
 
-
-        $user = auth()->user();
-
-      
-        $search = request('search');
-
-        if ($search) {
-            $empresa = cadastro_de_empresa::where(function ($query) use ($search, $user) {
-                $query->where('razaoSocial', 'like', '%' . $search . '%')
-                    ->orWhere('nomeFantasia', 'like', '%' . $search . '%');
-                   
-            })
+    if ($search) {
+        $empresa = cadastro_de_empresa::where(function ($query) use ($search, $user) {
+            $query->where('razaoSocial', 'like', '%' . $search . '%')
+                ->orWhere('nomeFantasia', 'like', '%' . $search . '%');
+        })
             ->where('user_id', '=', $user->id)
             ->paginate(10);
-        } else {
-            $empresa = $user->empresas()->paginate(10);
-        }
-        
-
-
-    
-       
-       
-       
-
-        return view('dashboard', ['empresa' => $empresa,  'search' => $search]);
+    } else {
+        $empresa = $user->empresas()->paginate(10);
+      
     }
 
+    return view('dashboard', [
+        'empresa' => $empresa,
+        
+        'search' => $search
+    ]);
+}
 
-    public function categorias(){
+
+
+    public function categorias()
+    {
 
 
         return view('buscacategorias');
     }
 
-    public function Showcategorias(Request $request) {
+    public function Showcategorias(Request $request)
+    {
         $categoria = $request->input('categoria');
-        $nomeDaCategoria = $categoria; 
-    
+        $nomeDaCategoria = $categoria;
+
         $empresa = cadastro_de_empresa::where('area_atuacao', $nomeDaCategoria)->get();
-       
+
         $idsempresa = $empresa->pluck('id')->toArray();
-    
+
         $servicos = cadastro_de_servico::whereIn('cadastro_de_empresas_id', $idsempresa)->paginate(15);
-    
-       //anexando manualmente o categoriaparâmetro aos links de paginação
+
+        //anexando manualmente o categoriaparâmetro aos links de paginação
         $servicos->appends(['categoria' => $nomeDaCategoria]);
-    
+
         return view('ResuladobuscaCategoria', [
             'servicos' => $servicos,
             'empresa' => $empresa,
             'nomeDaCategoria' => $nomeDaCategoria,
         ]);
     }
-    
-    
-
-    
 }

@@ -61,7 +61,7 @@ footer p {
 
 .second-ul {
   margin-right: auto;
-  margin-left: 190%;
+  margin-left: 74%;
 }
 
 .linha {
@@ -346,6 +346,19 @@ svg {
 
 }
 
+.img_meus_agedamentos {
+  margin-top: 20px;
+  margin-left: -10px;
+  min-width: 65px;
+  min-height: 65px;
+  max-width: 65px;
+  max-height: 65px;
+  border-radius: 10px;
+  border: 1px solid #D3D3D3;
+  overflow: hidden;
+
+}
+
 .img_categoria {
   margin-top: 10px;
   margin-left: 10px;
@@ -382,6 +395,21 @@ svg {
  
 }
 
+.nomeAgendamentos{
+  margin-top: -80px;
+  margin-left: 70px;
+  margin-bottom: 80px;
+  font-size: 12px;
+}
+
+.card_meus_agendamentos{
+  
+  min-width:300px;
+  min-height:190px;
+  max-width:300px;
+  max-height:190px;
+}
+
 
 
 
@@ -399,6 +427,15 @@ svg {
 
   float: right;
 
+}
+
+.paginaçãoRodape {
+  position: absolute; 
+  bottom: -10px; 
+  right: 0; 
+  
+  transform: translateY(-25px);
+ 
 }
 
 

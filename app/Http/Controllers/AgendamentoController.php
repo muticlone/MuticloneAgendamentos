@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Models\cadastro_de_servico;
 use App\Models\cadastro_de_empresa;
+use App\Models\Agendamento;
+use App\Models\User;
 
 class AgendamentoController extends Controller
 
@@ -43,17 +45,19 @@ class AgendamentoController extends Controller
    }
 
 
-   public function store(Request $request)
+   public function store(Request $request , Agendamento $Agendamento)
    {
       $user = auth()->user();
-      dd($user);
+     
 
 
-
+     
       $data = $request->all(); // dados da pagina
 
+     
+
       $idservico = $request->input('idServiçoAgendamento');
-      $idEmpresa =  $request->input('empresaid'); // id da empresa para fazer a busca
+      $idEmpresa =  $request->input('cadastro_de_empresas_id'); // id da empresa para fazer a busca
       $empresa = cadastro_de_empresa::findOrFail($idEmpresa); // busca dados empresa
 
       $servico = cadastro_de_servico::where('cadastro_de_empresas_id', $idEmpresa)
@@ -62,12 +66,12 @@ class AgendamentoController extends Controller
 
       // Dados da requisição
       $NomeDoProdutoRequest = $request->input('nomeServiçoAgendamento');
-      $valorDoProdutoRequest = $request->input('valorUnitatio');
-      $valorTotalProdutoRequest = $request->input('valorTotal');
+      $valorDoProdutoRequest = $request->input('valorUnitatioAgendamento');
+      $valorTotalProdutoRequest = $request->input('valorTotalAgendamento');
       $valorTotalProdutoRequestFloat = floatval($valorTotalProdutoRequest);
       $duracaohorasDoProdutoRequest = $request->input('duracaohorasAgendamento');
       $duracaoMinutosDoProdutoRequest = $request->input('duracaominutosAgendamento');
-      $formadepagamentoRequest = $request->input('formaDepagamento');
+      $formadepagamentoRequest = $request->input('formaDepagamentoAgendamento');
       $formaDePagamentoArray = array($formadepagamentoRequest);
     
 
@@ -86,7 +90,8 @@ class AgendamentoController extends Controller
       $comparisonNomeDdComNOmeRequest = array_diff($servicoNome, $NomeDoProdutoRequest);
       $comparasionFormadepagamento = array_intersect($formaDePagamentoArray,  $empresaformadepagamento);
 
-
+      
+     
 
       if (
          $valorTotalProdutoRequestFloat ==  $totalbd && $servicoValordoPRoduto == $valorDoProdutoRequest
@@ -95,9 +100,29 @@ class AgendamentoController extends Controller
          && empty($comparisonNomeDdComNOmeRequest) && $comparasionFormadepagamento
 
       ) {
-         dd($data);
+         $Agendamento->create($data);
+         return redirect('/dashboard')->with('msg', 'Agendado com sucesso!');
       } else {
-         dd("não para algum caso");
+         return redirect('/')->with('msgErro', 'Modicação não permitida!');
       }
+   }
+
+   public function show(){
+
+      $user = auth()->user();
+
+      $agendamentos = $user->agendamentos()
+      ->orderBy('dataHorarioAgendamento', 'asc')
+      ->paginate(10);
+      
+      $idempresa = $agendamentos->pluck('cadastro_de_empresas_id')->unique();
+      $empresaAgendamento = cadastro_de_empresa::whereIn('id', $idempresa)->get();
+
+
+      return view('Agedamentos.MeusAgendamentos',[
+         'agendamentos' => $agendamentos,
+         'empresaAgendamento' => $empresaAgendamento,
+      ]);
+        
    }
 }

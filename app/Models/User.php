@@ -63,6 +63,10 @@ class User extends Authenticatable
     public function empresas(){
         return $this->hasMany('App\Models\cadastro_de_empresa');
     }
+
+    public function agendamentos(){
+        return $this->hasMany('App\Models\Agendamento');
+    }
     
 
     

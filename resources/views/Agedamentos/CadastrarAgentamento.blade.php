@@ -27,47 +27,49 @@
         </div>
 
 
-        <div class="row g-12">
-
-            <div class="col-4 ">
-                <label for="valor">Nome</label>
-
-
-
-
-                <input type="text" name="nomeUser" id="NomeUser" class="form-control campodesablitado"
-                    value=" {{ $user->name }}">
-
-
-            </div>
-            <div class="col-3 ">
-                <label for="valor">Celular</label>
-
-                <input type="text" name="celularUser" id="celularUser" class="form-control campodesablitado"
-                    value=" {{ $user->phone }}">
-
-
-            </div>
-            <div class="col-5 ">
-                <label for="valor">E-mail</label>
-
-
-                <input type="text" name="emailUser" id="emailUser" class="form-control campodesablitado"
-                    value="  {{ $user->email }}">
-
-
-
-            </div>
-
-
-        </div>
-
-
-
-
         <form action="/cadastrar/agentamento" method="POST">
+            <div class="row g-12">
+
+                <div class="col-4 ">
+                    <label for="valor">Nome</label>
+
+
+
+
+                    <input type="text" name="NomeUser" id="NomeUser" class="form-control campodesablitado"
+                        value=" {{ $user->name }}">
+                    <input type="hidden" name="user_id" value="{{ $user->id }}">    
+
+
+
+                </div>
+                <div class="col-3 ">
+                    <label for="valor">Celular</label>
+
+                    <input type="text" name="celularUser" id="celularUser" class="form-control campodesablitado"
+                        value=" {{ $user->phone }}">
+
+
+                </div>
+                <div class="col-5 ">
+                    <label for="valor">E-mail</label>
+
+
+                    <input type="text" name="emailUser" id="emailUser" class="form-control campodesablitado"
+                        value="  {{ $user->email }}">
+
+
+
+                </div>
+
+
+            </div>
+
+
+
+
             @csrf
-            <input type="hidden" name="empresaid" value="{{ $empresa->id }}">
+            <input type="hidden" name="cadastro_de_empresas_id" value="{{ $empresa->id }}">
 
             <div class="row g-12 pt-4 ">
                 <table class="table  table-hover">
@@ -108,7 +110,8 @@
                                 </td>
                                 <td>
                                     R$ {{ $servico->valorDoServico }}
-                                    <input type="hidden" name="valorUnitatio[]" value="{{ $servico->valorDoServico }}">
+                                    <input type="hidden" name="valorUnitatioAgendamento[]"
+                                        value="{{ $servico->valorDoServico }}">
                                 </td>
                                 <td>
                                     <a class="btn btn-danger btn-sm deleteButton">Remover</a>
@@ -132,7 +135,8 @@
                             button.addEventListener("click", function() {
                                 var row = this.closest("tr");
                                 if (row) {
-                                    var hiddenInput = row.querySelector('input[name="valorUnitatio[]"]');
+                                    var hiddenInput = row.querySelector(
+                                        'input[name="valorUnitatioAgendamento[]"]');
                                     var valorUnitatio = parseFloat(hiddenInput
                                         .value); // Converte para tipo numérico
 
@@ -146,7 +150,7 @@
 
 
                                     row.remove();
-                                 
+
                                 }
                             });
                         });
@@ -160,7 +164,7 @@
                             <li>
                                 <div class="listadepagamentos">
                                     <input id="teste" class="form-check-input" style="margin-right:10px;" type="radio"
-                                        name="formaDepagamento" value="{{ $formadepagamento }}"
+                                        name="formaDepagamentoAgendamento" value="{{ $formadepagamento }}"
                                         @if ($loop->first) checked @endif>
                                     @if ($formadepagamento == 'Dinheiro')
                                         <x-dinheiro width="20" height="20" margin="10px" />
@@ -187,7 +191,7 @@
 
                     <script>
                         // Evento de clique nos inputs
-                        var inputs = document.querySelectorAll('input[name="FormaDepagamento"]');
+                        var inputs = document.querySelectorAll('input[name="FormaDepagamentoAgendamento"]');
                         inputs.forEach(function(input) {
                             input.addEventListener('click', function() {
                                 var selectedValue = this.value;
@@ -217,8 +221,8 @@
 
                     <div class="input-group mb-3">
                         <span class="input-group-text">R$</span>
-                        <input type="text" name="valorTotal" id="valorTotal" class="form-control campodesablitado"
-                            value="{{ number_format($somaValores, 2, ',', '.') }}">
+                        <input type="text" name="valorTotalAgendamento" id="valorTotal"
+                            class="form-control campodesablitado" value="{{ number_format($somaValores, 2, ',', '.') }}">
 
                     </div>
 
@@ -230,7 +234,7 @@
                                     title="Digite último horário disponível para esse serviço" />
 
                             </span>
-                            <input type="datetime-local" class="form-control" name="dataHorario"
+                            <input type="datetime-local" class="form-control" name="dataHorarioAgendamento"
                                 aria-describedby="validationTooltipUsernamePrepend" required />
                             <div class="invalid-tooltip">
                                 Por favor, digite Data e horário para o agedamento

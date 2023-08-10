@@ -4,6 +4,10 @@
 
 @section('conteudo')
 
+
+
+
+
     <div class="col-lg-12 col-sm-12 col-md-12 pt-2" align="center">
         <div class="btn-group" role="group" aria-label="Basic example">
             <a href="/" class="btn btn-sm btn-outline-info btndashboardservico">Home</a>
@@ -105,8 +109,6 @@
         {{-- paginação --}}
 
         <x-pagination :paginatedItems="$empresa" />
-
-       
     @else
         <!-- Se não houver empresas, exiba alguma mensagem de aviso ou tratamento adequado -->
         @if ($search)
@@ -118,6 +120,9 @@
 
 
     @endif
+    
+
+
 
 
 

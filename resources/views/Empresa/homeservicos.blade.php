@@ -131,9 +131,11 @@
 
 
     {{-- paginação --}}
+    <div class="paginaçãoRodape"> 
+        <x-pagination :paginatedItems="$paginatedItems" />
 
-    <x-pagination :paginatedItems="$paginatedItems" />
-
+    </div>
+    
 
 
 

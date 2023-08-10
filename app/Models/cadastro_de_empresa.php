@@ -49,7 +49,7 @@ class cadastro_de_empresa extends Model
     }
 
     public function sevicos(){
-        return $this->hasMany('App\Models\cadastro_de_servico.php');
+        return $this->hasMany('App\Models\cadastro_de_servico');
     }
 
    
