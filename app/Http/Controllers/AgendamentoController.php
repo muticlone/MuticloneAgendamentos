@@ -18,6 +18,9 @@ class AgendamentoController extends Controller
    public function create(Request $request)
    {
 
+      $user = auth()->user();
+
+
       $idEmpresa =  $request->input('idempresa');
 
       $id = $request->input('servico');
@@ -34,7 +37,7 @@ class AgendamentoController extends Controller
          'Agedamentos.CadastrarAgentamento',
          [
             'servico' =>  $servico, 'empresa' => $empresa,
-
+            'user' =>  $user
          ]
       );
    }
@@ -42,10 +45,13 @@ class AgendamentoController extends Controller
 
    public function store(Request $request)
    {
+      $user = auth()->user();
+      dd($user);
+
 
 
       $data = $request->all(); // dados da pagina
-      dd($data);
+
       $idservico = $request->input('idServiçoAgendamento');
       $idEmpresa =  $request->input('empresaid'); // id da empresa para fazer a busca
       $empresa = cadastro_de_empresa::findOrFail($idEmpresa); // busca dados empresa
@@ -58,24 +64,20 @@ class AgendamentoController extends Controller
       $NomeDoProdutoRequest = $request->input('nomeServiçoAgendamento');
       $valorDoProdutoRequest = $request->input('valorUnitatio');
       $valorTotalProdutoRequest = $request->input('valorTotal');
-
+      $valorTotalProdutoRequestFloat = floatval($valorTotalProdutoRequest);
       $duracaohorasDoProdutoRequest = $request->input('duracaohorasAgendamento');
       $duracaoMinutosDoProdutoRequest = $request->input('duracaominutosAgendamento');
       $formadepagamentoRequest = $request->input('formaDepagamento');
       $formaDePagamentoArray = array($formadepagamentoRequest);
+    
 
       // dados bd
       $servicoNome = $servico->pluck('nomeServico')->toArray();
       $servicoValordoPRoduto = $servico->pluck('valorDoServico')->toArray();
-      $total = array_sum($servicoValordoPRoduto);
+      $totalbd = array_sum($servicoValordoPRoduto);
       $servicoduracaohorasDoProduto = $servico->pluck('duracaohoras')->toArray();
-      $servicoduracaoMinutosDoProduto= $servico->pluck('duracaominutos')->toArray();
-      
-   
+      $servicoduracaoMinutosDoProduto = $servico->pluck('duracaominutos')->toArray();
       $empresaformadepagamento = $empresa->formaDePagamento;
-     
-   
-      
      
 
 
@@ -83,20 +85,19 @@ class AgendamentoController extends Controller
 
       $comparisonNomeDdComNOmeRequest = array_diff($servicoNome, $NomeDoProdutoRequest);
       $comparasionFormadepagamento = array_intersect($formaDePagamentoArray,  $empresaformadepagamento);
-    
-     
 
-      // if (
-      //    $valorTotalProdutoRequest == $total && $servicoValordoPRoduto == $valorDoProdutoRequest 
-      //    &&  $servicoduracaohorasDoProduto ==  $duracaohorasDoProdutoRequest
-      //    && $servicoduracaoMinutosDoProduto == $duracaoMinutosDoProdutoRequest
-      //    && empty($comparisonNomeDdComNOmeRequest) && $comparasionFormadepagamento 
-        
-      // ) {
-      //    dd("sim para todos os casos",$formaDePagamentoArray);
-        
-      // } else {
-      //    dd("não para algum caso");
-      // }
+
+
+      if (
+         $valorTotalProdutoRequestFloat ==  $totalbd && $servicoValordoPRoduto == $valorDoProdutoRequest
+         &&  $servicoduracaohorasDoProduto ==  $duracaohorasDoProdutoRequest
+         && $servicoduracaoMinutosDoProduto == $duracaoMinutosDoProdutoRequest
+         && empty($comparisonNomeDdComNOmeRequest) && $comparasionFormadepagamento
+
+      ) {
+         dd($data);
+      } else {
+         dd("não para algum caso");
+      }
    }
 }

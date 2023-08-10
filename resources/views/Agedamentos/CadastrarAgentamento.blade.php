@@ -20,13 +20,56 @@
 
 
             </div>
+
+
+
+
         </div>
+
+
+        <div class="row g-12">
+
+            <div class="col-4 ">
+                <label for="valor">Nome</label>
+
+
+
+
+                <input type="text" name="nomeUser" id="NomeUser" class="form-control campodesablitado"
+                    value=" {{ $user->name }}">
+
+
+            </div>
+            <div class="col-3 ">
+                <label for="valor">Celular</label>
+
+                <input type="text" name="celularUser" id="celularUser" class="form-control campodesablitado"
+                    value=" {{ $user->phone }}">
+
+
+            </div>
+            <div class="col-5 ">
+                <label for="valor">E-mail</label>
+
+
+                <input type="text" name="emailUser" id="emailUser" class="form-control campodesablitado"
+                    value="  {{ $user->email }}">
+
+
+
+            </div>
+
+
+        </div>
+
+
+
 
         <form action="/cadastrar/agentamento" method="POST">
             @csrf
             <input type="hidden" name="empresaid" value="{{ $empresa->id }}">
 
-            <div class="row g-12 ">
+            <div class="row g-12 pt-4 ">
                 <table class="table  table-hover">
                     <thead>
                         <tr class="tituloagendamento">
@@ -91,20 +134,19 @@
                                 if (row) {
                                     var hiddenInput = row.querySelector('input[name="valorUnitatio[]"]');
                                     var valorUnitatio = parseFloat(hiddenInput
-                                    .value); // Converte para tipo numérico
+                                        .value); // Converte para tipo numérico
 
                                     var valorTotalInput = document.getElementById("valorTotal");
                                     var valortotal = parseFloat(valorTotalInput
-                                    .value); // Converte para tipo numérico
+                                        .value); // Converte para tipo numérico
 
                                     var sub = valortotal - valorUnitatio;
 
                                     valorTotalInput.value = sub >= 0 ? sub : 0;
-                                    console.log("Valor un: " + valorUnitatio);
-                                    console.log("Valor Total: " + valortotal);
-                                    console.log("Subtração: " + sub);
+
 
                                     row.remove();
+                                 
                                 }
                             });
                         });
@@ -149,13 +191,12 @@
                         inputs.forEach(function(input) {
                             input.addEventListener('click', function() {
                                 var selectedValue = this.value;
-                                // Faça algo com o valor selecionado
-                                console.log(selectedValue);
+
                             });
                         });
 
                         $(document).ready(function() {
-                            $('#valorTotal').on('keydown paste', function(e) {
+                            $('.campodesablitado').on('keydown paste', function(e) {
                                 e.preventDefault();
                             });
                         });
@@ -176,7 +217,7 @@
 
                     <div class="input-group mb-3">
                         <span class="input-group-text">R$</span>
-                        <input type="text" name="valorTotal" id="valorTotal" class="form-control"
+                        <input type="text" name="valorTotal" id="valorTotal" class="form-control campodesablitado"
                             value="{{ number_format($somaValores, 2, ',', '.') }}">
 
                     </div>
@@ -189,7 +230,7 @@
                                     title="Digite último horário disponível para esse serviço" />
 
                             </span>
-                            <input type="datetime-local" class="form-control" name="horario_final_atedimento"
+                            <input type="datetime-local" class="form-control" name="dataHorario"
                                 aria-describedby="validationTooltipUsernamePrepend" required />
                             <div class="invalid-tooltip">
                                 Por favor, digite Data e horário para o agedamento
