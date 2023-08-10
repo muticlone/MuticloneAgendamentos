@@ -45,6 +45,7 @@ class AgendamentoController extends Controller
 
 
       $data = $request->all(); // dados da pagina
+      dd($data);
       $idservico = $request->input('idServiçoAgendamento');
       $idEmpresa =  $request->input('empresaid'); // id da empresa para fazer a busca
       $empresa = cadastro_de_empresa::findOrFail($idEmpresa); // busca dados empresa
@@ -85,17 +86,17 @@ class AgendamentoController extends Controller
     
      
 
-      if (
-         $valorTotalProdutoRequest == $total && $servicoValordoPRoduto == $valorDoProdutoRequest 
-         &&  $servicoduracaohorasDoProduto ==  $duracaohorasDoProdutoRequest
-         && $servicoduracaoMinutosDoProduto == $duracaoMinutosDoProdutoRequest
-         && empty($comparisonNomeDdComNOmeRequest) && $comparasionFormadepagamento 
+      // if (
+      //    $valorTotalProdutoRequest == $total && $servicoValordoPRoduto == $valorDoProdutoRequest 
+      //    &&  $servicoduracaohorasDoProduto ==  $duracaohorasDoProdutoRequest
+      //    && $servicoduracaoMinutosDoProduto == $duracaoMinutosDoProdutoRequest
+      //    && empty($comparisonNomeDdComNOmeRequest) && $comparasionFormadepagamento 
         
-      ) {
-         dd("sim para todos os casos",$formaDePagamentoArray);
+      // ) {
+      //    dd("sim para todos os casos",$formaDePagamentoArray);
         
-      } else {
-         dd("não para algum caso");
-      }
+      // } else {
+      //    dd("não para algum caso");
+      // }
    }
 }

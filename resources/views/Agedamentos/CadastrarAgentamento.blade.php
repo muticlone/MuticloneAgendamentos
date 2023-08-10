@@ -11,14 +11,14 @@
 
     <div class="col-md-9 offset-md-1 pt-2">
         <div class="pt-2">
-            
+
             <div class="alert alert-light" role="alert" align="center">
-                <img src="/img/logo_empresas/{{ $empresa->image }}"
-                class="img-fluid  img_logoDadosServicoAgendamentos" alt="{{ $empresa->razaoSocial }}">
-            </br>
+                <img src="/img/logo_empresas/{{ $empresa->image }}" class="img-fluid  img_logoDadosServicoAgendamentos"
+                    alt="{{ $empresa->razaoSocial }}">
+                </br>
                 Agendamento {{ strtolower($empresa->nomeFantasia) }}
-          
-               
+
+
             </div>
         </div>
 
@@ -34,14 +34,15 @@
                             <th scope="col">Duração</th>
 
                             <th scope="col">Valor un</th>
+                            <th scope="col">Ação</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($servico as $servico)
                             <tr class="textagendamento" name="produtos">
                                 <td>
-                                    <img src="/img/logo_servicos/{{ $servico->imageservico }}" alt="{{ $servico->nomeServico }}"
-                                    class="imgtabela">
+                                    <img src="/img/logo_servicos/{{ $servico->imageservico }}"
+                                        alt="{{ $servico->nomeServico }}" class="imgtabela">
                                     {{ $servico->nomeServico }}
 
                                     <input type="hidden" name="nomeServiçoAgendamento[]"
@@ -62,10 +63,12 @@
                                     <input type="hidden" name="duracaominutosAgendamento[]"
                                         value="{{ $servico->duracaominutos }}">
                                 </td>
-
-
-                                <td>R$ {{ $servico->valorDoServico }}
+                                <td>
+                                    R$ {{ $servico->valorDoServico }}
                                     <input type="hidden" name="valorUnitatio[]" value="{{ $servico->valorDoServico }}">
+                                </td>
+                                <td>
+                                    <a class="btn btn-danger btn-sm deleteButton">Remover</a>
                                 </td>
                             </tr>
                             @php
@@ -77,6 +80,36 @@
 
 
                 </table>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        var deleteButtons = document.querySelectorAll(".deleteButton");
+
+                        deleteButtons.forEach(function(button) {
+                            button.addEventListener("click", function() {
+                                var row = this.closest("tr");
+                                if (row) {
+                                    var hiddenInput = row.querySelector('input[name="valorUnitatio[]"]');
+                                    var valorUnitatio = parseFloat(hiddenInput
+                                    .value); // Converte para tipo numérico
+
+                                    var valorTotalInput = document.getElementById("valorTotal");
+                                    var valortotal = parseFloat(valorTotalInput
+                                    .value); // Converte para tipo numérico
+
+                                    var sub = valortotal - valorUnitatio;
+
+                                    valorTotalInput.value = sub >= 0 ? sub : 0;
+                                    console.log("Valor un: " + valorUnitatio);
+                                    console.log("Valor Total: " + valortotal);
+                                    console.log("Subtração: " + sub);
+
+                                    row.remove();
+                                }
+                            });
+                        });
+                    });
+                </script>
 
                 <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
                     <h5 class="card-title">Formas de Pagamento</h5>
@@ -144,26 +177,25 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text">R$</span>
                         <input type="text" name="valorTotal" id="valorTotal" class="form-control"
-                            value="{{ $somaValores }}">
+                            value="{{ number_format($somaValores, 2, ',', '.') }}">
 
                     </div>
 
                     <div class="col-lg-12 col-sm-12 col-md-12 pt-2">
-                    <label for="title">Data e horário</label>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"> 
-                            <x-svg_horario width="16" height="16" 
-                            title="Digite último horário disponível para esse serviço" />
-                            
-                        </span>
-                        <input type="datetime-local" class="form-control" name="horario_final_atedimento"
-                        aria-describedby="validationTooltipUsernamePrepend"
-                        required/>
-                        <div class="invalid-tooltip">
-                            Por favor, digite Data e horário para o agedamento 
+                        <label for="title">Data e horário</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <x-svg_horario width="16" height="16"
+                                    title="Digite último horário disponível para esse serviço" />
+
+                            </span>
+                            <input type="datetime-local" class="form-control" name="horario_final_atedimento"
+                                aria-describedby="validationTooltipUsernamePrepend" required />
+                            <div class="invalid-tooltip">
+                                Por favor, digite Data e horário para o agedamento
+                            </div>
                         </div>
                     </div>
-                </div> 
                     <div class="col-lg-12 col-sm-12 col-md-12 pt-2">
 
 
