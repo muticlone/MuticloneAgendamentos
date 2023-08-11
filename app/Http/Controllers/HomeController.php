@@ -99,28 +99,28 @@ class HomeController extends Controller
 
 
     public function dashboard()
-{
-    $user = auth()->user();
-    $search = request('search');
+    {
+        /** @var \App\User $user */
+        $user = auth()->user();
+        $search = request('search');
 
-    if ($search) {
-        $empresa = cadastro_de_empresa::where(function ($query) use ($search, $user) {
-            $query->where('razaoSocial', 'like', '%' . $search . '%')
-                ->orWhere('nomeFantasia', 'like', '%' . $search . '%');
-        })
-            ->where('user_id', '=', $user->id)
-            ->paginate(10);
-    } else {
-        $empresa = $user->empresas()->paginate(10);
-      
+        if ($search) {
+            $empresa = cadastro_de_empresa::where(function ($query) use ($search, $user) {
+                $query->where('razaoSocial', 'like', '%' . $search . '%')
+                    ->orWhere('nomeFantasia', 'like', '%' . $search . '%');
+            })
+                ->where('user_id', '=', $user->id)
+                ->paginate(10);
+        } else {
+            $empresa = $user->empresas()->paginate(10);
+        }
+
+        return view('dashboard', [
+            'empresa' => $empresa,
+
+            'search' => $search
+        ]);
     }
-
-    return view('dashboard', [
-        'empresa' => $empresa,
-        
-        'search' => $search
-    ]);
-}
 
 
 

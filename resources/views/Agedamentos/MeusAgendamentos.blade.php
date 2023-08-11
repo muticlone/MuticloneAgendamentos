@@ -35,7 +35,7 @@
                                 {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $agendamento->dataHorarioAgendamento)->format('d/m/Y H:i:s') }}
                             </p>
                             <p class="card-text  nomeAgendamentos">Status: aguardando confirmar</p>
-                            <a href="#" class="btn btn-sm btn-info nomeAgendamentos">Detalhes</a>
+                            <a href="{{ route('meus.agendamentosdetalhes', ['id' => $agendamento->id]) }}" class="btn btn-sm btn-info nomeAgendamentos">Detalhes</a>
                         </div>
                     </div>
                 </div>
