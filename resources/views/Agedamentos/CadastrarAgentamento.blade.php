@@ -38,7 +38,7 @@
 
                     <input type="text" name="NomeUser" id="NomeUser" class="form-control campodesablitado"
                         value=" {{ $user->name }}">
-                    <input type="hidden" name="user_id" value="{{ $user->id }}">    
+                    <input type="hidden" name="user_id" value="{{ $user->id }}">
 
 
 
