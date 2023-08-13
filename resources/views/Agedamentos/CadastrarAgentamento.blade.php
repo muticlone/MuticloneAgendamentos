@@ -95,12 +95,15 @@
                                     <input type="hidden" name="idServiçoAgendamento[]" value="{{ $servico->id }}">
                                 </td>
                                 <td>
+                                    @if( $servico->duracaohoras >1 )
                                     {{ $servico->duracaohoras }}
                                     @if ($servico->duracaohoras == '1')
-                                        Hora
+                                    Hora
                                     @else
                                         Horas
                                     @endif
+                                    @endif
+
                                     {{ $servico->duracaominutos }}
                                     minutos
                                     <input type="hidden" name="duracaohorasAgendamento[]"
@@ -141,12 +144,17 @@
                                         .value); // Converte para tipo numérico
 
                                     var valorTotalInput = document.getElementById("valorTotal");
-                                    var valortotal = parseFloat(valorTotalInput
-                                        .value); // Converte para tipo numérico
+                                    var valorTotalInputsub = document.getElementById("valorTotalsub");
+
+                                    var valortotal = parseFloat(valorTotalInputsub
+                                        .value);
+
 
                                     var sub = valortotal - valorUnitatio;
 
-                                    valorTotalInput.value = sub >= 0 ? sub : 0;
+                                    valorTotalInputsub.value = sub >= 0 ? sub : 0;
+                                    valorTotalInput.value = (sub >= 0 ? sub : 0).toFixed(2).replace(".",
+                                        ",");
 
 
                                     row.remove();
@@ -221,8 +229,10 @@
 
                     <div class="input-group mb-3">
                         <span class="input-group-text">R$</span>
-                        <input type="text" name="valorTotalAgendamento" id="valorTotal"
-                            class="form-control campodesablitado" value="{{ number_format($somaValores, 2, ',', '.') }}">
+                        <input type="hidden" name="valorTotalAgendamento" id="valorTotalsub" value="{{ $somaValores }}">
+                        <input type="text"  id="valorTotal"
+                        class="form-control campodesablitado" value="{{ number_format($somaValores, 2, ',', '.') }}">
+
 
                     </div>
 

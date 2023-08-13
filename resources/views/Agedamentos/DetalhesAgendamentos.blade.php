@@ -19,32 +19,38 @@
                         <div class="card">
                             <div class="card-header">
                                 {{ $agendamento->NomeUser }}
+
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Produtos</h5>
-                                <p class="card-text">
-                                    @foreach ($agendamento->nomeServiçoAgendamento as $index => $nome)
-                                        @php
-                                            $valorun = $agendamento->valorUnitatioAgendamento[$index] ?? null;
-                                            $duracaohoras = $agendamento->duracaohorasAgendamento[$index] ?? null;
-                                            $duracaominutos = $agendamento->duracaominutosAgendamento[$index] ?? null;
+                                <div class="card-body produtosDetalhesAgendamentos">
+                                    <p class="card-text">
+                                        @foreach ($agendamento->nomeServiçoAgendamento as $index => $nome)
+                                            @php
+                                                $valorun = $agendamento->valorUnitatioAgendamento[$index] ?? null;
+                                                $duracaohoras = $agendamento->duracaohorasAgendamento[$index] ?? null;
+                                                $duracaominutos = $agendamento->duracaominutosAgendamento[$index] ?? null;
 
-                                        @endphp
-                                        <p class="card-text">
-                                            {{ $nome }}
-                                            R$ {{ $valorun }}
-                                            Duração
-                                            @if ($duracaohoras > 0)
-                                                {{ $duracaohoras }} Horas
-                                            @endif
+                                            @endphp
+                                            <p class="card-text">
+                                                Produto: {{ $nome }} </br>
+                                                Valor: R$ {{ $valorun }} </br>
+                                                Duração:
+                                                @if ($duracaohoras > 0)
+                                                    {{ $duracaohoras }} Horas
+                                                @endif
 
-                                            {{ $duracaominutos }} Minutos
+                                                {{ $duracaominutos }} Minutos
 
-                                        </p>
-                                    @endforeach
+                                            </p>
+                                            </br>
+                                        @endforeach
 
 
-                                </p>
+                                    </p>
+                                </div>
+
+
                                 @php
                                     $somaminutos = 0;
                                     $somahoras = 0;
@@ -59,16 +65,22 @@
                                         $somahoras += $horas;
                                     @endphp
                                 @endforeach
+                                </br>
                                 <p class="card-text">
-                                    Duração total do agendamento:
+                                    Duração total:
                                     {{ $somahoras }} horas
                                     {{ $somaminutos }} minutos
 
                                 </p>
-                                <p class="card-text"> valor total: {{ $agendamento->valorTotalAgendamento }}</p>
-                                <p class="card-text">Forma de pagamento:
-                                    {{ $agendamento->formaDepagamentoAgendamento }}</p>
+                                <h5 class="card-title">Valor total à pagar</h5>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">R$</span>
+                                    <input type="text" class="form-control campodesablitado" value="{{ $agendamento->valorTotalAgendamento }}">
 
+                                </div>
+                                <h5 class="card-title">Forma de pagamento:  {{ $agendamento->formaDepagamentoAgendamento }}</h5>
+
+                                <h5 class="card-title">Data do agendamento</h5>
                                 <input type="datetime-local" class="form-control  campodesablitado"
                                     id="dataHorarioAgendamento" name="dataHorarioAgendamento"
                                     aria-describedby="validationTooltipUsernamePrepend"
@@ -101,6 +113,9 @@
                 </form>
             </div>
         </div>
+
+
+
         <script>
             document.getElementById('cancelarAgendamento').addEventListener('click', function() {
                 var textarea = document.getElementById('motivoCacelamento');

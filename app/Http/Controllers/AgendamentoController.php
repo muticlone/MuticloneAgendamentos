@@ -79,6 +79,16 @@ class AgendamentoController extends Controller
         $servicoNome = $servico->pluck('nomeServico')->toArray();
         $servicoValordoPRoduto = $servico->pluck('valorDoServico')->toArray();
         $totalbd = array_sum($servicoValordoPRoduto);
+        // $totalbdformat = number_format( $totalbd, 2, ',', '.');
+
+
+
+
+
+
+
+
+
         $servicoduracaohorasDoProduto = $servico->pluck('duracaohoras')->toArray();
         $servicoduracaoMinutosDoProduto = $servico->pluck('duracaominutos')->toArray();
         $empresaformadepagamento = $empresa->formaDePagamento;
@@ -90,11 +100,22 @@ class AgendamentoController extends Controller
         $comparisonNomeDdComNOmeRequest = array_diff($servicoNome, $NomeDoProdutoRequest);
         $comparasionFormadepagamento = array_intersect($formaDePagamentoArray,  $empresaformadepagamento);
 
+        dd(
+            $valorTotalProdutoRequestFloat,
+            $totalbd,
+
+            $servicoValordoPRoduto,
+            $valorDoProdutoRequest,
+            $servicoduracaohorasDoProduto,
+            $duracaohorasDoProdutoRequest,
+            $servicoduracaoMinutosDoProduto,
+            $duracaoMinutosDoProdutoRequest
+        );
 
 
 
         if (
-            $valorTotalProdutoRequestFloat ==  $totalbd && $servicoValordoPRoduto == $valorDoProdutoRequest
+            $valorTotalProdutoRequest ==  $totalbd && $servicoValordoPRoduto == $valorDoProdutoRequest
             &&  $servicoduracaohorasDoProduto ==  $duracaohorasDoProdutoRequest
             && $servicoduracaoMinutosDoProduto == $duracaoMinutosDoProdutoRequest
             && empty($comparisonNomeDdComNOmeRequest) && $comparasionFormadepagamento
