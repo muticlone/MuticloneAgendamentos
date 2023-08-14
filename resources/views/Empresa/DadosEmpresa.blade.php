@@ -140,10 +140,10 @@
 
                         {{-- paginação --}}
                         <div class="paginação">
-                            
+
                             <x-pagination :paginatedItems="$servico" />
 
-                          
+
                         </div>
 
 

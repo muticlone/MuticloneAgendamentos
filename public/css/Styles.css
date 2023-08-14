@@ -458,6 +458,17 @@ svg {
   border: 1px solid #F8F8FF;
 }
 
+.imgdetalheagendamento {
+    margin-left: 0px;
+    margin-right: 5px;
+    min-width: 22px;
+    min-height: 22px;
+    max-width: 22px;
+    max-height: 22px;
+    border-radius: 10px;
+    border: 1px solid #F8F8FF;
+  }
+
 
 /*largura da barra de rolagem */
 ::-webkit-scrollbar {
@@ -517,10 +528,11 @@ svg {
 
 .produtosDetalhesAgendamentos {
     margin-right: -14px;
-    max-height: 125px;
-    min-height: 125px;
+    max-height: 127px;
+    min-height: 127px;
     overflow: auto;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
+    cursor: pointer;
   }
 
   .produtosDetalhesAgendamentos p {
@@ -528,6 +540,7 @@ svg {
     margin-top: -30px;
 
   }
+
 
 
 .label-ckeck-dados-empresa {

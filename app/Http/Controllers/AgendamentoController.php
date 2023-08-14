@@ -25,11 +25,25 @@ class AgendamentoController extends Controller
 
         $idEmpresa =  $request->input('idempresa');
 
+
+
+
         $id = $request->input('servico');
 
-        $idArray = array_keys($id);
 
+
+
+
+
+
+
+
+        $idArray = array_keys($id);
         $servico = cadastro_de_servico::whereIn('id', $idArray)->get();
+
+
+
+
 
         $empresa = cadastro_de_empresa::findOrFail($idEmpresa);
 
@@ -150,16 +164,26 @@ class AgendamentoController extends Controller
 
     public function showdetalhes($id)
     {
+
         /** @var \App\User $user */
         $user = auth()->user();
 
         $agendamentos = $user->agendamentos()
             ->where('id', $id)
-            ->paginate(10);
+            ->get();
+
+
+            $idempresa = $agendamentos->pluck('cadastro_de_empresas_id');
+
+
+            $empresa = cadastro_de_empresa::whereIn('id', $idempresa)->get()->toArray();
+
 
 
         return view('Agedamentos.DetalhesAgendamentos', [
             'agendamentos' => $agendamentos,
+            'user' => $user,
+            'empresa' =>  $empresa,
 
         ]);
     }

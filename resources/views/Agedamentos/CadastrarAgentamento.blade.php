@@ -9,7 +9,7 @@
         $somaValores = 0;
     @endphp
 
-    <div class="col-md-9 offset-md-1 pt-2">
+    <div class="col-md-8 offset-md-2 pt-2">
         <div class="pt-2">
 
             <div class="alert alert-light" role="alert" align="center">
@@ -248,7 +248,12 @@
                         if (sub == 0) {
 
                             var div = document.getElementById("tabela");
-                            div.innerHTML = '<a href="/empresas/dados/{{$empresa->id}}">Seu carrinho vazio. Por favor, clique aqui é adicione mais produtos.</a>';
+                            div.innerHTML = `
+                                <div class="alert alert-light" role="alert">
+                                    <a class="alert-link" href="/empresas/dados/{{ $empresa->id }}">Seu carrinho está vazio. Por favor, clique aqui e adicione mais produtos.</a>
+                                </div>
+                            `;
+
                         }
 
                         valorTotalInputsub.value = sub >= 0 ? sub : 0;
@@ -282,7 +287,6 @@
             });
         });
     </script>
-
 
 
 

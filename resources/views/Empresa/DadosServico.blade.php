@@ -133,8 +133,11 @@
                                 </li>
                             @endforeach
                         </ul>
-
-                        <button class="btn btn-primary">Agendar</button>
+                        <form action="{{ route('cadastrar.Agentamentos') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="servico" value="{{  $servico->id }}">
+                            <button class="btn btn-primary">Agendar</button>
+                        </form>
                         <p class="card-text pt-2">Prestadora do serviço:
 
                             <a class="card-text" href="/empresas/dados/{{ $servico->cadastro_de_empresas_id }}"
