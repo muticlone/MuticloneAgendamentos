@@ -71,7 +71,8 @@
             @csrf
             <input type="hidden" name="cadastro_de_empresas_id" value="{{ $empresa->id }}">
 
-            <div class="row g-12 pt-4 ">
+            <div class="row g-12 pt-4" id="tabela">
+
                 <table class="table  table-hover">
                     <thead>
                         <tr class="tituloagendamento">
@@ -95,13 +96,13 @@
                                     <input type="hidden" name="idServiçoAgendamento[]" value="{{ $servico->id }}">
                                 </td>
                                 <td>
-                                    @if( $servico->duracaohoras >1 )
-                                    {{ $servico->duracaohoras }}
-                                    @if ($servico->duracaohoras == '1')
-                                    Hora
-                                    @else
-                                        Horas
-                                    @endif
+                                    @if ($servico->duracaohoras > 1)
+                                        {{ $servico->duracaohoras }}
+                                        @if ($servico->duracaohoras == '1')
+                                            Hora
+                                        @else
+                                            Horas
+                                        @endif
                                     @endif
 
                                     {{ $servico->duracaominutos }}
@@ -124,46 +125,16 @@
                                 $somaValores += $servico->valorDoServico;
                             @endphp
                         @endforeach
+
                     </tbody>
+
+
 
 
 
                 </table>
 
-                <script>
-                    document.addEventListener("DOMContentLoaded", function() {
-                        var deleteButtons = document.querySelectorAll(".deleteButton");
 
-                        deleteButtons.forEach(function(button) {
-                            button.addEventListener("click", function() {
-                                var row = this.closest("tr");
-                                if (row) {
-                                    var hiddenInput = row.querySelector(
-                                        'input[name="valorUnitatioAgendamento[]"]');
-                                    var valorUnitatio = parseFloat(hiddenInput
-                                        .value); // Converte para tipo numérico
-
-                                    var valorTotalInput = document.getElementById("valorTotal");
-                                    var valorTotalInputsub = document.getElementById("valorTotalsub");
-
-                                    var valortotal = parseFloat(valorTotalInputsub
-                                        .value);
-
-
-                                    var sub = valortotal - valorUnitatio;
-
-                                    valorTotalInputsub.value = sub >= 0 ? sub : 0;
-                                    valorTotalInput.value = (sub >= 0 ? sub : 0).toFixed(2).replace(".",
-                                        ",");
-
-
-                                    row.remove();
-
-                                }
-                            });
-                        });
-                    });
-                </script>
 
                 <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
                     <h5 class="card-title">Formas de Pagamento</h5>
@@ -197,29 +168,6 @@
                         @endforeach
                     </ul>
 
-                    <script>
-                        // Evento de clique nos inputs
-                        var inputs = document.querySelectorAll('input[name="FormaDepagamentoAgendamento"]');
-                        inputs.forEach(function(input) {
-                            input.addEventListener('click', function() {
-                                var selectedValue = this.value;
-
-                            });
-                        });
-
-                        $(document).ready(function() {
-                            $('.campodesablitado').on('keydown paste', function(e) {
-                                e.preventDefault();
-                            });
-                        });
-                    </script>
-
-
-
-
-
-
-
 
                 </div>
 
@@ -229,9 +177,10 @@
 
                     <div class="input-group mb-3">
                         <span class="input-group-text">R$</span>
-                        <input type="hidden" name="valorTotalAgendamento" id="valorTotalsub" value="{{ $somaValores }}">
-                        <input type="text"  id="valorTotal"
-                        class="form-control campodesablitado" value="{{ number_format($somaValores, 2, ',', '.') }}">
+                        <input type="hidden" name="valorTotalAgendamento" id="valorTotalsub"
+                            value="{{ $somaValores }}">
+                        <input type="text" id="valorTotal" class="form-control campodesablitado"
+                            value="{{ number_format($somaValores, 2, ',', '.') }}">
 
 
                     </div>
@@ -275,7 +224,64 @@
     </form>
 
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var deleteButtons = document.querySelectorAll(".deleteButton");
 
+            deleteButtons.forEach(function(button) {
+                button.addEventListener("click", function() {
+                    var row = this.closest("tr");
+                    if (row) {
+                        var hiddenInput = row.querySelector(
+                            'input[name="valorUnitatioAgendamento[]"]');
+                        var valorUnitatio = parseFloat(hiddenInput
+                            .value); // Converte para tipo numérico
+
+                        var valorTotalInput = document.getElementById("valorTotal");
+                        var valorTotalInputsub = document.getElementById("valorTotalsub");
+
+                        var valortotal = parseFloat(valorTotalInputsub
+                            .value);
+
+
+                        var sub = valortotal - valorUnitatio;
+                        if (sub == 0) {
+
+                            var div = document.getElementById("tabela");
+                            div.innerHTML = '<a href="/empresas/dados/{{$empresa->id}}">Seu carrinho vazio. Por favor, clique aqui é adicione mais produtos.</a>';
+                        }
+
+                        valorTotalInputsub.value = sub >= 0 ? sub : 0;
+                        valorTotalInput.value = (sub >= 0 ? sub : 0).toFixed(2).replace(".",
+                            ",");
+
+
+
+
+                        row.remove();
+
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        // Evento de clique nos inputs
+        var inputs = document.querySelectorAll('input[name="FormaDepagamentoAgendamento"]');
+        inputs.forEach(function(input) {
+            input.addEventListener('click', function() {
+                var selectedValue = this.value;
+
+            });
+        });
+
+        $(document).ready(function() {
+            $('.campodesablitado').on('keydown paste', function(e) {
+                e.preventDefault();
+            });
+        });
+    </script>
 
 
 
