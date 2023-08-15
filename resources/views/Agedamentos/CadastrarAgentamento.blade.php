@@ -28,6 +28,7 @@
 
 
         <form action="/cadastrar/agentamento" method="POST">
+            @csrf
             <div class="row g-12">
 
                 <div class="col-4 ">
@@ -68,7 +69,7 @@
 
 
 
-            @csrf
+
             <input type="hidden" name="cadastro_de_empresas_id" value="{{ $empresa->id }}">
 
             <div class="row g-12 pt-4" id="tabela">

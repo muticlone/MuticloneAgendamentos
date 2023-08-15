@@ -87,6 +87,7 @@
                                 </a>
                             </li>
                             @auth
+
                                 <li class="nav-item">
 
                                     <a class="nav-link active text-nowrap" aria-current="page" href="{{ route('meus.agendamentos') }}">
@@ -101,7 +102,7 @@
                                         Meus Negócios
                                     </a>
                                 </li>
-                                
+
 
 
 
@@ -241,7 +242,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       var liveToastBtn = document.getElementById('liveToastBtn');
       var liveToast = document.getElementById('liveToast');
-  
+
       liveToastBtn.addEventListener('click', function() {
         var toast = new bootstrap.Toast(liveToast);
         toast.show();

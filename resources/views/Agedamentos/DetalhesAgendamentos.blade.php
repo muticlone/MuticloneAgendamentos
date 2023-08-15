@@ -13,6 +13,11 @@
     <div class="col-md-10 offset-md-1 pt-1 ">
         <div class="row g-12">
 
+            <div class="col-12 pt-1 ">
+                <div class="alert alert-light" role="alert" align="center">
+                    Atendimento agendado
+                </div>
+            </div>
 
 
 
@@ -22,9 +27,9 @@
 
 
                     @foreach ($agendamentos as $agendamento)
-                        <div class="card">
+                        <div class="card ">
                             <div class="card-header">
-                              Cliente:  {{ $user->name }}
+                                Cliente: {{ $user->name }}
 
                             </div>
                             @php
@@ -128,12 +133,14 @@
                     @endforeach
                 </form>
             </div>
-            <div class="col-lg-6 col-sm-12 col-md-12 pt-2 "align="center">
+
+
+            <div class="col-lg-6 col-sm-12 col-md-12 pt-2 ">
 
 
                 @foreach ($empresa as $empresaItem)
                     <div>
-                        <div class="card">
+                        <div class="card card_detalhes_agendamentos">
 
 
                             <div class="card-body">
@@ -145,7 +152,8 @@
 
                                 <h5 class="vertical-align-middle">
                                     Local: {{ ucfirst(strtolower($empresaItem['nomeFantasia'])) }}
-                                    <img src="/img/logo_empresas/{{ $empresaItem['image'] }}" class="img-fluid imgdetalheagendamento mx-1"
+                                    <img src="/img/logo_empresas/{{ $empresaItem['image'] }}"
+                                        class="img-fluid imgdetalheagendamento mx-1"
                                         alt="{{ $empresaItem['razaoSocial'] }}">
 
                                 </h5>
@@ -206,7 +214,8 @@
 
 
                                 <div class="pt-1">
-                                    <a href="/empresas/dados/{{ $empresaItem['id'] }}" class="btn btn-primary">Detalhes</a>
+                                    <a href="/empresas/dados/{{ $empresaItem['id'] }}"
+                                        class="btn btn-primary">Detalhes</a>
 
                                 </div>
 
@@ -219,6 +228,15 @@
             </div>
         </div>
 
+        <script>
+            document.querySelectorAll('#nav-tab>[data-bs-toggle="tab"]').forEach(el => {
+                el.addEventListener('shown.bs.tab', () => {
+                    const target = el.getAttribute('data-bs-target')
+                    const scrollElem = document.querySelector(`${target} [data-bs-spy="scroll"]`)
+                    bootstrap.ScrollSpy.getOrCreateInstance(scrollElem).refresh()
+                })
+            })
+        </script>
 
 
         <script>
