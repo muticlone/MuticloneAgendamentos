@@ -7,11 +7,12 @@
 
     @php
         $somaValores = 0;
+        $dataAtual = date('d/m/Y');
     @endphp
 
     <div class="col-md-8 offset-md-2 pt-2">
         <div class="pt-2">
-
+            {{--
             <div class="alert alert-light" role="alert" align="center">
                 <img src="/img/logo_empresas/{{ $empresa->image }}" class="img-fluid  img_logoDadosServicoAgendamentos"
                     alt="{{ $empresa->razaoSocial }}">
@@ -19,7 +20,8 @@
                 Agendamento {{ strtolower($empresa->nomeFantasia) }}
 
 
-            </div>
+            </div> --}}
+
 
 
 
@@ -30,38 +32,79 @@
         <form action="/cadastrar/agentamento" method="POST">
             @csrf
             <div class="row g-12">
-
-                <div class="col-4 ">
-                    <label for="valor">Nome</label>
-
-
+                <input type="hidden" name="user_id" value="{{ $user->id }}">
+                <input type="hidden" name="NomeUser" id="NomeUser" class="form-control campodesablitado"
+                    value=" {{ $user->name }}">
 
 
-                    <input type="text" name="NomeUser" id="NomeUser" class="form-control campodesablitado"
-                        value=" {{ $user->name }}">
-                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+                <input type="hidden" name="celularUser" id="celularUser" class="form-control campodesablitado"
+                    value=" {{ $user->phone }}">
+
+                <input type="hidden" name="emailUser" id="emailUser" class="form-control campodesablitado"
+                    value="  {{ $user->email }}">
+
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 d-flex align-items-center">
+                            <strong>{{ ucfirst(strtolower($empresa->nomeFantasia)) }}
+                                <img src="/img/logo_empresas/{{ $empresa->image }}"
+                                    class="img-fluid img_logoDadosServicoAgendamentos" alt="{{ $empresa->razaoSocial }}">
+                            </strong>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end align-items-center">
+                            <small>Data: {{ $dataAtual }}</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 invoice-col">
+
+
+                    <address>
+
+
+                        {{ ucfirst(strtolower($empresa->logradouro)) }}
+                        N° {{ ucfirst(strtolower($empresa->numero_endereco)) }}<br>
+                        {{ ucfirst(strtolower($empresa->cidade)) }}, {{ $empresa->uf }}<br>
+                        Telefone: {{ $empresa->telefone }} Celular: {{ $empresa->celular }}<br>
+
+                    </address>
+
+
+
 
 
 
                 </div>
-                <div class="col-3 ">
-                    <label for="valor">Celular</label>
-
-                    <input type="text" name="celularUser" id="celularUser" class="form-control campodesablitado"
-                        value=" {{ $user->phone }}">
+                <div class="col-sm-4 invoice-col ">
 
 
-                </div>
-                <div class="col-5 ">
-                    <label for="valor">E-mail</label>
+                    <strong>{{ ucfirst(strtolower($user->name)) }}
 
 
-                    <input type="text" name="emailUser" id="emailUser" class="form-control campodesablitado"
-                        value="  {{ $user->email }}">
+                    </strong><br>
 
+                    {{ $user->email }}
+                    Celular: {{ $user->phone }}<br>
 
 
                 </div>
+
+                <div class="col-sm-4 invoice-col">
+                    <strong>
+
+                        Numero Pedido:
+                    </strong>
+
+                    {{ $numeroDopedio }}
+
+                    <input type="hidden" name="NumeroDopedido" id="celularUser" class="form-control campodesablitado"
+                        value=" {{ $numeroDopedio }}">
+
+                </div>
+
 
 
             </div>
@@ -72,7 +115,7 @@
 
             <input type="hidden" name="cadastro_de_empresas_id" value="{{ $empresa->id }}">
 
-            <div class="row g-12 pt-4" id="tabela">
+            <div class="row g-12 pt-1" id="tabela">
 
                 <table class="table  table-hover">
                     <thead>

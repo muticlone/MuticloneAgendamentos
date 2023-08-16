@@ -47,13 +47,20 @@ class AgendamentoController extends Controller
 
         $empresa = cadastro_de_empresa::findOrFail($idEmpresa);
 
+        $clienteagendamento = Agendamento::where('cadastro_de_empresas_id', $idEmpresa)->get();
+
+        $quantidadeItens = count($clienteagendamento);
+
+
+        $numeroDopedio =  $quantidadeItens +1;
 
 
         return view(
             'Agedamentos.CadastrarAgentamento',
             [
                 'servico' =>  $servico, 'empresa' => $empresa,
-                'user' =>  $user
+                'user' =>  $user,
+                'numeroDopedio' =>  $numeroDopedio
             ]
         );
     }

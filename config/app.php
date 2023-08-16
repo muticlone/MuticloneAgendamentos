@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Facade;
 
 return [
 
-    
-   
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -86,7 +86,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'pt-br',
 
     /*
     |--------------------------------------------------------------------------
@@ -218,7 +218,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
-   
-    
+
+
 
 ];

@@ -16,7 +16,7 @@
 
             <a href="/cadastrar/empresa" class="btn btn-sm btn-outline-info btndashboardservico">Cadastrar nova empresa</a>
             @foreach ($empresa as $empid)
-            <a  href="{{ route('meus.clientes.agendamentosdetalhesempresa',['id' => $empid->id]) }}" class="btn btn-sm btn-outline-info btndashboardservico">Meu Agendamentos</a>
+
 
             @endforeach
 
@@ -98,7 +98,8 @@
 
                                     <x-svg-meusservicos width="14" height="14" margin="3px" />
                                 </a>
-
+                                <a  href="{{ route('meus.clientes.agendamentosdetalhesempresa',['id' => $empid->id]) }}" class="btn btn-sm btn-outline-info btndashboardservico">Meu Agendamentos</a>
+                                <a  href="{{ route('dashboard.business')}}" class="btn btn-sm btn-outline-info btndashboardservico">Dashboard</a>
 
 
                             </td>

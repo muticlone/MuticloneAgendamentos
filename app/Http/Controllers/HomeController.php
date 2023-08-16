@@ -151,4 +151,12 @@ class HomeController extends Controller
             'nomeDaCategoria' => $nomeDaCategoria,
         ]);
     }
+
+    public function dashboardBusiness(){
+
+
+
+        return view('Empresa.dashboardBusiness');
+    }
+
 }

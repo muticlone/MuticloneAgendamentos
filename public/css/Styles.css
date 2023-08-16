@@ -308,10 +308,10 @@ svg {
 }
 
 .img_logoDadosServicoAgendamentos {
-  min-width: 45px;
-  min-height: 45px;
-  max-width: 45px;
-  max-height: 45px;
+  min-width: 25px;
+  min-height: 25px;
+  max-width: 25px;
+  max-height: 25px;
   border-radius: 10px;
 
   border: 1px solid #D3D3D3;
