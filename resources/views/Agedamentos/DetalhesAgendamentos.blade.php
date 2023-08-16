@@ -30,7 +30,7 @@
                         <div class="card ">
                             <div class="card-header">
                                 Cliente: {{ $user->name }}
-
+                                <input type="hidden" id="nome"  value="{{ $user->name }}">
                             </div>
                             @php
                                 $contador = 0;
@@ -226,79 +226,37 @@
                 @endforeach
 
             </div>
+            <div class="col-12 pt-2 ">
+                <div class="card">
+                    <div class="card-header">
+                        Mensagens
+                    </div>
+                    <div class="card-body">
+                        <div class="form-floating" id="mensagem-enviada">
+                            <textarea class="form-control" id="tela" style="height: 250px" disabled></textarea>
+                        </div>
+                        <div class="form-floating pt-3">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="comentario" style="height: 100px"></textarea>
+                            <label for="floatingTextarea2">Comments</label>
+                        </div>
+                        <div class="pt-2">
+                            <a  class="btn btn-primary" id="enviar">Enviar</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <script>
-            document.querySelectorAll('#nav-tab>[data-bs-toggle="tab"]').forEach(el => {
-                el.addEventListener('shown.bs.tab', () => {
-                    const target = el.getAttribute('data-bs-target')
-                    const scrollElem = document.querySelector(`${target} [data-bs-spy="scroll"]`)
-                    bootstrap.ScrollSpy.getOrCreateInstance(scrollElem).refresh()
-                })
-            })
-        </script>
-
-
-        <script>
-            document.getElementById('cancelarAgendamento').addEventListener('click', function() {
-                var textarea = document.getElementById('motivoCacelamento');
-                var btnagendar = document.getElementById('reagendarAgendamento');
-                var btnvoltar = document.getElementById('voltar');
-
-                textarea.style.display = 'block';
-
-                btnagendar.style.display = 'none';
-                btnvoltar.style.display = 'block';
-                textarea.required = true;
-            });
-
-
-            var primeiroClique = true;
-
-            document.getElementById('reagendarAgendamento').addEventListener('click', function() {
-                var dataHorarioAgendamento = document.getElementById('dataHorarioAgendamento');
-                var btcancelarAgendamento = document.getElementById('cancelarAgendamento');
-                var btcancelaracao = document.getElementById('cancelaracao');
-                var btnagendar = document.getElementById('reagendarAgendamento');
-                var conteudoElemento = document.getElementById('reagendar');
-
-                btcancelaracao.style.display = 'block';
-
-                if (primeiroClique) {
-                    dataHorarioAgendamento.value = "";
-                    dataHorarioAgendamento.classList.remove('campodesablitado');
-                    primeiroClique = false;
-                }
-
-                btcancelarAgendamento.style.display = 'none';
-                dataHorarioAgendamento.required = true;
-            });
-            document.getElementById('cancelaracao').addEventListener('click', function() {
-                var dataHorarioAgendamentoInicial = "{{ $agendamento->dataHorarioAgendamento }}";
-                var btcancelarAgendamento = document.getElementById('cancelarAgendamento');
-                var dataHorarioAgendamento = document.getElementById('dataHorarioAgendamento');
-                var btcancelaracao = document.getElementById('cancelaracao');
-                btcancelaracao.style.display = 'none';
-                btcancelarAgendamento.style.display = 'block';
-                dataHorarioAgendamento.value = dataHorarioAgendamentoInicial;
-                dataHorarioAgendamento.classList.add('campodesablitado');
-
-                // Reativar a funcionalidade original para o próximo clique
-                primeiroClique = true;
-            });
-            document.getElementById('voltar').addEventListener('click', function() {
-                var textarea = document.getElementById('motivoCacelamento');
-                var btnvoltar = document.getElementById('voltar');
-                var btnagendar = document.getElementById('reagendarAgendamento');
-
-                textarea.style.display = 'none';
-                btnvoltar.style.display = 'none';
-                btnagendar.style.display = 'block';
-            });
-        </script>
 
 
 
 
 
+
+
+
+
+        <script src="/js/DetalhesAgendamentos.js"></script>
     @endsection

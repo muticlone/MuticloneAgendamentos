@@ -53,7 +53,12 @@
 
                         <p>Status: aguardando confirmar</p>
 
-                        <a href="{{ route('meus.agendamentosdetalhes', ['id' => $agendamento->id]) }}" class="btn btn-primary">Detalhes</a>
+                        <a href="{{ route('meus.agendamentosdetalhes', ['id' => $agendamento->id]) }}" class="btn btn-primary position-relative">
+                            Detalhes
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                5
+                            </span>
+                        </a>
                     </div>
                 </div>
             </div>
