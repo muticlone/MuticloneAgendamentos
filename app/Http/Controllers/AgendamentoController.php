@@ -157,7 +157,8 @@ class AgendamentoController extends Controller
         }
     }
 
-    public function createProdutounico(Request $request , Agendamento $Agendamento){
+    public function createProdutounico(Request $request, Agendamento $Agendamento)
+    {
         $user = auth()->user();
 
         $idservico = $request->input('idServiçoAgendamento');
@@ -171,18 +172,18 @@ class AgendamentoController extends Controller
 
         $data = $request->all(); // dados da pagina
 
-         // Dados da requisição
-         $NomeDoProdutoRequest = $request->input('nomeServiçoAgendamento');
-         $valorDoProdutoRequest = $request->input('valorUnitatioAgendamento');
-         $valorTotalProdutoRequest = $request->input('valorTotalAgendamento');
-         $valorTotalProdutoRequestFloat = floatval($valorTotalProdutoRequest);
-         $duracaohorasDoProdutoRequest = $request->input('duracaohorasAgendamento');
-         $duracaoMinutosDoProdutoRequest = $request->input('duracaominutosAgendamento');
-         $formadepagamentoRequest = $request->input('formaDepagamentoAgendamento');
-         $formaDePagamentoArray = array($formadepagamentoRequest);
+        // Dados da requisição
+        $NomeDoProdutoRequest = $request->input('nomeServiçoAgendamento');
+        $valorDoProdutoRequest = $request->input('valorUnitatioAgendamento');
+        $valorTotalProdutoRequest = $request->input('valorTotalAgendamento');
+        $valorTotalProdutoRequestFloat = floatval($valorTotalProdutoRequest);
+        $duracaohorasDoProdutoRequest = $request->input('duracaohorasAgendamento');
+        $duracaoMinutosDoProdutoRequest = $request->input('duracaominutosAgendamento');
+        $formadepagamentoRequest = $request->input('formaDepagamentoAgendamento');
+        $formaDePagamentoArray = array($formadepagamentoRequest);
 
 
-          // dados bd
+        // dados bd
         $servicoNome = $servico->pluck('nomeServico')->toArray();
         $servicoValordoPRoduto = $servico->pluck('valorDoServico')->toArray();
         $totalbd = array_sum($servicoValordoPRoduto);
@@ -225,9 +226,6 @@ class AgendamentoController extends Controller
         } else {
             return redirect('/')->with('msgErro', 'Modicação não permitida!');
         }
-
-
-
     }
 
 
@@ -276,6 +274,36 @@ class AgendamentoController extends Controller
             'user' => $user,
             'empresa' =>  $empresa,
 
+        ]);
+    }
+
+    public function showdetalhesagendametnosempresa($id)
+    {
+
+        $user = auth()->user();
+
+        $empresa = cadastro_de_empresa::findOrFail($id);
+
+        if ($user->id != $empresa->user_id) {
+            return redirect('/dashboard');
+        } else {
+            $clienteagendamento = Agendamento::where('cadastro_de_empresas_id', $id)
+            ->orderBy('dataHorarioAgendamento', 'asc')
+            ->paginate(9);
+            $userIds = [];
+            foreach ($clienteagendamento as $agendamento) {
+                $userIds[] = $agendamento->user_id;
+            }
+            $users = User::whereIn('id', $userIds)->get();
+        }
+
+
+
+
+        return view('Agedamentos.EmpresaMeusAgendamentos', [
+            'clienteagendamento' => $clienteagendamento,
+            'users' => $users,
+            'empresa' =>$empresa,
         ]);
     }
 }

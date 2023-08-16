@@ -15,34 +15,53 @@
             </div>
 
             @foreach ($agendamentos as $agendamento)
-                <div class="col-auto pt-2">
-                    <div class="card card_meus_agendamentos"
-                        style="min-width:300px; min-height:190px; max-width:300px; max-height:190px;">
-                        <div class="card-body txt">
-                            @foreach ($empresaAgendamento as $empresa)
-                                @if ($empresa->id === $agendamento->cadastro_de_empresas_id)
-                                    <img src="/img/logo_empresas/{{ $empresa->image }}" class="img_meus_agedamentos"
-                                        alt="">
-                                    <p class="card-text  nomeAgendamentos">Empresa: {{ $empresa->nomeFantasia }}</p>
-                                @endif
-                            @endforeach
+            <div class="col-lg-4 col-md-6 col-sm-12 pt-2">
+                <div class="card">
+                    {{-- <img src="..." class="card-img-top img-fluid" alt="..."> --}}
+                    <div class="card-body">
+                        <div>
+                        @foreach ($empresaAgendamento as $empresa)
+                        @if ($empresa->id === $agendamento->cadastro_de_empresas_id)
+                            <div align ="center">
+                                <img src="/img/logo_empresas/{{ $empresa->image }}" class="img_meus_agedamentos  mx-2"
+                                alt="{{ $empresa->nomeFantasia }}">
+                            </div>
+                            <div class="pt-2">
+                                <h6 class="card-text ">Prestadora do serviço {{ ucfirst(strtolower($empresa->nomeFantasia)) }}
+                            </div>
 
-                            <p class="card-text  nomeAgendamentos">R$ {{ $agendamento->valorTotalAgendamento }}</p>
-                            <p class="card-text  nomeAgendamentos">Forma de pagamento:
-                                {{ $agendamento->formaDepagamentoAgendamento }}</p>
-                            <p class="card-text  nomeAgendamentos">Data do agendamento: </p>
-                            <p class="card-text  nomeAgendamentos">
-                                {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $agendamento->dataHorarioAgendamento)->format('d/m/Y H:i:s') }}
-                            </p>
-                            <p class="card-text  nomeAgendamentos">Status: aguardando confirmar</p>
-                            <a href="{{ route('meus.agendamentosdetalhes', ['id' => $agendamento->id]) }}" class="btn btn-sm btn-info nomeAgendamentos">Detalhes</a>
+
+                            </h6>
+                        @endif
+                        @endforeach
                         </div>
+
+                        <div class="mb-3 pt-2">
+                            <h6 class="card-title">Valor total</h6>
+                            <div class="input-group">
+                                <span class="input-group-text">R$</span>
+                                <input type="text" class="form-control campodesablitado"
+                                    value="{{ $agendamento->valorTotalAgendamento }}">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <h6 class="card-title">Data do agendamento</h6>
+                            <input type="datetime-local" class="form-control campodesablitado" id="dataHorarioAgendamento"
+                                name="dataHorarioAgendamento" aria-describedby="validationTooltipUsernamePrepend"
+                                value="{{ $agendamento->dataHorarioAgendamento }}" />
+                        </div>
+
+                        <p>Status: aguardando confirmar</p>
+
+                        <a href="{{ route('meus.agendamentosdetalhes', ['id' => $agendamento->id]) }}" class="btn btn-primary">Detalhes</a>
                     </div>
                 </div>
-            @endforeach
-            <div class="paginaçãoRodape ">
-                <x-pagination :paginatedItems="$agendamentos" />
             </div>
+            @endforeach
+
+                <x-pagination :paginatedItems="$agendamentos" />
+
+
 
 
 

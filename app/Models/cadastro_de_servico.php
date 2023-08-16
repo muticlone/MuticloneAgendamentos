@@ -12,9 +12,9 @@ use Illuminate\Pagination\Paginator;
 class cadastro_de_servico extends Model
 {
     use HasFactory;
-    
-  
-  
+
+
+
 
     protected $fillable = [
         'nomeServico',
@@ -27,7 +27,7 @@ class cadastro_de_servico extends Model
         'imageservico',
         'cadastro_de_empresas_id',
 
-       
+
     ];
 
     public function userEmpresa(){

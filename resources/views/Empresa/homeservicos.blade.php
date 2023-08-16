@@ -5,16 +5,16 @@
 @section('conteudo')
 
     <div class="row g-12">
-        
+
         <div class=" conteiner-search  col-8">
             <form action="/" method="GET" id="searchForm">
-                
 
 
-                
+
+
                 <div class="input-group mb-3">
-                   
-                  
+
+
                     {{-- <input type="text" list="suggestions" class="form-control" id="search" name="search" autocomplete="off" placeholder="Procurar..."> --}}
 
                     {{-- <button class="btn btn-outline-secondary custom-btn " type="submit">
@@ -22,20 +22,20 @@
                         Buscar
                     </button> --}}
 
-                    
 
-                    <select id="select-servicoHome" class="js-buscacategoria select2 form-select" 
+
+                    <select id="select-servicoHome" class="js-buscacategoria select2 form-select"
                     data-placeholder="Selecione um serviço" style="width: 100%" name="search">
                         <option value="" disabled selected>Selecione um serviço</option>
                         @foreach ($servico as $servicobusca)
                             <option class="custom-option img-flag" value="{{ $servicobusca->nomeServico }}" data-img-src="/img/logo_servicos/{{ $servicobusca->imageservico }}">{{ $servicobusca->nomeServico }}</option>
                         @endforeach
                     </select>
-                    
-                  
-                    
-               
-                   
+
+
+
+
+
 
 
                 </div>
@@ -45,7 +45,7 @@
 
 
         <x-carousel/>
-        
+
         @if (count($servico) > 0)
 
             @if ($search)
@@ -131,11 +131,11 @@
 
 
     {{-- paginação --}}
-    <div class="paginaçãoRodape"> 
+
         <x-pagination :paginatedItems="$paginatedItems" />
 
-    </div>
-    
+
+
 
 
 

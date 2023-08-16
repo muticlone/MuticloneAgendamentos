@@ -11,10 +11,14 @@
     <div class="col-lg-12 col-sm-12 col-md-12 pt-2" align="center">
         <div class="btn-group" role="group" aria-label="Basic example">
             <a href="/" class="btn btn-sm btn-outline-info btndashboardservico">Home</a>
-            {{-- <a  href="/dashboard" class="btn btn-sm btn-outline-info btndashboardservico">Meu negócios</a> --}}
+
 
 
             <a href="/cadastrar/empresa" class="btn btn-sm btn-outline-info btndashboardservico">Cadastrar nova empresa</a>
+            @foreach ($empresa as $empid)
+            <a  href="{{ route('meus.clientes.agendamentosdetalhesempresa',['id' => $empid->id]) }}" class="btn btn-sm btn-outline-info btndashboardservico">Meu Agendamentos</a>
+
+            @endforeach
 
 
         </div>
@@ -120,7 +124,7 @@
 
 
     @endif
-    
+
 
 
 

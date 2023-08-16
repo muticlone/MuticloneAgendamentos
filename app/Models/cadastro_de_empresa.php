@@ -15,7 +15,7 @@ class cadastro_de_empresa extends Model
 
 
     protected $fillable = [
-        
+
         'cnpj_cpf',
         'razaoSocial',
         'nomeFantasia',
@@ -39,9 +39,9 @@ class cadastro_de_empresa extends Model
         'tikTok',
         'site',
         'linkedin',
-        
 
-       
+
+
     ];
 
     public function user(){
@@ -52,5 +52,10 @@ class cadastro_de_empresa extends Model
         return $this->hasMany('App\Models\cadastro_de_servico');
     }
 
-   
+
+
+
+
+
+
 }
