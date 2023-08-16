@@ -42,7 +42,8 @@
 
                 <input type="hidden" name="emailUser" id="emailUser" class="form-control campodesablitado"
                     value="  {{ $user->email }}">
-
+                    <input type="hidden" name="numeroDoPedido" id="celularUser" class="form-control campodesablitado"
+                    value=" {{ $numeroDopedio }}">
 
 
                 <div class="container">
@@ -100,8 +101,7 @@
 
                     {{ $numeroDopedio }}
 
-                    <input type="hidden" name="NumeroDopedido" id="celularUser" class="form-control campodesablitado"
-                        value=" {{ $numeroDopedio }}">
+
 
                 </div>
 

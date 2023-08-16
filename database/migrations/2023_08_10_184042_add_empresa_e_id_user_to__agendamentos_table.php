@@ -14,9 +14,8 @@ return new class extends Migration
         Schema::table('agendamentos', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained();
             $table->foreignId('cadastro_de_empresas_id')->constrained();
-            $table->string('NomeUser');
-            $table->string('celularUser');
-            $table->string('emailUser');
+            $table->string('numeroDoPedido');
+
         });
     }
 
@@ -32,10 +31,9 @@ return new class extends Migration
             $table->foreignId('user_id_empresa')
             ->constrained()
             ->onDelete('cascade');
-            $table->dropColumn('NomeUser');
-            $table->dropColumn('celularUser');
-            $table->dropColumn('emailUser');
-            
+            $table->dropColumn('numeroDoPedido');
+
+
         });
     }
 };

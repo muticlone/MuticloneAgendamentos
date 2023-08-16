@@ -27,7 +27,7 @@
                     required autofocus />
             </div>
 
-        
+
 
             <div class="mt-4">
                 <x-label for="password" value="{{ __('Senha') }}" />
@@ -85,4 +85,4 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 
-<script>$('#phone').inputmask("(99) 999-999999");</script>
+<script>$('#phone').inputmask("(99) 99999-9999");</script>
