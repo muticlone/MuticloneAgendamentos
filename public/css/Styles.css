@@ -541,8 +541,8 @@ svg {
 
 .produtosDetalhesAgendamentos {
     margin-right: -14px;
-    max-height: 127px;
-    min-height: 127px;
+    max-height: 160px;
+    min-height: 160px;
     overflow: auto;
     scroll-behavior: auto;
     cursor: pointer;
@@ -674,4 +674,10 @@ svg {
 #loadingMessageservico {
   margin-right: 3px;
   /* Adjust the margin as needed to separate the icon from the text */
+}
+
+
+.btnDetalhes{
+    max-width: 120px;
+    min-width: 120px;
 }

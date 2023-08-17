@@ -40,6 +40,8 @@
                                 $contador = 0;
                             @endphp
                             <div class="card-body">
+
+
                                 <h6> Cliente: {{ $user->name }}</h6>
 
                                 @php
@@ -59,6 +61,51 @@
                                     @endphp
                                 @endforeach
 
+                                <div class=" produtosDetalhesAgendamentos" id="carrinho">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Produto</th>
+                                                <th scope="col">Valor</th>
+                                                <th scope="col">Duração</th>
+                                            </tr>
+                                        </thead>
+
+                                        @foreach ($agendamento->nomeServiçoAgendamento as $index => $nome)
+                                            @php
+                                                $valorun = $agendamento->valorUnitatioAgendamento[$index] ?? null;
+                                                $duracaohoras = $agendamento->duracaohorasAgendamento[$index] ?? null;
+                                                $duracaominutos = $agendamento->duracaominutosAgendamento[$index] ?? null;
+                                                $contador++;
+                                            @endphp
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">{{ $index+1 }}</th>
+                                                    <td>{{ $nome }}</td>
+                                                    <td>R$ {{ $valorun }}</td>
+                                                    <td>
+                                                        @if ($duracaohoras > 0)
+                                                            {{ $duracaohoras }} Horas
+                                                        @endif
+
+                                                        {{ $duracaominutos }} Minutos
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+
+
+
+
+                                        @endforeach
+                                    </table>
+
+
+                                </div>
+
+
+
 
                                 <p class="card-text">
                                     Duração total:
@@ -68,36 +115,8 @@
                                 </p>
 
 
-                                <div class="card-body produtosDetalhesAgendamentos" id="carrinho">
-
-                                    <p class="card-text ">
-                                        @foreach ($agendamento->nomeServiçoAgendamento as $index => $nome)
-                                            @php
-                                                $valorun = $agendamento->valorUnitatioAgendamento[$index] ?? null;
-                                                $duracaohoras = $agendamento->duracaohorasAgendamento[$index] ?? null;
-                                                $duracaominutos = $agendamento->duracaominutosAgendamento[$index] ?? null;
-                                                $contador++;
-                                            @endphp
-
-                                            <p class="card-text linha ">
-                                                Produto: {{ $nome }} </br>
-                                                Valor: R$ {{ $valorun }} </br>
-                                                Duração:
-                                                @if ($duracaohoras > 0)
-                                                    {{ $duracaohoras }} Horas
-                                                @endif
-
-                                                {{ $duracaominutos }} Minutos
-
-                                            </p>
-
-                                            </br>
-                                        @endforeach
 
 
-                                    </p>
-                                </div>
-                                </br>
                                 <p>Quantidade: {{ $contador }} produtos</p>
 
 
@@ -132,16 +151,16 @@
 
 
 
-                                    <div class="col-lg-6 col-sm-12 col-md-12 pt-2" id="reagendar">
+                                    <div class="col-12 pt-5" id="reagendar" align = "center">
                                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                             <button type="submit" id="reagendarAgendamento" style="display: block;"
-                                                class="btn btn-info"> Reagendar </button>
-                                            <a style="display: none;" id="voltar" class="btn btn-info">Voltar</a>
+                                                class="btn btn-info btnDetalhes"> Reagendar </button>
+                                            <a style="display: none;" id="voltar" class="btn btn-info btnDetalhes">Voltar</a>
 
 
                                             <button type="submit" id="cancelarAgendamento" style="display: block;"
-                                                class="btn btn-danger"> Cancelar agendamento </button>
-                                            <a style="display: none;" id="cancelaracao" class="btn btn-danger">Cancelar</a>
+                                                class="btn btn-danger btnDetalhes"> Cancelar  </button>
+                                            <a style="display: none;" id="cancelaracao" class="btn btn-danger btnDetalhes">Cancelar</a>
                                         </div>
 
                                     </div>
