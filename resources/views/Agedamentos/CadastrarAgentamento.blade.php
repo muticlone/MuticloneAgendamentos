@@ -33,7 +33,7 @@
             @csrf
             <div class="row g-12">
                 <input type="hidden" name="user_id" value="{{ $user->id }}">
-                <input type="hidden" name="NomeUser" id="NomeUser" class="form-control campodesablitado"
+                {{-- <input type="hidden" name="NomeUser" id="NomeUser" class="form-control campodesablitado"
                     value=" {{ $user->name }}">
 
 
@@ -41,7 +41,7 @@
                     value=" {{ $user->phone }}">
 
                 <input type="hidden" name="emailUser" id="emailUser" class="form-control campodesablitado"
-                    value="  {{ $user->email }}">
+                    value="  {{ $user->email }}"> --}}
                     <input type="hidden" name="numeroDoPedido" id="celularUser" class="form-control campodesablitado"
                     value=" {{ $numeroDopedio }}">
 
@@ -49,10 +49,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 d-flex align-items-center">
-                            <strong>{{ ucfirst(strtolower($empresa->nomeFantasia)) }}
+                            <strong>
                                 <img src="/img/logo_empresas/{{ $empresa->image }}"
                                     class="img-fluid img_logoDadosServicoAgendamentos" alt="{{ $empresa->razaoSocial }}">
-                            </strong>
+                                    {{ ucfirst(strtolower($empresa->nomeFantasia)) }}
+                               </strong>
                         </div>
                         <div class="col-md-6 d-flex justify-content-end align-items-center">
                             <small>Data: {{ $dataAtual }}</small>

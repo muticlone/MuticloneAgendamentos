@@ -1,8 +1,10 @@
 @extends('Layout.main')
-@section('logo', 'logo_empresa.png')
+
 @section('title', 'Dashboard')
 
 @section('conteudo')
+  <!-- estilos do AdminLTE -->
+
     <div class="col-md-10 offset-md-1 pt-1 ">
         <div class="row g-12">
 
@@ -22,75 +24,11 @@
 
 
                 {{-- Avaliação --}}
-                <div class="col-lg-12 col-sm-12 col-md-12 pt-2 ">
-                    <div class="card">
-                        <div class="card-header">
-                            Avaliação
-                        </div>
-                        <div class="card-body">
-                            <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="3.5"
-                                data-min="0" data-max="5" data-step="0.1" data-readonly="true"
-                                data-star-captions="pt-BR">
+                <x-comment_ratings valueAvaliacao="4.3" valueComentario="3.9" NomeUser="Marllus pereira santos"
+                comentario="Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos"
+                />
 
 
-
-                            {{-- <input id = "input-1" name = "input-1" class = "rating rating-loading" data-min = "0" data-max = "5" data-step = "1" >       --}}
-
-                        </div>
-                    </div>
-                </div>
-
-                {{-- comentarios --}}
-
-                <div class="col-lg-12 col-sm-12 col-md-12 pt-2 ">
-                    <div class="card ">
-                        <div class="card-header">
-                            Comentário
-                        </div>
-                        <div class="card-body coment">
-                            <div class="list-group-item">
-                                <p> Nome do usúario, comentario
-                                    <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="3.5"
-                                        data-min="0" data-max="5" data-step="0.1" data-readonly="true"
-                                        data-star-captions="pt-BR" data-size="xs">
-
-                                </p>
-                            </div>
-
-                            <p> Nome do usúario, comentario
-                                <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="3.5"
-                                    data-min="0" data-max="5" data-step="0.1" data-readonly="true"
-                                    data-star-captions="pt-BR" data-size="xs">
-
-                            </p>
-                            <p> Nome do usúario, comentario
-                                <input id="input-6" name="input-6" class="rating rating-loading" value="3.5"
-                                    data-min="0" data-max="5" data-step="0.1" data-readonly="true"
-                                    data-star-captions="pt-BR" data-size="xs">
-
-                            </p>
-                            <p> Nome do usúario, comentario
-                                <input id="input-6" name="input-6" class="rating rating-loading" value="3.5"
-                                    data-min="0" data-max="5" data-step="0.1" data-readonly="true"
-                                    data-star-captions="pt-BR" data-size="xs">
-
-                            </p>
-                            <p> Nome do usúario, comentario
-                                <input id="input-6" name="input-6" class="rating rating-loading" value="3.5"
-                                    data-min="0" data-max="5" data-step="0.1" data-readonly="true"
-                                    data-star-captions="pt-BR" data-size="xs">
-
-                            </p>
-                            <p> Nome do usúario, comentario
-                                <input id="input-6" name="input-6" class="rating rating-loading" value="3.5"
-                                    data-min="0" data-max="5" data-step="0.1" data-readonly="true"
-                                    data-star-captions="pt-BR" data-size="xs">
-
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
 
 
 
@@ -101,12 +39,12 @@
             <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
 
                 <div class="card">
-                    <h5 class="card-header">{{ $servico->nomeServico }}</h5>
+                    <h5 class="card-header">{{ucfirst(strtolower($servico->nomeServico))  }}</h5>
                     <div class="card-body">
-                        <h5 class="card-title">R$ {{ $servico->valorDoServico }}</h5>
-                        <h5 class="card-title">Descrição do serviço</h5>
-                        <p class="card-text">{{ $servico->descricaosevico }}</p>
 
+
+                        <p class="card-text txt_dados_empresa">{{ucfirst(strtolower($servico->descricaosevico))  }}</p>
+                        <h5 class="card-title">R$ {{ $servico->valorDoServico }}</h5>
                         <h5 class="card-title">Formas de Pagamento</h5>
                         <ul id="items-list">
                             @foreach ($empresa->formaDePagamento as $formadepagamento)
@@ -134,7 +72,8 @@
                             @endforeach
                         </ul>
 
-                        <a href="{{ route('cadastrar.agendamentoprodutouncio', ['id' => $servico->id]) }}" class="btn btn-primary">Agendar</a>
+                        <a href="{{ route('cadastrar.agendamentoprodutouncio', ['id' => $servico->id]) }}"
+                            class="btn btn-primary">Agendar</a>
 
                         <p class="card-text pt-2">Prestadora do serviço:
 
@@ -162,6 +101,7 @@
 
 
                     </div>
+
                 </div>
 
 
@@ -180,6 +120,7 @@
 
         </div>
     </div>
+
 
 
 

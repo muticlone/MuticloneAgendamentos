@@ -9,6 +9,10 @@ a {
 
 }
 
+.card-header {
+    background-color: transparent;
+  }
+
 samp {
   font-family: Roboto;
   font-size: 15px;
@@ -575,12 +579,12 @@ svg {
 }
 
 .campodesablitado {
-  background-color: #f8f8f8;
+  background-color: white;
   pointer-events: none;
 }
 
 .campodesablitadocomentariodetalhesagendamentos {
-    background-color: #f8f8f8;
+    background-color: white;
     pointer-events: none;
   }
 

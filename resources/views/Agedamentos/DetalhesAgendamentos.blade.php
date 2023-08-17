@@ -1,5 +1,6 @@
 @extends('Layout.main')
 
+
 @section('title', 'Detalhes Agendamento')
 
 @section('conteudo')
@@ -13,30 +14,60 @@
     <div class="col-md-10 offset-md-1 pt-1 ">
         <div class="row g-12">
 
-            <div class="col-12 pt-1 ">
+            {{-- <div class="col-12 pt-1 ">
                 <div class="alert alert-light" role="alert" align="center">
                     Atendimento agendado
                 </div>
-            </div>
+            </div> --}}
 
 
 
 
-            <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
+            <div class="col-lg-12 col-sm-12 col-md-12 pt-2">
                 <form action="{{ route('home') }}" method="get">
 
 
                     @foreach ($agendamentos as $agendamento)
                         <div class="card ">
                             <div class="card-header">
-                                Cliente: {{ $user->name }}
-                                <input type="hidden" id="nome"  value="{{ $user->name }}">
+
+
+                                N° do pedido: {{ $agendamento->numeroDoPedido }}
+
+                                <input type="hidden" id="nome" value="{{ $user->name }}">
                             </div>
                             @php
                                 $contador = 0;
                             @endphp
                             <div class="card-body">
-                                <h5 class="card-title">Carrinho</h5>
+                                <h6> Cliente: {{ $user->name }}</h6>
+
+                                @php
+                                    $somaminutos = 0;
+                                    $somahoras = 0;
+
+                                @endphp
+
+                                @foreach ($agendamento->duracaominutosAgendamento as $minutos)
+                                    @php
+                                        $somaminutos += $minutos;
+                                    @endphp
+                                @endforeach
+                                @foreach ($agendamento->duracaohorasAgendamento as $horas)
+                                    @php
+                                        $somahoras += $horas;
+                                    @endphp
+                                @endforeach
+
+
+                                <p class="card-text">
+                                    Duração total:
+                                    {{ $somahoras }} horas
+                                    {{ $somaminutos }} minutos
+
+                                </p>
+
+
                                 <div class="card-body produtosDetalhesAgendamentos" id="carrinho">
 
                                     <p class="card-text ">
@@ -66,81 +97,79 @@
 
                                     </p>
                                 </div>
-
-
-                                @php
-                                    $somaminutos = 0;
-                                    $somahoras = 0;
-                                @endphp
-                                @foreach ($agendamento->duracaominutosAgendamento as $minutos)
-                                    @php
-                                        $somaminutos += $minutos;
-                                    @endphp
-                                @endforeach
-                                @foreach ($agendamento->duracaohorasAgendamento as $horas)
-                                    @php
-                                        $somahoras += $horas;
-                                    @endphp
-                                @endforeach
                                 </br>
                                 <p>Quantidade: {{ $contador }} produtos</p>
-                                <p class="card-text">
-                                    Duração total:
-                                    {{ $somahoras }} horas
-                                    {{ $somaminutos }} minutos
 
-                                </p>
 
-                                <h5 class="card-title">Valor total à pagar</h5>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">R$</span>
-                                    <input type="text" class="form-control campodesablitado"
-                                        value="{{ $agendamento->valorTotalAgendamento }}">
-
-                                </div>
-                                <h5 class="card-title">Forma de pagamento: {{ $agendamento->formaDepagamentoAgendamento }}
-                                </h5>
-
-                                <h5 class="card-title">Data do agendamento</h5>
-                                <input type="datetime-local" class="form-control  campodesablitado"
-                                    id="dataHorarioAgendamento" name="dataHorarioAgendamento"
-                                    aria-describedby="validationTooltipUsernamePrepend"
-                                    value="{{ $agendamento->dataHorarioAgendamento }}" />
-
-                                </br>
-                                <p class="card-text">Status: aguardando confirmar</p>
-                                <div class="pt-1">
-                                    <textarea class="form-control" style="display: none;" name="motivoCacelamento" id="motivoCacelamento" cols="50"
-                                        placeholder="Digite o motivo do cancelamento" minlength="50" maxlength="250" rows="3"></textarea>
-
-                                </div>
                                 <div class="row g-12">
-                                    <div class="col-4 pt-2" id="reagendar">
-                                        <button type="submit" id="reagendarAgendamento" style="display: block;"
-                                            class="btn btn-info"> Reagendar </button>
-                                        <a style="display: none;" id="voltar" class="btn btn-info">Voltar</a>
+                                    <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+                                        <h5 class="card-title">Valor total à pagar </h5>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">R$</span>
+                                            <input type="text" class="form-control campodesablitado"
+                                                value="{{ number_format($agendamento->valorTotalAgendamento, 2, ',', '.') }}">
+
+                                        </div>
+
                                     </div>
-                                    <div class="col-6 pt-2">
-                                        <button type="submit" id="cancelarAgendamento" style="display: block;"
-                                            class="btn btn-danger"> Cancelar agendamento </button>
-                                        <a style="display: none;" id="cancelaracao" class="btn btn-danger">Cancelar</a>
+                                    <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+                                        <h5 class="card-title">Forma de pagamento</h5>
+                                        <input type="text" class="form-control campodesablitado"
+                                            value="{{ $agendamento->formaDepagamentoAgendamento }}">
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+                                        <h5 class="card-title">Data do agendamento</h5>
+                                        <input type="datetime-local" class="form-control  campodesablitado"
+                                            id="dataHorarioAgendamento" name="dataHorarioAgendamento"
+                                            aria-describedby="validationTooltipUsernamePrepend"
+                                            value="{{ $agendamento->dataHorarioAgendamento }}" />
+                                    </div>
+                                    <p class="card-text">Status: aguardando confirmar</p>
+                                    <div class="col-12">
+                                        <textarea class="form-control" style="display: none;" name="motivoCacelamento" id="motivoCacelamento" cols="50"
+                                            placeholder="Digite o motivo do cancelamento" minlength="50" maxlength="250" rows="3"></textarea>
                                     </div>
 
+
+
+                                    <div class="col-lg-6 col-sm-12 col-md-12 pt-2" id="reagendar">
+                                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                            <button type="submit" id="reagendarAgendamento" style="display: block;"
+                                                class="btn btn-info"> Reagendar </button>
+                                            <a style="display: none;" id="voltar" class="btn btn-info">Voltar</a>
+
+
+                                            <button type="submit" id="cancelarAgendamento" style="display: block;"
+                                                class="btn btn-danger"> Cancelar agendamento </button>
+                                            <a style="display: none;" id="cancelaracao" class="btn btn-danger">Cancelar</a>
+                                        </div>
+
+                                    </div>
 
                                 </div>
                             </div>
+
+
+
+
+
+
+
+
+
                         </div>
-                    @endforeach
-                </form>
             </div>
+            @endforeach
+            </form>
+        </div>
 
-
+        <div class="row g-12">
             <div class="col-lg-6 col-sm-12 col-md-12 pt-2 ">
 
 
                 @foreach ($empresa as $empresaItem)
                     <div>
-                        <div class="card card_detalhes_agendamentos">
+                        <div class="card">
 
 
                             <div class="card-body">
@@ -164,7 +193,8 @@
                                 </h5>
                                 <span class="vertical-align-middle">
                                     <x-svglcursor width="20" height="20" margin="2px" />
-                                    RUA: {{ $empresaItem['logradouro'] }}
+                                    Rua:
+                                    {{ ucfirst(strtolower($empresaItem['logradouro'])) }}
                                 </span>
                                 <span class="vertical-align-middle">
                                     <x-svglcursor width="20" height="20" margin="2px" />
@@ -172,16 +202,18 @@
                                 </span>
                                 <span class="vertical-align-middle">
                                     <x-svglcursor width="20" height="20" margin="2px" />
-                                    BAIRRO: {{ $empresaItem['bairro'] }}
+                                    Bairro:
+                                    {{ ucfirst(strtolower($empresaItem['bairro'])) }}
                                 </span>
                                 <span class="vertical-align-middle">
                                     <x-svglcursor width="20" height="20" margin="2px" />
-                                    CIDADE:{{ $empresaItem['cidade'] }}
+                                    Cidade:
+                                    {{ ucfirst(strtolower($empresaItem['cidade'])) }}
                                 </span>
                                 <span class="vertical-align-middle">
                                     <x-svglcursor width="20" height="20" margin="2px" />
 
-                                    ESTADO:{{ $empresaItem['uf'] }}
+                                    Estado: {{ $empresaItem['uf'] }}
 
                                 </span>
 
@@ -226,7 +258,7 @@
                 @endforeach
 
             </div>
-            <div class="col-12 pt-2 ">
+            <div class="col-lg-6 col-sm-12 col-md-12 pt-2 ">
                 <div class="card">
                     <div class="card-header">
                         Mensagens
@@ -240,23 +272,48 @@
                             <label for="floatingTextarea2">Comments</label>
                         </div>
                         <div class="pt-2">
-                            <a  class="btn btn-primary" id="enviar">Enviar</a>
+                            <a class="btn btn-primary" id="enviar">Enviar</a>
                         </div>
 
                     </div>
                 </div>
             </div>
-
         </div>
 
 
+    </div>
+
+
+
+    <script>
+        document.getElementById('cancelaracao').addEventListener('click', function() {
+            var dataHorarioAgendamento = "{{ $agendamento->dataHorarioAgendamento }}";
+
+            // Converter a data e hora para o formato desejado (yyyy-MM-ddThh:mm)
+            var dataHoraOriginal = new Date(dataHorarioAgendamento);
+            var dataHoraFormatada = dataHoraOriginal.toISOString().slice(0, 16);
+
+
+
+
+
+            var btcancelarAgendamento = document.getElementById('cancelarAgendamento');
+            var dataHorarioAgendamento = document.getElementById('dataHorarioAgendamento');
+            var btcancelaracao = document.getElementById('cancelaracao');
+            btcancelaracao.style.display = 'none';
+            btcancelarAgendamento.style.display = 'block';
+            dataHorarioAgendamento.value = dataHoraFormatada;
+            dataHorarioAgendamento.classList.add('campodesablitado');
+
+            // Reativar a funcionalidade original para o próximo clique
+            primeiroClique = true;
+        });
+    </script>
 
 
 
 
 
 
-
-
-        <script src="/js/DetalhesAgendamentos.js"></script>
-    @endsection
+    <script src="/js/DetalhesAgendamentos.js"></script>
+@endsection

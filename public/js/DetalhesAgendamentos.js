@@ -54,19 +54,7 @@ document.getElementById('reagendarAgendamento').addEventListener('click', functi
     btcancelarAgendamento.style.display = 'none';
     dataHorarioAgendamento.required = true;
 });
-document.getElementById('cancelaracao').addEventListener('click', function() {
-    var dataHorarioAgendamentoInicial = "{{ $agendamento->dataHorarioAgendamento }}";
-    var btcancelarAgendamento = document.getElementById('cancelarAgendamento');
-    var dataHorarioAgendamento = document.getElementById('dataHorarioAgendamento');
-    var btcancelaracao = document.getElementById('cancelaracao');
-    btcancelaracao.style.display = 'none';
-    btcancelarAgendamento.style.display = 'block';
-    dataHorarioAgendamento.value = dataHorarioAgendamentoInicial;
-    dataHorarioAgendamento.classList.add('campodesablitado');
 
-    // Reativar a funcionalidade original para o próximo clique
-    primeiroClique = true;
-});
 document.getElementById('voltar').addEventListener('click', function() {
     var textarea = document.getElementById('motivoCacelamento');
     var btnvoltar = document.getElementById('voltar');

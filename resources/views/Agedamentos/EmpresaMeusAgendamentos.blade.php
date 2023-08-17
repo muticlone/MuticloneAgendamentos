@@ -17,6 +17,18 @@
                         {{-- <img src="..." class="card-img-top img-fluid" alt="..."> --}}
                         <div class="card-body">
                             <div class="mb-3">
+
+                                    <div class="mb-3">
+
+                                        <div class="input-group">
+                                            <span class="input-group-text">N° do pedido</span>
+                                            <input type="text" class="form-control campodesablitado"
+                                                value="{{$agendamento->numeroDoPedido }}">
+                                        </div>
+                                    </div>
+
+
+
                                 <h6 class="card-title">Cliente: {{ $agendamento->user->name }}</h6>
                                 <div class="row g-2" >
 

@@ -16,48 +16,17 @@
 
                 <img src="/img/logo_empresas/{{ $empresa->image }}" class="img-fluid  img_dados_empresa"
                     alt="{{ $empresa->razaoSocial }}">
-                <div class="col-lg-12 col-sm-12 col-md-12 pt-2 ">
-                    <div class="card">
-                        <div class="card-header ">
-                            Avaliação
-                        </div>
-                        <div class="card-body comentavaliacaoEnpresa ">
-
-                            <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="3.5"
-                                data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-show-clear="false">
-
-                            <p> Nome do usúario, comentario
-                                <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="3.5"
-                                    data-min="0" data-max="5" data-step="0.1" data-readonly="true"
-                                    data-star-captions="pt-BR" data-size="xs">
-
-                            </p>
-                            <p> Nome do usúario, comentario
-                                <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="3.5"
-                                    data-min="0" data-max="5" data-step="0.1" data-readonly="true"
-                                    data-star-captions="pt-BR" data-size="xs">
-
-                            </p>
-                            <p> Nome do usúario, comentario
-                                <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="3.5"
-                                    data-min="0" data-max="5" data-step="0.1" data-readonly="true"
-                                    data-star-captions="pt-BR" data-size="xs">
-
-                            </p>
-
-
-
-                        </div>
-                    </div>
-                </div>
+                {{-- Avaliação --}}
+                <x-comment_ratings valueAvaliacao="4.3" valueComentario="3.9" NomeUser="Marllus pereira santos"
+                    comentario="Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos" />
             </div>
 
             <div class="col-lg-6 col-sm-12 col-md-12 pt-2 ">
 
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header  ">
 
-                        {{ $empresa->nomeFantasia }}
+                        {{ ucfirst(strtolower($empresa->nomeFantasia)) }}
                     </div>
                     <div class="card-body">
 
@@ -66,7 +35,9 @@
 
                                 Quem Somos
                             </h5>
-                            <p class="txt_dados_empresa">{{ $empresa->descricao }}</p>
+                            <p class="txt_dados_empresa">
+                                {{ ucfirst(strtolower($empresa->descricao)) }}
+                            </p>
                         @endif
                         @if ($empresa->area_atuacao)
                             <h5 class="vertical-align-middle">
@@ -76,18 +47,51 @@
 
 
                             </h5>
-                            <p>{{ $empresa->area_atuacao }}</p>
+                            <p>
+                                {{ ucfirst(strtolower( $empresa->area_atuacao)) }}
+                            </p>
                         @endif
                         <h5 class="vertical-align-middle">
 
 
                             Administrador
                         </h5>
-                        <p>{{ $Admempresa['name'] }}</p>
+                        <p>
+                            {{ ucfirst(strtolower( $Admempresa['name'])) }}
+                        </p>
+
                         @if ($empresa->site)
                             <a href="{{ $empresa->site }}" target="_blank"> Visite nosso site</a>
                         @endif
+
+                        <h5 class="card-title">Formas de Pagamento</h5>
+                        <ul id="items-list">
+                            @foreach ($empresa->formaDePagamento as $formadepagamento)
+                                <li>
+                                    <div class="listadepagamentos">
+                                        @if ($formadepagamento == 'Dinheiro')
+                                            <x-dinheiro width="20" height="20" margin="5px" />
+                                        @elseif($formadepagamento == 'Pix')
+                                            <x-pix width="20" height="20" margin="5px" />
+                                        @elseif($formadepagamento == 'Cartão de débito')
+                                            <x-cartao-de-depito width="20" height="20" margin="5px" />
+                                        @elseif($formadepagamento == 'Cartão de crédito')
+                                            <x-cartao_credito width="20" height="20" margin="5px" />
+                                        @elseif($formadepagamento == 'Boleto')
+                                            <x-boleto width="20" height="20" margin="5px" />
+                                        @elseif($formadepagamento == 'Vale-refeição')
+                                            <x-vale_refeicao width="20" height="20"margin="5px" />
+                                        @endif
+
+
+
+                                        <samp>{{ $formadepagamento }}</samp>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
+
 
                 </div>
 
@@ -140,9 +144,9 @@
 
                         {{-- paginação --}}
 
-
+                        <div class="paginação">
                             <x-pagination :paginatedItems="$servico" />
-
+                        </div>
 
 
 
@@ -176,7 +180,7 @@
 
 
         <div class="row g-12">
-            <div class="col-lg-6 col-sm-12 col-md-12 pt-5 ">
+            <div class="col-lg-6 col-sm-12 col-md-12 pt-3 ">
                 <div class="card">
                     <div class="card-header">
 
@@ -198,7 +202,7 @@
 
 
             </div>
-            <div class="col-lg-6 col-sm-12 col-md-12 pt-5 ">
+            <div class="col-lg-6 col-sm-12 col-md-12 pt-3 ">
 
 
                 <div class="card">
@@ -235,24 +239,28 @@
                         </h5>
                         <span class="vertical-align-middle">
                             <x-svglcursor width="20" height="20" margin="2px" />
-                            RUA: {{ $empresa->logradouro }}
+                            Rua:
+                            {{ucfirst(strtolower($empresa->logradouro))  }}
                         </span>
                         <span class="vertical-align-middle">
                             <x-svglcursor width="20" height="20" margin="2px" />
-                            N°: {{ $empresa->numero_endereco }}
+                            N°:
+                            {{ucfirst(strtolower($empresa->numero_endereco))  }}
                         </span>
                         <span class="vertical-align-middle">
                             <x-svglcursor width="20" height="20" margin="2px" />
-                            BAIRRO: {{ $empresa->bairro }}
+                            Bairro:
+                            {{ucfirst(strtolower( $empresa->bairro ))  }}
                         </span>
                         <span class="vertical-align-middle">
                             <x-svglcursor width="20" height="20" margin="2px" />
-                            CIDADE:{{ $empresa->cidade }}
+                            Cidade:
+                            {{ucfirst(strtolower( $empresa->cidade ))  }}
                         </span>
                         <span class="vertical-align-middle">
                             <x-svglcursor width="20" height="20" margin="2px" />
 
-                            ESTADO:{{ $empresa->uf }}
+                            Estado: {{ $empresa->uf }}
 
                         </span>
 
