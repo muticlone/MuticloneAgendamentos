@@ -69,10 +69,16 @@ class AgendamentoController extends Controller
     {
         $user = auth()->user();
         $servico = cadastro_de_servico::where('id', $id)->first();
+
         $idEmpresa = $servico->cadastro_de_empresas_id;
         $empresa = cadastro_de_empresa::findOrFail($idEmpresa);
 
+        $clienteagendamento = Agendamento::where('cadastro_de_empresas_id', $idEmpresa)->get();
 
+        $quantidadeItens = count($clienteagendamento);
+
+
+        $numeroDopedio =  $quantidadeItens +1;
 
 
 
@@ -81,7 +87,8 @@ class AgendamentoController extends Controller
             [
                 'user' =>  $user,
                 'servico' =>  $servico,
-                'empresa' => $empresa
+                'empresa' => $empresa,
+                 'numeroDopedio' =>  $numeroDopedio
 
             ]
         );

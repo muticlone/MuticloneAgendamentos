@@ -4,6 +4,7 @@ use App\Http\Controllers\AgendamentoController;
 use App\Http\Controllers\CadastroEmpresaController;
 use App\Http\Controllers\CadastroServicoController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BrowsershotController;
 
 use Illuminate\Support\Facades\Http;
 
@@ -59,6 +60,10 @@ Route::delete('/apagar/servicos/{id}',[CadastroServicoController::class,'destroy
 
 // rota de teste da geração img
 // Route::get('/generate-image', [OpenAIController::class, 'generateImage']);
+
+
+
+// Route::get('/take-screenshot', [BrowsershotController::class, 'takeScreenshot']);
 
 
 

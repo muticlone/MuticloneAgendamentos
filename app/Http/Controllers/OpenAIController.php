@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
+
+
+
 class OpenAIController extends Controller
 {
     public function generateImage()
@@ -28,5 +31,7 @@ class OpenAIController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => 'Erro ao gerar a imagem'], 500);
         }
+
+
     }
 }
