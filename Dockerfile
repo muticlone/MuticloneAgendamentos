@@ -1,46 +1,38 @@
+FROM php:8.1-apache
 
-FROM php:8.1-fpm
-
-# set your user name
-ARG user=muticlone
-ARG uid=1000
-
-# Install system dependencies
+# Install necessary libraries
 RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
     libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip
-
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+    libzip-dev
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
+RUN docker-php-ext-install \
+    mbstring \
+    zip
 
-# Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
-
-# Install redis
-RUN pecl install -o -f redis \
-    &&  rm -rf /tmp/pear \
-    &&  docker-php-ext-enable redis
+# Copy Laravel application
+COPY . /var/www/html
 
 # Set working directory
-WORKDIR /var/www
+WORKDIR /var/www/html
 
-# Copy custom configurations PHP
-COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Expose port 8989
+# Install dependencies
+RUN composer install
+
+# Change ownership of our applications
+RUN chown -R www-data:www-data /var/www/html
+
+RUN docker-php-ext-install mbstring
+
+COPY .env.example .env
+RUN php artisan key:generate
+
+# Expose port 80
 EXPOSE 80
 
-USER $user
+# Adjusting Apache configurations
+RUN a2enmod rewrite
+COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
