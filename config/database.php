@@ -35,6 +35,19 @@ return [
 
     'connections' => [
 
+    'back4app' => [
+        'driver' => 'mysql',
+        'host' => 'your_back4app_host',
+        'port' => 'your_back4app_port',
+        'database' => 'your_back4app_database',
+        'username' => 'your_back4app_username',
+        'password' => 'your_back4app_password',
+        'charset' => 'utf8',
+        'collation' => 'utf8_unicode_ci',
+        'prefix' => '',
+        'strict' => false,
+    ],
+
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DATABASE_URL'),
@@ -62,6 +75,8 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
+
+    
 
         'pgsql' => [
             'driver' => 'pgsql',
