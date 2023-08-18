@@ -41,6 +41,6 @@ WORKDIR /var/www
 COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 
 # Expose port 8989
-EXPOSE 8989
+EXPOSE 9000
 
 USER $user
