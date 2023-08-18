@@ -1,3 +1,4 @@
+
 FROM php:8.1-fpm
 
 # set your user name
@@ -38,5 +39,8 @@ WORKDIR /var/www
 
 # Copy custom configurations PHP
 COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
+
+# Expose port 8989
+EXPOSE 8989
 
 USER $user
