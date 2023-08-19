@@ -18,19 +18,19 @@
                         <div class="card-body">
                             <div class="mb-3">
 
-                                    <div class="mb-3">
+                                <div class="mb-3">
 
-                                        <div class="input-group">
-                                            <span class="input-group-text">N° do pedido</span>
-                                            <input type="text" class="form-control campodesablitado"
-                                                value="{{$agendamento->numeroDoPedido }}">
-                                        </div>
+                                    <div class="input-group">
+                                        <span class="input-group-text">N° do pedido</span>
+                                        <input type="text" class="form-control campodesablitado"
+                                            value="{{ $agendamento->numeroDoPedido }}">
                                     </div>
+                                </div>
 
 
 
                                 <h6 class="card-title">Cliente: {{ $agendamento->user->name }}</h6>
-                                <div class="row g-2" >
+                                <div class="row g-2">
 
 
                                     <div class="col-8">
@@ -38,14 +38,12 @@
                                     </div>
 
                                     @php
-                                        $numeroLimpo = preg_replace('/[^0-9]/', '',$agendamento->user->phone);
-
+                                        $numeroLimpo = preg_replace('/[^0-9]/', '', $agendamento->user->phone);
 
                                     @endphp
                                     <div class="col-4">
                                         <a href="https://wa.me/55{{ $numeroCelular = str_replace(['-', ' '], '', $numeroLimpo) }}?text=Ol%C3%A1%21%20{{ $agendamento->user->name }},%20estou%20entrando%20em%20contato%20a%20respeito%20do%20seu%20agendamento%20na%20{{ ucfirst(strtolower($empresa->nomeFantasia)) }}"
-                                            class="btn btn-success btn-sm vertical-align-middle"
-                                            target="_blank">
+                                            class="btn btn-success btn-sm vertical-align-middle" target="_blank">
                                             <x-svg-Whatsapp width="20" height="20" margin="2px" />
                                             Whatsapp
                                         </a>
@@ -73,10 +71,19 @@
                                     value="{{ $agendamento->dataHorarioAgendamento }}" />
                             </div>
 
-                            <p>Status: aguardando confirmar</p>
+                            @if ($agendamento->confirmado == 0)
+                                <p class="card-text">Status: aguardando confirmar</p>
+                            @elseif ($agendamento->finalizado == 1)
+                                <p class="card-text">Status: Finalizado</p>
+                            @elseif ($agendamento->confirmado == 1)
+                                <p class="card-text">Status: Confirmado</p>
+                            @endif
 
-                            <a href="#" class="btn btn-primary position-relative">Detalhes
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+
+                            <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => $agendamento->id, 'idEmpresa' => $empresa->id]) }}"
+                                class="btn btn-primary position-relative">Detalhes
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                     5
                                 </span>
                             </a>
@@ -85,6 +92,7 @@
                     </div>
                 </div>
             @endforeach
+
 
         </div>
 

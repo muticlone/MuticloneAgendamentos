@@ -52,7 +52,7 @@ class AgendamentoController extends Controller
         $quantidadeItens = count($clienteagendamento);
 
 
-        $numeroDopedio =  $quantidadeItens +1;
+        $numeroDopedio =  $quantidadeItens + 1;
 
 
         return view(
@@ -78,7 +78,7 @@ class AgendamentoController extends Controller
         $quantidadeItens = count($clienteagendamento);
 
 
-        $numeroDopedio =  $quantidadeItens +1;
+        $numeroDopedio =  $quantidadeItens + 1;
 
 
 
@@ -88,7 +88,7 @@ class AgendamentoController extends Controller
                 'user' =>  $user,
                 'servico' =>  $servico,
                 'empresa' => $empresa,
-                 'numeroDopedio' =>  $numeroDopedio
+                'numeroDopedio' =>  $numeroDopedio
 
             ]
         );
@@ -302,8 +302,8 @@ class AgendamentoController extends Controller
             return redirect('/dashboard');
         } else {
             $clienteagendamento = Agendamento::where('cadastro_de_empresas_id', $id)
-            ->orderBy('dataHorarioAgendamento', 'asc')
-            ->paginate(9);
+                ->orderBy('dataHorarioAgendamento', 'asc')
+                ->paginate(9);
             $userIds = [];
             foreach ($clienteagendamento as $agendamento) {
                 $userIds[] = $agendamento->user_id;
@@ -317,7 +317,81 @@ class AgendamentoController extends Controller
         return view('Agedamentos.EmpresaMeusAgendamentos', [
             'clienteagendamento' => $clienteagendamento,
             'users' => $users,
-            'empresa' =>$empresa,
+            'empresa' => $empresa,
         ]);
+    }
+
+    public function showdetalhesagendametnocliente($id, $idEmpresa)
+    {
+        $user = auth()->user();
+
+        $empresa = cadastro_de_empresa::findOrFail($idEmpresa);
+
+        if ($user->id != $empresa->user_id) {
+            return redirect('/dashboard');
+        } else {
+            $clienteagendamento = Agendamento::findOrfail($id);
+            $id_user = $clienteagendamento->user_id;
+            $users = User::findOrfail($id_user);
+        }
+
+
+        return view(
+            'Agedamentos.meusClientesAgendamentosDetalhes',
+            [
+                'agendamento' =>  $clienteagendamento,
+                'user' =>   $users,
+                'empresa' => $empresa,
+            ]
+
+
+        );
+    }
+
+    public function confirmarPedido(Request $request)
+    {
+
+        $clienteagendamento = Agendamento::findOrfail($request->id);
+        $empresa =   $clienteagendamento->cadastro_de_empresas_id;
+
+
+
+
+        $agendamento = Agendamento::findOrFail($clienteagendamento->id);
+        $agendamento->confirmado = true;
+        $agendamento->save();
+        return redirect('/meus/clientes/agendamentos/empresa/' .  $empresa)->with('msg', 'Confirmado com sucesso!');
+    }
+
+    public function finalizarPedido(Request $request){
+        $clienteagendamento = Agendamento::findOrfail($request->id);
+        $empresa =   $clienteagendamento->cadastro_de_empresas_id;
+
+
+
+
+        $agendamento = Agendamento::findOrFail($clienteagendamento->id);
+        $agendamento->finalizado = true;
+        $agendamento->save();
+        return redirect('/meus/clientes/agendamentos/empresa/' .  $empresa)->with('msg', 'Finalizado com sucesso!');
+    }
+
+    public function avaliacaoPedido(Request $request){
+
+
+        $nota = intval($request->input('nota'));
+
+        $comentario =  $request->comentario;
+
+
+        $clienteagendamento = Agendamento::findOrfail($request->id);
+        $agendamento = Agendamento::findOrFail($clienteagendamento->id);
+
+        $agendamento->nota = $nota;
+        $agendamento->comentario =  $comentario;
+        $agendamento->save();
+
+
+        return redirect('/meus/agendamentos')->with('msg', 'Enviado com sucesso!');
     }
 }

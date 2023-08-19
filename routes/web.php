@@ -49,6 +49,10 @@ Route::post('/cadastrar', [AgendamentoController::class, 'createProdutounico'])-
 Route::get('/meus/agendamentos', [AgendamentoController::class, 'show'])->name('meus.agendamentos')->middleware('auth');
 Route::get('/detalhes/agendamentos/{id}', [AgendamentoController::class, 'showdetalhes'])->name('meus.agendamentosdetalhes')->middleware('auth');
 Route::get('/meus/clientes/agendamentos/empresa/{id}', [AgendamentoController::class, 'showdetalhesagendametnosempresa'])->name('meus.clientes.agendamentosdetalhesempresa')->middleware('auth');
+Route::get('/meus/clientes/agendamentos/detalhes/{id}/{idEmpresa}', [AgendamentoController::class, 'showdetalhesagendametnocliente'])->name('meus.clientes.agendamentosdetalhes')->middleware('auth');
+Route::put('/confirmar{id}', [AgendamentoController::class, 'confirmarPedido'])->middleware('auth');
+Route::put('/finalizar{id}', [AgendamentoController::class, 'finalizarPedido'])->middleware('auth');
+Route::put('/avaliacao/{id}', [AgendamentoController::class, 'avaliacaoPedido'])->middleware('auth');
 
 Route::get('/cadastro/servicos/{id}', [CadastroServicoController::class, 'create'])->name('cadastro.servicos')->middleware('auth');
 Route::post('/cadastrar/servico/{id}', [CadastroServicoController::class, 'store'])->name('cadastrar.servico')->middleware('auth');

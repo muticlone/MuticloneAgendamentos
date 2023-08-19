@@ -11,20 +11,20 @@ class CadastroEmpresaController extends Controller
 {
     public function create(){
         return view('Empresa.CadastroEmpresa');
-     
+
   }
 
   public function store(Request $request, cadastro_de_empresa $Cadastro_empresa){
-   
+
     $data = $request->all();
-   
-   
+
+
 
     //img uploud
 
     if($request ->hasFile('image') && $request->file('image')->isValid()){
 
-        
+
         $requestImage =  $request->image;
 
         $extensao = $requestImage->extension();
@@ -51,10 +51,10 @@ class CadastroEmpresaController extends Controller
     $data['area_atuacao'] = $areaAtuacao;
 
     $user = auth()->user();
-    
+
     $data['user_id'] = $user->id;
 
-    
+
 
     $Cadastro_empresa->create($data);
 
@@ -66,7 +66,7 @@ public function edit($id){
 
     $empresa = cadastro_de_empresa::findOrFail($id);
 
-   
+
     if($user->id != $empresa->user_id) {
         return redirect('/dashboard');
     }
@@ -95,8 +95,10 @@ public function update(Request $request){
 
  return redirect('/dashboard')->with('msg', 'Atualizado com sucesso!');
 
-    
+
 }
+
+
 
 
 
