@@ -214,7 +214,7 @@
                                             <textarea class="form-control" name="comentario" cols="50" placeholder="Faça um breve comentário"
                                                 minlength="15" maxlength="250" rows="3">{{ $agendamento->comentario }}</textarea>
                                             </br>
-                                            <button type="submit" class="btn btn-info btn-sm">Avaliar</button>
+                                            <button type="submit" class="btn btn-info btn-sm">Reavaliar</button>
                                         </form>
                                     </div>
 

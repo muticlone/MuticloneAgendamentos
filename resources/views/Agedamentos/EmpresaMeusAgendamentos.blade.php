@@ -80,13 +80,33 @@
                             @endif
 
 
+                            @if ($agendamento->confirmado == 0)
                             <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => $agendamento->id, 'idEmpresa' => $empresa->id]) }}"
-                                class="btn btn-primary position-relative">Detalhes
+                                class="btn btn-warning position-relative">Detalhes
                                 <span
                                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                     5
                                 </span>
                             </a>
+                            @elseif ($agendamento->finalizado == 1)
+                            <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => $agendamento->id, 'idEmpresa' => $empresa->id]) }}"
+                                class="btn btn-success position-relative">Detalhes
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    5
+                                </span>
+                            </a>
+                            @elseif ($agendamento->confirmado == 1)
+                            <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => $agendamento->id, 'idEmpresa' => $empresa->id]) }}"
+                                class="btn btn-info position-relative">Detalhes
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    5
+                                </span>
+                            </a>
+                            @endif
+
+
 
                         </div>
                     </div>

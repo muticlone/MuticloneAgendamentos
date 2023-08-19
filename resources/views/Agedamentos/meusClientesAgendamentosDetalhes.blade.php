@@ -208,6 +208,28 @@
 
                                         <button type="submit" id="cancelarAgendamento" style="display: block;"
                                             class="btn btn-danger btnDetalhes"> Cancelar </button>
+                                    @else
+                                        @if (!is_null($agendamento->nota))
+                                            <div class="row g-12">
+                                                <div class="col-lg-12 col-sm-12 col-md-12">
+                                                    <label for="input-6"> Avaliação do cliente</label>
+                                                    <input id="input-6" name="input-6"
+                                                        class="rating rating-loading pt-br"
+                                                        value="{{ $agendamento->nota }}" data-min="0" data-max="5"
+                                                        data-step="0.1" data-readonly="true" data-show-clear="false">
+
+                                                </div>
+
+                                                <div class="col-lg-12 col-sm-12 col-md-12">
+                                                    <p>
+                                                        {{ $user->name }}:
+                                                        {{ $agendamento->comentario }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        @endif
+
+
                                     @endif
 
 
