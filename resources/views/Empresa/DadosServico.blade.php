@@ -24,11 +24,9 @@
 
 
                 {{-- Avaliação --}}
-                <x-comment_ratings valueAvaliacao="4.3" valueComentario="3.9" NomeUser="Marllus pereira santos"
-                comentario="Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos"
-                />
-
-
+                {{-- <x-comment_ratings :agendamentos="$agendamentos" valueAvaliacao="{{  $media }}" :NomeUser="  $nome "
+                comentario="Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos" />
+ --}}
 
 
 

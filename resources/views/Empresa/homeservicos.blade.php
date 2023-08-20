@@ -156,29 +156,6 @@
 
 
 
-        <script>
-            const appId = 'a2fdbdcb-385c-41f1-9f5c-691f577042a7';
-const apiKey = 'KxAgVMzmI8zzu54QBFItgeerN0N8p9XPiJmLvpuG';
-
-const url = `https://parseapi.back4app.com/classes/Container?limit=1000`;
-
-fetch(url, {
-  headers: {
-    'X-Parse-Application-Id': appId,
-    'X-Parse-REST-API-Key': apiKey
-  }
-})
-  .then(response => response.json())
-  .then(data => {
-    const containers = data.results;
-    console.log(containers);
-  })
-  .catch(error => {
-    console.error(error);
-  });
-
-        </script>
-
 
 
 

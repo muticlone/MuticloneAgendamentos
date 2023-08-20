@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Agendamento;
 
 
+
 use App\Models\User;
 
 class HomeController extends Controller
@@ -72,6 +73,7 @@ class HomeController extends Controller
     {
 
 
+
         $empresa = cadastro_de_empresa::findOrfail($id);
 
         $itensPorPagina = 50;
@@ -85,7 +87,36 @@ class HomeController extends Controller
 
         $Admempresa = User::where('id', $empresa->user_id)->first()->toArray();
 
-        return view('Empresa.DadosEmpresa', ['empresa' => $empresa, 'Admempresa' =>  $Admempresa, 'servico' => $servico]);
+
+        $user = auth()->user();
+
+
+
+            $agendamentos = Agendamento::where('cadastro_de_empresas_id', $id)
+                ->whereNotNull('nota')
+                ->whereNotNull('comentario')
+                ->whereNotNull('user_id')
+                ->get();
+
+            $notas = $agendamentos->pluck('nota');
+            $media = $notas->avg();
+            $user_id = $agendamentos->pluck('user_id');
+
+            $useragendamento = User::whereIn('id',$user_id)->get();
+            $nome =  $useragendamento->pluck('name');
+
+
+
+
+
+
+
+        return view('Empresa.DadosEmpresa', ['empresa' => $empresa,
+         'Admempresa' =>  $Admempresa, 'servico' => $servico,
+
+         'media' =>  $media , 'agendamentos' => $agendamentos,
+         'nome' =>  $nome
+        ]);
     }
 
 
@@ -152,14 +183,11 @@ class HomeController extends Controller
         ]);
     }
 
-    public function dashboardBusiness(){
+    public function dashboardBusiness()
+    {
 
 
 
         return view('Empresa.dashboardBusiness');
     }
-
-
-
-
 }

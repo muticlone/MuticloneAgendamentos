@@ -337,7 +337,7 @@ class AgendamentoController extends Controller
         $agendamento = Agendamento::findOrFail($clienteagendamento->id);
         $agendamento->confirmado = true;
         $agendamento->save();
-        return redirect('/meus/clientes/agendamentos/empresa/' .  $empresa)->with('msg', 'Confirmado com sucesso!');
+        return redirect('/meus/agendamentos/confirmados/' .  $empresa)->with('msg', 'Confirmado com sucesso!');
     }
 
     public function finalizarPedido(Request $request)
@@ -351,7 +351,7 @@ class AgendamentoController extends Controller
         $agendamento = Agendamento::findOrFail($clienteagendamento->id);
         $agendamento->finalizado = true;
         $agendamento->save();
-        return redirect('/meus/clientes/agendamentos/empresa/' .  $empresa)->with('msg', 'Finalizado com sucesso!');
+        return redirect('/meus/agendamentos/finalizados/' .  $empresa)->with('msg', 'Finalizado com sucesso!');
     }
 
     public function avaliacaoPedido(Request $request)
