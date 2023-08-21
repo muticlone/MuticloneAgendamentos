@@ -9,7 +9,7 @@
             <a href="{{ route('meus.agendamentos.confirmados',['id' => $empresa_id]) }}" class="btn btn-sm btn-outline-info btndashboardservico">Confirmados</a>
 
             <a href="{{ route('meus.agendamentos.finalizados', ['id' => $empresa_id]) }}" class="btn btn-sm btn-outline-success btndashboardservico">Finalizados</a>
-            <a href="#" class="btn btn-sm btn-outline-danger btndashboardservico">Cancelados</a>
+            <a href="{{ route('meus.agendamentos.cancelados', ['id' => $empresa_id]) }}" class="btn btn-sm btn-outline-danger btndashboardservico">Cancelados</a>
 
 
 

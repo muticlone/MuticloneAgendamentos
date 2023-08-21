@@ -53,9 +53,11 @@ Route::get('/meus/clientes/agendamentos/detalhes/{id}/{idEmpresa}', [Agendamento
 Route::get('/meus/agendamentos/finalizados/{id}', [AgendamentoController::class, 'showfinalizados'])->name('meus.agendamentos.finalizados')->middleware('auth');
 Route::get('/meus/agendamentos/aguardandoconfirmacao/{id}', [AgendamentoController::class, 'showaguardandoconfirmacao'])->name('meus.agendamentos.aguardandoconfirmacao')->middleware('auth');
 Route::get('/meus/agendamentos/confirmados/{id}', [AgendamentoController::class, 'showconfirmados'])->name('meus.agendamentos.confirmados')->middleware('auth');
+Route::get('/meus/agendamentos/cancelados/{id}', [AgendamentoController::class, 'showcancelados'])->name('meus.agendamentos.cancelados')->middleware('auth');
 
 Route::put('/confirmar{id}', [AgendamentoController::class, 'confirmarPedido'])->middleware('auth');
 Route::put('/finalizar{id}', [AgendamentoController::class, 'finalizarPedido'])->middleware('auth');
+Route::put('/cancelar{id}', [AgendamentoController::class, 'cancelarPedido'])->middleware('auth');
 Route::put('/avaliacao/{id}', [AgendamentoController::class, 'avaliacaoPedido'])->middleware('auth');
 
 Route::get('/cadastro/servicos/{id}', [CadastroServicoController::class, 'create'])->name('cadastro.servicos')->middleware('auth');

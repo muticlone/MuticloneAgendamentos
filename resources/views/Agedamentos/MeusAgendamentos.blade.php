@@ -53,13 +53,9 @@
                                     value="{{ $agendamento->dataHorarioAgendamento }}" />
                             </div>
 
-                            @if ($agendamento->confirmado == 0)
-                                <p class="card-text">Status: aguardando confirmar</p>
-                            @elseif ($agendamento->finalizado == 1)
-                                <p class="card-text">Status: Finalizado</p>
-                            @elseif ($agendamento->confirmado == 1)
-                                <p class="card-text">Status: Confirmado</p>
-                            @endif
+                            <x-status-agendamento agendamento_confirmado="{{ $agendamento->confirmado }}"
+                                agendamento_finalizado="{{ $agendamento->finalizado }}"
+                                agendamento_cancelado="{{ $agendamento->cancelado }}" />
 
 
                             <a href="{{ route('meus.agendamentosdetalhes', ['id' => $agendamento->id]) }}"

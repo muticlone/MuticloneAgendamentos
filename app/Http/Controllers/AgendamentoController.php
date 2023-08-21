@@ -304,6 +304,7 @@ class AgendamentoController extends Controller
         } else {
             $clienteagendamento = Agendamento::where('cadastro_de_empresas_id', $id)
                 ->where('finalizado', 0)
+                ->where('cancelado', 0)
                 ->orderBy('dataHorarioAgendamento', 'asc')
                 ->paginate(9);
             $userIds = [];
@@ -328,13 +329,9 @@ class AgendamentoController extends Controller
     public function confirmarPedido(Request $request)
     {
 
-        $clienteagendamento = Agendamento::findOrfail($request->id);
-        $empresa =   $clienteagendamento->cadastro_de_empresas_id;
 
-
-
-
-        $agendamento = Agendamento::findOrFail($clienteagendamento->id);
+        $agendamento = Agendamento::findOrFail($request->id);
+        $empresa =  $agendamento->cadastro_de_empresas_id;
         $agendamento->confirmado = true;
         $agendamento->save();
         return redirect('/meus/agendamentos/confirmados/' .  $empresa)->with('msg', 'Confirmado com sucesso!');
@@ -342,16 +339,24 @@ class AgendamentoController extends Controller
 
     public function finalizarPedido(Request $request)
     {
-        $clienteagendamento = Agendamento::findOrfail($request->id);
-        $empresa =   $clienteagendamento->cadastro_de_empresas_id;
-
-
-
-
-        $agendamento = Agendamento::findOrFail($clienteagendamento->id);
+        $agendamento = Agendamento::findOrFail($request->id);
+        $empresa =  $agendamento->cadastro_de_empresas_id;
         $agendamento->finalizado = true;
         $agendamento->save();
         return redirect('/meus/agendamentos/finalizados/' .  $empresa)->with('msg', 'Finalizado com sucesso!');
+    }
+
+    public function cancelarPedido(Request $request)
+    {
+        $motivoCacelamento =  $request->motivoCacelamento;
+        $agendamento = Agendamento::findOrFail($request->id);
+        $agendamento->confirmado = false;
+        $agendamento->finalizado = false;
+        $agendamento->cancelado = true;
+        $agendamento->motivoCancelamento =  $motivoCacelamento;
+        $agendamento->save();
+        $empresa =  $agendamento->cadastro_de_empresas_id;
+        return redirect('/meus/agendamentos/cancelados/' .  $empresa)->with('msg', 'Finalizado com sucesso!');
     }
 
     public function avaliacaoPedido(Request $request)
@@ -363,8 +368,8 @@ class AgendamentoController extends Controller
         $comentario =  $request->comentario;
 
 
-        $clienteagendamento = Agendamento::findOrfail($request->id);
-        $agendamento = Agendamento::findOrFail($clienteagendamento->id);
+
+        $agendamento = Agendamento::findOrFail($request->id);
 
         $agendamento->nota = $nota;
         $agendamento->comentario =  $comentario;
@@ -413,6 +418,8 @@ class AgendamentoController extends Controller
         } else {
             $clienteagendamento = Agendamento::where('cadastro_de_empresas_id', $id)
                 ->where('confirmado', 0)
+                ->where('cancelado', 0)
+
                 ->orderBy('dataHorarioAgendamento', 'asc')
                 ->paginate(9);
             $userIds = [];
@@ -444,6 +451,7 @@ class AgendamentoController extends Controller
             $clienteagendamento = Agendamento::where('cadastro_de_empresas_id', $id)
                 ->where('confirmado', 1)
                 ->where('finalizado', 0)
+                ->where('cancelado', 0)
                 ->orderBy('dataHorarioAgendamento', 'asc')
                 ->paginate(9);
             $userIds = [];
@@ -473,6 +481,7 @@ class AgendamentoController extends Controller
         } else {
             $clienteagendamento = Agendamento::where('cadastro_de_empresas_id', $id)
                 ->where('finalizado', 1)
+                ->where('cancelado', 0)
                 ->orderBy('updated_at', 'desc')
                 ->paginate(9);
             $userIds = [];
@@ -490,4 +499,31 @@ class AgendamentoController extends Controller
             'empresa' => $empresa,
         ]);
     }
+
+    public function  showcancelados($id){
+        $user = auth()->user();
+
+        $empresa = cadastro_de_empresa::findOrFail($id);
+
+        if ($user->id != $empresa->user_id) {
+            return redirect('/dashboard');
+        } else {
+            $clienteagendamento = Agendamento::where('cadastro_de_empresas_id', $id)
+                ->where('cancelado', 1)
+                ->orderBy('dataHorarioAgendamento', 'asc')
+                ->paginate(9);
+            $userIds = [];
+            foreach ($clienteagendamento as $agendamento) {
+                $userIds[] = $agendamento->user_id;
+            }
+            $users = User::whereIn('id', $userIds)->get();
+        }
+
+        return view('Agedamentos.EmpresaMeusagendamentosCancelados', [
+            'clienteagendamento' => $clienteagendamento,
+            'users' => $users,
+            'empresa' => $empresa,
+        ]);
+    }
+
 }

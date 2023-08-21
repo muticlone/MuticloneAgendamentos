@@ -679,7 +679,26 @@ svg {
 }
 
 
-.btnDetalhes{
-    max-width: 120px;
+.button-containerMeusClientesAgendamentosDetalhes {
+    display: flex;
+
+}
+
+.btnMeusClientesAgendamentoDetalhes {
+    display: flex;
+    gap: 10px;
+
+
+
+}
+
+.btntamanhoMeusClientesAgendamentoDetalhes {
     min-width: 120px;
+    min-height: 35px;
+}
+
+
+.inline-containerStatusAgendamento {
+    display: inline-flex;
+
 }
