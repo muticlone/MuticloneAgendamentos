@@ -11,9 +11,10 @@
             <x-agendamentos_clientes :clienteagendamento="$clienteagendamento" empresa_nomeFantasia="{{ $empresa->nomeFantasia }}"
                 empresa_id="{{ $empresa->id }}" />
         @else
+
             <div class="pt-2">
                 <div class="alert alert-warning pt-2" role="alert">
-                    Você ainda não tem atendimentos
+                    Você não tem atendimentos em andamento
                 </div>
             </div>
         @endif

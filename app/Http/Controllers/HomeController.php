@@ -159,7 +159,7 @@ class HomeController extends Controller
     {
 
 
-        return view('buscacategorias');
+        return view('busca.buscacategorias');
     }
 
     public function Showcategorias(Request $request)

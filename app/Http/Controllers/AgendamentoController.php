@@ -56,7 +56,7 @@ class AgendamentoController extends Controller
 
 
         return view(
-            'Agedamentos.CadastrarAgentamento',
+            'Agedamentos.Clientes.ClientesCadastrarAgentamento',
             [
                 'servico' =>  $servico, 'empresa' => $empresa,
                 'user' =>  $user,
@@ -83,7 +83,7 @@ class AgendamentoController extends Controller
 
 
         return view(
-            'Agedamentos.CadastrarAgentamentouncio',
+            'Agedamentos.Clientes.ClientesCadastrarAgentamentouncio',
             [
                 'user' =>  $user,
                 'servico' =>  $servico,
@@ -259,7 +259,7 @@ class AgendamentoController extends Controller
         $empresaAgendamento = cadastro_de_empresa::whereIn('id', $idempresa)->get();
 
 
-        return view('Agedamentos.MeusAgendamentos', [
+        return view('Agedamentos.Clientes.ClientesMeusAgendamentos', [
             'agendamentos' => $agendamentos,
             'empresaAgendamento' => $empresaAgendamento,
         ]);
@@ -284,7 +284,7 @@ class AgendamentoController extends Controller
 
 
 
-        return view('Agedamentos.DetalhesAgendamentos', [
+        return view('Agedamentos.Clientes.ClientesDetalhesAgendamentos', [
             'agendamentos' => $agendamentos,
             'user' => $user,
             'empresa' =>  $empresa,
@@ -294,6 +294,7 @@ class AgendamentoController extends Controller
 
     public function showdetalhesagendametnosempresa($id)
     {
+
 
         $user = auth()->user();
 
@@ -317,7 +318,7 @@ class AgendamentoController extends Controller
 
 
 
-        return view('Agedamentos.EmpresaMeusAgendamentos', [
+        return view('Agedamentos.Empresa.EmpresaMeusAgendamentos', [
             'clienteagendamento' => $clienteagendamento,
             'users' => $users,
             'empresa' => $empresa,
@@ -394,7 +395,7 @@ class AgendamentoController extends Controller
 
 
         return view(
-            'Agedamentos.meusClientesAgendamentosDetalhes',
+            'Agedamentos.Empresa.EmpresaDetalhesAgendamentos',
             [
                 'agendamento' =>  $clienteagendamento,
                 'user' =>   $users,
@@ -430,7 +431,7 @@ class AgendamentoController extends Controller
         }
 
 
-        return view('Agedamentos.EmpresaMeusAgendamentosAguardandoConfirmacao', [
+        return view('Agedamentos.Empresa.EmpresaMeusAgendamentosAguardandoConfirmacao', [
             'clienteagendamento' => $clienteagendamento,
             'users' => $users,
             'empresa' => $empresa,
@@ -462,7 +463,7 @@ class AgendamentoController extends Controller
         }
 
 
-        return view('Agedamentos.EmpresaMeusagendamentosConfirmados', [
+        return view('Agedamentos.Empresa.EmpresaMeusagendamentosConfirmados', [
             'clienteagendamento' => $clienteagendamento,
             'users' => $users,
             'empresa' => $empresa,
@@ -493,7 +494,7 @@ class AgendamentoController extends Controller
 
 
 
-        return view('Agedamentos.EmpresaMeusAgendamentosfinalizados', [
+        return view('Agedamentos.Empresa.EmpresaMeusAgendamentosfinalizados', [
             'clienteagendamento' => $clienteagendamento,
             'users' => $users,
             'empresa' => $empresa,
@@ -521,7 +522,7 @@ class AgendamentoController extends Controller
             $users = User::whereIn('id', $userIds)->get();
         }
 
-        return view('Agedamentos.EmpresaMeusagendamentosCancelados', [
+        return view('Agedamentos.Empresa.EmpresaMeusagendamentosCancelados', [
             'clienteagendamento' => $clienteagendamento,
             'users' => $users,
             'empresa' => $empresa,
