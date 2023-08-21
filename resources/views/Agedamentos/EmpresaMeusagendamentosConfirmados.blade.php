@@ -19,6 +19,7 @@
             </div>
         @endif
     </div>
+    <x-pagination :paginatedItems="$clienteagendamento" />
 
 
 @endsection
