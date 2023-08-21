@@ -513,6 +513,8 @@ class AgendamentoController extends Controller
                 ->orderBy('dataHorarioAgendamento', 'asc')
                 ->paginate(9);
             $userIds = [];
+
+
             foreach ($clienteagendamento as $agendamento) {
                 $userIds[] = $agendamento->user_id;
             }
