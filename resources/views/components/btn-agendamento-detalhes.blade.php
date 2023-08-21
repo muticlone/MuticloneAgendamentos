@@ -1,10 +1,9 @@
-@props(['agendamento_confirmado' => '', 'agendamento_finalizado' => '',
- 'agendamento_id' => '', 'agendamento_nota' => '', 'user_name' => '', 'agendamento_comentario' => ''])
+@props(['agendamento_confirmado' => '', 'agendamento_finalizado' => '', 'agendamento_id' => '', 'agendamento_nota' => '', 'user_name' => '', 'agendamento_comentario' => '', 'agendamento_cancelado' => '', 'agendamento_motivoCancelamento' => ''])
 
 
 <div>
     <div class="button-containerMeusClientesAgendamentosDetalhes">
-        @if ($agendamento_confirmado == 0)
+        @if ($agendamento_confirmado == 0 && $agendamento_cancelado == 0)
             <div class="btnMeusClientesAgendamentoDetalhes">
                 <form action="/confirmar{{ $agendamento_id }}" method="POST">
                     @csrf
@@ -31,7 +30,7 @@
             </div>
         @endif
 
-        @if ($agendamento_finalizado == 0)
+        @if ($agendamento_finalizado == 0 && $agendamento_cancelado == 0)
             <div class="btnMeusClientesAgendamentoDetalhes">
                 <button type="submit" id="reagendarAgendamento"
                     class="btn btn-info btntamanhoMeusClientesAgendamentoDetalhes mx-1 ">
@@ -66,6 +65,11 @@
     </div>
     </form>
     @endif
+    @if ($agendamento_cancelado == 1)
+
+
+        <p>Motivo: {{ $agendamento_motivoCancelamento }}</p>
+    @endif
 
 </div>
 
@@ -80,7 +84,7 @@
 
         textarea.style.display = 'block';
 
-        if (btnFinalizarAgendamento){
+        if (btnFinalizarAgendamento) {
             btnFinalizarAgendamento.style.display = 'none';
         }
 
@@ -105,7 +109,7 @@
             btnConfirmarAgendamento.style.display = 'block';
         }
 
-        if (btnFinalizarAgendamento){
+        if (btnFinalizarAgendamento) {
             btnFinalizarAgendamento.style.display = 'block';
         }
 
@@ -114,5 +118,3 @@
         btnagendar.style.display = 'block';
     });
 </script>
-
-

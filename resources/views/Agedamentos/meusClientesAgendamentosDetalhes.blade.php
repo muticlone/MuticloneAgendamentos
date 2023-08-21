@@ -257,7 +257,10 @@
                     @endif --}}
 
                     <x-btn-agendamento-detalhes agendamento_confirmado="{{ $agendamento->confirmado }}"
-                        agendamento_finalizado="{{ $agendamento->finalizado }}" agendamento_id="{{ $agendamento->id }}" />
+                        agendamento_finalizado="{{ $agendamento->finalizado }}" agendamento_id="{{ $agendamento->id }}"
+                        agendamento_cancelado="{{$agendamento->cancelado  }}"
+                        agendamento_motivoCancelamento="{{$agendamento->motivoCancelamento}}"
+                        />
 
 
                     @if ($agendamento->finalizado == 1)
