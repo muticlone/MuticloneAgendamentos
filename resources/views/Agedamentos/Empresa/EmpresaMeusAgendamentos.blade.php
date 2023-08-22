@@ -11,12 +11,8 @@
             <x-agendamentos_clientes :clienteagendamento="$clienteagendamento" empresa_nomeFantasia="{{ $empresa->nomeFantasia }}"
                 empresa_id="{{ $empresa->id }}" />
         @else
-
-            <div class="pt-2">
-                <div class="alert alert-warning pt-2" role="alert">
-                    Você não tem atendimentos em andamento
-                </div>
-            </div>
+            <x-verifica-cliente-atendimento ativos="{{ $ativos }}" pendete="{{ $pendete }}"
+                confirmado="{{ $confirmado }}" finalizado="{{ $finalizado }}" cancelado="{{ $cancelado }}" />
         @endif
     </div>
 
