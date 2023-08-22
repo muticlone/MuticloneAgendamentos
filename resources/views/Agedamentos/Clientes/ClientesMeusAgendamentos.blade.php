@@ -13,10 +13,7 @@
             @if (count($agendamentos) > 0)
                 <x-meus_agendamentos_clientes :agendamentos="$agendamentos" :empresaAgendamento="$empresaAgendamento" />
             @else
-
-
-            <x-verifica-cliente-atendimento :status="$statuses" />
-
+                <x-verifica-cliente-atendimento :status="$statuses" />
             @endif
 
         </div>

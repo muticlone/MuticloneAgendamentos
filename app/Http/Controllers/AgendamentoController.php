@@ -9,6 +9,8 @@ use App\Models\cadastro_de_servico;
 use App\Models\cadastro_de_empresa;
 use App\Models\Agendamento;
 use App\Models\User;
+use Carbon\Carbon;
+
 
 class AgendamentoController extends Controller
 
@@ -336,7 +338,8 @@ class AgendamentoController extends Controller
         $empresa =  $agendamento->cadastro_de_empresas_id;
         $agendamento->confirmado = true;
         $agendamento->save();
-        return redirect('/meus/agendamentos/confirmados/' .  $empresa)->with('msg', 'Confirmado com sucesso!');
+        return redirect('/meus/agendamentos/empresa/' .  $empresa.'/confirmados')->with('msg', 'Confirmado com sucesso!');
+
     }
 
     public function finalizarPedidoEmpresa(Request $request)
@@ -345,7 +348,7 @@ class AgendamentoController extends Controller
         $empresa =  $agendamento->cadastro_de_empresas_id;
         $agendamento->finalizado = true;
         $agendamento->save();
-        return redirect('/meus/agendamentos/finalizados/' .  $empresa)->with('msg', 'Finalizado com sucesso!');
+        return redirect('/meus/agendamentos/empresa/' .  $empresa.'/finalizados')->with('msg', 'Finalizado com sucesso!');
     }
 
     public function cancelarPedidoEmpresa(Request $request)
@@ -358,7 +361,7 @@ class AgendamentoController extends Controller
         $agendamento->motivoCancelamento =  $motivoCacelamento;
         $agendamento->save();
         $empresa =  $agendamento->cadastro_de_empresas_id;
-        return redirect('/meus/agendamentos/cancelados/' .  $empresa)->with('msg', 'Finalizado com sucesso!');
+        return redirect('/meus/agendamentos/empresa/' .  $empresa.'/cancelados')->with('msg', 'Finalizado com sucesso!');
     }
 
     public function show_Agendamentos_Clientes($status)
@@ -442,6 +445,11 @@ class AgendamentoController extends Controller
 
         ]);
     }
+
+
+
+
+
 
 
 

@@ -48,7 +48,6 @@ Route::get('/cadastrar/agendamento/{id}', [AgendamentoController::class, 'storeP
 Route::post('/cadastrar', [AgendamentoController::class, 'createProdutounico'])->name('cadastrar.agendamentoProdutouncio')->middleware('auth');
 
 
-Route::get('/meus/clientes/agendamentos/empresa/{id}', [AgendamentoController::class, 'show_Agendamentos_Ativos_Empresa'])->name('meus.clientes.agendamentosdetalhesempresa')->middleware('auth');
 
 
 
@@ -56,8 +55,10 @@ Route::get('/meus/clientes/agendamentos/empresa/{id}', [AgendamentoController::c
 
 Route::get('/meus/agendamentos/empresa/{id}/{status}', [AgendamentoController::class, 'showAgendamentosEmpresa'])->name('meus.clientes.agendamentos.empresa')->middleware('auth');
 Route::get('/meus/clientes/agendamentos/detalhes/{id}/{idEmpresa}', [AgendamentoController::class, 'showAgendamentosEmpresaDetalhes'])->name('meus.clientes.agendamentosdetalhes')->middleware('auth');
+
 Route::get('/detalhes/agendamentos/{id}', [AgendamentoController::class, 'show_Agendamentos_Detalhes_Clientes'])->name('show_Agendamentos_Detalhes_Clientes')->middleware('auth');
 Route::get('/meus/agendamentos/{status}', [AgendamentoController::class, 'show_Agendamentos_Clientes'])->name('clientes.agendamentos')->middleware('auth');
+
 
 Route::put('/confirmar{id}', [AgendamentoController::class, 'confirmarPedidoEmpresa'])->middleware('auth');
 Route::put('/finalizar{id}', [AgendamentoController::class, 'finalizarPedidoEmpresa'])->middleware('auth');
