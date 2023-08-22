@@ -243,7 +243,63 @@ class AgendamentoController extends Controller
     }
 
 
+    public function showAgendamentosEmpresa($id, $status)
+    {
+        $user = auth()->user();
+        $empresa = cadastro_de_empresa::findOrFail($id);
 
+        if ($user->id != $empresa->user_id) {
+            return redirect('/dashboard');
+        } else {
+            $query = Agendamento::where('cadastro_de_empresas_id', $id)
+                ->orderBy('dataHorarioAgendamento', 'asc');
+
+            switch ($status) {
+                case 'ativos':
+                    $query->where('finalizado', 0)
+                        ->where('cancelado', 0);
+                    break;
+                case 'pendentes':
+                    $query->where('confirmado', 0)
+                        ->where('cancelado', 0);
+                    break;
+                case 'confirmados':
+                    $query->where('confirmado', 1)
+                        ->where('finalizado', 0)
+                        ->where('cancelado', 0);
+                    break;
+                case 'finalizados':
+                    $query->where('finalizado', 1)
+                        ->where('cancelado', 0)
+                        ->orderBy('updated_at', 'desc');
+                    break;
+                case 'cancelados':
+                    $query->where('cancelado', 1)
+                        ->orderBy('updated_at', 'desc');
+                    break;
+            }
+
+            $clienteagendamento = $query->paginate(9);
+            $userIds = $clienteagendamento->pluck('user_id')->toArray();
+            $users = User::whereIn('id', $userIds)->get();
+
+            $statuses = [
+                'ativos' => false,
+                'pendentes' => false,
+                'confirmados' => false,
+                'finalizados' => false,
+                'cancelados' => false,
+            ];
+            $statuses[$status] = true;
+
+            return view('Agedamentos.Empresa.EmpresaMeusAgendamentos', [
+                'clienteagendamento' => $clienteagendamento,
+                'users' => $users,
+                'empresa' => $empresa,
+                'statuses' => $statuses,
+            ]);
+        }
+    }
 
     public function showAgendamentosEmpresaDetalhes($id, $idEmpresa)
     {
@@ -270,235 +326,6 @@ class AgendamentoController extends Controller
 
 
         );
-    }
-
-    public function show_Agendamentos_Ativos_Empresa($id)
-    {
-
-
-
-
-        $user = auth()->user();
-
-        $empresa = cadastro_de_empresa::findOrFail($id);
-
-        if ($user->id != $empresa->user_id) {
-            return redirect('/dashboard');
-        } else {
-            $clienteagendamento = Agendamento::where('cadastro_de_empresas_id', $id)
-                ->where('finalizado', 0)
-                ->where('cancelado', 0)
-                ->orderBy('dataHorarioAgendamento', 'asc')
-                ->paginate(9);
-            $userIds = [];
-            foreach ($clienteagendamento as $agendamento) {
-                $userIds[] = $agendamento->user_id;
-            }
-            $users = User::whereIn('id', $userIds)->get();
-        }
-
-        $ativos = true;
-        $pendete = false;
-        $confirmado = false;
-        $finalizado = false;
-        $cancelado = false;
-
-
-
-
-        return view('Agedamentos.Empresa.EmpresaMeusAgendamentos', [
-            'clienteagendamento' => $clienteagendamento,
-            'users' => $users,
-            'empresa' => $empresa,
-            'ativos' =>   $ativos,
-            'pendete' => $pendete,
-            'confirmado' =>  $confirmado,
-            'finalizado' =>  $finalizado,
-            'cancelado' =>  $cancelado,
-        ]);
-    }
-
-
-    public function show_Agendamentos_Pendentes_Empresa($id)
-    {
-
-
-
-        $user = auth()->user();
-
-        $empresa = cadastro_de_empresa::findOrFail($id);
-
-        if ($user->id != $empresa->user_id) {
-            return redirect('/dashboard');
-        } else {
-            $clienteagendamento = Agendamento::where('cadastro_de_empresas_id', $id)
-                ->where('confirmado', 0)
-                ->where('cancelado', 0)
-
-                ->orderBy('dataHorarioAgendamento', 'asc')
-                ->paginate(9);
-            $userIds = [];
-            foreach ($clienteagendamento as $agendamento) {
-                $userIds[] = $agendamento->user_id;
-            }
-            $users = User::whereIn('id', $userIds)->get();
-        }
-
-        $ativos = false;
-        $pendete = true;
-        $confirmado = false;
-        $finalizado = false;
-        $cancelado = false;
-
-
-
-
-        return view('Agedamentos.Empresa.EmpresaMeusAgendamentos', [
-            'clienteagendamento' => $clienteagendamento,
-            'users' => $users,
-            'empresa' => $empresa,
-            'ativos' =>   $ativos,
-            'pendete' => $pendete,
-            'confirmado' =>  $confirmado,
-            'finalizado' =>  $finalizado,
-            'cancelado' =>  $cancelado,
-        ]);
-
-
-    }
-
-
-    public function show_Agendamentos_confirmados_Empresa($id)
-    {
-
-        $user = auth()->user();
-
-        $empresa = cadastro_de_empresa::findOrFail($id);
-
-        if ($user->id != $empresa->user_id) {
-            return redirect('/dashboard');
-        } else {
-            $clienteagendamento = Agendamento::where('cadastro_de_empresas_id', $id)
-                ->where('confirmado', 1)
-                ->where('finalizado', 0)
-                ->where('cancelado', 0)
-                ->orderBy('dataHorarioAgendamento', 'asc')
-                ->paginate(9);
-            $userIds = [];
-            foreach ($clienteagendamento as $agendamento) {
-                $userIds[] = $agendamento->user_id;
-            }
-            $users = User::whereIn('id', $userIds)->get();
-        }
-
-        $ativos = false;
-        $pendete = false;
-        $confirmado = true;
-        $finalizado = false;
-        $cancelado = false;
-
-
-
-
-        return view('Agedamentos.Empresa.EmpresaMeusAgendamentos', [
-            'clienteagendamento' => $clienteagendamento,
-            'users' => $users,
-            'empresa' => $empresa,
-            'ativos' =>   $ativos,
-            'pendete' => $pendete,
-            'confirmado' =>  $confirmado,
-            'finalizado' =>  $finalizado,
-            'cancelado' =>  $cancelado,
-        ]);
-
-    }
-
-    public function show_Agendamentos_finalizados_Empresa($id)
-    {
-
-        $user = auth()->user();
-
-        $empresa = cadastro_de_empresa::findOrFail($id);
-
-        if ($user->id != $empresa->user_id) {
-            return redirect('/dashboard');
-        } else {
-            $clienteagendamento = Agendamento::where('cadastro_de_empresas_id', $id)
-                ->where('finalizado', 1)
-                ->where('cancelado', 0)
-                ->orderBy('updated_at', 'desc')
-                ->paginate(9);
-            $userIds = [];
-            foreach ($clienteagendamento as $agendamento) {
-                $userIds[] = $agendamento->user_id;
-            }
-            $users = User::whereIn('id', $userIds)->get();
-        }
-
-        $ativos = false;
-        $pendete = false;
-        $confirmado = false;
-        $finalizado = true;
-        $cancelado = false;
-
-
-
-
-        return view('Agedamentos.Empresa.EmpresaMeusAgendamentos', [
-            'clienteagendamento' => $clienteagendamento,
-            'users' => $users,
-            'empresa' => $empresa,
-            'ativos' =>   $ativos,
-            'pendete' => $pendete,
-            'confirmado' =>  $confirmado,
-            'finalizado' =>  $finalizado,
-            'cancelado' =>  $cancelado,
-        ]);
-
-
-    }
-
-    public function  show_Agendamentos_cancelados_Empresa($id)
-    {
-        $user = auth()->user();
-
-        $empresa = cadastro_de_empresa::findOrFail($id);
-
-        if ($user->id != $empresa->user_id) {
-            return redirect('/dashboard');
-        } else {
-            $clienteagendamento = Agendamento::where('cadastro_de_empresas_id', $id)
-                ->where('cancelado', 1)
-                ->orderBy('updated_at', 'desc')
-                ->paginate(9);
-            $userIds = [];
-
-
-            foreach ($clienteagendamento as $agendamento) {
-                $userIds[] = $agendamento->user_id;
-            }
-            $users = User::whereIn('id', $userIds)->get();
-        }
-
-        $ativos = false;
-        $pendete = false;
-        $confirmado = false;
-        $finalizado = false;
-        $cancelado = true;
-
-
-
-
-        return view('Agedamentos.Empresa.EmpresaMeusAgendamentos', [
-            'clienteagendamento' => $clienteagendamento,
-            'users' => $users,
-            'empresa' => $empresa,
-            'ativos' =>   $ativos,
-            'pendete' => $pendete,
-            'confirmado' =>  $confirmado,
-            'finalizado' =>  $finalizado,
-            'cancelado' =>  $cancelado,
-        ]);
     }
 
     public function confirmarPedidoEmpresa(Request $request)
@@ -534,37 +361,57 @@ class AgendamentoController extends Controller
         return redirect('/meus/agendamentos/cancelados/' .  $empresa)->with('msg', 'Finalizado com sucesso!');
     }
 
-    public function show_Agendamentos_Ativos_Clientes()
+    public function show_Agendamentos_Clientes($status)
     {
-
-
         /** @var \App\User $user */
         $user = auth()->user();
 
-        $agendamentos = $user->agendamentos()
-            ->where('finalizado', 0)
-            ->where('cancelado', 0)
-            ->orderBy('dataHorarioAgendamento', 'asc')
-            ->paginate(10);
+        $query = $user->agendamentos()
+            ->orderBy('dataHorarioAgendamento', 'asc');
 
+        switch ($status) {
+            case 'ativos':
+                $query->where('finalizado', 0)
+                    ->where('cancelado', 0);
+                break;
+            case 'pendentes':
+                $query->where('confirmado', 0)
+                    ->where('cancelado', 0);
+                break;
+            case 'confirmados':
+                $query->where('confirmado', 1)
+                    ->where('finalizado', 0)
+                    ->where('cancelado', 0);
+                break;
+            case 'finalizados':
+                $query->where('finalizado', 1)
+                    ->where('cancelado', 0)
+                    ->orderBy('updated_at', 'desc');
+                break;
+            case 'cancelados':
+                $query->where('cancelado', 1)
+                    ->orderBy('updated_at', 'desc');
+                break;
+        }
+
+        $agendamentos = $query->paginate(9);
 
         $idempresa = $agendamentos->pluck('cadastro_de_empresas_id')->unique();
         $empresaAgendamento = cadastro_de_empresa::whereIn('id', $idempresa)->get();
 
-        $ativos = true;
-        $pendete = false;
-        $confirmado = false;
-        $finalizado = false;
-        $cancelado = false;
+        $statuses = [
+            'ativos' => false,
+            'pendentes' => false,
+            'confirmados' => false,
+            'finalizados' => false,
+            'cancelados' => false,
+        ];
+        $statuses[$status] = true;
 
         return view('Agedamentos.Clientes.ClientesMeusAgendamentos', [
             'agendamentos' => $agendamentos,
             'empresaAgendamento' => $empresaAgendamento,
-            'ativos' =>   $ativos,
-            'pendete' => $pendete,
-            'confirmado' =>  $confirmado,
-            'finalizado' =>  $finalizado,
-            'cancelado' =>  $cancelado,
+            'statuses' => $statuses,
         ]);
     }
 
@@ -596,139 +443,8 @@ class AgendamentoController extends Controller
         ]);
     }
 
-    public function show_Aguardando_Confirmacao_Clientes()
-    {
-        /** @var \App\User $user */
-        $user = auth()->user();
-
-        $agendamentos = $user->agendamentos()
-            ->where('confirmado', 0)
-            ->where('cancelado', 0)
-
-            ->orderBy('dataHorarioAgendamento', 'asc')
-            ->paginate(9);
 
 
-        $idempresa = $agendamentos->pluck('cadastro_de_empresas_id')->unique();
-        $empresaAgendamento = cadastro_de_empresa::whereIn('id', $idempresa)->get();
-
-        $ativos = false;
-        $pendete = true;
-        $confirmado = false;
-        $finalizado = false;
-        $cancelado = false;
-
-        return view('Agedamentos.Clientes.ClientesMeusAgendamentos', [
-            'agendamentos' => $agendamentos,
-            'empresaAgendamento' => $empresaAgendamento,
-            'ativos' =>   $ativos,
-            'pendete' => $pendete,
-            'confirmado' =>  $confirmado,
-            'finalizado' =>  $finalizado,
-            'cancelado' =>  $cancelado,
-        ]);
-    }
-
-
-    public function show_Agendamentos_Confirmados_Clientes()
-    {
-        /** @var \App\User $user */
-        $user = auth()->user();
-
-        $agendamentos = $user->agendamentos()
-            ->where('confirmado', 1)
-            ->where('finalizado', 0)
-            ->where('cancelado', 0)
-            ->orderBy('dataHorarioAgendamento', 'asc')
-            ->paginate(10);
-
-
-        $idempresa = $agendamentos->pluck('cadastro_de_empresas_id')->unique();
-        $empresaAgendamento = cadastro_de_empresa::whereIn('id', $idempresa)->get();
-
-        $ativos = false;
-        $pendete = false;
-        $confirmado = true;
-        $finalizado = false;
-        $cancelado = false;
-
-
-        return view('Agedamentos.Clientes.ClientesMeusAgendamentos', [
-            'agendamentos' => $agendamentos,
-            'empresaAgendamento' => $empresaAgendamento,
-            'ativos' =>   $ativos,
-            'pendete' => $pendete,
-            'confirmado' =>  $confirmado,
-            'finalizado' =>  $finalizado,
-            'cancelado' =>  $cancelado,
-        ]);
-    }
-
-    public function show_agendamento_finalizados_Clientes()
-    {
-        /** @var \App\User $user */
-        $user = auth()->user();
-
-        $agendamentos = $user->agendamentos()
-            ->where('finalizado', 1)
-            ->where('cancelado', 0)
-            ->orderBy('updated_at', 'desc')
-            ->paginate(9);
-
-
-        $idempresa = $agendamentos->pluck('cadastro_de_empresas_id')->unique();
-        $empresaAgendamento = cadastro_de_empresa::whereIn('id', $idempresa)->get();
-
-        $ativos = false;
-        $pendete = false;
-        $confirmado = false;
-        $finalizado = true;
-        $cancelado = false;
-
-
-        return view('Agedamentos.Clientes.ClientesMeusAgendamentos', [
-            'agendamentos' => $agendamentos,
-            'empresaAgendamento' => $empresaAgendamento,
-            'ativos' =>   $ativos,
-            'pendete' => $pendete,
-            'confirmado' =>  $confirmado,
-            'finalizado' =>  $finalizado,
-            'cancelado' =>  $cancelado,
-        ]);
-    }
-    public function show_Agendamento_Cancelados_Clientes()
-    {
-        /** @var \App\User $user */
-        $user = auth()->user();
-
-        $agendamentos = $user->agendamentos()
-            ->where('cancelado', 1)
-            ->orderBy('updated_at', 'desc')
-            ->paginate(9);
-
-
-
-        $idempresa = $agendamentos->pluck('cadastro_de_empresas_id')->unique();
-        $empresaAgendamento = cadastro_de_empresa::whereIn('id', $idempresa)->get();
-
-        $ativos = false;
-        $pendete = false;
-        $confirmado = false;
-        $finalizado = false;
-        $cancelado = true;
-
-
-
-        return view('Agedamentos.Clientes.ClientesMeusAgendamentos', [
-            'agendamentos' => $agendamentos,
-            'empresaAgendamento' => $empresaAgendamento,
-            'ativos' =>   $ativos,
-            'pendete' => $pendete,
-            'confirmado' =>  $confirmado,
-            'finalizado' =>  $finalizado,
-            'cancelado' =>  $cancelado,
-        ]);
-    }
 
     public function avaliacaoPedidoCliente(Request $request)
     {

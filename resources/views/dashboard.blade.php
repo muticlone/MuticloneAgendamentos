@@ -98,7 +98,11 @@
 
                                     <x-svg-meusservicos width="14" height="14" margin="3px" />
                                 </a>
-                                <a  href="{{ route('meus.clientes.agendamentosdetalhesempresa',['id' =>$emp->id]) }}" class="btn btn-sm btn-outline-info btndashboardservico">Meu Agendamentos</a>
+
+
+                                    <a href="{{ route('meus.clientes.agendamentos.empresa', ['id' => $emp->id, 'status' => 'ativos']) }}"
+                                        class="btn btn-sm btn-outline-warning btndashboardservico">Meu Agendamentos</a>
+
                                 <a  href="{{ route('dashboard.business')}}" class="btn btn-sm btn-outline-info btndashboardservico">Dashboard</a>
 
 

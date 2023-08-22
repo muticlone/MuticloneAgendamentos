@@ -92,7 +92,7 @@
 
                                 <li class="nav-item">
 
-                                    <a class="nav-link active text-nowrap" aria-current="page" href="{{ route('clientes.agendamentos') }}">
+                                    <a class="nav-link active text-nowrap" aria-current="page" href="{{ route('clientes.agendamentos', ['status' => 'ativos']) }}">
 
                                        Meus agendamentos
                                     </a>

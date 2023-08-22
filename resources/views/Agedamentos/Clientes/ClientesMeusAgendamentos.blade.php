@@ -15,13 +15,7 @@
             @else
 
 
-                <x-verifica-cliente-atendimento
-                ativos="{{ $ativos }}"
-                pendete="{{$pendete  }}"
-                confirmado="{{$confirmado  }}"
-                finalizado="{{$finalizado  }}"
-                cancelado="{{$cancelado  }}"
-                />
+            <x-verifica-cliente-atendimento :status="$statuses" />
 
             @endif
 

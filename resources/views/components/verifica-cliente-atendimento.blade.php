@@ -1,16 +1,27 @@
-@props(['ativos' => '', 'pendete' => '','confirmado'=>'' ,'finalizado',
-    'cancelado' => ''
-])
+@props(['status' => []])
 <div>
-    @if ($ativos)
+
+
+
+
+    @if ($status['ativos'])
         <x-Alert texto="Você ainda não tem atendimentos ativos" />
-    @elseif ($pendete)
+    @endif
+
+    @if ($status['pendentes'])
         <x-Alert texto="Você ainda não tem atendimentos pendetes" />
-    @elseif ($confirmado)
+    @endif
+
+    @if ($status['confirmados'])
         <x-Alert cor="info" texto="Você ainda não tem atendimentos confirmados" />
-    @elseif ($finalizado)
+    @endif
+
+    @if ($status['finalizados'])
         <x-Alert cor="success" texto="Você ainda não tem atendimentos finalizado" />
-    @elseif ($cancelado)
+    @endif
+
+    @if ($status['cancelados'])
         <x-Alert cor="danger" texto="Você ainda não tem atendimentos Cancelado" />
     @endif
+
 </div>

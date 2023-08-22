@@ -11,8 +11,7 @@
             <x-agendamentos_clientes :clienteagendamento="$clienteagendamento" empresa_nomeFantasia="{{ $empresa->nomeFantasia }}"
                 empresa_id="{{ $empresa->id }}" />
         @else
-            <x-verifica-cliente-atendimento ativos="{{ $ativos }}" pendete="{{ $pendete }}"
-                confirmado="{{ $confirmado }}" finalizado="{{ $finalizado }}" cancelado="{{ $cancelado }}" />
+        <x-verifica-cliente-atendimento :status="$statuses" />
         @endif
     </div>
 
