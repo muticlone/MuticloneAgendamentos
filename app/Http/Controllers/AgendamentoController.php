@@ -477,10 +477,20 @@ class AgendamentoController extends Controller
         $idempresa = $agendamentos->pluck('cadastro_de_empresas_id')->unique();
         $empresaAgendamento = cadastro_de_empresa::whereIn('id', $idempresa)->get();
 
+        $ativos = true;
+        $pendete = false;
+        $confirmado = false;
+        $finalizado = false;
+        $cancelado = false;
 
         return view('Agedamentos.Clientes.ClientesMeusAgendamentos', [
             'agendamentos' => $agendamentos,
             'empresaAgendamento' => $empresaAgendamento,
+            'ativos' =>   $ativos,
+            'pendete' => $pendete,
+            'confirmado' =>  $confirmado,
+            'finalizado' =>  $finalizado,
+            'cancelado' =>  $cancelado,
         ]);
     }
 
@@ -528,10 +538,20 @@ class AgendamentoController extends Controller
         $idempresa = $agendamentos->pluck('cadastro_de_empresas_id')->unique();
         $empresaAgendamento = cadastro_de_empresa::whereIn('id', $idempresa)->get();
 
+        $ativos = false;
+        $pendete = true;
+        $confirmado = false;
+        $finalizado = false;
+        $cancelado = false;
 
         return view('Agedamentos.Clientes.ClientesMeusAgendamentos', [
             'agendamentos' => $agendamentos,
             'empresaAgendamento' => $empresaAgendamento,
+            'ativos' =>   $ativos,
+            'pendete' => $pendete,
+            'confirmado' =>  $confirmado,
+            'finalizado' =>  $finalizado,
+            'cancelado' =>  $cancelado,
         ]);
     }
 
@@ -552,10 +572,21 @@ class AgendamentoController extends Controller
         $idempresa = $agendamentos->pluck('cadastro_de_empresas_id')->unique();
         $empresaAgendamento = cadastro_de_empresa::whereIn('id', $idempresa)->get();
 
+        $ativos = false;
+        $pendete = false;
+        $confirmado = true;
+        $finalizado = false;
+        $cancelado = false;
+
 
         return view('Agedamentos.Clientes.ClientesMeusAgendamentos', [
             'agendamentos' => $agendamentos,
             'empresaAgendamento' => $empresaAgendamento,
+            'ativos' =>   $ativos,
+            'pendete' => $pendete,
+            'confirmado' =>  $confirmado,
+            'finalizado' =>  $finalizado,
+            'cancelado' =>  $cancelado,
         ]);
     }
 
@@ -574,10 +605,21 @@ class AgendamentoController extends Controller
         $idempresa = $agendamentos->pluck('cadastro_de_empresas_id')->unique();
         $empresaAgendamento = cadastro_de_empresa::whereIn('id', $idempresa)->get();
 
+        $ativos = false;
+        $pendete = false;
+        $confirmado = false;
+        $finalizado = true;
+        $cancelado = false;
+
 
         return view('Agedamentos.Clientes.ClientesMeusAgendamentos', [
             'agendamentos' => $agendamentos,
             'empresaAgendamento' => $empresaAgendamento,
+            'ativos' =>   $ativos,
+            'pendete' => $pendete,
+            'confirmado' =>  $confirmado,
+            'finalizado' =>  $finalizado,
+            'cancelado' =>  $cancelado,
         ]);
     }
     public function show_Agendamento_Cancelados_Clientes()
@@ -595,10 +637,22 @@ class AgendamentoController extends Controller
         $idempresa = $agendamentos->pluck('cadastro_de_empresas_id')->unique();
         $empresaAgendamento = cadastro_de_empresa::whereIn('id', $idempresa)->get();
 
+        $ativos = false;
+        $pendete = false;
+        $confirmado = false;
+        $finalizado = false;
+        $cancelado = true;
+
+
 
         return view('Agedamentos.Clientes.ClientesMeusAgendamentos', [
             'agendamentos' => $agendamentos,
             'empresaAgendamento' => $empresaAgendamento,
+            'ativos' =>   $ativos,
+            'pendete' => $pendete,
+            'confirmado' =>  $confirmado,
+            'finalizado' =>  $finalizado,
+            'cancelado' =>  $cancelado,
         ]);
     }
 

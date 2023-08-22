@@ -4,33 +4,33 @@
 
 @section('conteudo')
 
-<x-meu_agendamentos-clientes />
+    <x-meu_agendamentos-clientes />
 
 
     <div class="col-md-12 offset-md-0 pt-3">
         <div class="row g-12">
 
-
-
             @if (count($agendamentos) > 0)
-                <x-meus_agendamentos_clientes :agendamentos="$agendamentos" :empresaAgendamento="$empresaAgendamento"
-
-                />
+                <x-meus_agendamentos_clientes :agendamentos="$agendamentos" :empresaAgendamento="$empresaAgendamento" />
             @else
-                <div class="pt-2">
-                    <div class="alert alert-warning pt-2" role="alert">
-                        Você ainda não tem atendimentos a serem confirmados
-                    </div>
-                </div>
+
+                @if ($ativos)
+                    <x-Alert texto="Você ainda não tem atendimentos ativos" />
+                @elseif ($pendete)
+                    <x-Alert texto="Você ainda não tem atendimentos pendetes" />
+                @elseif ($confirmado)
+                    <x-Alert cor="info" texto="Você ainda não tem atendimentos confirmados" />
+                @elseif ($finalizado)
+                    <x-Alert cor="success" texto="Você ainda não tem atendimentos finalizado" />
+                @elseif ($cancelado)
+                    <x-Alert cor="danger" texto="Você ainda não tem atendimentos Cancelado" />
+                @endif
+
             @endif
-
-
-            <x-pagination :paginatedItems="$agendamentos" />
-
 
         </div>
 
-
+        <x-pagination :paginatedItems="$agendamentos" />
     </div>
 
 
