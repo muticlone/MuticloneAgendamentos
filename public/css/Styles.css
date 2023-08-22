@@ -133,6 +133,8 @@ li:last-child {
   }
 
 
+
+
 }
 
 
@@ -700,5 +702,12 @@ svg {
 
 .inline-containerStatusAgendamento {
     display: inline-flex;
+
+}
+
+
+.btn_agendamentos_clientes{
+    min-width: 110px;
+    max-width: 110px;
 
 }
