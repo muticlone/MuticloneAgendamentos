@@ -143,19 +143,23 @@
                                 value="{{ $agendamento->formaDepagamentoAgendamento }}">
                         </div>
                         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-                            <h5 class="card-title">Data do agendamento</h5>
-                            <input type="datetime-local" class="form-control  campodesablitado" id="dataHorarioAgendamento"
-                                name="dataHorarioAgendamento" aria-describedby="validationTooltipUsernamePrepend"
-                                value="{{ $agendamento->dataHorarioAgendamento }}" />
+                            <form id="FormReagendar"  action="/reagendar{{ $agendamento->id }}" method="POST">
+                                @csrf
+                                @method('PUT')
+
+                                <h5 class="card-title">Data do agendamento</h5>
+                                <input type="datetime-local" class="form-control  campodesablitado"
+                                    id="dataHorarioAgendamento" name="dataHorarioAgendamento"
+                                    aria-describedby="validationTooltipUsernamePrepend"
+                                    value="{{ $agendamento->dataHorarioAgendamento }}" required/>
+                            </form>
                         </div>
 
 
 
-                        <x-status-agendamento
-                        agendamento_confirmado="{{ $agendamento->confirmado }}"
-                        agendamento_finalizado="{{ $agendamento->finalizado }}"
-                        agendamento_cancelado="{{$agendamento->cancelado  }}"
-                        />
+                        <x-status-agendamento agendamento_confirmado="{{ $agendamento->confirmado }}"
+                            agendamento_finalizado="{{ $agendamento->finalizado }}"
+                            agendamento_cancelado="{{ $agendamento->cancelado }}" />
 
                         </br>
                         {{-- <div class="col-12 d-flex justify-content-end align-items-center">
@@ -172,95 +176,13 @@
 
                     </div>
 
-                    {{-- <div class="button-containerMeusClientesAgendamentosDetalhes">
-                        @if ($agendamento->confirmado == 0)
-                            <div class="btnMeusClientesAgendamentoDetalhes">
-                                <form action="/confirmar{{ $agendamento->id }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
 
-
-                                    <button type="submit" id="ConfirmarAgendamento" style="display: block;"
-                                        class="btn btn-success btntamanhoMeusClientesAgendamentoDetalhes"> Confirmar </button>
-
-                                </form>
-                            </div>
-                        @endif
-                        @if ($agendamento->confirmado == 1 && $agendamento->finalizado == 0)
-                            <div class="btnMeusClientesAgendamentoDetalhes">
-                                <form action="/finalizar{{ $agendamento->id }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" style="display: block;" id="FinalizarAgendamento"
-                                        class="btn btn-success btntamanhoMeusClientesAgendamentoDetalhes  mx-1 ">
-                                        Finalizar
-                                    </button>
-                                </form>
-
-                            </div>
-                        @endif
-
-                        @if ($agendamento->finalizado == 0)
-                            <div class="btnMeusClientesAgendamentoDetalhes">
-                                <button type="submit" id="reagendarAgendamento" class="btn btn-info btntamanhoMeusClientesAgendamentoDetalhes mx-1 ">
-                                    Reagendar </button>
-                                <a style="display: none;" id="voltar" class="btn btn-info btntamanhoMeusClientesAgendamentoDetalhes  mx-1 ">Voltar</a>
-                            </div>
-
-
-                            <div class="btnMeusClientesAgendamentoDetalhes">
-                                <form action="/cancelar{{ $agendamento->id }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" id="cancelarAgendamento" class="btn btn-danger btntamanhoMeusClientesAgendamentoDetalhes  mx-1">
-                                        Cancelar </button>
-                                    <a style="display: none;" id="cancelaracao"
-                                        class="btn btn-danger btntamanhoMeusClientesAgendamentoDetalhes  mx-1 ">Cancelar</a>
-
-
-
-
-
-                            </div>
-
-
-                    </div>
-
-                    <div class="col-12 pt-2">
-                        <textarea class="form-control" style="display: none;" name="motivoCacelamento" id="motivoCacelamento" cols="50"
-                            placeholder="Digite o motivo do cancelamento" minlength="50" maxlength="250" rows="3" required></textarea>
-                    </div>
-                    </form>
-                    @endif
-                    @if ($agendamento->finalizado == 1)
-                        @if (!is_null($agendamento->nota))
-                            <div class="row g-12">
-                                <div class="col-lg-12 col-sm-12 col-md-12">
-                                    <label for="input-6"> Avaliação do cliente</label>
-                                    <p>
-                                        {{ $user->name }}:
-                                        {{ $agendamento->comentario }}
-                                    </p>
-                                </div>
-                                <div class="col-lg-12 col-sm-12 col-md-12">
-
-                                    <input id="input-6" name="input-6" class="rating rating-loading pt-br"
-                                        value="{{ $agendamento->nota }}" data-min="0" data-max="5" data-step="0.1"
-                                        data-readonly="true" data-show-clear="false">
-
-                                </div>
-
-
-                            </div>
-                        @endif
-
-                    @endif --}}
 
                     <x-btn-agendamento-detalhes agendamento_confirmado="{{ $agendamento->confirmado }}"
                         agendamento_finalizado="{{ $agendamento->finalizado }}" agendamento_id="{{ $agendamento->id }}"
-                        agendamento_cancelado="{{$agendamento->cancelado  }}"
-                        agendamento_motivoCancelamento="{{$agendamento->motivoCancelamento}}"
-                        />
+                        agendamento_cancelado="{{ $agendamento->cancelado }}"
+                        agendamento_motivoCancelamento="{{ $agendamento->motivoCancelamento }}"
+                        agendamento_dataHorarioAgendamento="{{ $agendamento->dataHorarioAgendamento }}" />
 
 
                     @if ($agendamento->finalizado == 1)

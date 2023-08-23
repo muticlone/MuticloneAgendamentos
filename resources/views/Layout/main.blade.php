@@ -10,7 +10,7 @@
     <title>@yield('title')</title>
 
     <!-- fonte do google -->
-   <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
     <!-- css bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -42,6 +42,7 @@
 
 <body class="container">
     <header>
+
 
 
 
@@ -92,9 +93,10 @@
 
                                 <li class="nav-item">
 
-                                    <a class="nav-link active text-nowrap" aria-current="page" href="{{ route('clientes.agendamentos', ['status' => 'ativos']) }}">
+                                    <a class="nav-link active text-nowrap" aria-current="page"
+                                        href="{{ route('clientes.agendamentos', ['status' => 'ativos']) }}">
 
-                                       Meus agendamentos
+                                        Meus agendamentos
                                     </a>
                                 </li>
                                 <li class="nav-item">

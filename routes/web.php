@@ -27,7 +27,6 @@ Route::get('/get-cnpj/{cnpj}', function ($cnpj) {
 
 
 
-
 Route::get('/home/empresas', [HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 Route::get('/empresas/dados/{id}', [HomeController::class, 'show']);

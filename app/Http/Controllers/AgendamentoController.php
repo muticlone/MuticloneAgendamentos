@@ -167,7 +167,7 @@ class AgendamentoController extends Controller
 
         ) {
             $Agendamento->create($data);
-            return redirect('/meus/agendamentos')->with('msg', 'Agendado com sucesso!');
+            return redirect('/meus/agendamentos/ativos')->with('msg', 'Agendado com sucesso!');
         } else {
             return redirect('/')->with('msgErro', 'Modicação não permitida!');
         }
@@ -238,7 +238,7 @@ class AgendamentoController extends Controller
 
         ) {
             $Agendamento->create($data);
-            return redirect('/meus/agendamentos')->with('msg', 'Agendado com sucesso!');
+            return redirect('/meus/agendamentos/ativos')->with('msg', 'Agendado com sucesso!');
         } else {
             return redirect('/')->with('msgErro', 'Modicação não permitida!');
         }
