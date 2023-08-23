@@ -364,6 +364,21 @@ class AgendamentoController extends Controller
         return redirect('/meus/agendamentos/empresa/' .  $empresa.'/cancelados')->with('msg', 'Finalizado com sucesso!');
     }
 
+    public function ReagendarPedidoEmpresaEcliente(Request $request){
+        $novaData =  $request->dataHorarioAgendamento;
+
+        $agendamento = Agendamento::findOrFail($request->id);
+        $agendamento->confirmado = false;
+        $agendamento->finalizado = false;
+        $agendamento->cancelado = false;
+        $agendamento->save();
+        $empresa =  $agendamento->cadastro_de_empresas_id;
+        return redirect('/meus/agendamentos/empresa/' .  $empresa.'/pendentes')->with('msg', 'Reagendado com sucesso!');
+    }
+
+
+
+
     public function show_Agendamentos_Clientes($status)
     {
         /** @var \App\User $user */

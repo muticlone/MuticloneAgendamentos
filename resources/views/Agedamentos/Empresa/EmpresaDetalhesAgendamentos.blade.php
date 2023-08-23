@@ -143,7 +143,7 @@
                                 value="{{ $agendamento->formaDepagamentoAgendamento }}">
                         </div>
                         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-                            <form id="FormReagendar"  action="/reagendar{{ $agendamento->id }}" method="POST">
+                            <form id="FormReagendar"  action="/reagendar/{{ $agendamento->id }}" method="POST">
                                 @csrf
                                 @method('PUT')
 
