@@ -10,6 +10,8 @@ use App\Models\cadastro_de_empresa;
 use App\Models\Agendamento;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\URL;
 
 
 class AgendamentoController extends Controller
@@ -338,8 +340,7 @@ class AgendamentoController extends Controller
         $empresa =  $agendamento->cadastro_de_empresas_id;
         $agendamento->confirmado = true;
         $agendamento->save();
-        return redirect('/meus/agendamentos/empresa/' .  $empresa.'/confirmados')->with('msg', 'Confirmado com sucesso!');
-
+        return redirect('/meus/agendamentos/empresa/' .  $empresa . '/confirmados')->with('msg', 'Confirmado com sucesso!');
     }
 
     public function finalizarPedidoEmpresa(Request $request)
@@ -348,11 +349,14 @@ class AgendamentoController extends Controller
         $empresa =  $agendamento->cadastro_de_empresas_id;
         $agendamento->finalizado = true;
         $agendamento->save();
-        return redirect('/meus/agendamentos/empresa/' .  $empresa.'/finalizados')->with('msg', 'Finalizado com sucesso!');
+        return redirect('/meus/agendamentos/empresa/' .  $empresa . '/finalizados')->with('msg', 'Finalizado com sucesso!');
     }
 
-    public function cancelarPedidoEmpresa(Request $request)
-    {
+    public function cancelarPedidoEmpresa(Request $request){
+
+        $urlAnterior = URL::previous();
+
+
         $motivoCacelamento =  $request->motivoCacelamento;
         $agendamento = Agendamento::findOrFail($request->id);
         $agendamento->confirmado = false;
@@ -361,19 +365,38 @@ class AgendamentoController extends Controller
         $agendamento->motivoCancelamento =  $motivoCacelamento;
         $agendamento->save();
         $empresa =  $agendamento->cadastro_de_empresas_id;
-        return redirect('/meus/agendamentos/empresa/' .  $empresa.'/cancelados')->with('msg', 'Finalizado com sucesso!');
+
+        if (Str::contains(  $urlAnterior, '/meus/clientes/agendamentos/detalhes/')) {
+
+            return redirect('/meus/agendamentos/empresa/' . $empresa . '/cancelados')->with('msg', 'Cancelado com sucesso!');
+        } else {
+            return redirect('/meus/agendamentos/cancelados')->with('msg', 'Cancelado com sucesso!');
+        }
+
     }
 
-    public function ReagendarPedidoEmpresaEcliente(Request $request){
-        $novaData =  $request->dataHorarioAgendamento;
+    public function ReagendarPedidoEmpresaEcliente(Request $request)
+    {
 
+
+        $urlAnterior = URL::previous();
+        $novaData =  $request->dataHorarioAgendamento;
         $agendamento = Agendamento::findOrFail($request->id);
         $agendamento->confirmado = false;
         $agendamento->finalizado = false;
         $agendamento->cancelado = false;
+        $agendamento->dataHorarioAgendamento =   $novaData;
         $agendamento->save();
         $empresa =  $agendamento->cadastro_de_empresas_id;
-        return redirect('/meus/agendamentos/empresa/' .  $empresa.'/pendentes')->with('msg', 'Reagendado com sucesso!');
+
+
+        if (Str::contains(  $urlAnterior, '/meus/clientes/agendamentos/detalhes/')) {
+
+            return redirect('/meus/agendamentos/empresa/' .  $empresa . '/pendentes')->with('msg', 'Reagendado com sucesso!');
+        } else {
+            return redirect('/meus/agendamentos/pendentes')->with('msg', 'Reagendado com sucesso!');
+        }
+
     }
 
 
@@ -430,8 +453,12 @@ class AgendamentoController extends Controller
             'agendamentos' => $agendamentos,
             'empresaAgendamento' => $empresaAgendamento,
             'statuses' => $statuses,
+
         ]);
     }
+
+
+
 
     public function show_Agendamentos_Detalhes_Clientes($id)
     {

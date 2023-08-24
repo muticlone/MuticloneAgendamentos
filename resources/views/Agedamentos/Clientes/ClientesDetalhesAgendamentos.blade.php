@@ -135,44 +135,33 @@
                                         value="{{ $agendamento->formaDepagamentoAgendamento }}">
                                 </div>
                                 <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-                                    <h5 class="card-title">Data do agendamento</h5>
-                                    <input type="datetime-local" class="form-control  campodesablitado"
-                                        id="dataHorarioAgendamento" name="dataHorarioAgendamento"
-                                        aria-describedby="validationTooltipUsernamePrepend"
-                                        value="{{ $agendamento->dataHorarioAgendamento }}" />
+                                    <form id="FormReagendar"  action="/reagendar/{{ $agendamento->id }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+
+                                        <h5 class="card-title">Data do agendamento</h5>
+                                        <input type="datetime-local" class="form-control  campodesablitado"
+                                            id="dataHorarioAgendamento" name="dataHorarioAgendamento"
+                                            aria-describedby="validationTooltipUsernamePrepend"
+                                            value="{{ $agendamento->dataHorarioAgendamento }}" required/>
+                                    </form>
                                 </div>
 
 
-                                    <x-status-agendamento agendamento_confirmado="{{ $agendamento->confirmado }}"
-                                        agendamento_finalizado="{{ $agendamento->finalizado }}"
-                                        agendamento_cancelado="{{ $agendamento->cancelado }}" />
+                                <x-status-agendamento agendamento_confirmado="{{ $agendamento->confirmado }}"
+                                    agendamento_finalizado="{{ $agendamento->finalizado }}"
+                                    agendamento_cancelado="{{ $agendamento->cancelado }}" />
 
 
+                                <x-btn-agendamento-detalhes
+                                    agendamento_finalizado="{{ $agendamento->finalizado }}"
+                                    agendamento_id="{{ $agendamento->id }}"
+                                    agendamento_cancelado="{{ $agendamento->cancelado }}"
+                                    agendamento_motivoCancelamento="{{ $agendamento->motivoCancelamento }}"
+                                    agendamento_dataHorarioAgendamento="{{ $agendamento->dataHorarioAgendamento }}" />
 
 
                                 @if ($agendamento->finalizado == 0)
-                                    <div class="col-12 pt-2">
-                                        <textarea class="form-control" style="display: none;" name="motivoCacelamento" id="motivoCacelamento" cols="50"
-                                            placeholder="Digite o motivo do cancelamento" minlength="50" maxlength="250" rows="3"></textarea>
-                                    </div>
-
-
-
-                                    <div class="col-12 pt-5" id="reagendar" align="center">
-                                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                            <button type="submit" id="reagendarAgendamento" style="display: block;"
-                                                class="btn btn-info btnDetalhes"> Reagendar </button>
-                                            <a style="display: none;" id="voltar"
-                                                class="btn btn-info btnDetalhes">Voltar</a>
-
-
-                                            <button type="submit" id="cancelarAgendamento" style="display: block;"
-                                                class="btn btn-danger btnDetalhes"> Cancelar </button>
-                                            <a style="display: none;" id="cancelaracao"
-                                                class="btn btn-danger btnDetalhes">Cancelar</a>
-                                        </div>
-
-                                    </div>
                                 @else
                                     @if (is_null($agendamento->nota))
                                         <div align="center">
@@ -201,8 +190,8 @@
                                                     data-min="0" data-max="5" data-step="1" data-show-clear="false"
                                                     value="{{ $agendamento->nota }}">
 
-                                                <textarea class="form-control" name="comentario" cols="50" placeholder="Faça um breve comentário"
-                                                    minlength="15" maxlength="250" rows="3">{{ $agendamento->comentario }}</textarea>
+                                                <textarea class="form-control" name="comentario" cols="50" placeholder="Faça um breve comentário" minlength="15"
+                                                    maxlength="250" rows="3">{{ $agendamento->comentario }}</textarea>
                                                 </br>
                                                 <button type="submit" class="btn btn-info btn-sm">Reavaliar</button>
                                             </form>
@@ -240,9 +229,8 @@
                             <div class="card-body">
                                 <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3856.!2d0!3d0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7463b12bfda1035%3A0x373937af9e59ad56!2s{{ $empresaItem['logradouro'] }}%20%2C%20{{ $empresaItem['numero_endereco'] }}%20-%20{{ $empresaItem['bairro'] }}%2C%20{{ $empresaItem['cidade'] }}%20-%20{{ $empresaItem['uf'] }}%2C%2045065-000!5e0!3m2!1spt-BR!2sbr!4v1675985984301!5m2!1spt-BR!2sbr"
-                                    width="100%" height="100%" style="border: 0; border-radius: 10px;"
-                                    allowfullscreen="" loading="lazy"
-                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    width="100%" height="100%" style="border: 0; border-radius: 10px;" allowfullscreen=""
+                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 
                                 <h5 class="vertical-align-middle">
@@ -351,35 +339,12 @@
 
 
 
-    <script>
-        document.getElementById('cancelaracao').addEventListener('click', function() {
-            var dataHorarioAgendamento = "{{ $agendamento->dataHorarioAgendamento }}";
-
-            // Converter a data e hora para o formato desejado (yyyy-MM-ddThh:mm)
-            var dataHoraOriginal = new Date(dataHorarioAgendamento);
-            var dataHoraFormatada = dataHoraOriginal.toISOString().slice(0, 16);
 
 
 
 
 
-            var btcancelarAgendamento = document.getElementById('cancelarAgendamento');
-            var dataHorarioAgendamento = document.getElementById('dataHorarioAgendamento');
-            var btcancelaracao = document.getElementById('cancelaracao');
-            btcancelaracao.style.display = 'none';
-            btcancelarAgendamento.style.display = 'block';
-            dataHorarioAgendamento.value = dataHoraFormatada;
-            dataHorarioAgendamento.classList.add('campodesablitado');
 
-            // Reativar a funcionalidade original para o próximo clique
-            primeiroClique = true;
-        });
-    </script>
-
-
-
-
-    <script src="/js/DetalhesAgendamentos.js"></script>
 
 
 @endsection
