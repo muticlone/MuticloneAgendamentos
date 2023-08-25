@@ -511,6 +511,6 @@ class AgendamentoController extends Controller
         $agendamento->save();
 
 
-        return redirect('/agendamentos/finalizados')->with('msg', 'Enviado com sucesso!');
+        return redirect('/meus/agendamentos/finalizados')->with('msg', 'Enviado com sucesso!');
     }
 }

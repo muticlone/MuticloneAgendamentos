@@ -205,7 +205,10 @@
 
 
                             </div>
+                        @else
+                        <h6>Seu cliente ainda não avaliou agendamento</h6>
                         @endif
+
 
                     @endif
 

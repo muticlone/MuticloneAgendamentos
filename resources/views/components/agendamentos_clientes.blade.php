@@ -56,6 +56,12 @@
                                 </div>
                             </div>
                             <div class="mb-3">
+                                <h6 class="card-title">Forma de pagamento</h6>
+                                <input type="text" class="form-control campodesablitado"
+                                    value="{{ $agendamento->formaDepagamentoAgendamento }}">
+                            </div>
+
+                            <div class="mb-3">
                                 <h6 class="card-title">Data do agendamento</h6>
                                 <input type="datetime-local" class="form-control campodesablitado"
                                     id="dataHorarioAgendamento" name="dataHorarioAgendamento"
@@ -70,13 +76,23 @@
 
 
                             @if ($agendamento->confirmado == 0 && $agendamento->cancelado == 0)
+                            <div class="d-flex justify-content-between">
                                 <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => $agendamento->id, 'idEmpresa' => $empresa_id]) }}"
-                                    class="btn btn-warning position-relative">Detalhes
-                                    <span
-                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                        5
-                                    </span>
+                                   class="btn btn-warning position-relative d-inline-flex align-items-center">
+                                    Detalhes
+                                    <span class="badge rounded-pill bg-danger ms-2">5</span>
                                 </a>
+
+                                <form action="/confirmar{{ $agendamento->id }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" id="ConfirmarAgendamento" class="btn btn-success btntamanhoMeusClientesAgendamentoDetalhes">
+                                        Confirmar
+                                    </button>
+                                </form>
+                            </div>
+
+
                             @elseif ($agendamento->finalizado == 1 && $agendamento->cancelado == 0)
                                 <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => $agendamento->id, 'idEmpresa' => $empresa_id]) }}"
                                     class="btn btn-success position-relative">Detalhes
@@ -86,6 +102,7 @@
                                     </span>
                                 </a>
                             @elseif ($agendamento->confirmado == 1 && $agendamento->cancelado == 0)
+                            <div class="d-flex justify-content-between">
                                 <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => $agendamento->id, 'idEmpresa' => $empresa_id]) }}"
                                     class="btn btn-info position-relative">Detalhes
                                     <span
@@ -93,6 +110,15 @@
                                         5
                                     </span>
                                 </a>
+                                <form action="/finalizar{{ $agendamento->id }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" style="display: block;" id="FinalizarAgendamento"
+                                        class="btn btn-success btntamanhoMeusClientesAgendamentoDetalhes  mx-1 ">
+                                        Finalizar
+                                    </button>
+                                </form>
+                            </div>
                             @elseif ($agendamento->cancelado == 1)
                             <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => $agendamento->id, 'idEmpresa' => $empresa_id]) }}"
                                 class="btn btn-danger position-relative">Detalhes
