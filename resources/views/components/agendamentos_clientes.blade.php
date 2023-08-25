@@ -3,8 +3,10 @@
 
     <div class="container">
         <div class="row g-2 pt-2">
+
             @foreach ($clienteagendamento as $agendamento)
                 <div class="col-lg-4 col-md-6 col-sm-12 pt-2">
+
                     <div class="card">
 
                         <div class="card-body">

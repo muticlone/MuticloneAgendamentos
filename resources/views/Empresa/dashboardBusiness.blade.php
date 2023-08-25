@@ -1,47 +1,131 @@
 @extends('adminlte::page')
 
-@section('title', 'My View')
+@section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>My View</h1>
+
 @stop
 
 @section('content')
     <div class="row g-12">
 
 
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+        <div class="col-lg-12 col-sm-12 col-md-12 pt-2">
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>150</h3>
-                    <p>Pedidos no mês atual</p>
+                    <h3>{{ $quantidadedepedidos }}</h3>
+                    <p>Total de Pedidos</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-shopping-cart"></i>
                 </div>
-                <a href="#" class="small-box-footer">
-                    More info <i class="fas fa-arrow-circle-right"></i>
+
+                <a href="/meus/agendamentos/empresa/{{ $idempresa }}/finalizados" class="small-box-footer">
+                    Mais informações <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
         </div>
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-            <div class="info-box">
-                <span class="info-box-icon bg-info"><i class="far fa-bookmark"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Volor recebido no mês</span>
-                    <span class="info-box-number">R$ 41.410,30</span>
-                    <div class="progress">
-                        <div class="progress-bar bg-info" style="width: 50%"></div>
+        <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Faturamento Mensal</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+
                     </div>
-                    <span class="progress-description">
-                        50% atigindo Meta R$ 82.820,60
-                    </span>
                 </div>
+                <div class="card-body">
+                    <div class="">
+                        <img src="/img/logo_empresas/{{ $empresa->image }}" class="img-fluid  img_dashboardbusiness"
+                        alt="{{ $empresa->razaoSocial }}">
+                        <div class="info-box-content">
+                            <span class="info-box-text">Volor recebido no mês atual</span>
+                            <span class="info-box-number">
+                                {{ 'R$ ' . number_format( $valorMesAtual , 2, ',', '.') }}
+                            </span>
+                            <div class="progress">
+                                <div class="progress-bar bg-info" style="width: {{  $porcentagem_atingidamensal }}%"></div>
+                            </div>
+                            <span class="progress-description">
+                                @if ($porcentagem_atingidamensal == 100)
+                                {{ number_format(  $porcentagem_atingidamensal, 2, ',', '.') }}%
+                                </br>
+                                Meta mensal concluida
+                                @else
+                                {{ number_format(  $porcentagem_atingidamensal, 2, ',', '.') }}% da
+                                Meta mensal {{ 'R$ ' . number_format($metamensal, 2, ',', '.') }}
+                                <br/>
+                                Falta R$ {{ 'R$ ' . number_format($ValorFaltaParaChegarNaMetamensal, 2, ',', '.') }}
+
+
+                                @endif
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
+        </div>
+        <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Faturamento Anual</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart">
+                        <div class="chartjs-size-monitor">
+                            <div class="">
+
+                                <img src="/img/logo_empresas/{{ $empresa->image }}" class="img-fluid  img_dashboardbusiness"
+                                        alt="{{ $empresa->razaoSocial }}">
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Volor recebido no ano</span>
+                                    <span class="info-box-number">
+                                        {{ 'R$ ' . number_format( $faturamentoAnual , 2, ',', '.') }}
+                                    </span>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-info" style="width: {{    $porcentagem_atingidaanual }}%"></div>
+                                    </div>
+                                    <span class="progress-description">
+                                        @if ($porcentagem_atingidaanual == 100)
+                                        {{ number_format(  $porcentagem_atingidaanual, 2, ',', '.') }}%
+                                        </br>
+                                         Meta anual concluida
+                                        @else
+                                        {{ number_format(  $porcentagem_atingidaanual, 2, ',', '.') }} % da
+                                        Meta anual {{ 'R$ ' . number_format($metaAnual, 2, ',', '.') }}
+
+
+
+                                        <br/>
+                                        Falta  {{ 'R$ ' . number_format($ValorFaltaParaChegarNaMetaAnual, 2, ',', '.') }}
+
+                                        @endif
+
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
         </div>
 
         <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
-            <div class="card card-success">
+            <div class="card card-info">
                 <div class="card-header">
                     <h3 class="card-title">Faturamento Anual</h3>
                     <div class="card-tools">
@@ -70,10 +154,12 @@
             </div>
         </div>
 
+
+
         <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
-            <div class="card card-danger">
+            <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Produtos</h3>
+                    <h3 class="card-title">Formas de pagamento</h3>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
                             <i class="fas fa-minus"></i>
@@ -110,25 +196,53 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <link href="/css/StylesDashboard.css" rel="stylesheet" />
 @stop
 
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <script>
         var ctx = document.getElementById('pieChart').getContext('2d');
+        var formasContagem = @json($formasContagem);
 
+        // Filtra para remover entradas com valores igual a zero
+        formasContagem = Object.fromEntries(Object.entries(formasContagem).filter(([key, value]) => value !== 0));
+
+        var labelsFormaPagamento = Object.keys(formasContagem);
+        var dataFormaPagamento = Object.values(formasContagem);
+
+        // Mapeia as chaves para rótulos personalizados, se necessário
+        var labelsPersonalizados = labelsFormaPagamento.map(function(label) {
+            if (label === 'Dinheiro') {
+                return 'Pagamento em Dinheiro';
+            } else {
+                return label; // Mantém os outros rótulos
+            }
+        });
 
         var data = {
-            labels: ['produto 1', 'produto 2', 'produto 3', 'produto 4', 'produto 5'],
+            labels: labelsPersonalizados,
             datasets: [{
-                data: [12, 19, 3, 5, 2],
-                backgroundColor: ['red', 'blue', 'yellow', 'green', 'purple']
+                data: dataFormaPagamento,
+                backgroundColor: ['#FFFF00',
+                    '#1E90FF',
+                    'green',
+                    '#ADFF2F',
+                    'orange',
+                    '#DAA520',
+                    '#5F9EA0'
+                ]
             }]
         };
 
         var options = {
             responsive: true,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'right'
+                }
+            }
         };
 
         var pieChart = new Chart(ctx, {
@@ -138,18 +252,29 @@
         });
 
 
+
+
+
+
         var stackedBarCtx = document.getElementById('myStackedBarChart').getContext('2d');
+        var valorPorMes = @json($valorPorMes);
+
+        var meses = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+            'November', 'December'
+        ];
+
+        var dadosMeses = meses.map(function(mes) {
+            return valorPorMes[mes] || 0;
+        });
 
         var stackedBarData = {
-            labels: ['Janeiro', 'Fevereiro', 'março', 'Abril', 'Maio', 'Junho', 'julho', 'Agosto', 'Setembro',
-                'Novembro', 'Dezembro'
+            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+                'Novembro','Outubro', 'Dezembro'
             ],
             datasets: [{
                 label: 'Faturamento',
-
-                data: [10, 20, 30, 40, 50, 30, 70, 80, 10, 5, 10, 90],
-
-                backgroundColor: 'Blue',
+                data: dadosMeses,
+                backgroundColor: 'RGB(91, 192, 222)',
             }]
         };
 
@@ -161,7 +286,28 @@
                     stacked: true
                 },
                 y: {
-                    stacked: true
+                    stacked: true,
+                    ticks: {
+                        // Formatação para os valores do eixo y
+                        callback: function(value, index, values) {
+                            return 'R$ ' + value.toFixed(2); // Formatação como moeda (com 2 casas decimais)
+                        }
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            var label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += 'R$ ' + context.parsed.y.toFixed(
+                                2); // Formatação como moeda (com 2 casas decimais)
+                            return label;
+                        }
+                    }
                 }
             }
         };

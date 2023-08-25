@@ -8,6 +8,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Agendamento;
+use Carbon\Carbon;
 
 
 
@@ -94,30 +95,31 @@ class HomeController extends Controller
 
 
 
-            $agendamentos = Agendamento::where('cadastro_de_empresas_id', $id)
-                ->whereNotNull('nota')
-                ->whereNotNull('comentario')
-                ->whereNotNull('user_id')
-                ->get();
+        $agendamentos = Agendamento::where('cadastro_de_empresas_id', $id)
+            ->whereNotNull('nota')
+            ->whereNotNull('comentario')
+            ->whereNotNull('user_id')
+            ->get();
 
-            $notas = $agendamentos->pluck('nota');
-            $media = $notas->avg();
-            $user_id = $agendamentos->pluck('user_id');
+        $notas = $agendamentos->pluck('nota');
+        $media = $notas->avg();
+        $user_id = $agendamentos->pluck('user_id');
 
-            $useragendamento = User::whereIn('id',$user_id)->get();
-            $nome =  $useragendamento->pluck('name');
-
-
+        $useragendamento = User::whereIn('id', $user_id)->get();
+        $nome =  $useragendamento->pluck('name');
 
 
 
 
 
-        return view('Empresa.DadosEmpresa', ['empresa' => $empresa,
-         'Admempresa' =>  $Admempresa, 'servico' => $servico,
 
-         'media' =>  $media , 'agendamentos' => $agendamentos,
-         'nome' =>  $nome
+
+        return view('Empresa.DadosEmpresa', [
+            'empresa' => $empresa,
+            'Admempresa' =>  $Admempresa, 'servico' => $servico,
+
+            'media' =>  $media, 'agendamentos' => $agendamentos,
+            'nome' =>  $nome
         ]);
     }
 
@@ -185,11 +187,91 @@ class HomeController extends Controller
         ]);
     }
 
-    public function dashboardBusiness()
+    public function dashboardBusiness($id)
     {
 
+        $user = auth()->user();
+        $empresa = cadastro_de_empresa::findOrFail($id);
+        $metaAnual = 50000;
+        if ($user->id != $empresa->user_id) {
+            return redirect('/dashboard');
+        } else {
+            $agendamentos =  Agendamento::where('cadastro_de_empresas_id', $id)->where('finalizado', 1)->get();
+
+            $finalizado =  $agendamentos->pluck('finalizado')->toArray();
+            $contagemFinalizados = array_count_values($finalizado);
+            $quantidadedepedidos = $contagemFinalizados[1] ?? 0;
+
+            $idempresa =  $agendamentos->pluck('cadastro_de_empresas_id')->first();
+            $empresa = cadastro_de_empresa::findOrfail($idempresa);
+
+            $valorRecebido =  $agendamentos->pluck('valorTotalAgendamento')->toArray();
+            $valorRecebidoNumerico = array_map('intval', $valorRecebido);
 
 
-        return view('Empresa.dashboardBusiness');
+            $faturamentoAnual = array_sum($valorRecebidoNumerico);
+            $ValorFaltaParaChegarNaMetaAnual = $metaAnual - $faturamentoAnual;
+            $porcentagem_atingidaanual = ($faturamentoAnual / $metaAnual) * 100;
+            if ( $porcentagem_atingidaanual > 100) {
+                $porcentagem_atingidaanual = 100;
+            }
+
+
+
+
+            $valorPorMes = [];
+            $mesAtual = Carbon::now()->format('F');
+
+            for ($mes = 1; $mes <= 12; $mes++) {
+                $agendamentoFaturamentoanual = Agendamento::where('cadastro_de_empresas_id', $id)
+                    ->where('finalizado', 1)
+                    ->whereMonth('updated_at', $mes)
+                    ->get();
+
+                $valorRecebidoMes = $agendamentoFaturamentoanual->sum('valorTotalAgendamento');
+                $nomeMes = date('F', mktime(0, 0, 0, $mes, 1));
+                $valorPorMes[$nomeMes] = $valorRecebidoMes;
+
+                if ($nomeMes === $mesAtual) {
+                    $valorMesAtual = $valorRecebidoMes;
+                    $metamensal = $metaAnual/12;
+                    $ValorFaltaParaChegarNaMetamensal = $metamensal - $valorMesAtual;
+
+                    $porcentagem_atingidamensal = ( $valorMesAtual / $metamensal) * 100;
+                    if ($porcentagem_atingidamensal > 100) {
+                        $porcentagem_atingidamensal = 100;
+                    }
+
+                }
+            }
+
+
+
+
+
+            $formaPagamentoContagemTotal = [];
+            $formasPagamento = $agendamentos->pluck('formaDepagamentoAgendamento')->toArray();
+            $formaPagamentoContagemTotal = array_count_values($formasPagamento);
+
+
+
+
+
+        }
+
+        return view('Empresa.dashboardBusiness', [
+            'quantidadedepedidos' => $quantidadedepedidos,
+            'idempresa' => $idempresa, 'faturamentoAnual' =>  $faturamentoAnual,
+            'valorPorMes' =>  $valorPorMes ,
+            'formasContagem' =>  $formaPagamentoContagemTotal,
+            'valorMesAtual' =>  $valorMesAtual,
+            'ValorFaltaParaChegarNaMetaAnual' =>  $ValorFaltaParaChegarNaMetaAnual,
+            'metaAnual' =>  $metaAnual,
+            'porcentagem_atingidaanual' =>   $porcentagem_atingidaanual,
+            'ValorFaltaParaChegarNaMetamensal' =>  $ValorFaltaParaChegarNaMetamensal,
+            'metamensal' => $metamensal,
+            'porcentagem_atingidamensal' =>  $porcentagem_atingidamensal,
+            'empresa' =>  $empresa
+        ]);
     }
 }
