@@ -17,7 +17,7 @@
 
     <x-pagination :paginatedItems="$clienteagendamento" />
 
-
+    <script src="/js/Atualizar.js"></script>
 
 
 

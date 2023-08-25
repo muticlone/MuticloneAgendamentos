@@ -70,6 +70,7 @@ Route::put('/reagendar/{id}', [AgendamentoController::class, 'ReagendarPedidoEmp
 
 
 
+
 Route::get('/cadastro/servicos/{id}', [CadastroServicoController::class, 'create'])->name('cadastro.servicos')->middleware('auth');
 Route::post('/cadastrar/servico/{id}', [CadastroServicoController::class, 'store'])->name('cadastrar.servico')->middleware('auth');
 Route::get('/servicos/dados/{id}', [CadastroServicoController::class, 'show']);

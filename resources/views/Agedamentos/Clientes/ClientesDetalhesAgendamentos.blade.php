@@ -345,6 +345,6 @@
 
 
 
-
+    <script src="/js/Atualizar.js"></script>
 
 @endsection

@@ -18,10 +18,13 @@
 
         </div>
 
+
+
+
+
         <x-pagination :paginatedItems="$agendamentos" />
     </div>
 
+    <script src="/js/Atualizar.js"></script>
 
 @endsection
-
-

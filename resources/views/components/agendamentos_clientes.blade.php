@@ -6,7 +6,7 @@
             @foreach ($clienteagendamento as $agendamento)
                 <div class="col-lg-4 col-md-6 col-sm-12 pt-2">
                     <div class="card">
-                        {{-- <img src="..." class="card-img-top img-fluid" alt="..."> --}}
+
                         <div class="card-body">
                             <div class="mb-3">
 
@@ -109,8 +109,11 @@
                     </div>
                 </div>
             @endforeach
+
         </div>
     </div>
+
+
 
 
 
