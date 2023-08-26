@@ -10,10 +10,12 @@
 @stop
 
 @section('content')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+
     <div class="row g-12">
 
 
-        <div class="col-lg-12 col-sm-12 col-md-12 pt-2">
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{ $quantidadedepedidos }}</h3>
@@ -28,6 +30,80 @@
                 </a>
             </div>
         </div>
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>{{ $quantidadedepedidosmesatual }}</h3>
+                    <p>Total de Pedidos mês atual</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+
+                <a href="/meus/agendamentos/empresa/{{ $idempresa }}/finalizados" class="small-box-footer">
+                    Mais informações <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>{{ $clientemesatual }}</h3>
+                    <p>Clientes mês atual</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    More info <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>{{ $clientetotal }}</h3>
+                    <p>Clientes total</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    More info <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row g-12">
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Novos Clientes no mês atual</font>
+                        </font>
+                    </span>
+                    <span class="info-box-number">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">2.000</font>
+                        </font>
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row g-12">
+
+
         <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
             <div class="card card-info">
                 <div class="card-header">
@@ -49,7 +125,8 @@
                                 {{ 'R$ ' . number_format($valorMesAtual, 2, ',', '.') }}
                             </span>
                             <div class="progress">
-                                <div class="progress-bar bg-info" style="width: {{ $porcentagem_atingidamensal }}%"></div>
+                                <div class="progress-bar bg-info" style="width: {{ $porcentagem_atingidamensal }}%">
+                                </div>
                             </div>
                             <span class="progress-description">
                                 @if ($porcentagem_atingidamensal == 100)
@@ -60,7 +137,8 @@
                                     {{ number_format($porcentagem_atingidamensal, 2, ',', '.') }}% da
                                     Meta mensal {{ 'R$ ' . number_format($metamensal, 2, ',', '.') }}
                                     <br />
-                                    Falta R$ {{ 'R$ ' . number_format($ValorFaltaParaChegarNaMetamensal, 2, ',', '.') }}
+                                    Falta R$
+                                    {{ 'R$ ' . number_format($ValorFaltaParaChegarNaMetamensal, 2, ',', '.') }}
                                 @endif
 
                             </span>
@@ -95,7 +173,8 @@
                                         {{ 'R$ ' . number_format($faturamentoAnual, 2, ',', '.') }}
                                     </span>
                                     <div class="progress">
-                                        <div class="progress-bar bg-info" style="width: {{ $porcentagem_atingidaanual }}%">
+                                        <div class="progress-bar bg-info"
+                                            style="width: {{ $porcentagem_atingidaanual }}%">
                                         </div>
                                     </div>
                                     <span class="progress-description">
@@ -122,6 +201,8 @@
                 </div>
 
             </div>
+
+
 
 
         </div>
@@ -221,13 +302,47 @@
             </div>
         </div>
 
+        <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Pedidos por Mês</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
 
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart">
+                        <div class="chartjs-size-monitor">
+                            <div class="chartjs-size-monitor-expand">
+                                <div class=""></div>
+                            </div>
+                            <div class="chartjs-size-monitor-shrink">
+                                <div class=""></div>
+                            </div>
+                        </div>
+                        <canvas id="myStackedBarChartClientes"
+                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 367px;"
+                            width="734" height="500" class="chartjs-render-monitor"></canvas>
+                    </div>
+                </div>
 
-
-
-
+            </div>
+        </div>
 
     </div>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -235,7 +350,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+
     <link href="/css/StylesDashboard.css" rel="stylesheet" />
 @stop
 
@@ -340,10 +455,11 @@
 
         var donutChartCanvas = document.getElementById('donutChartmesAtual').getContext('2d');
 
-        var ProdutosContagemmesatual = @json( $produtosmensal);
+        var ProdutosContagemmesatual = @json($produtosmensal);
 
         // Filtra para remover entradas com valores igual a zero
-        ProdutosContagemmesatual = Object.fromEntries(Object.entries(ProdutosContagemmesatual).filter(([key, value]) => value !== 0));
+        ProdutosContagemmesatual = Object.fromEntries(Object.entries(ProdutosContagemmesatual).filter(([key, value]) =>
+            value !== 0));
 
         var labelsprodutosmesatual = Object.keys(ProdutosContagemmesatual);
         var dataprodutosmesatual = Object.values(ProdutosContagemmesatual);
@@ -441,5 +557,74 @@
             data: stackedBarData,
             options: stackedBarOptions
         });
+
+        var stackedBarCtx = document.getElementById('myStackedBarChartClientes').getContext('2d');
+        var valorPorMes = @json($clientePormes);
+
+
+
+        var meses = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+            'November', 'December'
+        ];
+
+        var dadosMeses = meses.map(function(mes) {
+            return valorPorMes[mes] || 0;
+        });
+
+        var stackedBarData = {
+            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+                'Novembro', 'Outubro', 'Dezembro'
+            ],
+            datasets: [{
+                label: 'Pedidos por mês',
+                data: dadosMeses,
+                backgroundColor: 'RGB(91, 192, 222)',
+            }]
+        };
+
+        var stackedBarOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    stacked: true
+                },
+                y: {
+                    stacked: true,
+                    ticks: {
+                        // Formatação para os valores do eixo y
+                        callback: function(value, index, values) {
+                            return value.toFixed(0); // Formatação como moeda (com 2 casas decimais)
+                        }
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            var label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += context.parsed.y.toFixed(
+                                0); // Formatação como moeda (com 2 casas decimais)
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        var myStackedBarChart = new Chart(stackedBarCtx, {
+            type: 'bar',
+            data: stackedBarData,
+            options: stackedBarOptions
+        });
     </script>
+
+
+
+
+
 @stop

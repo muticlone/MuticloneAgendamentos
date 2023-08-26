@@ -208,6 +208,13 @@ class HomeController extends Controller
             $valorRecebido =  $agendamentos->pluck('valorTotalAgendamento')->toArray();
             $valorRecebidoNumerico = array_map('intval', $valorRecebido);
 
+            $userId =  $agendamentos->pluck('user_id')->toArray();
+
+            $clientes = array_count_values($userId);
+            $clientetotal = count($clientes);
+
+
+
 
             $faturamentoAnual = array_sum($valorRecebidoNumerico);
             $ValorFaltaParaChegarNaMetaAnual = $metaAnual - $faturamentoAnual;
@@ -220,6 +227,7 @@ class HomeController extends Controller
 
 
             $valorPorMes = [];
+
             $mesAtual = Carbon::now()->format('F');
 
             for ($mes = 1; $mes <= 12; $mes++) {
@@ -229,8 +237,15 @@ class HomeController extends Controller
                     ->get();
 
                 $valorRecebidoMes = $agendamentoFaturamentoanual->sum('valorTotalAgendamento');
+
                 $nomeMes = date('F', mktime(0, 0, 0, $mes, 1));
                 $valorPorMes[$nomeMes] = $valorRecebidoMes;
+
+
+
+
+
+
 
                 if ($nomeMes === $mesAtual) {
                     $valorMesAtual = $valorRecebidoMes;
@@ -257,21 +272,44 @@ class HomeController extends Controller
             $produtosTotal = array_count_values($produto);
 
             $numeroMesAtual = Carbon::now()->month;
-            $produtosMesAtual = Agendamento::where('cadastro_de_empresas_id', $id)
+            $MesAtual = Agendamento::where('cadastro_de_empresas_id', $id)
                 ->where('finalizado', 1)
-                ->whereMonth('updated_at', $numeroMesAtual)
-                ->pluck('nomeServiçoAgendamento')
-                ->flatten()
-                ->toArray();
+                ->whereMonth('updated_at', $numeroMesAtual)->get();
 
-            $produtosmensal = array_count_values($produtosMesAtual);
 
+            $produtosmaisAgendadosMesatual =  $MesAtual->pluck('nomeServiçoAgendamento')->flatten()->toArray();
+            $produtosmensal = array_count_values($produtosmaisAgendadosMesatual);
+
+            $userIdmesatual =  $MesAtual->pluck('user_id')->toArray();
+            $clientesMesatual = array_count_values($userIdmesatual);
+            $clientemesatual = count($clientesMesatual);
+
+            $finalizadomesatual =  $MesAtual->pluck('finalizado')->toArray();
+            $contagemFinalizadosmesatual = array_count_values($finalizadomesatual);
+            $quantidadedepedidosmesatual = $contagemFinalizadosmesatual[1] ?? 0;
+
+
+            $clientePormes = [];
+
+            for ($mes = 1; $mes <= 12; $mes++) {
+                $MesAtualgrafico = Agendamento::where('cadastro_de_empresas_id', $id)
+                    ->where('finalizado', 1)
+                    ->whereMonth('updated_at', $mes)->get();
+                    $finalizadografico = $MesAtualgrafico->pluck('finalizado')->toArray(); // Change 'finalizadografico' to 'finalizado'
+                    $contagemFinalizadosgrafico = array_count_values($finalizadografico);
+                    $quantidadedepedidosgratico = $contagemFinalizadosgrafico[1] ?? 0;
+
+
+                $nomeMesgrafico = date('F', mktime(0, 0, 0, $mes, 1));
+                $clientePormes[$nomeMesgrafico] = $quantidadedepedidosgratico;
+            }
         }
 
         return view('Empresa.dashboardBusiness', [
             'quantidadedepedidos' => $quantidadedepedidos,
             'idempresa' => $idempresa, 'faturamentoAnual' =>  $faturamentoAnual,
             'valorPorMes' =>  $valorPorMes,
+            'clientePormes' =>  $clientePormes,
             'formasContagem' =>  $formaPagamentoContagemTotal,
             'valorMesAtual' =>  $valorMesAtual,
             'ValorFaltaParaChegarNaMetaAnual' =>  $ValorFaltaParaChegarNaMetaAnual,
@@ -282,7 +320,10 @@ class HomeController extends Controller
             'porcentagem_atingidamensal' =>  $porcentagem_atingidamensal,
             'empresa' =>  $empresa,
             'produtosTotal' => $produtosTotal,
-            'produtosmensal' => $produtosmensal
+            'produtosmensal' => $produtosmensal,
+            'clientetotal' =>  $clientetotal,
+            'clientemesatual' =>  $clientemesatual,
+            'quantidadedepedidosmesatual' =>  $quantidadedepedidosmesatual,
         ]);
     }
 }
