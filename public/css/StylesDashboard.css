@@ -6,3 +6,16 @@
     border-radius: 10px;
     border: 1px solid #D3D3D3
 }
+.caption .caption-badge.caption-secondary,
+.caption .caption-badge.caption-primary,
+.caption .caption-badge.caption-info,
+.caption .caption-badge.caption-warning,
+.caption .caption-badge.caption-danger,
+.caption .caption-badge.caption-success {
+    display: none;
+}
+
+.cards{
+   min-height: 100px;
+   max-height: 100px;
+}

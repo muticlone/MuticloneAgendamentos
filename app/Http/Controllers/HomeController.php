@@ -295,14 +295,23 @@ class HomeController extends Controller
                 $MesAtualgrafico = Agendamento::where('cadastro_de_empresas_id', $id)
                     ->where('finalizado', 1)
                     ->whereMonth('updated_at', $mes)->get();
-                    $finalizadografico = $MesAtualgrafico->pluck('finalizado')->toArray(); // Change 'finalizadografico' to 'finalizado'
-                    $contagemFinalizadosgrafico = array_count_values($finalizadografico);
-                    $quantidadedepedidosgratico = $contagemFinalizadosgrafico[1] ?? 0;
+                $finalizadografico = $MesAtualgrafico->pluck('finalizado')->toArray(); // Change 'finalizadografico' to 'finalizado'
+                $contagemFinalizadosgrafico = array_count_values($finalizadografico);
+                $quantidadedepedidosgratico = $contagemFinalizadosgrafico[1] ?? 0;
 
 
                 $nomeMesgrafico = date('F', mktime(0, 0, 0, $mes, 1));
                 $clientePormes[$nomeMesgrafico] = $quantidadedepedidosgratico;
             }
+
+            $agendamentos = Agendamento::where('cadastro_de_empresas_id', $id)
+                ->whereNotNull('nota')
+                ->whereNotNull('comentario')
+                ->whereNotNull('user_id')
+                ->get();
+
+            $notas = $agendamentos->pluck('nota');
+            $media = $notas->avg();
         }
 
         return view('Empresa.dashboardBusiness', [
@@ -324,6 +333,7 @@ class HomeController extends Controller
             'clientetotal' =>  $clientetotal,
             'clientemesatual' =>  $clientemesatual,
             'quantidadedepedidosmesatual' =>  $quantidadedepedidosmesatual,
+            'media' =>  $media,
         ]);
     }
 }

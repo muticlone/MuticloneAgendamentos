@@ -12,6 +12,78 @@
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
 
+    <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/css/star-rating.min.css" media="all"
+        rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all"
+        rel="stylesheet" type="text/css" />
+    <div class="row g-12">
+
+
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
+
+            <div class="info-box mb-3 cards">
+                <img src="/img/logo_empresas/{{ $empresa->image }}" class="img-fluid  img_dashboardbusiness"
+                    alt="{{ $empresa->razaoSocial }}">
+                <div class="info-box-content">
+                    <span class="info-box-text">{{ $empresa->nomeFantasia }}</span>
+                    <span class="info-box-number">
+                        <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="{{ $media }}"
+                            data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-show-clear="false"
+                            data-size="xs">
+
+                    </span>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+            <div class="info-box mb-3 cards">
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Novos Clientes no mês atual</font>
+                        </font>
+                    </span>
+                    <span class="info-box-number">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">2.000</font>
+                        </font>
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+            <div class="info-box cards">
+                <span class="info-box-icon bg-info"><i class="far fa-flag"></i></span>
+                <div class="info-box-content ">
+                    <span class="info-box-text">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Favoritos</font>
+                        </font>
+                    </span>
+                    <span class="info-box-number">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">410</font>
+                        </font>
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
     <div class="row g-12">
 
 
@@ -47,6 +119,39 @@
         </div>
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
+
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">53 </font>
+                        </font><sup style="font-size: 20px">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">%</font>
+                            </font>
+                        </sup>
+                    </h3>
+
+                    <p>
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Taxa de cancelamento</font>
+                        </font>
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            Mais informações</font>
+                    </font><i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+
+        </div>
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{ $clientemesatual }}</h3>
@@ -78,28 +183,12 @@
         </div>
 
 
-    </div>
-    <div class="row g-12">
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-            <div class="info-box mb-3">
-                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">
-                        <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">Novos Clientes no mês atual</font>
-                        </font>
-                    </span>
-                    <span class="info-box-number">
-                        <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">2.000</font>
-                        </font>
-                    </span>
-                </div>
 
-            </div>
 
-        </div>
     </div>
+
+
+
 
     <div class="row g-12">
 
@@ -357,6 +446,14 @@
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js"></script>
+
+    <!-- Load Bootstrap Star Rating JS -->
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/star-rating.min.js"
+        type="text/javascript"></script>
+    <!-- Load Portuguese language file -->
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/locales/pt-BR.js"></script>
+
+
 
     <script>
         var ctx = document.getElementById('pieChart').getContext('2d');
