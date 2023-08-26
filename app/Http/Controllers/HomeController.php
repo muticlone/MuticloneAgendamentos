@@ -198,9 +198,19 @@ class HomeController extends Controller
         } else {
             $agendamentos =  Agendamento::where('cadastro_de_empresas_id', $id)->where('finalizado', 1)->get();
 
+            $agendamentoscancelados =  Agendamento::where('cadastro_de_empresas_id', $id)->where('cancelado', 1)->get();
+            $cancelado = $agendamentoscancelados->pluck('cancelado')->toArray();
+            $contagemcancelado = array_count_values($cancelado);
+            $quantidadedepedidoscacenlados = $contagemcancelado[1] ?? 0;
+
+
+
             $finalizado =  $agendamentos->pluck('finalizado')->toArray();
             $contagemFinalizados = array_count_values($finalizado);
             $quantidadedepedidos = $contagemFinalizados[1] ?? 0;
+
+            $Porcetagemcancelados = ($quantidadedepedidoscacenlados / $quantidadedepedidos) * 100;
+            $Porcentagemdepedidoscancelados = number_format( $Porcetagemcancelados, 2, '.', '') . '%';
 
             $idempresa =  $agendamentos->pluck('cadastro_de_empresas_id')->first();
             $empresa = cadastro_de_empresa::findOrfail($idempresa);
@@ -334,6 +344,8 @@ class HomeController extends Controller
             'clientemesatual' =>  $clientemesatual,
             'quantidadedepedidosmesatual' =>  $quantidadedepedidosmesatual,
             'media' =>  $media,
+            'Porcentagemdepedidoscancelados' => $Porcentagemdepedidoscancelados,
+            'quantidadedepedidoscacenlados' => $quantidadedepedidoscacenlados,
         ]);
     }
 }

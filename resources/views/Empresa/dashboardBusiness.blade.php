@@ -87,7 +87,7 @@
     <div class="row g-12">
 
 
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+        <div class="col-lg-3 col-sm-12 col-md-12 pt-2">
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{ $quantidadedepedidos }}</h3>
@@ -102,11 +102,11 @@
                 </a>
             </div>
         </div>
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+        <div class="col-lg-3 col-sm-12 col-md-12 pt-2">
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{ $quantidadedepedidosmesatual }}</h3>
-                    <p>Total de Pedidos mês atual</p>
+                    <p>Pedidos mês atual</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-shopping-cart"></i>
@@ -117,31 +117,32 @@
                 </a>
             </div>
         </div>
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+        <div class="col-lg-3 col-sm-12 col-md-12 pt-2">
 
 
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>
                         <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">53 </font>
-                        </font><sup style="font-size: 20px">
-                            <font style="vertical-align: inherit;">
-                                <font style="vertical-align: inherit;">%</font>
-                            </font>
-                        </sup>
+                            <font style="vertical-align: inherit;">{{  $Porcentagemdepedidoscancelados }} </font>
+                        </font>
+
                     </h3>
 
                     <p>
                         <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">Taxa de cancelamento</font>
+                            <font style="vertical-align: inherit;"> cancelados: {{ $quantidadedepedidoscacenlados }}</font>
                         </font>
+
                     </p>
+
+
+
                 </div>
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <a href="/meus/agendamentos/empresa/{{ $idempresa }}/cancelados" class="small-box-footer">
                     <font style="vertical-align: inherit;">
                         <font style="vertical-align: inherit;">
                             Mais informações</font>
@@ -150,12 +151,12 @@
             </div>
 
         </div>
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+        <div class="col-lg-3 col-sm-12 col-md-12 pt-2">
 
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{ $clientemesatual }}</h3>
-                    <p>Clientes mês atual</p>
+                    <p style="  font-size: 15px;">Clientes mês atual</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-user-plus"></i>
@@ -166,7 +167,7 @@
             </div>
         </div>
 
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+        <div class="col-lg-3 col-sm-12 col-md-12 pt-2">
 
             <div class="small-box bg-info">
                 <div class="inner">
