@@ -212,7 +212,7 @@ class HomeController extends Controller
             $faturamentoAnual = array_sum($valorRecebidoNumerico);
             $ValorFaltaParaChegarNaMetaAnual = $metaAnual - $faturamentoAnual;
             $porcentagem_atingidaanual = ($faturamentoAnual / $metaAnual) * 100;
-            if ( $porcentagem_atingidaanual > 100) {
+            if ($porcentagem_atingidaanual > 100) {
                 $porcentagem_atingidaanual = 100;
             }
 
@@ -234,14 +234,13 @@ class HomeController extends Controller
 
                 if ($nomeMes === $mesAtual) {
                     $valorMesAtual = $valorRecebidoMes;
-                    $metamensal = $metaAnual/12;
+                    $metamensal = $metaAnual / 12;
                     $ValorFaltaParaChegarNaMetamensal = $metamensal - $valorMesAtual;
 
-                    $porcentagem_atingidamensal = ( $valorMesAtual / $metamensal) * 100;
+                    $porcentagem_atingidamensal = ($valorMesAtual / $metamensal) * 100;
                     if ($porcentagem_atingidamensal > 100) {
                         $porcentagem_atingidamensal = 100;
                     }
-
                 }
             }
 
@@ -254,15 +253,25 @@ class HomeController extends Controller
             $formaPagamentoContagemTotal = array_count_values($formasPagamento);
 
 
+            $produto = $agendamentos->pluck('nomeServiçoAgendamento')->flatten()->toArray();
+            $produtosTotal = array_count_values($produto);
 
+            $numeroMesAtual = Carbon::now()->month;
+            $produtosMesAtual = Agendamento::where('cadastro_de_empresas_id', $id)
+                ->where('finalizado', 1)
+                ->whereMonth('updated_at', $numeroMesAtual)
+                ->pluck('nomeServiçoAgendamento')
+                ->flatten()
+                ->toArray();
 
+            $produtosmensal = array_count_values($produtosMesAtual);
 
         }
 
         return view('Empresa.dashboardBusiness', [
             'quantidadedepedidos' => $quantidadedepedidos,
             'idempresa' => $idempresa, 'faturamentoAnual' =>  $faturamentoAnual,
-            'valorPorMes' =>  $valorPorMes ,
+            'valorPorMes' =>  $valorPorMes,
             'formasContagem' =>  $formaPagamentoContagemTotal,
             'valorMesAtual' =>  $valorMesAtual,
             'ValorFaltaParaChegarNaMetaAnual' =>  $ValorFaltaParaChegarNaMetaAnual,
@@ -271,7 +280,9 @@ class HomeController extends Controller
             'ValorFaltaParaChegarNaMetamensal' =>  $ValorFaltaParaChegarNaMetamensal,
             'metamensal' => $metamensal,
             'porcentagem_atingidamensal' =>  $porcentagem_atingidamensal,
-            'empresa' =>  $empresa
+            'empresa' =>  $empresa,
+            'produtosTotal' => $produtosTotal,
+            'produtosmensal' => $produtosmensal
         ]);
     }
 }

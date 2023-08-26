@@ -4,6 +4,9 @@
 
 @section('content_header')
 
+
+
+
 @stop
 
 @section('content')
@@ -39,27 +42,25 @@
                 <div class="card-body">
                     <div class="">
                         <img src="/img/logo_empresas/{{ $empresa->image }}" class="img-fluid  img_dashboardbusiness"
-                        alt="{{ $empresa->razaoSocial }}">
+                            alt="{{ $empresa->razaoSocial }}">
                         <div class="info-box-content">
                             <span class="info-box-text">Volor recebido no mês atual</span>
                             <span class="info-box-number">
-                                {{ 'R$ ' . number_format( $valorMesAtual , 2, ',', '.') }}
+                                {{ 'R$ ' . number_format($valorMesAtual, 2, ',', '.') }}
                             </span>
                             <div class="progress">
-                                <div class="progress-bar bg-info" style="width: {{  $porcentagem_atingidamensal }}%"></div>
+                                <div class="progress-bar bg-info" style="width: {{ $porcentagem_atingidamensal }}%"></div>
                             </div>
                             <span class="progress-description">
                                 @if ($porcentagem_atingidamensal == 100)
-                                {{ number_format(  $porcentagem_atingidamensal, 2, ',', '.') }}%
-                                </br>
-                                Meta mensal concluida
+                                    {{ number_format($porcentagem_atingidamensal, 2, ',', '.') }}%
+                                    </br>
+                                    Meta mensal concluida
                                 @else
-                                {{ number_format(  $porcentagem_atingidamensal, 2, ',', '.') }}% da
-                                Meta mensal {{ 'R$ ' . number_format($metamensal, 2, ',', '.') }}
-                                <br/>
-                                Falta R$ {{ 'R$ ' . number_format($ValorFaltaParaChegarNaMetamensal, 2, ',', '.') }}
-
-
+                                    {{ number_format($porcentagem_atingidamensal, 2, ',', '.') }}% da
+                                    Meta mensal {{ 'R$ ' . number_format($metamensal, 2, ',', '.') }}
+                                    <br />
+                                    Falta R$ {{ 'R$ ' . number_format($ValorFaltaParaChegarNaMetamensal, 2, ',', '.') }}
                                 @endif
 
                             </span>
@@ -86,30 +87,31 @@
                         <div class="chartjs-size-monitor">
                             <div class="">
 
-                                <img src="/img/logo_empresas/{{ $empresa->image }}" class="img-fluid  img_dashboardbusiness"
-                                        alt="{{ $empresa->razaoSocial }}">
+                                <img src="/img/logo_empresas/{{ $empresa->image }}"
+                                    class="img-fluid  img_dashboardbusiness" alt="{{ $empresa->razaoSocial }}">
                                 <div class="info-box-content">
                                     <span class="info-box-text">Volor recebido no ano</span>
                                     <span class="info-box-number">
-                                        {{ 'R$ ' . number_format( $faturamentoAnual , 2, ',', '.') }}
+                                        {{ 'R$ ' . number_format($faturamentoAnual, 2, ',', '.') }}
                                     </span>
                                     <div class="progress">
-                                        <div class="progress-bar bg-info" style="width: {{    $porcentagem_atingidaanual }}%"></div>
+                                        <div class="progress-bar bg-info" style="width: {{ $porcentagem_atingidaanual }}%">
+                                        </div>
                                     </div>
                                     <span class="progress-description">
                                         @if ($porcentagem_atingidaanual == 100)
-                                        {{ number_format(  $porcentagem_atingidaanual, 2, ',', '.') }}%
-                                        </br>
-                                         Meta anual concluida
+                                            {{ number_format($porcentagem_atingidaanual, 2, ',', '.') }}%
+                                            </br>
+                                            Meta anual concluida
                                         @else
-                                        {{ number_format(  $porcentagem_atingidaanual, 2, ',', '.') }} % da
-                                        Meta anual {{ 'R$ ' . number_format($metaAnual, 2, ',', '.') }}
+                                            {{ number_format($porcentagem_atingidaanual, 2, ',', '.') }} % da
+                                            Meta anual {{ 'R$ ' . number_format($metaAnual, 2, ',', '.') }}
 
 
 
-                                        <br/>
-                                        Falta  {{ 'R$ ' . number_format($ValorFaltaParaChegarNaMetaAnual, 2, ',', '.') }}
-
+                                            <br />
+                                            Falta
+                                            {{ 'R$ ' . number_format($ValorFaltaParaChegarNaMetaAnual, 2, ',', '.') }}
                                         @endif
 
                                     </span>
@@ -183,6 +185,44 @@
 
             </div>
         </div>
+        <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Produtos mais agendados no mês atual </h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <canvas id="donutChartmesAtual"
+                        style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 601px;"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Produtos mais agendados</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <canvas id="donutChart"
+                        style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 601px;"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+
 
 
 
@@ -201,6 +241,8 @@
 
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js"></script>
+
     <script>
         var ctx = document.getElementById('pieChart').getContext('2d');
         var formasContagem = @json($formasContagem);
@@ -252,6 +294,88 @@
         });
 
 
+        function generateVariedColors(count) {
+            const scale = chroma.scale(['#FF5733', '#33FFB4', '#FFFF00', '#1E90FF', '#5F9EA0']).mode('lch').colors(count);
+            return scale;
+        }
+
+        var donutChartCanvas = document.getElementById('donutChart').getContext('2d');
+
+        var ProdutosContagem = @json($produtosTotal);
+
+        // Filtra para remover entradas com valores igual a zero
+        ProdutosContagem = Object.fromEntries(Object.entries(ProdutosContagem).filter(([key, value]) => value !== 0));
+
+        var labelsprodutosPagamento = Object.keys(ProdutosContagem);
+        var dataprodutos = Object.values(ProdutosContagem);
+
+        // Gerar cores variadas baseadas no número de fatias
+        var backgroundColorsprodutos = generateVariedColors(labelsprodutosPagamento.length);
+
+        // Dados do gráfico
+        var data = {
+            labels: labelsprodutosPagamento,
+            datasets: [{
+                data: dataprodutos,
+                backgroundColor: backgroundColorsprodutos
+            }]
+        };
+
+        // Opções do gráfico
+        var donutOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+            legend: {
+                display: true,
+            },
+            cutoutPercentage: 50, // Define o tamanho do "buraco" no meio do gráfico
+        };
+
+        // Criando o gráfico Donut
+        var donutChart = new Chart(donutChartCanvas, {
+            type: 'doughnut',
+            data: data,
+            options: donutOptions
+        });
+
+        var donutChartCanvas = document.getElementById('donutChartmesAtual').getContext('2d');
+
+        var ProdutosContagemmesatual = @json( $produtosmensal);
+
+        // Filtra para remover entradas com valores igual a zero
+        ProdutosContagemmesatual = Object.fromEntries(Object.entries(ProdutosContagemmesatual).filter(([key, value]) => value !== 0));
+
+        var labelsprodutosmesatual = Object.keys(ProdutosContagemmesatual);
+        var dataprodutosmesatual = Object.values(ProdutosContagemmesatual);
+
+        // Gerar cores variadas baseadas no número de fatias
+        var backgroundColorsprodutos = generateVariedColors(labelsprodutosPagamento.length);
+
+        // Dados do gráfico
+        var data = {
+            labels: labelsprodutosmesatual,
+            datasets: [{
+                data: dataprodutosmesatual,
+                backgroundColor: backgroundColorsprodutos
+            }]
+        };
+
+        // Opções do gráfico
+        var donutOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+            legend: {
+                display: true,
+            },
+            cutoutPercentage: 50, // Define o tamanho do "buraco" no meio do gráfico
+        };
+
+        // Criando o gráfico Donut
+        var donutChart = new Chart(donutChartCanvas, {
+            type: 'doughnut',
+            data: data,
+            options: donutOptions
+        });
 
 
 
@@ -269,7 +393,7 @@
 
         var stackedBarData = {
             labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
-                'Novembro','Outubro', 'Dezembro'
+                'Novembro', 'Outubro', 'Dezembro'
             ],
             datasets: [{
                 label: 'Faturamento',
