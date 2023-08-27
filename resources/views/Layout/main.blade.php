@@ -90,25 +90,24 @@
                                 </a>
                             </li>
                             @auth
+                                @if (Auth::user()->agendamentos->count() > 0)
+                                    <li class="nav-item">
 
-                                <li class="nav-item">
+                                        <a class="nav-link active text-nowrap" aria-current="page"
+                                            href="{{ route('clientes.agendamentos', ['status' => 'ativos']) }}">
 
-                                    <a class="nav-link active text-nowrap" aria-current="page"
-                                        href="{{ route('clientes.agendamentos', ['status' => 'ativos']) }}">
-
-                                        Meus agendamentos
-                                    </a>
-                                </li>
+                                            Meus agendamentos
+                                        </a>
+                                    </li>
+                                @endif
                                 @if (Auth::user()->user_type == 'company')
+                                    <li class="nav-item">
 
+                                        <a class="nav-link active text-nowrap" aria-current="page" href="/dashboard">
 
-                                <li class="nav-item">
-
-                                    <a class="nav-link active text-nowrap" aria-current="page" href="/dashboard">
-
-                                        Meus Negócios
-                                    </a>
-                                </li>
+                                            Meus Negócios
+                                        </a>
+                                    </li>
                                 @endif
 
 
@@ -127,8 +126,13 @@
                             @auth
 
 
-                            <ul class="navbar-nav @if (Auth::user()->user_type == 'company') second-ul @else other-ul @endif">
-
+                                <ul
+                                    class="navbar-nav
+                            @if (Auth::user()->user_type == 'company') second-ul
+                            @elseif (Auth::user()->agendamentos->count() > 0)
+                                other-uls
+                            @else
+                                other-ul @endif">
 
 
                                     <li class="nav-item">
