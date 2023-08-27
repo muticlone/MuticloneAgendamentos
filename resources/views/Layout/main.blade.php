@@ -99,6 +99,9 @@
                                         Meus agendamentos
                                     </a>
                                 </li>
+                                @if (Auth::user()->user_type == 'company')
+
+
                                 <li class="nav-item">
 
                                     <a class="nav-link active text-nowrap" aria-current="page" href="/dashboard">
@@ -106,6 +109,7 @@
                                         Meus Negócios
                                     </a>
                                 </li>
+                                @endif
 
 
 
@@ -123,7 +127,7 @@
                             @auth
 
 
-                                <ul class="navbar-nav second-ul">
+                            <ul class="navbar-nav @if (Auth::user()->user_type == 'company') second-ul @else other-ul @endif">
 
 
 

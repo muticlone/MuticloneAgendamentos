@@ -66,9 +66,17 @@ footer p {
 
 
 .second-ul {
-  margin-right: auto;
-  margin-left: 74%;
-}
+    margin-right: auto;
+    margin-left: 74%;
+  }
+
+  .other-ul {
+    margin-right: auto;
+    margin-left: 130%;
+  }
+
+
+
 
 .linha {
 

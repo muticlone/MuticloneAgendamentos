@@ -23,8 +23,16 @@
 
             <div class="mt-4">
                 <x-label for="phone" value="{{ __('Celular') }}" />
-                <x-input id="phone"  autofocus autocomplete="name" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')"
-                    required autofocus />
+                <x-input id="phone" autofocus autocomplete="name" class="block mt-1 w-full" type="text"
+                    name="phone" :value="old('phone')" required autofocus />
+            </div>
+            <div class="mt-4">
+                <x-label value="{{ __('Tipo de usuario') }}" />
+                <select class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                    name="user_type">
+                    <option value="userclient">Pessoa Física</option>
+                    <option value="company">Empresa</option>
+                </select>
             </div>
 
 
@@ -85,4 +93,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 
-<script>$('#phone').inputmask("(99) 99999-9999");</script>
+<script>
+    $('#phone').inputmask("(99) 99999-9999");
+</script>
