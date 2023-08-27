@@ -16,8 +16,6 @@
 
             <a href="/cadastrar/empresa" class="btn btn-sm btn-outline-info btndashboardservico">Cadastrar nova empresa</a>
             @foreach ($empresa as $empid)
-
-
             @endforeach
 
 
@@ -100,10 +98,15 @@
                                 </a>
 
 
-                                    <a href="{{ route('meus.clientes.agendamentos.empresa', ['id' => $emp->id, 'status' => 'ativos']) }}"
-                                        class="btn btn-sm btn-outline-warning btndashboardservico">Meu Agendamentos</a>
+                                <a href="{{ route('meus.clientes.agendamentos.empresa', ['id' => $emp->id, 'status' => 'ativos']) }}"
+                                    class="btn btn-sm btn-outline-warning btndashboardservico">Meu Agendamentos</a>
 
-                                <a  href="{{ route('dashboard.business',['id' => $emp->id])}}" class="btn btn-sm btn-outline-info btndashboardservico">Dashboard</a>
+                                @if($temagendamentos)
+                                    <a href="{{ route('dashboard.business', ['id' => $emp->id]) }}"
+                                        class="btn btn-sm btn-outline-info btndashboardservico">Dashboard</a>
+                                @endif
+
+
 
 
                             </td>

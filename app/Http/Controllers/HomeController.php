@@ -150,10 +150,21 @@ class HomeController extends Controller
             $empresa = $user->empresas()->paginate(10);
         }
 
+        $ids = [];
+
+        foreach ($empresa as $empresaItem) {
+
+            $ids[] = $empresaItem->id;
+        }
+
+        $agendamentos = Agendamento::whereIn('cadastro_de_empresas_id',  $ids)->where('finalizado', 1)->get();
+        $temagendamentos = !$agendamentos->isEmpty();
+
         return view('dashboard', [
             'empresa' => $empresa,
 
-            'search' => $search
+            'search' => $search,
+            'temagendamentos' => $temagendamentos
         ]);
     }
 
@@ -174,6 +185,8 @@ class HomeController extends Controller
         $empresa = cadastro_de_empresa::where('area_atuacao', $nomeDaCategoria)->get();
 
         $idsempresa = $empresa->pluck('id')->toArray();
+
+
 
         $servicos = cadastro_de_servico::whereIn('cadastro_de_empresas_id', $idsempresa)->paginate(15);
 
@@ -209,8 +222,9 @@ class HomeController extends Controller
             $contagemFinalizados = array_count_values($finalizado);
             $quantidadedepedidos = $contagemFinalizados[1] ?? 0;
 
+
             $Porcetagemcancelados = ($quantidadedepedidoscacenlados / $quantidadedepedidos) * 100;
-            $Porcentagemdepedidoscancelados = number_format( $Porcetagemcancelados, 2, '.', '') . '%';
+            $Porcentagemdepedidoscancelados = number_format($Porcetagemcancelados, 2, '.', '') . '%';
 
             $idempresa =  $agendamentos->pluck('cadastro_de_empresas_id')->first();
             $empresa = cadastro_de_empresa::findOrfail($idempresa);

@@ -84,10 +84,11 @@
 
 
     </div>
+
     <div class="row g-12">
 
 
-        <div class="col-lg-3 col-sm-12 col-md-12 pt-2">
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{ $quantidadedepedidos }}</h3>
@@ -102,7 +103,7 @@
                 </a>
             </div>
         </div>
-        <div class="col-lg-3 col-sm-12 col-md-12 pt-2">
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{ $quantidadedepedidosmesatual }}</h3>
@@ -117,14 +118,14 @@
                 </a>
             </div>
         </div>
-        <div class="col-lg-3 col-sm-12 col-md-12 pt-2">
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
 
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>
                         <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">{{  $Porcentagemdepedidoscancelados }} </font>
+                            <font style="vertical-align: inherit;">{{ $Porcentagemdepedidoscancelados }} </font>
                         </font>
 
                     </h3>
@@ -151,7 +152,14 @@
             </div>
 
         </div>
-        <div class="col-lg-3 col-sm-12 col-md-12 pt-2">
+
+
+
+
+
+    </div>
+    <div class="row g-12">
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
             <div class="small-box bg-info">
                 <div class="inner">
@@ -167,7 +175,7 @@
             </div>
         </div>
 
-        <div class="col-lg-3 col-sm-12 col-md-12 pt-2">
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
             <div class="small-box bg-info">
                 <div class="inner">
@@ -182,12 +190,7 @@
                 </a>
             </div>
         </div>
-
-
-
-
     </div>
-
 
 
 

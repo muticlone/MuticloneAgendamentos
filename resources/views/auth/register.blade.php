@@ -23,7 +23,7 @@
 
             <div class="mt-4">
                 <x-label for="phone" value="{{ __('Celular') }}" />
-                <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')"
+                <x-input id="phone"  autofocus autocomplete="name" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')"
                     required autofocus />
             </div>
 
