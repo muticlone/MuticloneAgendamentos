@@ -23,7 +23,27 @@ class CreateNewUser implements CreatesNewUsers
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
+            'user_type' => [
+                'required',
+                'string',
+                function ($attribute, $value, $fail) {
+                    if ($value === 'root') {
+                        $fail('Não é permitido cadastrar um usuário com o tipo "root".');
+                    }
+                },
+            ],
+            'phone' => [
+                'required',
+                'string',
+                function ($attribute, $value, $fail) {
+                    $pattern = '/^\(\d{2}\) \d{5}-\d{4}$/';
+                    if (!preg_match($pattern, $value)) {
+                        $fail('O campo ' . $attribute . ' deve estar no formato (99) 99999-9999.');
+                    }
+                },
+            ],
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+
         ])->validate();
 
         return User::create([

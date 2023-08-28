@@ -109,8 +109,22 @@
                                         </a>
                                     </li>
                                 @endif
+                                @if (Auth::user()->user_type == 'root')
+                                <li class="nav-item">
 
+                                    <a class="nav-link active text-nowrap" aria-current="page" href="/dashboard">
 
+                                        Meus Negócios
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+
+                                    <a class="nav-link active text-nowrap" aria-current="page" href="{{ route('root') }}">
+
+                                     Root
+                                    </a>
+                                </li>
+                                @endif
 
 
 

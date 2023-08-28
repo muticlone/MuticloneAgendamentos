@@ -17,8 +17,23 @@ class CadastroServicoController extends Controller
 
     public function create($id)
     {
+        $servico = cadastro_de_servico::where('cadastro_de_empresas_id', $id)->first();
 
 
+        $empresa = cadastro_de_empresa::findOrFail($id);
+
+        $user = auth()->user();
+
+
+
+        if (
+            $user->id == $empresa->user_id &&
+
+            $empresa->id == $servico->cadastro_de_empresas_id
+        ) {
+        } else {
+            return back();
+        }
 
         $empresa = cadastro_de_empresa::findOrFail($id);
 
@@ -95,7 +110,7 @@ class CadastroServicoController extends Controller
         } else {
 
             $servicos = cadastro_de_servico::where('cadastro_de_empresas_id', $id)
-            ->orderBy('id', 'desc') 
+            ->orderBy('id', 'desc')
             ->paginate($registrosPorPagina);
         }
 
@@ -103,8 +118,8 @@ class CadastroServicoController extends Controller
 
         return view('Empresa.MeusServico', [
             'servicos' => $servicos,
-            'search' => $search, 'empresa' => $empresa,  
-           
+            'search' => $search, 'empresa' => $empresa,
+
         ]);
     }
 
@@ -119,6 +134,7 @@ class CadastroServicoController extends Controller
 
         $servico = cadastro_de_servico::findOrfail($id);
         $id_empresa = $servico->cadastro_de_empresas_id;
+
         $empresa = cadastro_de_empresa::findOrFail($id_empresa);
 
         $user = auth()->user();
@@ -126,9 +142,10 @@ class CadastroServicoController extends Controller
 
         // $registrosPaginados = cadastro_de_servico::where('cadastro_de_empresas_id', $id_empresa)->paginate(1);
 
+
         if (
             $user->id == $empresa->user_id &&
-            $empresa->user_id == $empresa->id &&
+
             $empresa->id == $servico->cadastro_de_empresas_id
         ) {
         } else {
@@ -140,7 +157,7 @@ class CadastroServicoController extends Controller
         return view('Empresa.EditmeusServico', [
             'servico' =>  $servico,
             'empresa' => $empresa,
-         
+
 
         ]);
     }
