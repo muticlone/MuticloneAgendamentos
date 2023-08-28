@@ -27,8 +27,8 @@ class CreateNewUser implements CreatesNewUsers
                 'required',
                 'string',
                 function ($attribute, $value, $fail) {
-                    if ($value === 'root') {
-                        $fail('Não é permitido cadastrar um usuário com o tipo "root".');
+                    if (!in_array($value, ['company', 'userclient'])) {
+                        $fail('O Tipo de usuario deve ser "Pessoa Física" ou "Empresa".');
                     }
                 },
             ],
