@@ -28,7 +28,6 @@
 
         </div>
 
-
         <form action="/cadastrar/agentamento" method="POST">
             @csrf
 
