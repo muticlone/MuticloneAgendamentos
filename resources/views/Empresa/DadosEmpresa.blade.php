@@ -19,7 +19,7 @@
                 {{-- Avaliação --}}
 
                 <x-comment_ratings :agendamentos="$agendamentos" valueAvaliacao="{{  $media }}" :NomeUser="  $nome "
-                    comentario="Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos" />
+                     />
             </div>
 
             <div class="col-lg-6 col-sm-12 col-md-12 pt-2 ">

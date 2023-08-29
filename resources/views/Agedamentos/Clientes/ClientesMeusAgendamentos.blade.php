@@ -20,8 +20,6 @@
 
 
 
-
-
         <x-pagination :paginatedItems="$agendamentos" />
     </div>
 

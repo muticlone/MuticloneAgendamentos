@@ -34,6 +34,9 @@
 
 
                 <x-cadastrar_agendamento
+                idempresa="{{ $empresa_id_criptografado }}"
+                :encryptedIds="$encryptedIds"
+
                 user_id="{{ $user->id }}"
                 numeroDopedio="{{ $numeroDopedio }}"
                 empresaimage="{{  $empresa->image }}"

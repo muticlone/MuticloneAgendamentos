@@ -103,11 +103,11 @@ class HomeController extends Controller
 
         $notas = $agendamentos->pluck('nota');
         $media = $notas->avg();
+
         $user_id = $agendamentos->pluck('user_id');
 
         $useragendamento = User::whereIn('id', $user_id)->get();
         $nome =  $useragendamento->pluck('name');
-
 
 
 

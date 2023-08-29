@@ -22,12 +22,12 @@
                 <div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab">
                     <div class="list-group-item">
                         @foreach ($agendamentos as $index => $agendamento)
-                            @if (isset($NomeUser[$index]))
-                                {{ $NomeUser[$index] }} </br> {{ $agendamento->comentario }}
+
+                                </br> {{ $agendamento->comentario }}
                                 <input id="input-6" name="input-6" class="rating rating-loading pt-br"
                                     value="{{ $agendamento->nota }}" data-min="0" data-max="5" data-step="0.1"
                                     data-readonly="true" data-size="xs" data-show-clear="false">
-                            @endif
+
                         @endforeach
 
 
