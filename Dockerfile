@@ -8,7 +8,8 @@ RUN apt-get update && apt-get install -y \
 # Install PHP extensions
 RUN docker-php-ext-install \
     mbstring \
-    zip
+    zip \
+    pdo_mysql
 
 # Copy Laravel application
 COPY . /var/www/html
