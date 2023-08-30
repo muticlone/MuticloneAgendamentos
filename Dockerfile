@@ -8,8 +8,7 @@ RUN apt-get update && apt-get install -y \
 # Install PHP extensions
 RUN docker-php-ext-install \
     mbstring \
-    zip \
-    pdo_mysql
+    zip
 
 # Copy Laravel application
 COPY . /var/www/html
@@ -33,7 +32,6 @@ RUN php artisan key:generate
 
 # Expose port 80
 EXPOSE 80
-EXPOSE 3306
 
 # Adjusting Apache configurations
 RUN a2enmod rewrite
