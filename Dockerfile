@@ -31,6 +31,9 @@ RUN docker-php-ext-install mbstring
 COPY .env.example .env
 RUN php artisan key:generate
 
+# Run migrations
+RUN php artisan migrate
+
 # Expose port 80
 EXPOSE 80
 
