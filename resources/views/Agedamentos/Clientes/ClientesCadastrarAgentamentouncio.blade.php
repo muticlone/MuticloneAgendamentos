@@ -27,7 +27,10 @@
                 servico_nomeServico="{{ $servico->nomeServico }}" servico_id="{{ $servico->id }}"
                 servico_duracaohoras="{{ $servico->duracaohoras }}"
                 servico_duracaominutos="{{ $servico->duracaominutos }}"
-                servico_valorDoServico="{{ $servico->valorDoServico }}" />
+                servico_valorDoServico="{{ $servico->valorDoServico }}"
+                idempresa="{{ $empresa_id_criptografado }}"
+
+                />
 
 
 

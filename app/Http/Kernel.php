@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
 
         'root' => \App\Http\Middleware\RootAccess::class,
         'company_or_root' => \App\Http\Middleware\CompanyOrRootAccess::class,
+
     ];
 
 

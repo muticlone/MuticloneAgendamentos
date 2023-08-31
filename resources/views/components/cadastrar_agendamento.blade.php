@@ -1,5 +1,13 @@
 <div>
-    @props(['user_id' => '', 'numeroDopedio' => '', 'empresaimage' => '', 'empresa_razaoSocial' => '', 'empresa_nomeFantasia' => '', 'dataAtual' => '', 'empresa_logradouro' => '', 'empresa_numero_endereco' => '', 'empresa_cidade' => '', 'empresa_uf' => '', 'empresa_telefone' => '', 'empresa_celular' => '', 'user_name' => '', 'user_email' => '', 'user_phone' => '', 'empresa_id' => '', 'servico' => ' ', 'empresa_formaDePagamento' => ' ', 'somaValores' => 0, 'servico_imageservico' => '', 'servico_nomeServico' => '', 'servico_id' => '', 'servico_duracaohoras' => '', 'servico_duracaominutos' => '', 'servico_valorDoServico' => '', 'idempresa' => '', 'servicoid' => ''])
+    @props(['user_id' => '', 'numeroDopedio' => '', 'empresaimage' => '', 'empresa_razaoSocial' => '',
+     'empresa_nomeFantasia' => '', 'dataAtual' => '', 'empresa_logradouro' => '',
+      'empresa_numero_endereco' => '', 'empresa_cidade' => '', 'empresa_uf' => '',
+      'empresa_telefone' => '', 'empresa_celular' => '', 'user_name' => '', 'user_email' => '',
+       'user_phone' => '', 'empresa_id' => '', 'servico' => ' ', 'empresa_formaDePagamento' => ' ',
+        'somaValores' => 0, 'servico_imageservico' => '', 'servico_nomeServico' => '', 'servico_id' => '',
+        'servico_duracaohoras' => '', 'servico_duracaominutos' => '', 'servico_valorDoServico' => '',
+        'idempresa' => '', 'servicoid' => '' , 'encryptedIdunico' => ''
+        ])
 
 
     <div class="row g-12">
@@ -154,6 +162,13 @@
                         </td>
                         <td>
                             R$ {{ $servico_valorDoServico }}
+
+                            <?php
+
+                            $encryptedIduncio = encrypt($servico_id);
+                            ?>
+
+                            <input type="hidden" name="idServiçoAgendamento[]" value="{{ $encryptedIduncio}}">
 
                         </td>
                         <td>

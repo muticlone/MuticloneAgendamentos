@@ -51,11 +51,6 @@ class AgendamentoController extends Controller
         $servico = cadastro_de_servico::whereIn('id', $idArray)->get();
 
 
-        // $encryptedIds = [];
-
-        // foreach ($servico as $item) {
-        //     $encryptedIds[] = Crypt::encrypt($item->id);
-        // }
 
 
 
@@ -104,8 +99,12 @@ class AgendamentoController extends Controller
 
         $quantidadeItens = count($clienteagendamento);
 
+        $empresa_id = $empresa->id;
+        $empresa_id_criptografado = encrypt($empresa_id);
 
-        $numeroDopedio =  $quantidadeItens + 1;
+
+        $numeroDopediodescript =  $quantidadeItens + 1;
+        $numeroDopedio = encrypt(  $numeroDopediodescript);
 
 
 
@@ -115,14 +114,16 @@ class AgendamentoController extends Controller
                 'user' =>  $user,
                 'servico' =>  $servico,
                 'empresa' => $empresa,
-                'numeroDopedio' =>  $numeroDopedio
+                'numeroDopedio' =>  $numeroDopedio,
+                'empresa_id_criptografado' => $empresa_id_criptografado,
+
 
             ]
         );
     }
 
 
-    public function store(Request $request, Agendamento $Agendamento)
+    public function createNewAgendamento(Request $request, Agendamento $Agendamento)
     {
 
         $user = auth()->user();
@@ -131,7 +132,6 @@ class AgendamentoController extends Controller
         $idservico = $request->input('idServiçoAgendamento');
 
         $idEmpresa =  $request->input('cadastro_de_empresas_id');
-
 
         try {
             $numeroDoPedidoincript =  $request->input('numeroDoPedido');
@@ -183,6 +183,14 @@ class AgendamentoController extends Controller
                 'required',
                 'date_format:Y-m-d\TH:i',
             ],
+            'valorTotalAgendamento' => [
+                'required',
+                function ($attribute, $value, $fail) use ($totalbd) {
+                    if ($value != $totalbd) {
+                        $fail("$attribute Modicação não permitida!");
+                    }
+                },
+            ],
 
         ]);
 
@@ -209,75 +217,101 @@ class AgendamentoController extends Controller
         return redirect('/meus/agendamentos/ativos')->with('msg', 'Agendado com sucesso!');
     }
 
-    public function createProdutounico(Request $request, Agendamento $Agendamento)
+    public function createAgendamentoProdutoUnico(Request $request, Agendamento $Agendamento)
     {
         $user = auth()->user();
 
         $idservico = $request->input('idServiçoAgendamento');
-        $idEmpresa =  $request->input('cadastro_de_empresas_id'); // id da empresa para fazer a busca
-        $empresa = cadastro_de_empresa::findOrFail($idEmpresa); // busca dados empresa
+        $idEmpresa =  $request->input('cadastro_de_empresas_id');
 
-        $servico = cadastro_de_servico::where('cadastro_de_empresas_id', $idEmpresa)
-            ->whereIn('id',  $idservico)
+        $formaDepagamentoAgendamentoincript = $request->input('formaDepagamentoAgendamento');
+        $formaDepagamentoAgendamento = decrypt($formaDepagamentoAgendamentoincript);
+
+
+        try {
+
+            $numeroDoPedidoincript =  $request->input('numeroDoPedido');
+            $numeroDoPedido = decrypt($numeroDoPedidoincript);
+
+            $empresa_id_desencriptado = decrypt($idEmpresa);
+           $idServico = [];
+
+                foreach ($idservico as $encryptedValue) {
+                    $decryptedValue = Crypt::decrypt($encryptedValue);
+                   $idServico[] = $decryptedValue;
+                }
+
+            $empresa = cadastro_de_empresa::findOrFail($empresa_id_desencriptado);
+
+            $servico = cadastro_de_servico::where('cadastro_de_empresas_id', $empresa_id_desencriptado)
+            ->whereIn('id', $idServico)
             ->get();
 
 
-        $data = $request->all(); // dados da pagina
 
-        // Dados da requisição
-        $NomeDoProdutoRequest = $request->input('nomeServiçoAgendamento');
-        $valorDoProdutoRequest = $request->input('valorUnitatioAgendamento');
-        $valorTotalProdutoRequest = $request->input('valorTotalAgendamento');
-        // $valorTotalProdutoRequestFloat = floatval($valorTotalProdutoRequest);
-        $duracaohorasDoProdutoRequest = $request->input('duracaohorasAgendamento');
-        $duracaoMinutosDoProdutoRequest = $request->input('duracaominutosAgendamento');
-        $formadepagamentoRequest = $request->input('formaDepagamentoAgendamento');
-        $formaDePagamentoArray = array($formadepagamentoRequest);
+        } catch (DecryptException $e) {
 
+            return redirect('/')->with('msgErro', 'Modicação não permitida!');
+        }
+
+
+        $dataHorarioAgendamento =  $request->input('dataHorarioAgendamento');
 
         // dados bd
         $servicoNome = $servico->pluck('nomeServico')->toArray();
         $servicoValordoPRoduto = $servico->pluck('valorDoServico')->toArray();
+
         $totalbd = array_sum($servicoValordoPRoduto);
-        // $totalbdformat = number_format( $totalbd, 2, ',', '.');
+
+
 
 
         $servicoduracaohorasDoProduto = $servico->pluck('duracaohoras')->toArray();
         $servicoduracaoMinutosDoProduto = $servico->pluck('duracaominutos')->toArray();
-        $empresaformadepagamento = $empresa->formaDePagamento;
+        $idempresa =  $empresa->id;
+        $user_id =  $user->id;
 
+        $validator = Validator::make($request->all(), [
+            'dataHorarioAgendamento' => [
+                'required',
+                'date_format:Y-m-d\TH:i',
+            ],
+            'valorTotalAgendamento' => [
+                'required',
+                function ($attribute, $value, $fail) use ($totalbd) {
+                    if ($value != $totalbd) {
+                        $fail("$attribute Modicação não permitida!");
+                    }
+                },
+            ],
 
+        ]);
 
-
-
-        $comparisonNomeDdComNOmeRequest = array_diff($servicoNome, $NomeDoProdutoRequest);
-        $comparasionFormadepagamento = array_intersect($formaDePagamentoArray,  $empresaformadepagamento);
-
-
-        //  dd(
-        //     $valorTotalProdutoRequestFloat,
-        //     $totalbd,
-
-        //     $servicoValordoPRoduto,
-        //     $valorDoProdutoRequest,
-        //     $servicoduracaohorasDoProduto,
-        //     $duracaohorasDoProdutoRequest,
-        //     $servicoduracaoMinutosDoProduto,
-        //     $duracaoMinutosDoProdutoRequest
-        // );
-
-        if (
-            $valorTotalProdutoRequest ==  $totalbd && $servicoValordoPRoduto == $valorDoProdutoRequest
-            &&  $servicoduracaohorasDoProduto ==  $duracaohorasDoProdutoRequest
-            && $servicoduracaoMinutosDoProduto == $duracaoMinutosDoProdutoRequest
-            && empty($comparisonNomeDdComNOmeRequest) && $comparasionFormadepagamento
-
-        ) {
-            $Agendamento->create($data);
-            return redirect('/meus/agendamentos/ativos')->with('msg', 'Agendado com sucesso!');
-        } else {
+        if ($validator->fails()) {
             return redirect('/')->with('msgErro', 'Modicação não permitida!');
         }
+
+
+        $agendamento = new Agendamento;
+        $agendamento->valorTotalAgendamento =  $totalbd;
+        $agendamento->duracaohorasAgendamento =   $servicoduracaohorasDoProduto;
+        $agendamento->duracaominutosAgendamento =  $servicoduracaoMinutosDoProduto;
+        $agendamento->valorUnitatioAgendamento = $servicoValordoPRoduto;
+        $agendamento->nomeServiçoAgendamento =  $servicoNome;
+        $agendamento->formaDepagamentoAgendamento = $formaDepagamentoAgendamento;
+        $agendamento->dataHorarioAgendamento = $dataHorarioAgendamento;
+        $agendamento->user_id = $user_id;
+        $agendamento->cadastro_de_empresas_id  =  $idempresa;
+        $agendamento->numeroDoPedido = $numeroDoPedido;
+
+
+        $agendamento->save();
+
+
+
+        return redirect('/meus/agendamentos/ativos')->with('msg', 'Agendado com sucesso!');
+
+
     }
 
 

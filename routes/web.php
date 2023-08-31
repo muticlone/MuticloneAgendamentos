@@ -5,6 +5,7 @@ use App\Http\Controllers\CadastroEmpresaController;
 use App\Http\Controllers\CadastroServicoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BrowsershotController;
+use App\Http\Middleware\PreventBackHistory;
 
 use Illuminate\Support\Facades\Http;
 
@@ -44,9 +45,9 @@ Route::post('/cadastrar/empresa', [CadastroEmpresaController::class, 'store'])->
 
 
 Route::POST('/cadastrar/agentamentos', [AgendamentoController::class, 'create'])->name('cadastrar.Agentamentos')->middleware('auth');
-Route::post('/cadastrar/agentamento', [AgendamentoController::class, 'store'])->name('cadastrar.agendamento')->middleware('auth');
+Route::post('/cadastrar/agentamento', [AgendamentoController::class, 'createNewAgendamento'])->name('cadastrar.agendamento')->middleware('auth');
 Route::get('/cadastrar/agendamento/{id}', [AgendamentoController::class, 'storeProdutounico'])->name('cadastrar.agendamentoprodutouncio')->middleware('auth');
-Route::post('/cadastrar', [AgendamentoController::class, 'createProdutounico'])->name('cadastrar.agendamentoProdutouncio')->middleware('auth');
+Route::post('/cadastrar', [AgendamentoController::class, 'createAgendamentoProdutoUnico'])->name('cadastrar.agendamentoProdutouncio')->middleware('auth');
 
 
 
