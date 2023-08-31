@@ -51,11 +51,11 @@ class AgendamentoController extends Controller
         $servico = cadastro_de_servico::whereIn('id', $idArray)->get();
 
 
-        $encryptedIds = [];
+        // $encryptedIds = [];
 
-        foreach ($servico as $item) {
-            $encryptedIds[] = Crypt::encrypt($item->id);
-        }
+        // foreach ($servico as $item) {
+        //     $encryptedIds[] = Crypt::encrypt($item->id);
+        // }
 
 
 
@@ -75,7 +75,9 @@ class AgendamentoController extends Controller
         $quantidadeItens = count($clienteagendamento);
 
 
-        $numeroDopedio =  $quantidadeItens + 1;
+        $numeroDopediodescript =  $quantidadeItens + 1;
+        $numeroDopedio = encrypt(  $numeroDopediodescript);
+
 
 
         return view(
@@ -85,7 +87,7 @@ class AgendamentoController extends Controller
                 'user' =>  $user,
                 'numeroDopedio' =>  $numeroDopedio,
                 'empresa_id_criptografado' => $empresa_id_criptografado,
-                'encryptedIds' =>  $encryptedIds
+
             ]
         );
     }
@@ -124,14 +126,21 @@ class AgendamentoController extends Controller
     {
 
         $user = auth()->user();
-        // $data = $request->all();
-
 
 
         $idservico = $request->input('idServiçoAgendamento');
+
         $idEmpresa =  $request->input('cadastro_de_empresas_id');
 
+
         try {
+            $numeroDoPedidoincript =  $request->input('numeroDoPedido');
+            $numeroDoPedido = decrypt($numeroDoPedidoincript);
+
+            $formaDepagamentoAgendamentoincript = $request->input('formaDepagamentoAgendamento');
+            $formaDepagamentoAgendamento = decrypt($formaDepagamentoAgendamentoincript);
+
+
             $empresa_id_desencriptado = decrypt($idEmpresa);
             $decryptedArray = [];
 
@@ -139,6 +148,8 @@ class AgendamentoController extends Controller
                 $decryptedValue = Crypt::decrypt($encryptedValue);
                 $decryptedArray[] = $decryptedValue;
             }
+
+
 
             $empresa = cadastro_de_empresa::findOrFail($empresa_id_desencriptado);
 
@@ -151,61 +162,33 @@ class AgendamentoController extends Controller
         }
 
 
-
-
-
-
-        $formaDepagamentoAgendamento = $request->input('formaDepagamentoAgendamento');
         $dataHorarioAgendamento =  $request->input('dataHorarioAgendamento');
-        $numeroDoPedido =  $request->input('numeroDoPedido');
-
 
         // dados bd
         $servicoNome = $servico->pluck('nomeServico')->toArray();
         $servicoValordoPRoduto = $servico->pluck('valorDoServico')->toArray();
+
         $totalbd = array_sum($servicoValordoPRoduto);
+
+
+
+
         $servicoduracaohorasDoProduto = $servico->pluck('duracaohoras')->toArray();
         $servicoduracaoMinutosDoProduto = $servico->pluck('duracaominutos')->toArray();
-        $empresaformadepagamento = $empresa->formaDePagamento;
         $idempresa =  $empresa->id;
         $user_id =  $user->id;
 
         $validator = Validator::make($request->all(), [
-
-
-            'formaDepagamentoAgendamento' => [
-                'required',
-                function ($attribute, $value, $fail) use ($empresaformadepagamento) {
-                    $selectedMethods = explode(',', $value);
-
-                    $validSelected = false;
-                    foreach ($selectedMethods as $selectedMethod) {
-                        if (in_array($selectedMethod, $empresaformadepagamento)) {
-                            $validSelected = true;
-                            break;
-                        }
-                    }
-
-                    if (!$validSelected) {
-                        $fail("Modicação não permitida!");
-                    }
-                },
-            ],
             'dataHorarioAgendamento' => [
                 'required',
                 'date_format:Y-m-d\TH:i',
             ],
-
 
         ]);
 
         if ($validator->fails()) {
             return redirect('/')->with('msgErro', 'Modicação não permitida!');
         }
-
-
-
-
 
 
         $agendamento = new Agendamento;

@@ -1,20 +1,11 @@
 <div>
-    @props(['user_id' => '', 'numeroDopedio' => '', 'empresaimage' => '',
-     'empresa_razaoSocial' => '', 'empresa_nomeFantasia' => '', 'dataAtual' => '',
-      'empresa_logradouro' => '', 'empresa_numero_endereco' => '', 'empresa_cidade' => '',
-       'empresa_uf' => '', 'empresa_telefone' => '', 'empresa_celular' => '', 'user_name' => '',
-        'user_email' => '', 'user_phone' => '', 'empresa_id' => '', 'servico' => ' ',
-         'empresa_formaDePagamento' => ' ', 'somaValores' => 0, 'servico_imageservico' => '',
-          'servico_nomeServico' => '', 'servico_id' => '', 'servico_duracaohoras' => '',
-           'servico_duracaominutos' => '', 'servico_valorDoServico' => '', 'idempresa' => '',
-            'servicoid' => '','encryptedIds' => [] ])
+    @props(['user_id' => '', 'numeroDopedio' => '', 'empresaimage' => '', 'empresa_razaoSocial' => '', 'empresa_nomeFantasia' => '', 'dataAtual' => '', 'empresa_logradouro' => '', 'empresa_numero_endereco' => '', 'empresa_cidade' => '', 'empresa_uf' => '', 'empresa_telefone' => '', 'empresa_celular' => '', 'user_name' => '', 'user_email' => '', 'user_phone' => '', 'empresa_id' => '', 'servico' => ' ', 'empresa_formaDePagamento' => ' ', 'somaValores' => 0, 'servico_imageservico' => '', 'servico_nomeServico' => '', 'servico_id' => '', 'servico_duracaohoras' => '', 'servico_duracaominutos' => '', 'servico_valorDoServico' => '', 'idempresa' => '', 'servicoid' => ''])
 
 
     <div class="row g-12">
 
 
-        <input type="hidden" name="numeroDoPedido" id="celularUser" class="form-control campodesablitado"
-            value=" {{ $numeroDopedio }}">
+
 
 
         <div class="container">
@@ -71,7 +62,7 @@
                 Numero Pedido:
             </strong>
 
-            {{ $numeroDopedio }}
+            {{ decrypt($numeroDopedio) }}
 
 
 
@@ -80,15 +71,6 @@
 
 
     </div>
-
-
-
-
-
-    <input type="hidden" name="cadastro_de_empresas_id" value="{{ $idempresa }}">
-    @foreach ($encryptedIds as $servicoId)
-    <input type="hidden" name="idServiçoAgendamento[]" value="{{ $servicoId }}">
-    @endforeach
 
     <div class="row g-12 pt-1" id="tabela">
 
@@ -111,8 +93,6 @@
                                     alt="{{ $servico->nomeServico }}" class="imgtabela">
                                 {{ $servico->nomeServico }}
 
-                                {{-- <input type="hidden" name="nomeServiçoAgendamento[]"
-                                    value="{{ $servico->nomeServico }}"> --}}
 
 
                             </td>
@@ -128,16 +108,18 @@
 
                                 {{ $servico->duracaominutos }}
                                 minutos
-                                {{-- <input type="hidden" name="duracaohorasAgendamento[]"
-                                    value="{{ $servico->duracaohoras }}">
-                                <input type="hidden" name="duracaominutosAgendamento[]"
-                                    value="{{ $servico->duracaominutos }}"> --}}
+
                             </td>
                             <td>
                                 R$ {{ $servico->valorDoServico }}
                                 {{-- melhorar a seguraça --}}
                                 <input type="hidden" name="valorUnitatioAgendamento[]"
                                     value="{{ $servico->valorDoServico }}">
+                                <?php
+
+                                $encryptedId = encrypt($servico->id);
+                                ?>
+                                <input type="hidden" name="idServiçoAgendamento[]" value="{{  $encryptedId }}">
                             </td>
                             <td>
                                 <a class="btn btn-danger btn-sm deleteButton">Remover</a>
@@ -153,10 +135,8 @@
                             <img src="/img/logo_servicos/{{ $servico_imageservico }}" alt="{{ $servico_nomeServico }}"
                                 class="imgtabela">
                             {{ $servico_nomeServico }}
-                            {{--
-                        <input type="hidden" name="nomeServiçoAgendamento[]"
-                            value="{{ $servico_nomeServico }}"> --}}
-                            <input type="hidden" name="idServiçoAgendamento[]" value="{{ $servico_id }}">
+
+
                         </td>
                         <td>
                             @if ($servico_duracaohoras > 1)
@@ -170,15 +150,11 @@
 
                             {{ $servico_duracaominutos }}
                             minutos
-                            {{-- <input type="hidden" name="duracaohorasAgendamento[]"
-                            value="{{ $servico_duracaohoras }}">
-                        <input type="hidden" name="duracaominutosAgendamento[]"
-                            value="{{ $servico_duracaominutos }}"> --}}
+
                         </td>
                         <td>
                             R$ {{ $servico_valorDoServico }}
-                            {{-- <input type="hidden" name="valorUnitatioAgendamento[]"
-                            value="{{ $servico_valorDoServico }}"> --}}
+
                         </td>
                         <td>
                             <a class="btn btn-danger btn-sm deleteButton" id="remover">Remover</a>
@@ -208,7 +184,7 @@
                     <li>
                         <div class="listadepagamentos">
                             <input id="teste" class="form-check-input" style="margin-right:10px;" type="radio"
-                                name="formaDepagamentoAgendamento" value="{{ $formadepagamento }}"
+                                name="formaDepagamentoAgendamento" value="{{ encrypt($formadepagamento) }}"
                                 @if ($loop->first) checked @endif>
                             @if ($formadepagamento == 'Dinheiro')
                                 <x-dinheiro width="20" height="20" margin="10px" />
@@ -301,4 +277,10 @@
 
         </div>
     </div>
+    <input type="hidden" name="cadastro_de_empresas_id" value="{{ $idempresa }}">
+
+
+
+    <input type="hidden" name="numeroDoPedido" id="numeroDoPedido" class="form-control campodesablitado"
+        value=" {{ $numeroDopedio }}">
 </div>
