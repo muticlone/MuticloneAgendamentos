@@ -740,6 +740,6 @@ svg {
 
   @media (max-width: 460px) {
     .cardhomeServico {
-      width: 20rem; /* Tamanho quando a tela for 460px ou menos */
+      width: 22rem; /* Tamanho quando a tela for 460px ou menos */
     }
   }
