@@ -4,7 +4,7 @@ FROM php:8.1-fpm
 ARG user=muticlone
 ARG uid=1000
 
-# Install system dependencies
+# Install system dependencies ffgyy
 RUN apt-get update && apt-get install -y \
     git \
     curl \
