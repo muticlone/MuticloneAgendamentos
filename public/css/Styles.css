@@ -149,7 +149,13 @@ li:last-child {
 
 
 
+
+
+
+
 }
+
+
 
 
 
@@ -228,15 +234,12 @@ svg {
 .conteiner-search {
   position: relative;
   z-index: 2;
-  top: 30%;
+  top: 46%;
   transform: translateY(-50%);
   left: 16%;
 
 
 }
-
-
-
 
 .conteiner-searchCategoria {
   position: relative;

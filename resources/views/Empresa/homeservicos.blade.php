@@ -79,7 +79,7 @@
 
         @foreach ($servico as $index => $servico)
             <div class="col-auto pt-2">
-                <div class="card" style="width: 12rem ;">
+                <div class="card" style="width: 20rem ;">
 
                     <img src="/img/logo_servicos/{{ $servico->imageservico }}" class=" img_tela_home" class="img-logo"
                         alt="{{ $servico->nomeServico }}">
