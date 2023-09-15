@@ -27,9 +27,9 @@ class CadastroServicoController extends Controller
 
 
         if (
-            $user->id == $empresa->user_id &&
+            $user->id == $empresa->user_id
 
-            $empresa->id == $servico->cadastro_de_empresas_id
+
         ) {
         } else {
             return back();
