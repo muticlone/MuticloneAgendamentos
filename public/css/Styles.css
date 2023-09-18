@@ -741,6 +741,6 @@ svg {
   /* Media query para dispositivos com largura de tela menor ou igual a 768px (tamanho típico de tela de celular) */
   @media (max-width: 459px) {
     .cardhomesericos {
-      width: 22rem;
+      width: 20rem;
     }
   }
