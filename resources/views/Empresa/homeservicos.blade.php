@@ -10,7 +10,7 @@
             <form action="/" method="GET" id="searchForm">
 
 
-                    <x-select-servico-home :servico="$servico"/>
+                <x-select-servico-home :servico="$servico" />
 
 
             </form>
@@ -18,7 +18,7 @@
         </div>
 
 
-        <x-carousel/>
+        <x-carousel />
 
         @if (count($servico) > 0)
 
@@ -106,7 +106,7 @@
 
     {{-- paginação --}}
 
-        <x-pagination :paginatedItems="$paginatedItems" />
+    <x-pagination :paginatedItems="$paginatedItems" />
 
 
 
