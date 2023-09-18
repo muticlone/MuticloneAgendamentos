@@ -223,7 +223,9 @@
                                 </svg>
                             </span>
                             <input type="text" class="form-control" id="cep" name="cep" placeholder="Cep"
-                                onblur="pesquisacep(this.value);"  aria-describedby="validationTooltipUsernamePrepend" required />
+                                onblur="pesquisacep(this.value);"  aria-describedby="validationTooltipUsernamePrepend" required
+                                inputmode="numeric"
+                                />
                             <div class="invalid-tooltip">
                                 Por favor, digite seu número do seu cep
                             </div>
