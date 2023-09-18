@@ -15,23 +15,8 @@
                 <div class="input-group mb-3">
 
 
-                    {{-- <input type="text" list="suggestions" class="form-control" id="search" name="search" autocomplete="off" placeholder="Procurar..."> --}}
 
-                    {{-- <button class="btn btn-outline-secondary custom-btn " type="submit">
-                        <ion-icon name="search-outline" class="iconCentralizar"></ion-icon>
-                        Buscar
-                    </button> --}}
-
-
-
-                    <select id="select-servicoHome" class="js-buscacategoria select2 form-select"
-                    data-placeholder="Selecione um serviço" style="width: 100%" name="search">
-                        <option value="" disabled selected>Selecione um serviço</option>
-                        @foreach ($servico as $servicobusca)
-                            <option class="custom-option img-flag" value="{{ $servicobusca->nomeServico }}" data-img-src="/img/logo_servicos/{{ $servicobusca->imageservico }}">{{ $servicobusca->nomeServico }}</option>
-                        @endforeach
-                    </select>
-
+                    <x-select-servico-home :servico="$servico" width="350"/>
 
 
 

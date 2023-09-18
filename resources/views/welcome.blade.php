@@ -31,15 +31,7 @@
 
 
 
-
-                    <select id="select-servicoHome" class="js-buscacategoria select2 form-select"
-                    data-placeholder="Selecione um serviço" style="width: 100%" name="search">
-                        <option value="" disabled selected>Selecione um serviço</option>
-                        @foreach ($Cadastro_empresa as $empresaBusca)
-                            <option class="custom-option img-flag" value="{{$empresaBusca->nomeFantasia }}" data-img-src="/img/logo_empresas/{{ $empresaBusca->image }}">{{ $empresaBusca->nomeFantasia }}</option>
-                        @endforeach
-                    </select>
-
+                <x-select-empresa-home :empresa="$Cadastro_empresa" width="350" />
 
 
 

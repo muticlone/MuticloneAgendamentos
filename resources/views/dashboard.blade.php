@@ -23,16 +23,9 @@
     </div>
 
     <div class="col-lg-5 col-sm-12 col-md-12 pt-2">
-        <form action="#" method="GET">
+        <form action="#" method="GET" id="searchForm">
 
-            <div class="input-group mb-3">
-                <input type="search" class="form-control" id="search" name="search"
-                    placeholder="Busque pelo nome nome da empresa...">
-                <button class="btn btn-outline-secondary custom-btn" type="submit">
-                    <ion-icon name="search-outline" class="iconCentralizar"></ion-icon>
-                    Buscar
-                </button>
-            </div>
+            <x-select-empresa-home :empresa="$empresa" nome="Busque"/>
         </form>
     </div>
 
@@ -148,5 +141,5 @@
 
 
     <script src="/js/Tooltips.js"></script>
-
+    <script src="/js/select2.js"></script>
 @endsection

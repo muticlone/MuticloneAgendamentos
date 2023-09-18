@@ -21,23 +21,9 @@
         <div class="col-lg-5 col-sm-12 col-md-12 pt-2">
             <form action="#" method="GET" id="searchForm">
 
-                {{-- <div class="input-group mb-3">
-                    <input type="search" class="form-control" id="search" name="search"
-                        placeholder="Busque o serviço pelo nome...">
-                    <button class="btn btn-outline-secondary custom-btn" type="submit">
-                        <ion-icon name="search-outline" class="iconCentralizar"></ion-icon>
-                        Buscar
-                    </button>
-                </div> --}}
 
 
-                <select id="select-meus-servico" class="js-buscacategoria select2 form-select"
-                data-placeholder="Selecione um serviço" style="width: 100%" name="search">
-                    <option value="" disabled selected>Busque um serviço</option>
-                    @foreach ($servicos as $servicobusca)
-                        <option class="custom-option img-flag" value="{{ $servicobusca->nomeServico }}" data-img-src="/img/logo_servicos/{{ $servicobusca->imageservico }}">{{ $servicobusca->nomeServico }}</option>
-                    @endforeach
-                </select>
+                <x-select-servico-home :servico="$servicos" nome="Busque um serviço"/>
 
             </form>
 
