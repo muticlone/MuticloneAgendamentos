@@ -738,9 +738,19 @@ svg {
     width: 12rem;
   }
 
-  /* Media query para dispositivos com largura de tela menor ou igual a 768px (tamanho típico de tela de celular) */
+  /* celular */
   @media (max-width: 479px) {
     .cardhomesericos {
       width: 20rem;
     }
+
+    .conteiner-search {
+        position: relative;
+        z-index: 2;
+        top: 28%;
+        transform: translateY(-50%);
+        left: 16%;
+
+
+      }
   }
