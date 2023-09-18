@@ -119,7 +119,7 @@
 
                             </td>
                             <td>
-                                R$ {{ $servico->valorDoServico }}
+                                R$ {{ number_format($servico->valorDoServico , 2, ',', '.') }}
                                 {{-- melhorar a seguraça --}}
                                 <input type="hidden" name="valorUnitatioAgendamento[]"
                                     value="{{ $servico->valorDoServico }}">
@@ -161,7 +161,9 @@
 
                         </td>
                         <td>
-                            R$ {{ $servico_valorDoServico }}
+
+
+                            R$ {{ number_format ($servico_valorDoServico , 2, ',', '.') }}
 
                             <?php
 

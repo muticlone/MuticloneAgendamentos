@@ -99,13 +99,13 @@
                 <th scope="col">Você ainda não serviços </th>
             @endif
 
-            <th scope="col"></th>
+
         </tr>
     </thead>
     <tbody>
         @foreach ($servicos as $servico)
             <tr>
-                <th scope="row">{{ $loop->index + 1 }}</th>
+
                 <td class="tabelas">
                     <div class="list-group">
                         <a class="list-group-item list-group-item-action" href="/servicos/dados/{{ $servico->id }}">

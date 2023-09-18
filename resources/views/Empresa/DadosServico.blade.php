@@ -26,7 +26,7 @@
                 {{-- Avaliação --}}
                 {{-- <x-comment_ratings :agendamentos="$agendamentos" valueAvaliacao="{{  $media }}" :NomeUser="  $nome "
                 comentario="Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos" />
- --}}
+                --}}
 
 
 
@@ -42,7 +42,7 @@
 
 
                         <p class="card-text txt_dados_empresa">{{ucfirst(strtolower($servico->descricaosevico))  }}</p>
-                        <h5 class="card-title">R$ {{ $servico->valorDoServico }}</h5>
+                        <h5 class="card-title">R$ {{ number_format($servico->valorDoServico , 2, ',', '.') }}</h5>
                         <h5 class="card-title">Formas de Pagamento</h5>
                         <ul id="items-list">
                             @foreach ($empresa->formaDePagamento as $formadepagamento)

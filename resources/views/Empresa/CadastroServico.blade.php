@@ -5,13 +5,13 @@
 @section('conteudo')
 
     <div class="col-md-8 offset-md-2 pt-5">
-       
+
         <form action="/cadastrar/servico/{{ $empresa->id }}" method="POST" enctype="multipart/form-data"
             class="row g-3 needs-validation" novalidate>
             @csrf
-           
+
             <div class="row g-12">
-               
+
                 <div class="col-lg-12 col-sm-12 col-md-12" align="center">
                     <img src="/img/logo_empresas/{{ $empresa->image }}" class="img-fluid  img_edit"
                         alt="{{ $empresa->razaoSocial }}">
@@ -61,8 +61,10 @@
                             <x-dinheiro width="16" height="16" />
                         </span>
 
-                        <input type="number" class="form-control" id="valorDoServico" name="valorDoServico"
-                            placeholder="Valor" aria-describedby="validationTooltipUsernamePrepend" required />
+                        <input type="text" class="form-control" id="valorDoServico" name="valorDoServico"
+                            placeholder="Valor" aria-describedby="validationTooltipUsernamePrepend"
+                            inputmode="numeric"
+                            required />
                         <div class="invalid-tooltip">
                             Por favor, digite o valor do serviço
                         </div>
@@ -182,11 +184,11 @@
                     </button>
                 </div>
 
-               
+
 
             </div>
 
-     
+
 
 
     </div>

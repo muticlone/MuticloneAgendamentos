@@ -18,6 +18,8 @@
                                         <span class="input-group-text">N° do pedido</span>
                                         <input type="text" class="form-control campodesablitado"
                                             value="{{ $agendamento->numeroDoPedido }}">
+
+
                                     </div>
                                 </div>
 
@@ -54,7 +56,9 @@
                                 <div class="input-group">
                                     <span class="input-group-text">R$</span>
                                     <input type="text" class="form-control campodesablitado"
-                                        value="{{ $agendamento->valorTotalAgendamento }}">
+                                        value="{{ number_format( $agendamento->valorTotalAgendamento , 2, ',', '.') }}">
+
+
                                 </div>
                             </div>
                             <div class="mb-3">

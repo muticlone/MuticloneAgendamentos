@@ -50,6 +50,11 @@ class CadastroServicoController extends Controller
 
         $data = $request->all();
 
+        $valorDoServico = $_POST['valorDoServico'];
+        $valorDoServico = str_replace(',', '.', $valorDoServico);
+
+
+
         if ($request->hasFile('imageservico') && $request->file('imageservico')->isValid()) {
             $requestImage = $request->file('imageservico');
             $extensao = $requestImage->extension();
@@ -61,7 +66,7 @@ class CadastroServicoController extends Controller
 
 
         $data['cadastro_de_empresas_id'] =  $id;
-
+        $data['valorDoServico'] =    $valorDoServico;
 
 
         $cadastro_de_servico->create($data);
