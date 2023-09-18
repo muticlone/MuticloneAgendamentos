@@ -734,12 +734,3 @@ svg {
 }
 
 
-.cardhomeServico {
-    width: 12rem; /* Tamanho padrão */
-  }
-
-  @media (max-width: 460px) {
-    .cardhomeServico {
-      width: 22rem; /* Tamanho quando a tela for 460px ou menos */
-    }
-  }
