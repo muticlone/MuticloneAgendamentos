@@ -10,20 +10,9 @@
             <form action="/" method="GET" id="searchForm">
 
 
+                    <x-select-servico-home :servico="$servico"/>
 
 
-                <div class="input-group mb-3">
-
-
-
-                    <x-select-servico-home :servico="$servico" width="350"/>
-
-
-
-
-
-
-                </div>
             </form>
 
         </div>

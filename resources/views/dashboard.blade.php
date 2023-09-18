@@ -25,7 +25,7 @@
     <div class="col-lg-5 col-sm-12 col-md-12 pt-2">
         <form action="#" method="GET" id="searchForm">
 
-            <x-select-empresa-home :empresa="$empresa" nome="Busque"/>
+            <x-select-empresa-home :empresa="$empresa"  nome="Busque por suas empresas"/>
         </form>
     </div>
 
@@ -34,9 +34,12 @@
 
     @if (count($empresa) > 0)
         @if ($search)
-            <div class="alert alert-success" role="alert">
-                Buscando por: "{{ $search }}" <a href="/dashboard">Visualizar todas as suas empresas</a>
+            <div class="pt-2">
+                <div class="alert alert-success" role="alert">
+                    Buscando por: "{{ $search }}" <a href="/dashboard">Visualizar todas as suas empresas</a>
+                </div>
             </div>
+
         @endif
 
         <div class="table-responsive">
@@ -141,5 +144,5 @@
 
 
     <script src="/js/Tooltips.js"></script>
-    <script src="/js/select2.js"></script>
+
 @endsection

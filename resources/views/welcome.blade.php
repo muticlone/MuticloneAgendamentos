@@ -21,24 +21,13 @@
 
         </div> --}}
 
-        <div class=" conteiner-search  col-8">
+        <div class="conteiner-search  col-8">
             <form action="/home/empresas" method="GET" id="searchForm">
 
 
+                <x-select-empresa-home :empresa="$Cadastro_empresa" width="100" />
 
 
-                <div class="input-group mb-3">
-
-
-
-                <x-select-empresa-home :empresa="$Cadastro_empresa" width="350" />
-
-
-
-
-
-
-                </div>
             </form>
 
         </div>
@@ -172,6 +161,6 @@
 
 
     <script src="/js/carrosel.js"></script>
-    <script src="/js/select2.js"></script>
+
 
 @endsection
