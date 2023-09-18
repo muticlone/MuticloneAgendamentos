@@ -73,37 +73,40 @@
                             <td>
 
                                 <a href="/dashboard/edit/{{ $emp->id }}"
-                                    class="btn btn-sm btn-outline-warning btndashboard bt" data-bs-toggle="tooltip"
-                                    data-bs-placement="bottom" data-bs-custom-class="custom-tooltip"
-                                    data-bs-title="Edite o cadastro da empresa">
+                                    class="btn btn-sm btn-outline-warning btndashboard bt btnDashoard"
 
                                     <x-svg-edit width="14" height="14" margin="3px" />
 
                                 </a>
+                                {{--
+                                <a href="#" class="btn btn-sm btn-outline-danger btndashboard bt btnDashoard"
 
-                                <a href="#" class="btn btn-sm btn-outline-danger btndashboard bt "
-                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                    data-bs-custom-class="custom-tooltip" data-bs-title="Apagar empresa">
 
                                     <x-svg-deletar width="14" height="14" margin="3px" />
 
-                                </a>
+                                </a> --}}
 
                                 <a href="/dados/servicos/{{ $emp->id }}"
-                                    class="btn btn-sm btn-outline-info btndashboard bt" data-bs-toggle="tooltip"
-                                    data-bs-placement="bottom" data-bs-custom-class="custom-tooltip"
-                                    data-bs-title="Veja seus serviços ">
+                                    class="btn btn-sm btn-outline-info btndashboard bt btnDashoard"
 
                                     <x-svg-meusservicos width="14" height="14" margin="3px" />
                                 </a>
 
 
                                 <a href="{{ route('meus.clientes.agendamentos.empresa', ['id' => $emp->id, 'status' => 'ativos']) }}"
-                                    class="btn btn-sm btn-outline-warning btndashboardservico">Meu Agendamentos</a>
+                                    class="btn btn-sm btn-outline-warning btndashboardservico bt btnDashoard">
+
+
+                                    <x-svg-meus-agendamentos width="14" height="14" margin="3px" />
+                                </a>
 
                                 @if($temagendamentos)
                                     <a href="{{ route('dashboard.business', ['id' => $emp->id]) }}"
-                                        class="btn btn-sm btn-outline-info btndashboardservico">Dashboard</a>
+                                        class="btn btn-sm btn-outline-info btndashboardservico btnDashoard">
+
+                                        <x-svg-dashboard width="14" height="14" margin="3px" />
+
+                                    </a>
                                 @endif
 
 

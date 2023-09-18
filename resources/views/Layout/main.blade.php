@@ -50,7 +50,7 @@
 
             <div class="container-fluid ">
 
-                <a href="{{ route('home') }}">
+                <a href="{{ route('home.servicos') }}">
 
                     <img class="imgnavbar" src="/img/logo.png" alt="logo">
                 </a>
@@ -63,7 +63,7 @@
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                     aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
-                        <a href="{{ route('home') }}">
+                        <a href="{{ route('home.servicos') }}">
 
                             <img class="imgnavbar" src="/img/logo.png" alt="logo">
                         </a>
