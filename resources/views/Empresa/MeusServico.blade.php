@@ -108,7 +108,7 @@
 
 
                             <a href="/edit/servicos/{{ $servico->id }}"
-                                class="btn btn-sm btn-outline-warning btndashboardservico mr-3">
+                                class="btn btn-sm btn-outline-warning btndashboardservico mr-3 btnDashoard">
                                 {{-- editar --}}
                                 <x-svg-edit width="14" height="14" margin="3px" />
                             </a>
@@ -116,7 +116,7 @@
 
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-outline-danger btndashboardservico mr-3 ">
+                            <button type="submit" class="btn btn-sm btn-outline-danger btndashboardservico mr-3 btnDashoard">
                                 {{-- apagar --}}
                                 <x-svg-deletar width="14" height="14" margin="3px" />
 
