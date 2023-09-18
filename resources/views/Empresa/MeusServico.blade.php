@@ -19,17 +19,29 @@
             </div>
         </div>
         <div class="col-lg-5 col-sm-12 col-md-12 pt-2">
-            <form action="#" method="GET">
+            <form action="#" method="GET" id="searchForm">
 
-                <div class="input-group mb-3">
+                {{-- <div class="input-group mb-3">
                     <input type="search" class="form-control" id="search" name="search"
                         placeholder="Busque o serviço pelo nome...">
                     <button class="btn btn-outline-secondary custom-btn" type="submit">
                         <ion-icon name="search-outline" class="iconCentralizar"></ion-icon>
                         Buscar
                     </button>
-                </div>
+                </div> --}}
+
+
+                <select id="select-meus-servico" class="js-buscacategoria select2 form-select"
+                data-placeholder="Selecione um serviço" style="width: 100%" name="search">
+                    <option value="" disabled selected>Busque um serviço</option>
+                    @foreach ($servicos as $servicobusca)
+                        <option class="custom-option img-flag" value="{{ $servicobusca->nomeServico }}" data-img-src="/img/logo_servicos/{{ $servicobusca->imageservico }}">{{ $servicobusca->nomeServico }}</option>
+                    @endforeach
+                </select>
+
             </form>
+
+
         </div>
 
     </div>
@@ -51,12 +63,15 @@
 @endforeach
 
 @if ($search && $link !== null)
-    <div class="alert alert-success" role="alert">
-        Resultado da busca: "{{ $search }}"
-        <a href="/dados/servicos/{{ $link }}">
-            Ver todos os Serviços
-        </a>
+    <div class="pt-2">
+        <div class="alert alert-success" role="alert">
+            Resultado da busca: "{{ $search }}"
+            <a href="/dados/servicos/{{ $link }}">
+                Ver todos os Serviços
+            </a>
+        </div>
     </div>
+
 @elseif($search && $link == null)
     <div class="alert alert-warning" role="alert">
         Buscando por: "{{ $search }}" Nenhum resultado encontrado
@@ -139,7 +154,7 @@
 <x-pagination :paginatedItems="$servicos" />
 
 
-
+<script src="/js/select2.js"></script>
 
 
 
