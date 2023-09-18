@@ -147,32 +147,44 @@
 
    //cadastro de cliente alterar o campos cpf e cnpj
 
-   function changeInputType() {
+  // Função para aplicar a máscara de CPF
+  function applyCPFMask(inputElement) {
+    $(inputElement).inputmask("999.999.999-99");
+  }
+
+  // Função para aplicar a máscara de CNPJ
+  function applyCNPJMask(inputElement) {
+    $(inputElement).inputmask("99.999.999/9999-99");
+  }
+
+  // Função para limpar o campo de entrada
+  function clearInput(inputElement) {
+    inputElement.value = "";
+  }
+
+  // Função para alternar entre as máscaras com base na seleção do usuário
+  function toggleMask() {
     const checkbox = document.getElementById("flexSwitchCheckChecked");
     const inputCNPJ = document.querySelector('input[name="cnpj_cpf"]');
 
-    const labelCNPJ = document.getElementById("labelCnpj");
-
-
     if (checkbox.checked) {
-        inputCNPJ.setAttribute("placeholder", "CPF");
-        inputCNPJ.setAttribute("maxlength", "14");
-        inputCNPJ.setAttribute("minlength", "14");
-        labelCNPJ.innerText = "CPF";
-
-
-        inputCNPJ.setAttribute("onkeypress", "formatar('###.###.###-##', this)");
-
-
-
+      inputCNPJ.setAttribute("placeholder", "CPF");
+      inputCNPJ.removeAttribute("maxlength");
+      inputCNPJ.removeAttribute("minlength");
+      applyCPFMask(inputCNPJ);
+      clearInput(inputCNPJ); // Limpar o campo
     } else {
-        inputCNPJ.setAttribute("placeholder", "CNPJ");
-        inputCNPJ.setAttribute("maxlength", "18");
-        inputCNPJ.setAttribute("minlength", "18");
-        labelCNPJ.innerText = "Cnpj";
-        inputCNPJ.setAttribute("onkeypress", "formatar('##.###.###/####-##', this)");
-
-
+      inputCNPJ.setAttribute("placeholder", "CNPJ");
+      inputCNPJ.setAttribute("maxlength", "18");
+      inputCNPJ.setAttribute("minlength", "18");
+      applyCNPJMask(inputCNPJ);
+      clearInput(inputCNPJ); // Limpar o campo
     }
-}
+  }
 
+  // Adicione um ouvinte de evento para alternar a máscara quando o estado do checkbox mudar
+  const checkbox = document.getElementById("flexSwitchCheckChecked");
+  checkbox.addEventListener("change", toggleMask);
+
+  // Aplicar a máscara inicialmente com base no estado do checkbox
+  toggleMask();
