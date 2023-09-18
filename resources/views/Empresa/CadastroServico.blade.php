@@ -174,14 +174,14 @@
 
 
                     </div>
-                    <button type="button" class="btn btn-success" id="generateDescriptionSevico"
+                    {{-- <button type="button" class="btn btn-success" id="generateDescriptionSevico"
                         data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip"
                         data-bs-title="Digite nome do serviço, depois gere aqui uma descrição automática para o seu serviço">
                         <span id="nomeDesciservico" style="margin-right: 10px;">Gere uma descrição</span>
                         <span id="loadingMessageservico" style="display: none;" class="spinner-border spinner-border-sm"
                             role="status" aria-hidden="true"></span>
 
-                    </button>
+                    </button> --}}
                 </div>
 
 
@@ -205,6 +205,23 @@
     <script src="/js/gbtCadastroServico.js"></script>
     <script src="/js/Tooltips.js"></script>
 
+    <script>
+        $(document).ready(function() {
+          $('#valorDoServico').inputmask({
+            alias: 'numeric',
+            rightAlign: false,
+            radixPoint: ',',
+            groupSeparator: '.',
+            autoGroup: true,
+            digits: 2,
+            digitsOptional: false,
+            placeholder: '0',
+            allowMinus: false,
+            prefix: 'R$ ',
+            clearMaskOnLostFocus: false // Mantém a máscara após perder o foco
+          });
+        });
+        </script>
 
 
 @endsection

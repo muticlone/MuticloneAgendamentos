@@ -57,10 +57,11 @@
                         <x-dinheiro width="16" height="16" />
                     </span>
 
-                    <input type="number" class="form-control" id="valorDoServico" name="valorDoServico"
+                    <input type="text" class="form-control" id="valorDoServico" name="valorDoServico"
                     placeholder ="Valor"
                     value="{{$ValuevalorDoservico}}"
                     aria-describedby="validationTooltipUsernamePrepend"
+                    inputmode="numeric"
                     required/>
                     <div class="invalid-tooltip">
                         Por favor, digite o valor do serviço
@@ -187,5 +188,27 @@
    </div>
 
 
+   <script>
+    $(document).ready(function() {
+      $('#valorDoServico').inputmask({
+        alias: 'numeric',
+        rightAlign: false,
+        radixPoint: ',',
+        groupSeparator: '.',
+        autoGroup: true,
+        digits: 2,
+        digitsOptional: false,
+        placeholder: '0',
+        allowMinus: false,
+        prefix: 'R$ ',
+        clearMaskOnLostFocus: false // Mantém a máscara após perder o foco
+      });
+    });
+    </script>
+
+
+
+
 
 </div>
+

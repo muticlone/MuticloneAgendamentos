@@ -51,8 +51,8 @@ class CadastroServicoController extends Controller
         $data = $request->all();
 
         $valorDoServico = $_POST['valorDoServico'];
-        $valorDoServico = str_replace(',', '.', $valorDoServico);
-
+        $valorDoServico = str_replace('R$ ', '', $valorDoServico); // Remove o prefixo "R$ "
+        $valorDoServico = str_replace(',', '.', $valorDoServico); // Substitui a vírgula por um ponto
 
 
         if ($request->hasFile('imageservico') && $request->file('imageservico')->isValid()) {
@@ -176,6 +176,12 @@ class CadastroServicoController extends Controller
         $data = $request->all();
 
 
+        $valorDoServico = $_POST['valorDoServico'];
+        $valorDoServico = str_replace('R$ ', '', $valorDoServico); // Remove o prefixo "R$ "
+        $valorDoServico = str_replace(',', '.', $valorDoServico); // Substitui a vírgula por um ponto
+
+
+
 
         if ($request->hasFile('imageservico') && $request->file('imageservico')->isValid()) {
 
@@ -188,7 +194,7 @@ class CadastroServicoController extends Controller
         }
 
 
-
+        $data['valorDoServico'] =    $valorDoServico;
         cadastro_de_servico::findOrFail($servico->id)->update($data);
 
 
