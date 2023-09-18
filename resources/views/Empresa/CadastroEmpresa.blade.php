@@ -63,7 +63,7 @@
                                 </svg>
                             </span>
                             <input type="text" class="form-control" id="cnpj" name="cnpj_cpf" placeholder="Cnpj"
-                                maxlength="18" minlength="18" OnKeyPress="formatar('##.###.###/####-##', this)"
+
                                 aria-describedby="validationTooltipUsernamePrepend" required />
 
                             <div class="invalid-tooltip">
@@ -689,6 +689,7 @@
 
     <script>$('#Celular').inputmask("(99) 99999-9999");</script>
     <script>$('#telefone').inputmask("(99) 9999-9999");</script>
+    <script>$('#cnpj').inputmask("99.999.999/9999-99");</script>
 
     <script src="/js/Tooltips.js"></script>
 @endsection
