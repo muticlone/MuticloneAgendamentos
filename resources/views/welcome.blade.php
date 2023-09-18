@@ -7,7 +7,7 @@
     <div class="row g-12">
 
 
-        <div class=" conteiner-search  col-8">
+        {{-- <div class=" conteiner-search  col-8">
             <form action="/home/empresas" method="GET">
 
                 <div class="input-group mb-3">
@@ -16,6 +16,36 @@
                         <ion-icon name="search-outline" class="iconCentralizar"></ion-icon>
                         Buscar
                     </button>
+                </div>
+            </form>
+
+        </div> --}}
+
+        <div class=" conteiner-search  col-8">
+            <form action="/home/empresas" method="GET" id="searchForm">
+
+
+
+
+                <div class="input-group mb-3">
+
+
+
+
+                    <select id="select-servicoHome" class="js-buscacategoria select2 form-select"
+                    data-placeholder="Selecione um serviço" style="width: 100%" name="search">
+                        <option value="" disabled selected>Selecione um serviço</option>
+                        @foreach ($Cadastro_empresa as $empresaBusca)
+                            <option class="custom-option img-flag" value="{{$empresaBusca->nomeFantasia }}" data-img-src="/img/logo_empresas/{{ $empresaBusca->image }}">{{ $empresaBusca->nomeFantasia }}</option>
+                        @endforeach
+                    </select>
+
+
+
+
+
+
+
                 </div>
             </form>
 
@@ -150,5 +180,6 @@
 
 
     <script src="/js/carrosel.js"></script>
+    <script src="/js/select2.js"></script>
 
 @endsection
