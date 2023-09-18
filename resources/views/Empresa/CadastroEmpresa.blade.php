@@ -63,7 +63,7 @@
                                 </svg>
                             </span>
                             <input type="text" class="form-control" id="cnpj" name="cnpj_cpf" placeholder="Cnpj"
-
+                                 inputmode="numeric"
                                 aria-describedby="validationTooltipUsernamePrepend" required />
 
                             <div class="invalid-tooltip">
