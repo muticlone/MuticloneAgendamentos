@@ -7,7 +7,11 @@ $(document).ready(function () {
     $('.js-buscacategoria').on('change', function () {
         $('#searchForm').submit(); // Envie o formulário quando uma opção é selecionada
     });
+
+
 });
+
+
 
 
 $(document).ready(function () {

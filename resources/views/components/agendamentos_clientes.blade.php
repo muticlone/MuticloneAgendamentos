@@ -1,10 +1,8 @@
 <div>
-    @props(['clienteagendamento' => '', 'empresa_nomeFantasia' => '', 'empresa_id' => '',
-    'nomesClientes' => [], 'search' => '',
-    'numerosDosPedidos' => [],
-    ])
-
-
+    @props(['clienteagendamento' => '', 'empresa_nomeFantasia' => '',
+    'empresa_id' => '', 'nomesClientes' => [], 'search' => '',
+    'searchdate' => '',
+    'numerosDosPedidos' => []])
 
     <div class="container pt-2">
         <form action="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/todos"
@@ -12,19 +10,33 @@
             <div class="row">
 
 
-                 <div class="col-md-4">
+                <div class="col-md-4 pt-1 ">
                     <x-select-meus-agendamentos :agendamento="$clienteagendamento" :value="$nomesClientes" width="100%" />
                 </div>
-                <div class="col-md-4">
-                    <x-select-meus-agendamentos nome="Busque pelo numero do pedido" :agendamento="$clienteagendamento" :value=" $numerosDosPedidos" width="100%" id="select2" />
+                <div class="col-md-4  pt-1">
+                    <x-select-meus-agendamentos nome="Busque pelo numero do pedido" :agendamento="$clienteagendamento" :value="$numerosDosPedidos"
+                        width="100%" id="select2" />
                 </div>
 
-                <div class="col-md-4">
-                    <input type="date" class="form-control" aria-describedby="validationTooltipUsernamePrepend" />
+                <div class="col-md-4  pt-1">
+                    <x-inpunt-date/>
                 </div>
+
+
             </div>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const dataInput = document.getElementById('dataInput');
+            const searchForm = document.getElementById('searchForm'); // Adicione um id ao formulário
+
+            dataInput.addEventListener('change', function () {
+                searchForm.submit(); // Submete automaticamente o formulário quando a data é alterada
+            });
+        });
+    </script>
 
 
     <div class="container">
@@ -34,13 +46,17 @@
                 @if (is_numeric($search))
                     <div class="pt-1">
                         <div class="alert alert-success" role="alert">
-                            Buscando pelo um número do pedido: {{ $search }} <a href="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/todos">Ver todos</a>
+                            Buscando pelo um número do pedido: {{ $search }} <a
+                                href="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/todos">Ver
+                                todos</a>
                         </div>
                     </div>
                 @else
                     <div class="pt-1">
                         <div class="alert alert-success" role="alert">
-                            Buscando pelo nome do cliente : "{{ $search }}" <a href="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/todos"> Ver todos</a>
+                            Buscando pelo nome do cliente : "{{ $search }}" <a
+                                href="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/todos">
+                                Ver todos</a>
                         </div>
                     </div>
                 @endif

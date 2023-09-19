@@ -315,6 +315,9 @@ class AgendamentoController extends Controller
         $user = auth()->user();
         $empresa = cadastro_de_empresa::findOrFail($id);
         $search = request('search');
+        $searchdate = request('searchdate');
+
+
 
 
         $nomes = Agendamento::where('cadastro_de_empresas_id', $id);
@@ -327,7 +330,7 @@ class AgendamentoController extends Controller
 
 
 
-            $numerosDosPedidos = Agendamento::where('cadastro_de_empresas_id', $id)->pluck('numeroDoPedido')->toArray();
+        $numerosDosPedidos = Agendamento::where('cadastro_de_empresas_id', $id)->pluck('numeroDoPedido')->toArray();
 
 
 
@@ -336,27 +339,39 @@ class AgendamentoController extends Controller
         if ($user->id != $empresa->user_id) {
             return redirect('/dashboard');
         } else {
-            if ($search) {
+            if ($search || $searchdate) {
+
+
 
 
                 $query = Agendamento::where('cadastro_de_empresas_id', $id);
 
-                $idsCliente = $nomes->distinct()
-                    ->join('users as agendamento_users', 'agendamentos.user_id', '=', 'agendamento_users.id')
-                    ->where('agendamento_users.name', '=', $search)
-                    ->pluck('agendamento_users.id');
+                if ($searchdate) {
 
-                // Verifica se há resultados para o nome de cliente pesquisado
-                if (count($idsCliente) > 0) {
-                    $query->whereIn('user_id', $idsCliente);
+
+                    $query->whereDate('updated_at', '=',$searchdate);
+
+
                 } else {
-                    $query->where('numeroDoPedido', 'like', '%' . $search . '%');
+
+                    $idsCliente = $nomes->distinct()
+                        ->join('users as agendamento_users', 'agendamentos.user_id', '=', 'agendamento_users.id')
+                        ->where('agendamento_users.name', '=', $search)
+                        ->pluck('agendamento_users.id');
+
+                    // Verifica se há resultados para o nome de cliente pesquisado
+                    if (count($idsCliente) > 0) {
+                        $query->whereIn('user_id', $idsCliente);
+                    } else {
+                        $query->where('numeroDoPedido', '=',  $search);
+                    }
                 }
             } else {
 
                 $query = Agendamento::where('cadastro_de_empresas_id', $id)
                     ->orderByRaw('confirmado ASC, dataHorarioAgendamento ASC');
             }
+
 
 
 
@@ -397,6 +412,7 @@ class AgendamentoController extends Controller
 
 
 
+
             $statuses = [
                 'ativos' => false,
                 'pendentes' => false,
@@ -414,6 +430,8 @@ class AgendamentoController extends Controller
                 'nomesClientes' => $nomesClientes,
                 'search' => $search,
                 'numerosDosPedidos' =>  $numerosDosPedidos,
+                'searchdate' => $searchdate,
+
             ]);
         }
     }

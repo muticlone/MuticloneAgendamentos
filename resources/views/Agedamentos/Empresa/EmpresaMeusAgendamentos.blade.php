@@ -14,6 +14,7 @@
                 empresa_nomeFantasia="{{ $empresa->nomeFantasia }}"
                 empresa_id="{{ $empresa->id }}"
                 search="{{ $search }}"
+                searchdate={{ $searchdate }}
                 :nomesClientes="$nomesClientes"
                 :numerosDosPedidos="$numerosDosPedidos"
                 />
