@@ -1,8 +1,33 @@
 <div>
-    @props(['clienteagendamento' => '', 'empresa_nomeFantasia' => '', 'empresa_id' => ''])
+    @props(['clienteagendamento' => '', 'empresa_nomeFantasia' => '', 'empresa_id' => '' ,'nomesClientes' => []])
+
+    <div class="container pt-2">
+        <form action="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/ativos" method="GET" id="searchForm">
+            <div class="row">
+
+
+                <div class="col-md-4">
+                    <x-select-meus-agendamentos :agendamento="$clienteagendamento" :value="$nomesClientes" width="100%" />
+                </div>
+                <div class="col-md-4">
+                    <x-select-meus-agendamentos nome="Busque pelo numero do pedido" :agendamento="$clienteagendamento" :value="json_encode($clienteagendamento->pluck('numeroDoPedido')->toArray())"
+                        width="100%" id="select2" />
+                </div>
+                <div class="col-md-4">
+                    <input type="date" class="form-control" aria-describedby="validationTooltipUsernamePrepend" />
+                </div>
+            </div>
+        </form>
+    </div>
+
 
     <div class="container">
         <div class="row g-2 pt-2">
+
+
+
+
+
 
             @foreach ($clienteagendamento as $agendamento)
                 <div class="col-lg-4 col-md-6 col-sm-12 pt-2">
@@ -56,7 +81,7 @@
                                 <div class="input-group">
                                     <span class="input-group-text">R$</span>
                                     <input type="text" class="form-control campodesablitado"
-                                        value="{{ number_format( $agendamento->valorTotalAgendamento , 2, ',', '.') }}">
+                                        value="{{ number_format($agendamento->valorTotalAgendamento, 2, ',', '.') }}">
 
 
                                 </div>
@@ -82,23 +107,22 @@
 
 
                             @if ($agendamento->confirmado == 0 && $agendamento->cancelado == 0)
-                            <div class="d-flex justify-content-between">
-                                <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => $agendamento->id, 'idEmpresa' => $empresa_id]) }}"
-                                   class="btn btn-warning position-relative d-inline-flex align-items-center">
-                                    Detalhes
-                                    <span class="badge rounded-pill bg-danger ms-2">5</span>
-                                </a>
+                                <div class="d-flex justify-content-between">
+                                    <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => $agendamento->id, 'idEmpresa' => $empresa_id]) }}"
+                                        class="btn btn-warning position-relative d-inline-flex align-items-center">
+                                        Detalhes
+                                        <span class="badge rounded-pill bg-danger ms-2">5</span>
+                                    </a>
 
-                                <form action="/confirmar{{ $agendamento->id }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" id="ConfirmarAgendamento" class="btn btn-success btntamanhoMeusClientesAgendamentoDetalhes">
-                                        Confirmar
-                                    </button>
-                                </form>
-                            </div>
-
-
+                                    <form action="/confirmar{{ $agendamento->id }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" id="ConfirmarAgendamento"
+                                            class="btn btn-success btntamanhoMeusClientesAgendamentoDetalhes">
+                                            Confirmar
+                                        </button>
+                                    </form>
+                                </div>
                             @elseif ($agendamento->finalizado == 1 && $agendamento->cancelado == 0)
                                 <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => $agendamento->id, 'idEmpresa' => $empresa_id]) }}"
                                     class="btn btn-success position-relative">Detalhes
@@ -108,31 +132,31 @@
                                     </span>
                                 </a>
                             @elseif ($agendamento->confirmado == 1 && $agendamento->cancelado == 0)
-                            <div class="d-flex justify-content-between">
+                                <div class="d-flex justify-content-between">
+                                    <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => $agendamento->id, 'idEmpresa' => $empresa_id]) }}"
+                                        class="btn btn-info position-relative">Detalhes
+                                        <span
+                                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            5
+                                        </span>
+                                    </a>
+                                    <form action="/finalizar{{ $agendamento->id }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" style="display: block;" id="FinalizarAgendamento"
+                                            class="btn btn-success btntamanhoMeusClientesAgendamentoDetalhes  mx-1 ">
+                                            Finalizar
+                                        </button>
+                                    </form>
+                                </div>
+                            @elseif ($agendamento->cancelado == 1)
                                 <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => $agendamento->id, 'idEmpresa' => $empresa_id]) }}"
-                                    class="btn btn-info position-relative">Detalhes
+                                    class="btn btn-danger position-relative">Detalhes
                                     <span
-                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                        5
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+                                        1
                                     </span>
                                 </a>
-                                <form action="/finalizar{{ $agendamento->id }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" style="display: block;" id="FinalizarAgendamento"
-                                        class="btn btn-success btntamanhoMeusClientesAgendamentoDetalhes  mx-1 ">
-                                        Finalizar
-                                    </button>
-                                </form>
-                            </div>
-                            @elseif ($agendamento->cancelado == 1)
-                            <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => $agendamento->id, 'idEmpresa' => $empresa_id]) }}"
-                                class="btn btn-danger position-relative">Detalhes
-                                <span
-                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
-                                   1
-                                </span>
-                            </a>
                             @endif
 
 

@@ -22,7 +22,8 @@ $(document).ready(function () {
 
 
         templateResult: formatOption,
-        templateSelection: formatOption
+        templateSelection: formatOption,
+
     });
 
     function formatOption(option) {

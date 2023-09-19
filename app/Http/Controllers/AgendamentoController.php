@@ -71,7 +71,7 @@ class AgendamentoController extends Controller
 
 
         $numeroDopediodescript =  $quantidadeItens + 1;
-        $numeroDopedio = encrypt(  $numeroDopediodescript);
+        $numeroDopedio = encrypt($numeroDopediodescript);
 
 
 
@@ -104,7 +104,7 @@ class AgendamentoController extends Controller
 
 
         $numeroDopediodescript =  $quantidadeItens + 1;
-        $numeroDopedio = encrypt(  $numeroDopediodescript);
+        $numeroDopedio = encrypt($numeroDopediodescript);
 
 
 
@@ -234,21 +234,18 @@ class AgendamentoController extends Controller
             $numeroDoPedido = decrypt($numeroDoPedidoincript);
 
             $empresa_id_desencriptado = decrypt($idEmpresa);
-           $idServico = [];
+            $idServico = [];
 
-                foreach ($idservico as $encryptedValue) {
-                    $decryptedValue = Crypt::decrypt($encryptedValue);
-                   $idServico[] = $decryptedValue;
-                }
+            foreach ($idservico as $encryptedValue) {
+                $decryptedValue = Crypt::decrypt($encryptedValue);
+                $idServico[] = $decryptedValue;
+            }
 
             $empresa = cadastro_de_empresa::findOrFail($empresa_id_desencriptado);
 
             $servico = cadastro_de_servico::where('cadastro_de_empresas_id', $empresa_id_desencriptado)
-            ->whereIn('id', $idServico)
-            ->get();
-
-
-
+                ->whereIn('id', $idServico)
+                ->get();
         } catch (DecryptException $e) {
 
             return redirect('/')->with('msgErro', 'Modicação não permitida!');
@@ -310,8 +307,6 @@ class AgendamentoController extends Controller
 
 
         return redirect('/meus/agendamentos/ativos')->with('msg', 'Agendado com sucesso!');
-
-
     }
 
 
@@ -319,12 +314,48 @@ class AgendamentoController extends Controller
     {
         $user = auth()->user();
         $empresa = cadastro_de_empresa::findOrFail($id);
+        $search = request('search');
+
+
+        $nomes = Agendamento::where('cadastro_de_empresas_id', $id);
+
+
+        $nomesClientes = $nomes->distinct()
+            ->join('users', 'agendamentos.user_id', '=', 'users.id')
+            ->pluck('users.name');
+
+
+
 
         if ($user->id != $empresa->user_id) {
             return redirect('/dashboard');
         } else {
-            $query = Agendamento::where('cadastro_de_empresas_id', $id)
-                ->orderByRaw('confirmado ASC, dataHorarioAgendamento ASC');
+            if ($search) {
+
+
+                $query = Agendamento::where('cadastro_de_empresas_id', $id);
+
+                $idsCliente = $nomes->distinct()
+                    ->join('users as agendamento_users', 'agendamentos.user_id', '=', 'agendamento_users.id')
+                    ->where('agendamento_users.name', '=', $search)
+                    ->pluck('agendamento_users.id');
+
+                // Verifica se há resultados para o nome de cliente pesquisado
+                if (count($idsCliente) > 0) {
+                    $query->whereIn('user_id', $idsCliente);
+                }else {
+                    $query->where('numeroDoPedido', 'like', '%' . $search . '%');
+
+                }
+
+
+            } else {
+
+                $query = Agendamento::where('cadastro_de_empresas_id', $id)
+                    ->orderByRaw('confirmado ASC, dataHorarioAgendamento ASC');
+            }
+
+
 
             switch ($status) {
                 case 'ativos':
@@ -355,6 +386,9 @@ class AgendamentoController extends Controller
             $userIds = $clienteagendamento->pluck('user_id')->toArray();
             $users = User::whereIn('id', $userIds)->get();
 
+
+
+
             $statuses = [
                 'ativos' => false,
                 'pendentes' => false,
@@ -369,6 +403,7 @@ class AgendamentoController extends Controller
                 'users' => $users,
                 'empresa' => $empresa,
                 'statuses' => $statuses,
+                'nomesClientes' => $nomesClientes
             ]);
         }
     }
