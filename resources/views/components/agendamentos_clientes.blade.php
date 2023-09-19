@@ -1,8 +1,7 @@
 <div>
-    @props(['clienteagendamento' => '', 'empresa_nomeFantasia' => '',
-    'empresa_id' => '', 'nomesClientes' => [], 'search' => '',
-    'searchdate' => '',
-    'numerosDosPedidos' => []])
+    @props(['clienteagendamento' => '', 'empresa_nomeFantasia' => '', 'empresa_id' => '', 'nomesClientes' => [], 'search' => '', 'searchdate' => '', 'numerosDosPedidos' => []])
+
+
 
     <div class="container pt-2">
         <form action="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/todos"
@@ -19,7 +18,7 @@
                 </div>
 
                 <div class="col-md-4  pt-1">
-                    <x-inpunt-date/>
+                    <x-inpunt-date />
                 </div>
 
 
@@ -28,11 +27,11 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const dataInput = document.getElementById('dataInput');
             const searchForm = document.getElementById('searchForm'); // Adicione um id ao formulário
 
-            dataInput.addEventListener('change', function () {
+            dataInput.addEventListener('change', function() {
                 searchForm.submit(); // Submete automaticamente o formulário quando a data é alterada
             });
         });
@@ -42,11 +41,33 @@
     <div class="container">
         <div class="row g-2 pt-2">
 
+
+
+            @if ($searchdate)
+
+
+                <div class="pt-1">
+                    <div class="alert alert-success" role="alert">
+                        Buscando por agendamentos na data: "{{ \Carbon\Carbon::parse($searchdate)->format('d/m/Y') }}" <a
+                            href="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/todos">Ver
+                            todos</a>
+                    </div>
+                </div>
+            @endif
+
+
+
+
+
+
+
+
+
             @if ($search)
                 @if (is_numeric($search))
                     <div class="pt-1">
                         <div class="alert alert-success" role="alert">
-                            Buscando pelo um número do pedido: {{ $search }} <a
+                            Buscando pelo um número do pedido: "{{ $search }}" <a
                                 href="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/todos">Ver
                                 todos</a>
                         </div>

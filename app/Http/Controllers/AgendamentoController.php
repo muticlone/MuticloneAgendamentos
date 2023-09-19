@@ -349,8 +349,7 @@ class AgendamentoController extends Controller
                 if ($searchdate) {
 
 
-                    $query->whereDate('dataHorarioAgendamento', '=',$searchdate);
-
+                    $query->whereDate('dataHorarioAgendamento', '=', $searchdate);
 
                 } else {
 
@@ -422,6 +421,10 @@ class AgendamentoController extends Controller
             ];
             $statuses[$status] = true;
 
+
+
+
+
             return view('Agedamentos.Empresa.EmpresaMeusAgendamentos', [
                 'clienteagendamento' => $clienteagendamento,
                 'users' => $users,
@@ -430,7 +433,7 @@ class AgendamentoController extends Controller
                 'nomesClientes' => $nomesClientes,
                 'search' => $search,
                 'numerosDosPedidos' =>  $numerosDosPedidos,
-                'searchdate' => $searchdate,
+                'searchdate' =>  $searchdate,
 
             ]);
         }

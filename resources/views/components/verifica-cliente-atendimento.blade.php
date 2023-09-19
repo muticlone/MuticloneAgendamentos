@@ -1,4 +1,4 @@
-@props(['status' => []])
+@props(['status' => [] , 'searchdate' => ''])
 <div>
 
 
@@ -22,6 +22,10 @@
 
     @if ($status['cancelados'])
         <x-Alert cor="danger" texto="Você ainda não tem atendimentos Cancelado" />
+    @endif
+
+    @if ($status['todos'])
+        <x-Alert texto="Não foram encontrados agendamentos para o dia  {{ \Carbon\Carbon::parse($searchdate)->format('d/m/Y') }}" />
     @endif
 
 </div>
