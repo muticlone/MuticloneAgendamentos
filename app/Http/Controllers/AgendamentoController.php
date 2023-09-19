@@ -349,7 +349,7 @@ class AgendamentoController extends Controller
                 if ($searchdate) {
 
 
-                    $query->whereDate('updated_at', '=',$searchdate);
+                    $query->whereDate('dataHorarioAgendamento', '=',$searchdate);
 
 
                 } else {
