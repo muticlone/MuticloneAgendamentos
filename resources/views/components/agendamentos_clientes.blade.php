@@ -1,8 +1,9 @@
 <div>
-    @props(['clienteagendamento' => '', 'empresa_nomeFantasia' => '', 'empresa_id' => '' ,'nomesClientes' => []])
+    @props(['clienteagendamento' => '', 'empresa_nomeFantasia' => '', 'empresa_id' => '', 'nomesClientes' => [], 'search' => ''])
 
     <div class="container pt-2">
-        <form action="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/ativos" method="GET" id="searchForm">
+        <form action="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/todos"
+            method="GET" id="searchForm">
             <div class="row">
 
 
@@ -24,11 +25,21 @@
     <div class="container">
         <div class="row g-2 pt-2">
 
-
-
-
-
-
+            @if ($search)
+                @if (is_numeric($search))
+                    <div class="pt-1">
+                        <div class="alert alert-success" role="alert">
+                            Buscando pelo um número do pedido: {{ $search }} <a href="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/todos">Ver todos</a>
+                        </div>
+                    </div>
+                @else
+                    <div class="pt-1">
+                        <div class="alert alert-success" role="alert">
+                            Buscando pelo nome do cliente : "{{ $search }}" <a href="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/todos"> Ver todos</a>
+                        </div>
+                    </div>
+                @endif
+            @endif
             @foreach ($clienteagendamento as $agendamento)
                 <div class="col-lg-4 col-md-6 col-sm-12 pt-2">
 

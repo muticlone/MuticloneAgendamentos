@@ -380,6 +380,11 @@ class AgendamentoController extends Controller
                     $query->where('cancelado', 1)
                         ->orderBy('updated_at', 'desc');
                     break;
+
+                case 'todos':
+                    $query->where('cadastro_de_empresas_id', $id)
+                    ->orderBy('updated_at', 'desc');
+                break;
             }
 
             $clienteagendamento = $query->paginate(9);
@@ -403,7 +408,8 @@ class AgendamentoController extends Controller
                 'users' => $users,
                 'empresa' => $empresa,
                 'statuses' => $statuses,
-                'nomesClientes' => $nomesClientes
+                'nomesClientes' => $nomesClientes,
+                'search' => $search
             ]);
         }
     }

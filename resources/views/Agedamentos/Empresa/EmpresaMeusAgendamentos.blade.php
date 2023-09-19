@@ -11,7 +11,11 @@
             @php
                 $decodedNomesClientes = htmlspecialchars_decode($nomesClientes);
             @endphp
-            <x-agendamentos_clientes :clienteagendamento="$clienteagendamento" empresa_nomeFantasia="{{ $empresa->nomeFantasia }}" empresa_id="{{ $empresa->id }}" :nomesClientes="$decodedNomesClientes" />
+            <x-agendamentos_clientes :clienteagendamento="$clienteagendamento"
+                empresa_nomeFantasia="{{ $empresa->nomeFantasia }}"
+                empresa_id="{{ $empresa->id }}"
+                search="{{ $search }}"
+                :nomesClientes="$decodedNomesClientes" />
         @else
         <x-verifica-cliente-atendimento :status="$statuses" />
         @endif
