@@ -1,5 +1,10 @@
 <div>
-    @props(['clienteagendamento' => '', 'empresa_nomeFantasia' => '', 'empresa_id' => '', 'nomesClientes' => [], 'search' => ''])
+    @props(['clienteagendamento' => '', 'empresa_nomeFantasia' => '', 'empresa_id' => '',
+    'nomesClientes' => [], 'search' => '',
+    'numerosDosPedidos' => [],
+    ])
+
+
 
     <div class="container pt-2">
         <form action="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/todos"
@@ -7,13 +12,13 @@
             <div class="row">
 
 
-                <div class="col-md-4">
+                 <div class="col-md-4">
                     <x-select-meus-agendamentos :agendamento="$clienteagendamento" :value="$nomesClientes" width="100%" />
                 </div>
                 <div class="col-md-4">
-                    <x-select-meus-agendamentos nome="Busque pelo numero do pedido" :agendamento="$clienteagendamento" :value="json_encode($clienteagendamento->pluck('numeroDoPedido')->toArray())"
-                        width="100%" id="select2" />
+                    <x-select-meus-agendamentos nome="Busque pelo numero do pedido" :agendamento="$clienteagendamento" :value=" $numerosDosPedidos" width="100%" id="select2" />
                 </div>
+
                 <div class="col-md-4">
                     <input type="date" class="form-control" aria-describedby="validationTooltipUsernamePrepend" />
                 </div>

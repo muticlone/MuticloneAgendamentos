@@ -322,7 +322,13 @@ class AgendamentoController extends Controller
 
         $nomesClientes = $nomes->distinct()
             ->join('users', 'agendamentos.user_id', '=', 'users.id')
-            ->pluck('users.name');
+            ->pluck('users.name')
+            ->toArray();
+
+
+
+            $numerosDosPedidos = Agendamento::where('cadastro_de_empresas_id', $id)->pluck('numeroDoPedido')->toArray();
+
 
 
 
@@ -343,12 +349,9 @@ class AgendamentoController extends Controller
                 // Verifica se há resultados para o nome de cliente pesquisado
                 if (count($idsCliente) > 0) {
                     $query->whereIn('user_id', $idsCliente);
-                }else {
+                } else {
                     $query->where('numeroDoPedido', 'like', '%' . $search . '%');
-
                 }
-
-
             } else {
 
                 $query = Agendamento::where('cadastro_de_empresas_id', $id)
@@ -383,8 +386,8 @@ class AgendamentoController extends Controller
 
                 case 'todos':
                     $query->where('cadastro_de_empresas_id', $id)
-                    ->orderBy('updated_at', 'desc');
-                break;
+                        ->orderBy('updated_at', 'desc');
+                    break;
             }
 
             $clienteagendamento = $query->paginate(9);
@@ -409,7 +412,8 @@ class AgendamentoController extends Controller
                 'empresa' => $empresa,
                 'statuses' => $statuses,
                 'nomesClientes' => $nomesClientes,
-                'search' => $search
+                'search' => $search,
+                'numerosDosPedidos' =>  $numerosDosPedidos,
             ]);
         }
     }

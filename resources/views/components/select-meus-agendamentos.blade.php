@@ -1,19 +1,17 @@
 <div>
-    @props(['agendamento' => '', 'width' => '', 'nome' => 'Busque pelo nome do cliente', 'value' => ''])
+    @props(['agendamento' => '', 'width' => '', 'nome' => 'Busque pelo nome do cliente', 'value' => []])
 
 
-    <select  class="js-buscacategoria select2 form-select" data-placeholder="{{ $nome }}"
-        style="width: {{ $width }}%" name="search">
+
+
+    <select class="js-buscacategoria select2 form-select" data-placeholder="{{ $nome }}" style="width: {{ $width }}%" name="search">
         <option value="" disabled selected>{{ $nome }}</option>
 
-        @php
-            $nomes = json_decode($value); // Transforme a string JSON em um array PHP
-        @endphp
-
-        @foreach ($nomes as $nome)
-            <option class="custom-option img-flag" value="{{ $nome }}">{{ $nome }}</option>
+        @if (is_array($value) || is_object($value))
+        @foreach ($value as $optionValue)
+            <option class="custom-option img-flag" value="{{ $optionValue }}">{{ $optionValue }}</option>
         @endforeach
-
+    @endif
     </select>
 </div>
 
