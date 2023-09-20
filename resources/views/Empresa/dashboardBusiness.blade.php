@@ -17,7 +17,7 @@
     <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all"
         rel="stylesheet" type="text/css" />
 
-    <main>
+    {{-- <main>
         <div class="container-fluid">
             <div class="row">
                 @if (session('msg'))
@@ -33,7 +33,7 @@
                 @yield('conteudo')
             </div>
         </div>
-    </main>
+    </main> --}}
     <div class="row g-12">
 
 
@@ -211,9 +211,9 @@
     </div>
 
     @if ($metaAnual > 0)
-        <label for="valorDaMetaAnual">Sua meta de faturamento anual</label>
+    <label for="valorDaMetaAnual">Faturamento anual</label>
     @else
-        <label for="valorDaMetaAnual">Digite qual é sua meta de faturamento anual</label>
+        <label for="valorDaMetaAnual">Crie uma meta de faturamento anual</label>
     @endif
 
 
@@ -686,6 +686,7 @@
                     ticks: {
                         // Formatação para os valores do eixo y
                         callback: function(value, index, values) {
+
                             return 'R$ ' + value.toFixed(2); // Formatação como moeda (com 2 casas decimais)
                         }
                     }
@@ -699,8 +700,8 @@
                             if (label) {
                                 label += ': ';
                             }
-                            label += 'R$ ' + context.parsed.y.toFixed(
-                                2); // Formatação como moeda (com 2 casas decimais)
+                            var formattedValue = context.parsed.y.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                            label += 'R$ ' + formattedValue; // Formatação como moeda (com 2 casas decimais)
                             return label;
                         }
                     }
