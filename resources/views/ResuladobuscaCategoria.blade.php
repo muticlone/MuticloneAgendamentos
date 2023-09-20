@@ -9,14 +9,7 @@
     <div class=" conteiner-searchCategoria  col-8">
         <form action="/" method="GET" id="searchForm">
 
-
-                <select id="select-servicoCategoria" class="js-buscacategoria select2 form-select"
-                data-placeholder="Selecione um serviço" style="width: 100%" name="search">
-                    <option value="" disabled selected>Selecione um serviço</option>
-                    @foreach ($servicos as $servicobusca)
-                        <option class="custom-option img-flag" value="{{ $servicobusca->nomeServico }}" data-img-src="/img/logo_servicos/{{ $servicobusca->imageservico }}">{{ $servicobusca->nomeServico }}</option>
-                    @endforeach
-                </select>
+          <x-select-servico-home :servico="$servicos" />
 
 
         </form>
