@@ -39,7 +39,7 @@ Route::get('/busca/categorias', [HomeController::class, 'Showcategorias'])->name
 Route::get('/dashboard/business/{id}', [HomeController::class, 'dashboardBusiness'])->name('dashboard.business')->middleware('auth');;
 
 
-Route::put('/atualizarmeta/{id}', [HomeController::class, 'atualizarmeta'])->middleware('auth','company_or_root');
+Route::put('/atualizarmeta/{id}', [HomeController::class, 'atualizarmeta'])->middleware('auth');
 
 
 Route::get('/dashboard/edit/{id}', [CadastroEmpresaController::class, 'edit'])->middleware('auth', 'company_or_root');
