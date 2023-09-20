@@ -179,6 +179,7 @@ class HomeController extends Controller
 
     public function Showcategorias(Request $request)
     {
+
         $categoria = $request->input('categoria');
         $nomeDaCategoria = $categoria;
 
@@ -205,7 +206,10 @@ class HomeController extends Controller
 
         $user = auth()->user();
         $empresa = cadastro_de_empresa::findOrFail($id);
-        $metaAnual = 50000;
+        $porcentagem_atingidaanual = 0;
+        $porcentagem_atingidamensal =0;
+
+        $metaAnual =  $empresa->metaDeFaturamento ;
         if ($user->id != $empresa->user_id) {
             return redirect('/dashboard');
         } else {
@@ -242,10 +246,14 @@ class HomeController extends Controller
 
             $faturamentoAnual = array_sum($valorRecebidoNumerico);
             $ValorFaltaParaChegarNaMetaAnual = $metaAnual - $faturamentoAnual;
-            $porcentagem_atingidaanual = ($faturamentoAnual / $metaAnual) * 100;
-            if ($porcentagem_atingidaanual > 100) {
-                $porcentagem_atingidaanual = 100;
+            if($metaAnual > 0){
+                $porcentagem_atingidaanual = ($faturamentoAnual / $metaAnual) * 100;
+                if ($porcentagem_atingidaanual > 100) {
+                    $porcentagem_atingidaanual = 100;
+                }
             }
+
+
 
 
 
@@ -275,11 +283,13 @@ class HomeController extends Controller
                     $valorMesAtual = $valorRecebidoMes;
                     $metamensal = $metaAnual / 12;
                     $ValorFaltaParaChegarNaMetamensal = $metamensal - $valorMesAtual;
-
-                    $porcentagem_atingidamensal = ($valorMesAtual / $metamensal) * 100;
-                    if ($porcentagem_atingidamensal > 100) {
-                        $porcentagem_atingidamensal = 100;
+                    if($metaAnual > 0){
+                        $porcentagem_atingidamensal = ($valorMesAtual / $metamensal) * 100;
+                        if ($porcentagem_atingidamensal > 100) {
+                            $porcentagem_atingidamensal = 100;
+                        }
                     }
+
                 }
             }
 
@@ -361,5 +371,18 @@ class HomeController extends Controller
             'Porcentagemdepedidoscancelados' => $Porcentagemdepedidoscancelados,
             'quantidadedepedidoscacenlados' => $quantidadedepedidoscacenlados,
         ]);
+    }
+
+    public function atualizarmeta($id ,  Request $request){
+
+        $valorDaMetaAnual = $request->input('valorDaMetaAnual');
+        $valorDaMetaAnualFloat = (float) str_replace(["R$", ".", ","], ["", "", "."],  $valorDaMetaAnual);
+
+        $empresa = cadastro_de_empresa::findOrFail($id);
+        $empresa->metaDeFaturamento =  $valorDaMetaAnualFloat;
+        $empresa->save();
+
+        return back()->with('msg', 'salvo!');
+
     }
 }

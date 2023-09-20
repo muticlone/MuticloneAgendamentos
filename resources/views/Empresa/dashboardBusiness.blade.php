@@ -16,6 +16,24 @@
         rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all"
         rel="stylesheet" type="text/css" />
+
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                @if (session('msg'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('msg') }}
+                    </div>
+                @endif
+                @if (session('msgErro'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('msgErro') }}
+                    </div>
+                @endif
+                @yield('conteudo')
+            </div>
+        </div>
+    </main>
     <div class="row g-12">
 
 
@@ -192,9 +210,39 @@
         </div>
     </div>
 
+    @if ($metaAnual > 0)
+        <label for="valorDaMetaAnual">Sua meta de faturamento anual</label>
+    @else
+        <label for="valorDaMetaAnual">Digite qual é sua meta de faturamento anual</label>
+    @endif
+
+
+
+    <form action="/atualizarmeta/{{ $idempresa }}" method="POST">
+        @csrf
+        @method('PUT')
+        <div class="row g-12">
+            <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
+
+                <input type="text" class="form-control mascValor" id="valorDaMetaAnual" name="valorDaMetaAnual"
+                    placeholder="Valor da meta anual" value="{{ $metaAnual }}"
+                    aria-describedby="validationTooltipUsernamePrepend" inputmode="numeric" required />
+
+            </div>
+
+            <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
+
+                <button type="submit" class="btn btn-info ">Salvar</button>
+            </div>
+
+
+    </form>
+    </div>
 
 
     <div class="row g-12">
+
+
 
 
         <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
@@ -230,8 +278,11 @@
                                     {{ number_format($porcentagem_atingidamensal, 2, ',', '.') }}% da
                                     Meta mensal {{ 'R$ ' . number_format($metamensal, 2, ',', '.') }}
                                     <br />
-                                    Falta R$
-                                    {{ 'R$ ' . number_format($ValorFaltaParaChegarNaMetamensal, 2, ',', '.') }}
+                                    @if ($ValorFaltaParaChegarNaMetamensal > 0)
+                                        Falta R$
+                                        {{ 'R$ ' . number_format($ValorFaltaParaChegarNaMetamensal, 2, ',', '.') }}
+                                    @endif
+
                                 @endif
 
                             </span>
@@ -282,8 +333,11 @@
 
 
                                             <br />
-                                            Falta
-                                            {{ 'R$ ' . number_format($ValorFaltaParaChegarNaMetaAnual, 2, ',', '.') }}
+                                            @if ($ValorFaltaParaChegarNaMetamensal > 0)
+                                                Falta
+                                                {{ 'R$ ' . number_format($ValorFaltaParaChegarNaMetaAnual, 2, ',', '.') }}
+                                            @endif
+
                                         @endif
 
                                     </span>
@@ -448,6 +502,7 @@
 @stop
 
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js"></script>
 
@@ -725,7 +780,25 @@
     </script>
 
 
+    <script>
+        $(document).ready(function() {
+            $('.mascValor').inputmask({
+                alias: 'numeric',
+                rightAlign: false,
+                radixPoint: ',',
+                groupSeparator: '.',
+                autoGroup: true,
+                digits: 2,
+                digitsOptional: false,
+                placeholder: '0',
+                allowMinus: false,
+                prefix: 'R$ ',
+                clearMaskOnLostFocus: false // Mantém a máscara após perder o foco
+            });
+        });
+    </script>
 
+    <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 
 
 @stop

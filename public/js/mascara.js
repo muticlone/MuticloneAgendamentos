@@ -13,7 +13,7 @@ function formatar(mascara, documento) {
 
 
 // cadastro de empresa e edit ramo de atauação ativar opção otros adicona
-//um inpunt 
+//um inpunt
 
 function mostrarOutro() {
   var selectElement = document.getElementById("area-atuacao");
@@ -32,6 +32,22 @@ function mostrarOutro() {
   }
 }
 
+
+$(document).ready(function() {
+    $('.mascValor').inputmask({
+      alias: 'numeric',
+      rightAlign: false,
+      radixPoint: ',',
+      groupSeparator: '.',
+      autoGroup: true,
+      digits: 2,
+      digitsOptional: false,
+      placeholder: '0',
+      allowMinus: false,
+      prefix: 'R$ ',
+      clearMaskOnLostFocus: false // Mantém a máscara após perder o foco
+    });
+  });
 
 
 

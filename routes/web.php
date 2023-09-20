@@ -38,6 +38,10 @@ Route::get('/servicos/categorias', [HomeController::class, 'categorias'])->name(
 Route::get('/busca/categorias', [HomeController::class, 'Showcategorias'])->name('busca.sevico.categorias');
 Route::get('/dashboard/business/{id}', [HomeController::class, 'dashboardBusiness'])->name('dashboard.business')->middleware('auth');;
 
+
+Route::put('/atualizarmeta/{id}', [HomeController::class, 'atualizarmeta'])->middleware('auth','company_or_root');
+
+
 Route::get('/dashboard/edit/{id}', [CadastroEmpresaController::class, 'edit'])->middleware('auth', 'company_or_root');
 Route::put('/empresa/edit/{id}', [CadastroEmpresaController::class, 'update'])->middleware('auth', 'company_or_root');
 Route::get('/cadastrar/empresa', [CadastroEmpresaController::class, 'create'])->name('pag.cadastrar.Empresa')->middleware('auth', 'company_or_root');
@@ -67,7 +71,6 @@ Route::put('/finalizar{id}', [AgendamentoController::class, 'finalizarPedidoEmpr
 Route::put('/cancelar{id}', [AgendamentoController::class, 'cancelarPedidoEmpresa'])->middleware('auth');
 Route::put('/avaliacao/{id}', [AgendamentoController::class, 'avaliacaoPedidoCliente'])->middleware('auth');
 Route::put('/reagendar/{id}', [AgendamentoController::class, 'ReagendarPedidoEmpresaEcliente'])->middleware('auth');
-
 
 
 

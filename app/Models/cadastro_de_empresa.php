@@ -39,7 +39,7 @@ class cadastro_de_empresa extends Model
         'tikTok',
         'site',
         'linkedin',
-
+        'metaDeFaturamento',
 
 
     ];

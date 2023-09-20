@@ -509,7 +509,7 @@ class AgendamentoController extends Controller
         $agendamento->finalizado = false;
         $agendamento->cancelado = true;
         $agendamento->motivoCancelamento =  $motivoCacelamento;
-        $agendamento->save();
+
         $empresa =  $agendamento->cadastro_de_empresas_id;
 
         if (Str::contains($urlAnterior, '/meus/clientes/agendamentos/detalhes/')) {
