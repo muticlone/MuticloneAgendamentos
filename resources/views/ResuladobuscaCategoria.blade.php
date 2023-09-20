@@ -5,24 +5,12 @@
 @section('conteudo')
 
 <div class="row g-12">
-        
+
     <div class=" conteiner-searchCategoria  col-8">
         <form action="/" method="GET" id="searchForm">
-            
 
 
-            
-            <div class="input-group mb-3">
-               
-              
-                {{-- <input type="text" list="suggestions" class="form-control" id="search" name="search" autocomplete="off" placeholder="Procurar..."> --}}
-
-                {{-- <button class="btn btn-outline-secondary custom-btn " type="submit">
-                    <ion-icon name="search-outline" class="iconCentralizar"></ion-icon>
-                    Buscar
-                </button> --}}
-
-                <select id="select-servicoCategoria" class="js-buscacategoria select2 form-select" 
+                <select id="select-servicoCategoria" class="js-buscacategoria select2 form-select"
                 data-placeholder="Selecione um serviço" style="width: 100%" name="search">
                     <option value="" disabled selected>Selecione um serviço</option>
                     @foreach ($servicos as $servicobusca)
@@ -30,27 +18,22 @@
                     @endforeach
                 </select>
 
-                
 
-               
-
-
-            </div>
         </form>
 
     </div>
 
 
     <x-carousel/>
-    
-    <div class="col-12  pt-2 "> 
+
+    <div class="col-12  pt-2 ">
         <div class="alert alert-light" role="alert" align="center">
             Todos os serviços disponíveis na categorias {{ $nomeDaCategoria}}</a>
-        
+
         </div>
     </div>
-    
-   
+
+
 </div>
 
 
