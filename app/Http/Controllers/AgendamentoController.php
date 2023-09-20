@@ -559,12 +559,22 @@ class AgendamentoController extends Controller
             ->distinct()
             ->pluck('formaDepagamentoAgendamento')
             ->toArray();
+
+
+        $numerosDosPedidos = $user->agendamentos()
+             ->distinct()
+            ->pluck('numeroDoPedido')->toArray();
+
+            sort($numerosDosPedidos);
+
+
+
+
         if ($search || $searchdate) {
 
             if (in_array($search, $formaDepagamentoAgendamento)) {
 
                 $query = $user->agendamentos()->where('formaDepagamentoAgendamento', '=', $search);
-
             } elseif ($searchdate) {
                 $query = $user->agendamentos()->whereDate('dataHorarioAgendamento', '=', $searchdate);
             } elseif ($search) {
@@ -584,6 +594,12 @@ class AgendamentoController extends Controller
 
                 $query = $user->agendamentos()->whereIn('cadastro_de_empresas_id', $empresaAgendamentoid);
             }
+
+            if(is_numeric($search)){
+                $query = $user->agendamentos()->where('numeroDoPedido', '=', $search);
+            }
+
+
         } else {
             $query = $user->agendamentos()
                 ->orderByRaw('confirmado ASC, dataHorarioAgendamento ASC');
@@ -656,7 +672,7 @@ class AgendamentoController extends Controller
             'search' => $search,
             'searchdate' =>  $searchdate,
             'formaDepagamentoAgendamento' => $formaDepagamentoAgendamento,
-
+            'numerosDosPedidos' =>  $numerosDosPedidos
         ]);
     }
 

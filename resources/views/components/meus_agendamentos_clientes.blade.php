@@ -1,7 +1,7 @@
 @props(['agendamentos' => '', 'empresaAgendamento' => '', 'NomesDasEmpresas' => [],
         'search' => '' , 'searchdate' => '',
         'formaDepagamentoAgendamento' => [],
-
+        'numerosDosPedidos' => [],
 ])
 <div>
 
@@ -14,9 +14,16 @@
                 </div>
 
                 <div class="col-md-3 pt-1 ">
+                    <x-select-meus-agendamentos nome="Busque pelo N° do pedido" :agendamento="$agendamentos" :value="$numerosDosPedidos"
+                        width="100%" />
+                </div>
+
+                <div class="col-md-3 pt-1 ">
                     <x-select-meus-agendamentos nome="Busque pela forma de pagamento" :agendamento="$agendamentos" :value="$formaDepagamentoAgendamento"
                         width="100%" />
                 </div>
+
+
 
 
                 <div class="col-md-3  pt-1">

@@ -17,6 +17,7 @@
                 :empresaAgendamento="$empresaAgendamento"
                 :NomesDasEmpresas="$NomesDasEmpresas"
                 :formaDepagamentoAgendamento="$formaDepagamentoAgendamento"
+                :numerosDosPedidos="$numerosDosPedidos"
                 search="{{ $search  }}"
                 searchdate="{{ $searchdate }}"
 
