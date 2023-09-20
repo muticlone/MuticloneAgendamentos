@@ -16,6 +16,7 @@
                 searchdate="{{ $searchdate }}"
                 :nomesClientes="$nomesClientes"
                 :numerosDosPedidos="$numerosDosPedidos"
+                :formaDepagamentoAgendamento="$formaDepagamentoAgendamento"
                 />
 
         @else

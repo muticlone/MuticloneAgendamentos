@@ -1,5 +1,10 @@
 <div>
-    @props(['clienteagendamento' => '', 'empresa_nomeFantasia' => '', 'empresa_id' => '', 'nomesClientes' => [], 'search' => '', 'searchdate' => '', 'numerosDosPedidos' => []])
+    @props(['clienteagendamento' => '', 'empresa_nomeFantasia' => '',
+    'empresa_id' => '', 'nomesClientes' => [], 'search' => '', 'searchdate' => '',
+     'numerosDosPedidos' => [] , 'formaDepagamentoAgendamento' => [] ,
+
+
+     ])
 
 
 
@@ -9,15 +14,20 @@
             <div class="row">
 
 
-                <div class="col-md-4 pt-1 ">
+                <div class="col-md-3 pt-1 ">
                     <x-select-meus-agendamentos :agendamento="$clienteagendamento" :value="$nomesClientes" width="100%" />
                 </div>
-                <div class="col-md-4  pt-1">
-                    <x-select-meus-agendamentos nome="Busque pelo numero do pedido" :agendamento="$clienteagendamento" :value="$numerosDosPedidos"
+                <div class="col-md-3  pt-1">
+                    <x-select-meus-agendamentos nome="Busque pelo N° do pedido." :agendamento="$clienteagendamento" :value="$numerosDosPedidos"
                         width="100%" id="select2" />
                 </div>
 
-                <div class="col-md-4  pt-1">
+                <div class="col-md-3  pt-1">
+                    <x-select-meus-agendamentos nome="Busque pela forma de pagamento" :agendamento="$clienteagendamento" :value="$formaDepagamentoAgendamento"
+                        width="100%" id="select2" />
+                </div>
+
+                <div class="col-md-3  pt-1">
                     <x-inpunt-date />
                 </div>
 
@@ -75,7 +85,7 @@
                 @else
                     <div class="pt-1">
                         <div class="alert alert-success" role="alert">
-                            Buscando pelo nome do cliente : "{{ $search }}" <a
+                            Buscando por:  "{{ $search }}" <a
                                 href="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/todos">
                                 Ver todos</a>
                         </div>

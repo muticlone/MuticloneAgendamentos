@@ -4,7 +4,7 @@
 
 
 
-    <select class="js-buscacategoria select2 form-select" data-placeholder="{{ $nome }}" style="width: {{ $width }}%" name="search">
+    <select class="js-buscacategoria select2 form-select select-meus-agendamentos" data-placeholder="{{ $nome }}" style="width: {{ $width }}%" name="search">
         <option value="" disabled selected>{{ $nome }}</option>
 
         @if (is_array($value) || is_object($value))

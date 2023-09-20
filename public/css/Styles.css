@@ -760,6 +760,8 @@ svg {
         font-size: 10px;
         padding: 3px 8px;
         }
+
+
   }
 
 
@@ -778,5 +780,11 @@ svg {
     max-width: 100px;
 
  }
+
+ select.select-meus-agendamentos.select2-hidden-accessible + .select2-container .select2-selection__placeholder {
+    font-size: 13px;
+
+}
+
 
 

@@ -330,7 +330,15 @@ class AgendamentoController extends Controller
 
 
 
-        $numerosDosPedidos = Agendamento::where('cadastro_de_empresas_id', $id)->pluck('numeroDoPedido')->toArray();
+        $numerosDosPedidos = Agendamento::where('cadastro_de_empresas_id', $id)
+            ->pluck('numeroDoPedido')->toArray();
+
+        $formaDepagamentoAgendamento = Agendamento::where('cadastro_de_empresas_id', $id)
+            ->distinct()
+            ->pluck('formaDepagamentoAgendamento')
+            ->toArray();
+
+
 
 
 
@@ -350,7 +358,6 @@ class AgendamentoController extends Controller
 
 
                     $query->whereDate('dataHorarioAgendamento', '=', $searchdate);
-
                 } else {
 
                     $idsCliente = $nomes->distinct()
@@ -361,7 +368,11 @@ class AgendamentoController extends Controller
                     // Verifica se há resultados para o nome de cliente pesquisado
                     if (count($idsCliente) > 0) {
                         $query->whereIn('user_id', $idsCliente);
-                    } else {
+
+                    }else if (true) {
+                        $query->where('formaDepagamentoAgendamento', '=', $search);
+                    }
+                    else {
                         $query->where('numeroDoPedido', '=',  $search);
                     }
                 }
@@ -434,6 +445,7 @@ class AgendamentoController extends Controller
                 'search' => $search,
                 'numerosDosPedidos' =>  $numerosDosPedidos,
                 'searchdate' =>  $searchdate,
+                'formaDepagamentoAgendamento' => $formaDepagamentoAgendamento,
 
             ]);
         }
@@ -535,13 +547,45 @@ class AgendamentoController extends Controller
 
 
 
-    public function show_Agendamentos_Clientes($status)
+    public function show_Agendamentos_Clientes($status , Request $request)
     {
         /** @var \App\User $user */
         $user = auth()->user();
+        $search = request('search');
+        $searchdate = request('searchdate');
+        $idsempresas = $request->input('idEmpresa');
 
-        $query = $user->agendamentos()
+       // decrypt
+
+        if ($search || $searchdate) {
+
+
+           $iddescipt = [];
+
+            foreach ($idsempresas as $encryptedValue) {
+                $decryptedValue = Crypt::decrypt($encryptedValue);
+               $iddescipt[] = $decryptedValue;
+            }
+
+            $empresaAgendamentoid = cadastro_de_empresa::where('nomeFantasia', $search)
+            ->whereIn('id', $iddescipt)
+            ->pluck('id');
+
+
+
+
+            //aqui
+
+            $query = $user->agendamentos()->whereIn('cadastro_de_empresas_id', $empresaAgendamentoid);
+
+        }else{
+            $query = $user->agendamentos()
             ->orderByRaw('confirmado ASC, dataHorarioAgendamento ASC');
+        }
+
+
+
+
 
         switch ($status) {
             case 'ativos':
@@ -571,7 +615,14 @@ class AgendamentoController extends Controller
         $agendamentos = $query->paginate(9);
 
         $idempresa = $agendamentos->pluck('cadastro_de_empresas_id')->unique();
+
         $empresaAgendamento = cadastro_de_empresa::whereIn('id', $idempresa)->get();
+        $NomesDasEmpresas =[];
+        foreach ($empresaAgendamento as $empresa) {
+            $NomesDasEmpresas[] = $empresa->nomeFantasia;
+        }
+
+
 
         $statuses = [
             'ativos' => false,
@@ -586,6 +637,7 @@ class AgendamentoController extends Controller
             'agendamentos' => $agendamentos,
             'empresaAgendamento' => $empresaAgendamento,
             'statuses' => $statuses,
+            'NomesDasEmpresas' => $NomesDasEmpresas,
 
         ]);
     }

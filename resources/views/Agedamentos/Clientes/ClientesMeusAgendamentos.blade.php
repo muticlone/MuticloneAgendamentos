@@ -13,7 +13,10 @@
         <div class="row g-12">
 
             @if (count($agendamentos) > 0)
-                <x-meus_agendamentos_clientes :agendamentos="$agendamentos" :empresaAgendamento="$empresaAgendamento" />
+                <x-meus_agendamentos_clientes :agendamentos="$agendamentos"
+                :empresaAgendamento="$empresaAgendamento"
+                :NomesDasEmpresas="$NomesDasEmpresas"
+                />
             @else
                 <x-verifica-cliente-atendimento :status="$statuses" />
             @endif

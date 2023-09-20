@@ -1,7 +1,20 @@
-@props(['agendamentos' => '', 'empresaAgendamento' => ''])
+@props(['agendamentos' => '', 'empresaAgendamento' => '' , 'NomesDasEmpresas' => []])
 <div>
     <div class="container">
+        <form action="/meus/agendamentos/ativos" method="GET" id="searchForm">
+            <div class="col-md-3 pt-1 ">
+                <x-select-meus-agendamentos :agendamento="$agendamentos" :value="$NomesDasEmpresas" width="100%" />
+            </div>
+            @foreach ($empresaAgendamento as $idempresa)
+
+            <input type="hidden" name="idEmpresa[]" value=" {{encrypt( $idempresa->id )}} ">
+
+            @endforeach
+        </form>
+
+
         <div class="row g-2 pt-2">
+
             @foreach ($agendamentos as $agendamento)
                 <div class="col-lg-4 col-md-6 col-sm-12 pt-2">
                     <div class="card">
@@ -22,6 +35,8 @@
 
                                         </h6>
                                     @endif
+
+
                                 @endforeach
                             </div>
 
