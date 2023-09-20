@@ -1,6 +1,6 @@
 @props(['agendamentos' => '', 'empresaAgendamento' => '', 'NomesDasEmpresas' => [],
         'search' => '' , 'searchdate' => '',
-
+        'formaDepagamentoAgendamento' => [],
 
 ])
 <div>
@@ -10,6 +10,11 @@
             <div class="row">
                 <div class="col-md-3 pt-1 ">
                     <x-select-meus-agendamentos nome="Busque pelo nome da empresa" :agendamento="$agendamentos" :value="$NomesDasEmpresas"
+                        width="100%" />
+                </div>
+
+                <div class="col-md-3 pt-1 ">
+                    <x-select-meus-agendamentos nome="Busque pela forma de pagamento" :agendamento="$agendamentos" :value="$formaDepagamentoAgendamento"
                         width="100%" />
                 </div>
 
@@ -57,7 +62,18 @@
                                 @endforeach
                             </div>
 
-                            <div class="mb-3 pt-2">
+                            <div class="mb-3 pt-1 ">
+
+                                <div class="input-group">
+                                    <span class="input-group-text">N° do pedido</span>
+                                    <input type="text" class="form-control campodesablitado"
+                                        value="{{ $agendamento->numeroDoPedido }}">
+
+
+                                </div>
+                            </div>
+
+                            <div class="mb-3 pt-1">
                                 <h6 class="card-title">Valor total</h6>
                                 <div class="input-group">
                                     <span class="input-group-text">R$</span>
@@ -66,6 +82,11 @@
 
 
                                 </div>
+                            </div>
+                            <div class="mb-3">
+                                <h6 class="card-title">Forma de pagamento</h6>
+                                <input type="text" class="form-control campodesablitado"
+                                    value="{{ $agendamento->formaDepagamentoAgendamento }}">
                             </div>
                             <div class="mb-3">
                                 <h6 class="card-title">Data do agendamento</h6>

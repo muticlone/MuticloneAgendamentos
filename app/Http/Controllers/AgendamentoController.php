@@ -555,14 +555,19 @@ class AgendamentoController extends Controller
         $idsempresas = $request->input('idEmpresa');
 
         // aqui
-
+        $formaDepagamentoAgendamento = $user->agendamentos()
+            ->distinct()
+            ->pluck('formaDepagamentoAgendamento')
+            ->toArray();
         if ($search || $searchdate) {
 
-            if ($searchdate) {
+            if (in_array($search, $formaDepagamentoAgendamento)) {
 
+                $query = $user->agendamentos()->where('formaDepagamentoAgendamento', '=', $search);
+
+            } elseif ($searchdate) {
                 $query = $user->agendamentos()->whereDate('dataHorarioAgendamento', '=', $searchdate);
-            } else {
-
+            } elseif ($search) {
                 $iddescipt = [];
 
                 foreach ($idsempresas as $encryptedValue) {
@@ -570,13 +575,11 @@ class AgendamentoController extends Controller
                     $iddescipt[] = $decryptedValue;
                 }
 
+
+
                 $empresaAgendamentoid = cadastro_de_empresa::where('nomeFantasia', $search)
                     ->whereIn('id', $iddescipt)
                     ->pluck('id');
-
-
-
-
 
 
                 $query = $user->agendamentos()->whereIn('cadastro_de_empresas_id', $empresaAgendamentoid);
@@ -621,12 +624,16 @@ class AgendamentoController extends Controller
 
         $agendamentos = $query->paginate(9);
 
-        $idempresa = $agendamentos->pluck('cadastro_de_empresas_id')->unique();
+
+
+        $idempresa =  $user->agendamentos()->pluck('cadastro_de_empresas_id')->unique();
 
         $empresaAgendamento = cadastro_de_empresa::whereIn('id', $idempresa)->get();
+
         $NomesDasEmpresas = [];
         foreach ($empresaAgendamento as $empresa) {
-            $NomesDasEmpresas[] = $empresa->nomeFantasia;
+            $nomeFormatado = ucwords(strtolower($empresa->nomeFantasia));
+            $NomesDasEmpresas[] = $nomeFormatado;
         }
 
 
@@ -648,6 +655,7 @@ class AgendamentoController extends Controller
             'NomesDasEmpresas' => $NomesDasEmpresas,
             'search' => $search,
             'searchdate' =>  $searchdate,
+            'formaDepagamentoAgendamento' => $formaDepagamentoAgendamento,
 
         ]);
     }
