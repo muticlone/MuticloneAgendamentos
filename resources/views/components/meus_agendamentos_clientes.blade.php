@@ -1,19 +1,38 @@
-@props(['agendamentos' => '', 'empresaAgendamento' => '' , 'NomesDasEmpresas' => []])
+@props(['agendamentos' => '', 'empresaAgendamento' => '', 'NomesDasEmpresas' => [],
+        'search' => '' , 'searchdate' => '',
+
+
+])
 <div>
+
     <div class="container">
-        <form action="/meus/agendamentos/ativos" method="GET" id="searchForm">
-            <div class="col-md-3 pt-1 ">
-                <x-select-meus-agendamentos :agendamento="$agendamentos" :value="$NomesDasEmpresas" width="100%" />
+        <form action="/meus/agendamentos/todos" method="GET" id="searchForm">
+            <div class="row">
+                <div class="col-md-3 pt-1 ">
+                    <x-select-meus-agendamentos nome="Busque pelo nome da empresa" :agendamento="$agendamentos" :value="$NomesDasEmpresas"
+                        width="100%" />
+                </div>
+
+
+                <div class="col-md-3  pt-1">
+                    <x-inpunt-date />
+                </div>
             </div>
+
+
+
             @foreach ($empresaAgendamento as $idempresa)
-
-            <input type="hidden" name="idEmpresa[]" value=" {{encrypt( $idempresa->id )}} ">
-
+                <input type="hidden" name="idEmpresa[]" value=" {{ encrypt($idempresa->id) }} ">
             @endforeach
+
         </form>
 
 
         <div class="row g-2 pt-2">
+
+            <x-alert-busca-agendamento search="{{ $search }}"
+            searchdate="{{ $searchdate }}"
+            href="/meus/agendamentos/todos"/>
 
             @foreach ($agendamentos as $agendamento)
                 <div class="col-lg-4 col-md-6 col-sm-12 pt-2">
@@ -28,15 +47,13 @@
                                                 class="img_meus_agedamentos  mx-2" alt="{{ $empresa->nomeFantasia }}">
                                         </div>
                                         <div class="pt-2">
-                                            <h6 class="card-text ">Prestadora do serviço
+                                            <h6 class="card-text ">Prestadora do serviço:
                                                 {{ ucfirst(strtolower($empresa->nomeFantasia)) }}
                                         </div>
 
 
                                         </h6>
                                     @endif
-
-
                                 @endforeach
                             </div>
 
@@ -45,7 +62,7 @@
                                 <div class="input-group">
                                     <span class="input-group-text">R$</span>
                                     <input type="text" class="form-control campodesablitado"
-                                        value="{{  number_format($agendamento->valorTotalAgendamento, 2, ',', '.' )}}">
+                                        value="{{ number_format($agendamento->valorTotalAgendamento, 2, ',', '.') }}">
 
 
                                 </div>
@@ -90,3 +107,13 @@
     </div>
 
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const dataInput = document.getElementById('dataInput');
+        const searchForm = document.getElementById('searchForm'); // Adicione um id ao formulário
+
+        dataInput.addEventListener('change', function() {
+            searchForm.submit(); // Submete automaticamente o formulário quando a data é alterada
+        });
+    });
+</script>

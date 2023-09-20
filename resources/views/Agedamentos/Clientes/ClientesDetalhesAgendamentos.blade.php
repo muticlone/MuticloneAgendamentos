@@ -218,7 +218,7 @@
         </div>
 
         <div class="row g-12">
-            <div class="col-lg-6 col-sm-12 col-md-12 pt-2 ">
+            <div class="col-lg-12 col-sm-12 col-md-12 pt-2 ">
 
 
                 @foreach ($empresa as $empresaItem)
@@ -312,7 +312,7 @@
                 @endforeach
 
             </div>
-            <div class="col-lg-6 col-sm-12 col-md-12 pt-2 ">
+            {{-- <div class="col-lg-6 col-sm-12 col-md-12 pt-2 ">
                 <div class="card">
                     <div class="card-header">
                         Mensagens
@@ -331,7 +331,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
 

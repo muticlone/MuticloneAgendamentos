@@ -16,6 +16,8 @@
                 <x-meus_agendamentos_clientes :agendamentos="$agendamentos"
                 :empresaAgendamento="$empresaAgendamento"
                 :NomesDasEmpresas="$NomesDasEmpresas"
+                search="{{ $search  }}"
+                searchdate="{{ $searchdate }}"
                 />
             @else
                 <x-verifica-cliente-atendimento :status="$statuses" />

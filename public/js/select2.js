@@ -11,6 +11,15 @@ $(document).ready(function () {
 
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    const dataInput = document.getElementById('dataInput');
+    const searchForm = document.getElementById('searchForm'); // Adicione um id ao formulário
+
+    dataInput.addEventListener('change', function() {
+        searchForm.submit(); // Submete automaticamente o formulário quando a data é alterada
+    });
+});
+
 
 
 

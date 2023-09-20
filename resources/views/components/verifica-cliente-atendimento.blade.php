@@ -25,7 +25,7 @@
     @endif
 
     @if ($status['todos'])
-        <x-Alert texto="Não foram encontrados agendamentos para o dia  {{ \Carbon\Carbon::parse($searchdate)->format('d/m/Y') }}" />
+        <x-Alert texto="Nenhum agendamento foi localizado durante esta pesquisa." />
     @endif
 
 </div>

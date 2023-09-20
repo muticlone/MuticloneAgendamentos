@@ -36,16 +36,7 @@
         </form>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const dataInput = document.getElementById('dataInput');
-            const searchForm = document.getElementById('searchForm'); // Adicione um id ao formulário
 
-            dataInput.addEventListener('change', function() {
-                searchForm.submit(); // Submete automaticamente o formulário quando a data é alterada
-            });
-        });
-    </script>
 
 
     <div class="container">
@@ -53,45 +44,13 @@
 
 
 
-            @if ($searchdate)
-
-
-                <div class="pt-1">
-                    <div class="alert alert-success" role="alert">
-                        Buscando por agendamentos na data: "{{ \Carbon\Carbon::parse($searchdate)->format('d/m/Y') }}" <a
-                            href="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/todos">Ver
-                            todos</a>
-                    </div>
-                </div>
-            @endif
 
 
 
+            <x-alert-busca-agendamento search="{{ $search }}" searchdate="{{ $searchdate }}"
+            href="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/todos"/>
 
 
-
-
-
-
-            @if ($search)
-                @if (is_numeric($search))
-                    <div class="pt-1">
-                        <div class="alert alert-success" role="alert">
-                            Buscando pelo um número do pedido: "{{ $search }}" <a
-                                href="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/todos">Ver
-                                todos</a>
-                        </div>
-                    </div>
-                @else
-                    <div class="pt-1">
-                        <div class="alert alert-success" role="alert">
-                            Buscando por:  "{{ $search }}" <a
-                                href="/meus/agendamentos/empresa/{{ $clienteagendamento->pluck('cadastro_de_empresas_id')[0] }}/todos">
-                                Ver todos</a>
-                        </div>
-                    </div>
-                @endif
-            @endif
             @foreach ($clienteagendamento as $agendamento)
                 <div class="col-lg-4 col-md-6 col-sm-12 pt-2">
 

@@ -368,11 +368,9 @@ class AgendamentoController extends Controller
                     // Verifica se há resultados para o nome de cliente pesquisado
                     if (count($idsCliente) > 0) {
                         $query->whereIn('user_id', $idsCliente);
-
-                    }else if (true) {
+                    } else if (true) {
                         $query->where('formaDepagamentoAgendamento', '=', $search);
-                    }
-                    else {
+                    } else {
                         $query->where('numeroDoPedido', '=',  $search);
                     }
                 }
@@ -429,6 +427,7 @@ class AgendamentoController extends Controller
                 'confirmados' => false,
                 'finalizados' => false,
                 'cancelados' => false,
+                'todos' => false,
             ];
             $statuses[$status] = true;
 
@@ -547,7 +546,7 @@ class AgendamentoController extends Controller
 
 
 
-    public function show_Agendamentos_Clientes($status , Request $request)
+    public function show_Agendamentos_Clientes($status, Request $request)
     {
         /** @var \App\User $user */
         $user = auth()->user();
@@ -555,32 +554,36 @@ class AgendamentoController extends Controller
         $searchdate = request('searchdate');
         $idsempresas = $request->input('idEmpresa');
 
-       // decrypt
+        // aqui
 
         if ($search || $searchdate) {
 
+            if ($searchdate) {
 
-           $iddescipt = [];
+                $query = $user->agendamentos()->whereDate('dataHorarioAgendamento', '=', $searchdate);
+            } else {
 
-            foreach ($idsempresas as $encryptedValue) {
-                $decryptedValue = Crypt::decrypt($encryptedValue);
-               $iddescipt[] = $decryptedValue;
+                $iddescipt = [];
+
+                foreach ($idsempresas as $encryptedValue) {
+                    $decryptedValue = Crypt::decrypt($encryptedValue);
+                    $iddescipt[] = $decryptedValue;
+                }
+
+                $empresaAgendamentoid = cadastro_de_empresa::where('nomeFantasia', $search)
+                    ->whereIn('id', $iddescipt)
+                    ->pluck('id');
+
+
+
+
+
+
+                $query = $user->agendamentos()->whereIn('cadastro_de_empresas_id', $empresaAgendamentoid);
             }
-
-            $empresaAgendamentoid = cadastro_de_empresa::where('nomeFantasia', $search)
-            ->whereIn('id', $iddescipt)
-            ->pluck('id');
-
-
-
-
-            //aqui
-
-            $query = $user->agendamentos()->whereIn('cadastro_de_empresas_id', $empresaAgendamentoid);
-
-        }else{
+        } else {
             $query = $user->agendamentos()
-            ->orderByRaw('confirmado ASC, dataHorarioAgendamento ASC');
+                ->orderByRaw('confirmado ASC, dataHorarioAgendamento ASC');
         }
 
 
@@ -610,6 +613,10 @@ class AgendamentoController extends Controller
                 $query->where('cancelado', 1)
                     ->orderBy('updated_at', 'desc');
                 break;
+
+            case 'todos':
+                $user->agendamentos();
+                break;
         }
 
         $agendamentos = $query->paginate(9);
@@ -617,7 +624,7 @@ class AgendamentoController extends Controller
         $idempresa = $agendamentos->pluck('cadastro_de_empresas_id')->unique();
 
         $empresaAgendamento = cadastro_de_empresa::whereIn('id', $idempresa)->get();
-        $NomesDasEmpresas =[];
+        $NomesDasEmpresas = [];
         foreach ($empresaAgendamento as $empresa) {
             $NomesDasEmpresas[] = $empresa->nomeFantasia;
         }
@@ -630,6 +637,7 @@ class AgendamentoController extends Controller
             'confirmados' => false,
             'finalizados' => false,
             'cancelados' => false,
+            'todos' => false,
         ];
         $statuses[$status] = true;
 
@@ -638,6 +646,8 @@ class AgendamentoController extends Controller
             'empresaAgendamento' => $empresaAgendamento,
             'statuses' => $statuses,
             'NomesDasEmpresas' => $NomesDasEmpresas,
+            'search' => $search,
+            'searchdate' =>  $searchdate,
 
         ]);
     }
