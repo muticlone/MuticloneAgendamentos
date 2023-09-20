@@ -377,7 +377,7 @@ class HomeController extends Controller
 
         $valorDaMetaAnual = $request->input('valorDaMetaAnual');
         $valorDaMetaAnualFloat = (float) str_replace(["R$", ".", ","], ["", "", "."],  $valorDaMetaAnual);
-
+        dd($valorDaMetaAnualFloat);
         $empresa = cadastro_de_empresa::findOrFail($id);
         $empresa->metaDeFaturamento =  $valorDaMetaAnualFloat;
         $empresa->save();
