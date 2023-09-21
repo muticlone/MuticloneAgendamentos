@@ -5,6 +5,7 @@
 
 @section('title', 'Meus clientes')
 
+
 @section('conteudo')
     <div class="col-md-9 offset-md-1 pt-2">
         <div class="table-responsive">
@@ -20,16 +21,24 @@
 
                     </tr>
                 </thead>
-                {{-- teste --}}
                 <tbody>
-                    @foreach ($clientes as $cliente)
+                    @foreach ( $clientesOrdenados as $cliente)
                         <tr>
 
                             <td> {{ $cliente->name }}</td>
 
-                            <td>{{ \Carbon\Carbon::parse($cliente->dataHorarioAgendamento)->format('d-m-Y') }}</td>
 
                             <td>
+                                @foreach ($dadosClientes as $dados)
+                                    @if ($dados['user_id'] == $cliente->id)
+                                        {{ \Carbon\Carbon::createFromFormat('d/m/Y', $dados['updated_at'])->format('d-m-Y') }}
+                                    @endif
+                                @endforeach
+                            </td>
+
+
+                            <td>
+
 
 
 

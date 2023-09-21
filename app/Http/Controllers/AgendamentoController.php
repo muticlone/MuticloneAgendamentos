@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 
 
@@ -337,6 +338,7 @@ class AgendamentoController extends Controller
             ->distinct()
             ->pluck('formaDepagamentoAgendamento')
             ->toArray();
+
 
 
 
@@ -744,19 +746,38 @@ class AgendamentoController extends Controller
         } else {
 
             $idsClientes = Agendamento::where('cadastro_de_empresas_id', $id)
+                ->where('finalizado', 1)
+                ->where('cancelado', 0)
                 ->distinct()
                 ->pluck('user_id')
                 ->toArray();
 
-                $clientes = User::whereIn('users.id', $idsClientes)
-                ->join('agendamentos', 'users.id', '=', 'agendamentos.user_id')
-                ->where('agendamentos.cadastro_de_empresas_id', $id)
-                ->orderBy('agendamentos.dataHorarioAgendamento', 'asc')
-                ->distinct('users.id')
-                ->paginate(9);
+
+
+            $dadosClientes = Agendamento::where('cadastro_de_empresas_id', $id)
+                ->where('finalizado', 1)
+                ->where('cancelado', 0)
+                ->select('user_id')
+                ->selectRaw('max(updated_at) as updated_at')
+                ->groupBy('user_id')
+                ->get()
+                ->toArray();
 
 
 
+            foreach ($dadosClientes as &$datas) {
+                $datas['updated_at'] = date('d/m/Y', strtotime($datas['updated_at']));
+            }
+
+            $clientes =  User::whereIn('id', $idsClientes)->paginate(15);
+            // Sua coleção de clientes já ordenada
+            $clientesOrdenados = $clientes->sortBy(function ($cliente) use ($dadosClientes) {
+                foreach ($dadosClientes as $dados) {
+                    if ($dados['user_id'] == $cliente->id) {
+                        return \Carbon\Carbon::createFromFormat('d/m/Y', $dados['updated_at']);
+                    }
+                }
+            })->values();
 
 
         }
@@ -764,10 +785,10 @@ class AgendamentoController extends Controller
 
 
         return view('Empresa.DadosMeusClientes', [
-
+            'clientesOrdenados' =>  $clientesOrdenados,
             'clientes' => $clientes,
             'empresa' =>  $empresa,
-
+            'dadosClientes' =>  $dadosClientes,
 
 
         ]);
