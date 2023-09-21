@@ -45,7 +45,7 @@ class dashboardBusinessController extends Controller
             $idempresa =  $agendamentos->pluck('cadastro_de_empresas_id')->first();
             $empresa = cadastro_de_empresa::findOrfail($idempresa);
 
-            //sair
+
             $valorRecebido =  $agendamentos->pluck('valorTotalAgendamento')->toArray();
             $valorRecebidoNumerico = array_map('intval', $valorRecebido);
 
@@ -56,7 +56,7 @@ class dashboardBusinessController extends Controller
 
 
 
-            //sair
+
             $faturamentoAnual = array_sum($valorRecebidoNumerico);
             $ValorFaltaParaChegarNaMetaAnual = $metaAnual - $faturamentoAnual;
             if ($metaAnual > 0) {
@@ -70,7 +70,7 @@ class dashboardBusinessController extends Controller
 
 
 
-            //sair
+
             $valorPorMes = [];
 
             $mesAtual = Carbon::now()->format('F');
