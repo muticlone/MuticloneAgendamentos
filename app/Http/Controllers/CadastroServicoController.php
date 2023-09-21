@@ -211,4 +211,7 @@ class CadastroServicoController extends Controller
 
         return redirect('/dados/servicos/' . $servico->cadastro_de_empresas_id)->with('msg', 'Evento excluído com sucesso!');
     }
+
+
+
 }

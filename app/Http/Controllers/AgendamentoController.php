@@ -732,4 +732,39 @@ class AgendamentoController extends Controller
 
         return redirect('/meus/agendamentos/finalizados')->with('msg', 'Enviado com sucesso!');
     }
+
+
+    public function showMeusClientes($id){
+
+        $user = auth()->user();
+
+        $empresa = cadastro_de_empresa::findOrFail($id);
+
+        if ($user->id != $empresa->user_id) {
+            return redirect('/dashboard');
+        } else {
+
+            $idsClientes = Agendamento::where('cadastro_de_empresas_id', $id)
+            ->distinct()
+            ->pluck('user_id')
+            ->toArray();
+
+            $clientes =  User::whereIn('id', $idsClientes)->paginate(9);
+
+
+
+
+
+
+        }
+
+
+
+        return view('Empresa.DadosMeusClientes', [
+
+            'clientes' => $clientes
+
+
+        ]);
+    }
 }

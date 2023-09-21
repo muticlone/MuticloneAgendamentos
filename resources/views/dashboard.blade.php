@@ -82,6 +82,13 @@
 
                                 </a> --}}
 
+                                <a href="{{ route('dados.meus.clientes', ['id' => $emp->id]) }}"
+                                    class="btn btn-sm btn-outline-info btndashboard bt btnDashoard"
+
+
+                                    <x-svg-meus-clientes width="14" height="14" margin="3px" />
+                                </a>
+
                                 <a href="/dados/servicos/{{ $emp->id }}"
                                     class="btn btn-sm btn-outline-info btndashboard bt btnDashoard"
 
@@ -95,6 +102,7 @@
 
                                     <x-svg-meus-agendamentos width="14" height="14" margin="3px" />
                                 </a>
+
 
                                 @if($temagendamentos)
                                     <a href="{{ route('dashboard.business', ['id' => $emp->id]) }}"
