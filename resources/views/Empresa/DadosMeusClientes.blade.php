@@ -29,12 +29,12 @@
                             <td>{{ \Carbon\Carbon::parse($cliente->dataHorarioAgendamento)->format('d-m-Y') }}</td>
 
                             <td>
-                                <a href="/{{ $cliente->id }}" class="btn btn-sm  btn-info ">Detalhes</a>
-                            </td>
-                            <td>
+
+
 
                                 <x-btn-whatsapp numero="{{ str_replace(['(', ')', ' ', '-'], '', $cliente->phone) }}"
                                     mensagem="Olá! {{ $cliente->name }} Sentimos sua falta e estamos ansiosos para recebê-lo de volta. Como podemos ajudar você hoje?" />
+
 
                             </td>
 

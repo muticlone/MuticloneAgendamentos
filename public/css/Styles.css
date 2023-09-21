@@ -1,65 +1,65 @@
 * {
-  font-family: Roboto;
+    font-family: Roboto;
 
-  /* text-transform: capitalize; */
+    /* text-transform: capitalize; */
 
 }
 
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 
 }
 
 .card-header {
     background-color: transparent;
-  }
+}
 
 samp {
-  font-family: Roboto;
-  font-size: 15px;
+    font-family: Roboto;
+    font-size: 15px;
 
 }
 
 
 ul {
-  list-style-type: none;
-  /* Remove o ponto/bullet point */
+    list-style-type: none;
+    /* Remove o ponto/bullet point */
 }
 
 
 body {
-  min-height: 100vh;
-  padding-bottom: 100px;
-  position: relative;
+    min-height: 100vh;
+    padding-bottom: 100px;
+    position: relative;
 }
 
 footer {
-  text-align: center;
+    text-align: center;
 
-  padding: 20px;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 footer p {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .imgnavbar {
-  width: 150px;
+    width: 150px;
 
 
 }
 
 #navbar img.dark-theme {
-  filter: invert(1);
+    filter: invert(1);
 }
 
 .colorspancadastrodeempresa {
-  color: white;
-  min-width: 120px;
+    color: white;
+    min-width: 120px;
 }
 
 
@@ -88,63 +88,63 @@ footer p {
 
 
 
-  border-bottom: 1px solid #c0c0c0
+    border-bottom: 1px solid #c0c0c0
 }
 
 li:last-child {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 .navbar .offcanvas a:hover {
-  color: #1E90FF
+    color: #1E90FF
 }
 
 .cor {
-  color: #1E90FF
+    color: #1E90FF
 }
 
 
 @media (max-width: 1000px) {
 
-  /* Regras de estilo quando a tela tem até 768px de largura */
-  .second-ul {
-    margin-right: 0;
-    margin-left: 0;
-  }
+    /* Regras de estilo quando a tela tem até 768px de largura */
+    .second-ul {
+        margin-right: 0;
+        margin-left: 0;
+    }
 
-  .navbar li {
-
-
-
-    border-bottom: 1px solid black;
-
-    padding: 15px;
+    .navbar li {
 
 
 
+        border-bottom: 1px solid black;
 
-  }
+        padding: 15px;
 
 
 
 
+    }
 
 
-  .navbar li:last-child {
-    border-bottom: none;
-  }
 
 
-  .linha {
-    border-bottom: none
-  }
-
-  .btndashboard {
 
 
-    margin-top: 10px;
+    .navbar li:last-child {
+        border-bottom: none;
+    }
 
-  }
+
+    .linha {
+        border-bottom: none
+    }
+
+    .btndashboard {
+
+
+        margin-top: 10px;
+
+    }
 
 
 
@@ -161,54 +161,54 @@ li:last-child {
 
 
 #info-container {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 #info-container ion-icon {
-  font-size: 20px;
-  color: #f2a340;
-  margin-right: 5px;
-  vertical-align: middle;
+    font-size: 20px;
+    color: #f2a340;
+    margin-right: 5px;
+    vertical-align: middle;
 
 }
 
 .iconCentralizar {
-  vertical-align: middle;
-  font-size: 20px;
-  color: #f2a340;
-  margin-right: 5px;
+    vertical-align: middle;
+    font-size: 20px;
+    color: #f2a340;
+    margin-right: 5px;
 
 }
 
 
 .vertical-align-middle {
 
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 
 
 
 }
 
 svg {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .cursor {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 
 
 .custom-btn {
-  color: #f2a340;
+    color: #f2a340;
 
 }
 
 /* select2 home serviços */
 #select-servico+.select2-container .select2-selection {
-  min-height: 40px;
+    min-height: 40px;
 
 }
 
@@ -216,14 +216,14 @@ svg {
 
 
 
-  border-radius: 10px;
+    border-radius: 10px;
 
 }
 
 
 
 .container-img {
-  position: relative;
+    position: relative;
 
 
 
@@ -232,38 +232,38 @@ svg {
 
 
 .conteiner-search {
-  position: relative;
-  z-index: 2;
-  top: 36%;
-  transform: translateY(-50%);
-  left: 16%;
+    position: relative;
+    z-index: 2;
+    top: 36%;
+    transform: translateY(-50%);
+    left: 16%;
 
 
 
 }
 
 .conteiner-searchCategoria {
-  position: relative;
-  z-index: 2;
-  top: 41%;
-  transform: translateY(-50%);
-  left: 16%;
+    position: relative;
+    z-index: 2;
+    top: 41%;
+    transform: translateY(-50%);
+    left: 16%;
 
 
 }
 
 .container-carousel {
-  margin-top: -50px;
+    margin-top: -50px;
 }
 
 
 
 .img-logo {
 
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 2px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 2px;
 
 
 }
@@ -271,13 +271,13 @@ svg {
 
 
 .txt {
-  font-size: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  text-transform: uppercase;
-  font-weight: bold;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    text-transform: uppercase;
+    font-weight: bold;
 
 
 }
@@ -295,67 +295,67 @@ svg {
 
 
 .row {
-  display: flex;
+    display: flex;
 }
 
 
 .btg {
-  margin-top: auto;
+    margin-top: auto;
 }
 
 
 .txt_dados_empresa {
-  text-align: justify;
-  text-indent: 30px;
+    text-align: justify;
+    text-indent: 30px;
 }
 
 
 
 
 .img_dados_empresa {
-  min-width: 200px;
-  min-height: 200px;
-  max-width: 200px;
-  max-height: 200px;
-  border-radius: 10px;
+    min-width: 200px;
+    min-height: 200px;
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 10px;
 
-  border: 1px solid #D3D3D3;
+    border: 1px solid #D3D3D3;
 
 
 }
 
 .img_logoDadosServico {
-  min-width: 25px;
-  min-height: 25px;
-  max-width: 25px;
-  max-height: 25px;
-  border-radius: 10px;
+    min-width: 25px;
+    min-height: 25px;
+    max-width: 25px;
+    max-height: 25px;
+    border-radius: 10px;
 
-  border: 1px solid #D3D3D3;
+    border: 1px solid #D3D3D3;
 
 
 }
 
 .img_logoDadosServicoAgendamentos {
-  min-width: 25px;
-  min-height: 25px;
-  max-width: 25px;
-  max-height: 25px;
-  border-radius: 10px;
+    min-width: 25px;
+    min-height: 25px;
+    max-width: 25px;
+    max-height: 25px;
+    border-radius: 10px;
 
-  border: 1px solid #D3D3D3;
+    border: 1px solid #D3D3D3;
 
 
 }
 
 .img_edit {
 
-  min-width: 100px;
-  min-height: 100px;
-  max-width: 100px;
-  max-height: 100px;
-  border-radius: 10px;
-  border: 1px solid #D3D3D3;
+    min-width: 100px;
+    min-height: 100px;
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 10px;
+    border: 1px solid #D3D3D3;
 
 }
 
@@ -363,138 +363,138 @@ svg {
 
 
 .img_tela_home {
-  margin-top: 15px;
-  margin-left: 8px;
+    margin-top: 15px;
+    margin-left: 8px;
 
-  min-width: 65px;
-  min-height: 65px;
-  max-width: 65px;
-  max-height: 65px;
-  border-radius: 10px;
-  border: 1px solid #D3D3D3;
-  overflow: hidden;
+    min-width: 65px;
+    min-height: 65px;
+    max-width: 65px;
+    max-height: 65px;
+    border-radius: 10px;
+    border: 1px solid #D3D3D3;
+    overflow: hidden;
 
 }
 
 .img_meus_agedamentos {
 
-  margin-left: -10px;
-  min-width: 40px;
-  min-height: 40px;
-  max-width: 40px;
-  max-height: 40px;
-  border-radius: 10px;
-  border: 1px solid #D3D3D3;
-  overflow: hidden;
+    margin-left: -10px;
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 10px;
+    border: 1px solid #D3D3D3;
+    overflow: hidden;
 
 }
 
 .img_categoria {
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
 
 
-  min-width: 90px;
-  min-height: 90px;
-  max-width: 90px;
-  max-height: 90px;
+    min-width: 90px;
+    min-height: 90px;
+    max-width: 90px;
+    max-height: 90px;
 
-  border-radius: 10px;
-  border: 1px solid #D3D3D3;
-  overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid #D3D3D3;
+    overflow: hidden;
 
 
 
 }
 
 .txtcategoria {
-  font-size: 15px;
-  position: absolute;
-  top: 20px;
-  left: 115px;
+    font-size: 15px;
+    position: absolute;
+    top: 20px;
+    left: 115px;
 
 
 
 
 }
 
-.describuscacategoria{
-  margin-top: -15px;
-  font-size: 12px;
+.describuscacategoria {
+    margin-top: -15px;
+    font-size: 12px;
 
 }
 
-.nomeAgendamentos{
-  margin-top: -80px;
-  margin-left: 70px;
-  margin-bottom: 80px;
-  font-size: 12px;
+.nomeAgendamentos {
+    margin-top: -80px;
+    margin-left: 70px;
+    margin-bottom: 80px;
+    font-size: 12px;
 }
 
-.card_meus_agendamentos{
+.card_meus_agendamentos {
 
-  min-width:300px;
-  min-height:190px;
-  max-width:300px;
-  max-height:190px;
+    min-width: 300px;
+    min-height: 190px;
+    max-width: 300px;
+    max-height: 190px;
 }
 
 
-.card_detalhes_agendamentos{
+.card_detalhes_agendamentos {
 
 
-    min-height:637px;
+    min-height: 637px;
 
-    max-height:637px;
-  }
+    max-height: 637px;
+}
 
 
 
 
 .image-and-rating {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  margin-left: 80px;
-  margin-top: -50px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-left: 80px;
+    margin-top: -50px;
 
 }
 
 .paginação {
-  position: relative;
+    position: relative;
 
-  float: right;
+    float: right;
 
 }
 
 .paginaçãoRodape {
-  position: absolute;
-  bottom: -10px;
-  right: 0;
+    position: absolute;
+    bottom: -10px;
+    right: 0;
 
-  transform: translateY(-25px);
+    transform: translateY(-25px);
 
 }
 
 
 .card {
 
-  height: 100%;
+    height: 100%;
 
-  border-radius: 10px;
+    border-radius: 10px;
 
 }
 
 .imgtabela {
-  margin-left: 0px;
-  margin-right: 5px;
-  min-width: 30px;
-  min-height: 30px;
-  max-width: 30px;
-  max-height: 30px;
-  border-radius: 10px;
-  border: 1px solid #F8F8FF;
+    margin-left: 0px;
+    margin-right: 5px;
+    min-width: 30px;
+    min-height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    border-radius: 10px;
+    border: 1px solid #F8F8FF;
 }
 
 .imgdetalheagendamento {
@@ -506,12 +506,12 @@ svg {
     max-height: 22px;
     border-radius: 10px;
     border: 1px solid #F8F8FF;
-  }
+}
 
 
 /*largura da barra de rolagem */
 ::-webkit-scrollbar {
-  width: 8px;
+    width: 8px;
 
 
 
@@ -522,16 +522,16 @@ svg {
 
 
 ::-webkit-scrollbar-thumb {
-  height: 20px;
-  /* Defina a altura desejada aqui */
-  border-radius: 15px;
-  background-color: #11101d;
+    height: 20px;
+    /* Defina a altura desejada aqui */
+    border-radius: 15px;
+    background-color: #11101d;
 
 }
 
 /*mudar de cor ao encostar na rolagem la ele */
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #11101d;
+    background-color: #11101d;
 
 }
 
@@ -541,28 +541,28 @@ svg {
 }  */
 
 .listadepagamentos {
-  display: inline-flex;
-  align-items: center;
+    display: inline-flex;
+    align-items: center;
 }
 
 
 .coment {
-  max-height: 270px;
-  /* Ajuste a altura máxima conforme necessário */
-  min-height: 260px;
-  overflow: auto;
+    max-height: 270px;
+    /* Ajuste a altura máxima conforme necessário */
+    min-height: 260px;
+    overflow: auto;
 }
 
 .comentDadosEmpresa {
-  max-height: 180px;
-  min-height: 180px;
-  overflow: auto;
+    max-height: 180px;
+    min-height: 180px;
+    overflow: auto;
 }
 
 .comentavaliacaoEnpresa {
-  max-height: 130px;
-  min-height: 130px;
-  overflow: auto;
+    max-height: 130px;
+    min-height: 130px;
+    overflow: auto;
 }
 
 .produtosDetalhesAgendamentos {
@@ -572,134 +572,149 @@ svg {
     overflow: auto;
     scroll-behavior: auto;
     cursor: pointer;
-  }
+}
 
-  .produtosDetalhesAgendamentos p {
+.produtosDetalhesAgendamentos p {
     margin-left: -14px;
     margin-top: -30px;
 
-  }
+}
 
 
 
 .label-ckeck-dados-empresa {
-  cursor: pointer;
-  max-width: 200px;
-  min-width: 200px;
+    cursor: pointer;
+    max-width: 200px;
+    min-width: 200px;
 }
 
 .textagendamento {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 .tituloagendamento {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 .truncate-cell {
-  max-width: 400px;
-  /* Defina a largura máxima desejada para a célula */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    max-width: 400px;
+    /* Defina a largura máxima desejada para a célula */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .campodesablitado {
-  background-color: white;
-  pointer-events: none;
+    background-color: white;
+    pointer-events: none;
 }
 
 .campodesablitadocomentariodetalhesagendamentos {
     background-color: white;
     pointer-events: none;
-  }
+}
 
 
 
 .txt-carousel-caption {
-  color: #f2a340;
-  position: absolute;
-  top: -70px;
-  left: -308px;
-  width: 180%;
-  height: 130%;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* Cor do fundo com transparência */
-  backdrop-filter: blur(5px);
-  /* Propriedade para aplicar o desfoque */
-  -webkit-backdrop-filter: blur(5px);
-  /* Suporte para navegadores baseados em Webkit, como o Safari */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    color: #f2a340;
+    position: absolute;
+    top: -70px;
+    left: -308px;
+    width: 180%;
+    height: 130%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Cor do fundo com transparência */
+    backdrop-filter: blur(5px);
+    /* Propriedade para aplicar o desfoque */
+    -webkit-backdrop-filter: blur(5px);
+    /* Suporte para navegadores baseados em Webkit, como o Safari */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
 
 /* Estilos personalizados para as opções do select2 */
 .custom-option {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .img-flag {
-  width: 30px; /* Largura da imagem */
-  height: 30px; /* Altura da imagem */
-  margin-right: 8px; /* Espaçamento à direita */
-  border-radius: 50%; /* Borda circular (caso a imagem seja quadrada) */
+    width: 30px;
+    /* Largura da imagem */
+    height: 30px;
+    /* Altura da imagem */
+    margin-right: 8px;
+    /* Espaçamento à direita */
+    border-radius: 50%;
+    /* Borda circular (caso a imagem seja quadrada) */
 }
 
 
 
 .btndashboard {
 
-  color: black;
-  border-color: #D3D3D3;
-  /* Cor do contorno do botão btn-outline-info */
-  display: inline-block;
+    color: black;
+    border-color: #D3D3D3;
+    /* Cor do contorno do botão btn-outline-info */
+    display: inline-block;
 
 
-  text-align: center;
-  min-width: 110px
+    text-align: center;
+    min-width: 110px
+}
+
+.btnwhts{
+    color: black;
+    border-color: #D3D3D3;
+    /* Cor do contorno do botão btn-outline-info */
+
+
+
+
+
 }
 
 .btndashboardservico {
 
 
-  justify-content: center;
-  /* Centraliza o texto horizontalmente */
-  align-items: center;
-  /* Centraliza o texto verticalmente */
-  color: black;
-  border-color: #D3D3D3;
-  margin-top: 5px;
+    justify-content: center;
+    /* Centraliza o texto horizontalmente */
+    align-items: center;
+    /* Centraliza o texto verticalmente */
+    color: black;
+    border-color: #D3D3D3;
+    margin-top: 5px;
 
 }
 
 
 .tabelas {
-  width: 50%;
+    width: 50%;
 }
 
 #generateDescription {
-  display: flex;
-  align-items: center;
-  margin-right: 5px
+    display: flex;
+    align-items: center;
+    margin-right: 5px
 }
 
 #generateDescriptionSevico {
-  display: flex;
-  align-items: center;
-  margin-right: 5px
+    display: flex;
+    align-items: center;
+    margin-right: 5px
 }
 
 #loadingMessage {
-  margin-right: 3px;
-  /* Adjust the margin as needed to separate the icon from the text */
+    margin-right: 3px;
+    /* Adjust the margin as needed to separate the icon from the text */
 }
 
 #loadingMessageservico {
-  margin-right: 3px;
-  /* Adjust the margin as needed to separate the icon from the text */
+    margin-right: 3px;
+    /* Adjust the margin as needed to separate the icon from the text */
 }
 
 
@@ -728,7 +743,7 @@ svg {
 }
 
 
-.btn_agendamentos_clientes{
+.btn_agendamentos_clientes {
     min-width: 110px;
     max-width: 110px;
 
@@ -737,12 +752,12 @@ svg {
 
 .cardlayout {
     width: 12rem;
-  }
+}
 
-  /* celular */
-  @media (max-width: 479px) {
+/* celular */
+@media (max-width: 479px) {
     .cardlayout {
-      width: 20rem;
+        width: 20rem;
     }
 
     .conteiner-search {
@@ -753,38 +768,57 @@ svg {
         left: 16%;
 
 
-      }
+    }
 
 
-      .btn-extra-sm {
+    .btn-extra-sm {
         font-size: 10px;
         padding: 3px 8px;
-        }
+    }
 
 
-  }
+}
 
 
 
 
- .btnDashoard{
+.btnDashoard {
     min-width: 180px;
 
     max-width: 180px;
 
- }
+}
 
- .btnmeusServicos{
+.btnmeusServicos {
     min-width: 100px;
 
     max-width: 100px;
 
- }
+}
 
- select.select-meus-agendamentos.select2-hidden-accessible + .select2-container .select2-selection__placeholder {
+select.select-meus-agendamentos.select2-hidden-accessible+.select2-container .select2-selection__placeholder {
     font-size: 13px;
 
 }
 
+.btnMeusClientes {
+
+
+
+    margin-right: 10px;
+
+    min-width: 100px;
+    max-width: 100px;
+
+    margin-top: 2px;
+
+
+
+
+}
+
+.txtcenter{
+    text-align: center;
+}
 
 

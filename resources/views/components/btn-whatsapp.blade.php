@@ -2,10 +2,16 @@
     @props(['numero' => '', 'mensagem' => ''])
 
     <a href="https://wa.me/55{{ str_replace(['(', ')', ' ', '-'], '', $numero) }}?text={{ $mensagem }}"
-        class="btn btn-success btn-sm rounded float-end vertical-align-middle"
+        class="btn  btn-outline-success btnwhts  btn-sm rounded float-end vertical-align-middle  btnMeusClientes "
         data-bs-toggle="tooltip" data-bs-placement="bottom"
         title=""  target="_blank">
-        <x-svg-Whatsapp width="20" height="20" margin="2px"/>
+        <x-svg-Whatsapp width="10" height="10" margin="2px"/>
         Whatsapp
      </a>
+     <a href="/" class="btn btn-sm btn-outline-info btndashboard rounded float-end vertical-align-middle btnMeusClientes  ">
+
+        Detalhes
+
+    </a>
+
 </div>

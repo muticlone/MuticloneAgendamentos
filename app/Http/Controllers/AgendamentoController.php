@@ -748,12 +748,12 @@ class AgendamentoController extends Controller
                 ->pluck('user_id')
                 ->toArray();
 
-            $clientes = User::whereIn('users.id', $idsClientes)
+                $clientes = User::whereIn('users.id', $idsClientes)
                 ->join('agendamentos', 'users.id', '=', 'agendamentos.user_id')
                 ->where('agendamentos.cadastro_de_empresas_id', $id)
                 ->orderBy('agendamentos.dataHorarioAgendamento', 'asc')
+                ->distinct('users.id')
                 ->paginate(9);
-
 
 
 
