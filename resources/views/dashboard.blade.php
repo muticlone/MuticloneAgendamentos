@@ -15,8 +15,6 @@
 
 
             <a href="/cadastrar/empresa" class="btn btn-sm btn-outline-info btndashboardservico">Cadastrar nova empresa</a>
-            @foreach ($empresa as $empid)
-            @endforeach
 
 
         </div>

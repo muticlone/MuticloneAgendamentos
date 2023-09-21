@@ -13,8 +13,11 @@
                     <tr>
 
                         <th scope="col">Nome </th>
-                        <th scope="col">Contato</th>
+
+                        <th scope="col">Último agendamento </th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -22,18 +25,19 @@
                         <tr>
 
                             <td> {{ $cliente->name }}</td>
-                            <td>{{ $cliente->phone }}</td>
+
+                            <td>{{ \Carbon\Carbon::parse($cliente->dataHorarioAgendamento)->format('d-m-Y') }}</td>
+
+                            <td>
+                                <a href="/{{ $cliente->id }}" class="btn btn-sm  btn-info ">Detalhes</a>
+                            </td>
                             <td>
 
-
-
-
                                 <x-btn-whatsapp numero="{{ str_replace(['(', ')', ' ', '-'], '', $cliente->phone) }}"
-                                    mensagem="bom dia" />
-
-                                </a>
+                                    mensagem="Olá! {{ $cliente->name }} Sentimos sua falta e estamos ansiosos para recebê-lo de volta. Como podemos ajudar você hoje?" />
 
                             </td>
+
                         </tr>
                     @endforeach
 

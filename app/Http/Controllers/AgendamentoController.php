@@ -562,10 +562,10 @@ class AgendamentoController extends Controller
 
 
         $numerosDosPedidos = $user->agendamentos()
-             ->distinct()
+            ->distinct()
             ->pluck('numeroDoPedido')->toArray();
 
-            sort($numerosDosPedidos);
+        sort($numerosDosPedidos);
 
 
 
@@ -595,11 +595,9 @@ class AgendamentoController extends Controller
                 $query = $user->agendamentos()->whereIn('cadastro_de_empresas_id', $empresaAgendamentoid);
             }
 
-            if(is_numeric($search)){
+            if (is_numeric($search)) {
                 $query = $user->agendamentos()->where('numeroDoPedido', '=', $search);
             }
-
-
         } else {
             $query = $user->agendamentos()
                 ->orderByRaw('confirmado ASC, dataHorarioAgendamento ASC');
@@ -734,7 +732,8 @@ class AgendamentoController extends Controller
     }
 
 
-    public function showMeusClientes($id){
+    public function showMeusClientes($id)
+    {
 
         $user = auth()->user();
 
@@ -745,11 +744,15 @@ class AgendamentoController extends Controller
         } else {
 
             $idsClientes = Agendamento::where('cadastro_de_empresas_id', $id)
-            ->distinct()
-            ->pluck('user_id')
-            ->toArray();
+                ->distinct()
+                ->pluck('user_id')
+                ->toArray();
 
-            $clientes =  User::whereIn('id', $idsClientes)->paginate(9);
+            $clientes = User::whereIn('users.id', $idsClientes)
+                ->join('agendamentos', 'users.id', '=', 'agendamentos.user_id')
+                ->where('agendamentos.cadastro_de_empresas_id', $id)
+                ->orderBy('agendamentos.dataHorarioAgendamento', 'asc')
+                ->paginate(9);
 
 
 
@@ -762,7 +765,9 @@ class AgendamentoController extends Controller
 
         return view('Empresa.DadosMeusClientes', [
 
-            'clientes' => $clientes
+            'clientes' => $clientes,
+            'empresa' =>  $empresa,
+
 
 
         ]);
