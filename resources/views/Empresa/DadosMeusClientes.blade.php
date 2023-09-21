@@ -20,6 +20,7 @@
 
                     </tr>
                 </thead>
+                {{-- teste --}}
                 <tbody>
                     @foreach ($clientes as $cliente)
                         <tr>
