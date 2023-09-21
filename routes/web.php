@@ -5,6 +5,7 @@ use App\Http\Controllers\CadastroEmpresaController;
 use App\Http\Controllers\CadastroServicoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BrowsershotController;
+use App\Http\Controllers\dashboardBusinessController;
 use App\Http\Middleware\PreventBackHistory;
 
 use Illuminate\Support\Facades\Http;
@@ -36,10 +37,9 @@ Route::get('/empresas/dados/{id}', [HomeController::class, 'show']);
 Route::get('/', [HomeController::class, 'showServicos'])->name('home.servicos');
 Route::get('/servicos/categorias', [HomeController::class, 'categorias'])->name('home.sevico.categorias');
 Route::get('/busca/categorias', [HomeController::class, 'Showcategorias'])->name('busca.sevico.categorias');
-Route::get('/dashboard/business/{id}', [HomeController::class, 'dashboardBusiness'])->name('dashboard.business')->middleware('auth');;
 
 
-Route::put('/atualizarmeta/{id}', [HomeController::class, 'atualizarmeta'])->middleware('auth');
+
 
 
 Route::get('/dashboard/edit/{id}', [CadastroEmpresaController::class, 'edit'])->middleware('auth', 'company_or_root');
@@ -99,11 +99,12 @@ Route::get('root', [RootController::class, 'root'])
 
 
 
+Route::get('/dashboard/business/{id}', [dashboardBusinessController::class, 'dashboardBusiness'])->name('dashboard.business')->middleware('auth', 'company_or_root');
+Route::put('/atualizarmeta/{id}', [dashboardBusinessController::class, 'atualizarmeta'])->middleware('auth', 'company_or_root');
 
+Route::get('/dashboard/financeiro', [dashboardBusinessController::class, 'dashboardFinanceiro'])->name('dashboard.financeiro')->middleware('auth', 'company_or_root');
 
-
-
-
+Route::get('/dashboard/garficos', [dashboardBusinessController::class, 'dashboardGraficos'])->name('dashboard.Graficos')->middleware('auth', 'company_or_root');
 
 
 

@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Agendamento;
+
+
+
 return [
 
     /*
@@ -315,21 +319,21 @@ return [
         [
             'text'        => 'Incio',
             'url'         => '/',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fas fa-fw fa-home',
             // 'label'       => 4,
             'label_color' => 'success',
         ],
         // ['header' => 'account_settings'],
         [
-            'text' => 'Gráficos',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'Meus Negócio',
+            'url'  => '/dashboard',
+            'icon' => 'fas fa-fw fa-briefcase',
 
         ],
         [
-            'text' => 'Faturamento',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Perfil',
+            'url'  => '/user/profile',
+            'icon' => 'fas fa-fw fa-user',
         ],
         // [
         //     'text'    => 'multilevel',

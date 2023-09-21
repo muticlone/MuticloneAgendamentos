@@ -234,10 +234,9 @@
 
                 <button type="submit" class="btn btn-info ">Salvar</button>
             </div>
-
+        </div>
 
     </form>
-    </div>
 
 
     <div class="row g-12">
@@ -293,6 +292,7 @@
             </div>
 
         </div>
+            {{-- sair --}}
         <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
             <div class="card card-info">
                 <div class="card-header">
@@ -800,6 +800,5 @@
     </script>
 
     <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
-
 
 @stop
