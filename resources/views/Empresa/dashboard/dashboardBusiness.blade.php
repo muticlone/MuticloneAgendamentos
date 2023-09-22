@@ -17,23 +17,7 @@
     <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all"
         rel="stylesheet" type="text/css" />
 
-    {{-- <main>
-        <div class="container-fluid">
-            <div class="row">
-                @if (session('msg'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('msg') }}
-                    </div>
-                @endif
-                @if (session('msgErro'))
-                    <div class="alert alert-danger" role="alert">
-                        {{ session('msgErro') }}
-                    </div>
-                @endif
-                @yield('conteudo')
-            </div>
-        </div>
-    </main> --}}
+
     <div class="row g-12">
 
 
@@ -107,42 +91,23 @@
 
 
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-            <div class="small-box bg-info">
-                <div class="inner">
-                    <h3>{{ $quantidadedepedidos }}</h3>
-                    <p>Total de Pedidos</p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-shopping-cart"></i>
-                </div>
 
-                <a href="/meus/agendamentos/empresa/{{ $idempresa }}/finalizados" class="small-box-footer">
-                    Mais informações <i class="fas fa-arrow-circle-right"></i>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-            <div class="small-box bg-info">
-                <div class="inner">
-                    <h3>{{ $quantidadedepedidosmesatual }}</h3>
-                    <p>Pedidos mês atual</p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-shopping-cart"></i>
-                </div>
+            <x-small-user tema="{{ $quantidadedepedidos }}" txt="Total de Pedidos" icon='fas fa-shopping-cart'
+            link="/meus/agendamentos/empresa/{{ $idempresa }}/finalizados" class="small-box-footer" />
 
-                <a href="/meus/agendamentos/empresa/{{ $idempresa }}/finalizados" class="small-box-footer">
-                    Mais informações <i class="fas fa-arrow-circle-right"></i>
-                </a>
-            </div>
         </div>
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
 
+            <x-small-user tema="{{ $quantidadedepedidosmesatual }}" txt="Pedidos mês atual" icon='fas fa-shopping-cart'
+            link="/meus/agendamentos/empresa/{{ $idempresa }}/finalizados" class="small-box-footer" />
+
+        </div>
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
             <x-agendamentos-cancelados Porcentagemdepedidoscancelados="{{ $Porcentagemdepedidoscancelados }}"
-            quantidadedepedidoscacenlados="{{ $quantidadedepedidoscacenlados }}"
-            link="/meus/agendamentos/empresa/{{ $idempresa }}/cancelados" />
+                quantidadedepedidoscacenlados="{{ $quantidadedepedidoscacenlados }}"
+                link="/meus/agendamentos/empresa/{{ $idempresa }}/cancelados" />
 
         </div>
 
@@ -154,39 +119,20 @@
     <div class="row g-12">
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
-            <div class="small-box bg-info">
-                <div class="inner">
-                    <h3>{{ $clientemesatual }}</h3>
-                    <p style="  font-size: 15px;">Clientes mês atual</p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-user-plus"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                    More info <i class="fas fa-arrow-circle-right"></i>
-                </a>
-            </div>
+            <x-small-user tema="{{ $clientemesatual }}" txt="Clientes mês atual" icon='fas fa-user-plus' link="#" />
+
         </div>
 
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
-            <div class="small-box bg-info">
-                <div class="inner">
-                    <h3>{{ $clientetotal }}</h3>
-                    <p>Clientes total</p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-user-plus"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                    More info <i class="fas fa-arrow-circle-right"></i>
-                </a>
-            </div>
+            <x-small-user tema="{{ $clientetotal }}" txt="Clientes total"
+                icon='fas fa-user-plus'
+                link="/dados/meus/clientes/{{ $idempresa }}/ativos" />
         </div>
     </div>
 
     @if ($metaAnual > 0)
-    <label for="valorDaMetaAnual">Faturamento anual</label>
+        <label for="valorDaMetaAnual">Faturamento anual</label>
     @else
         <label for="valorDaMetaAnual">Crie uma meta de faturamento anual</label>
     @endif
@@ -267,7 +213,7 @@
             </div>
 
         </div>
-            {{-- sair --}}
+        {{-- sair --}}
         <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
             <div class="card card-info">
                 <div class="card-header">
@@ -675,7 +621,10 @@
                             if (label) {
                                 label += ': ';
                             }
-                            var formattedValue = context.parsed.y.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                            var formattedValue = context.parsed.y.toLocaleString('pt-BR', {
+                                style: 'currency',
+                                currency: 'BRL'
+                            });
                             label += 'R$ ' + formattedValue; // Formatação como moeda (com 2 casas decimais)
                             return label;
                         }

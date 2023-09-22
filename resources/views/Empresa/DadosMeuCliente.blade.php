@@ -32,19 +32,11 @@
     <div class="row g-12">
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
-            <div class="small-box bg-info">
-                <div class="inner">
-                    <h3> {{ $numeroDoPedidos }}</h3>
-                    <p>Todal de agendamentos finalizados</p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-user-plus"></i>
-                </div>
-                <a href="/meus/agendamentos/empresa/{{ $idEmpresa }}/finalizados?search={{ $clientesBusca->name }}"
-                    class="small-box-footer">
-                    More info <i class="fas fa-arrow-circle-right"></i>
-                </a>
-            </div>
+            <x-small-user tema="{{ $numeroDoPedidos }}" txt="Todal de agendamentos finalizados"
+            link="/meus/agendamentos/empresa/{{ $idEmpresa }}/finalizados?search={{ $clientesBusca->name }}"
+            icon='fas fa-user-plus'
+            />
+
         </div>
 
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
@@ -56,7 +48,10 @@
             link="/meus/agendamentos/empresa/{{ $idEmpresa }}/cancelados?search={{ $clientesBusca->name }}" />
 
         </div>
-
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+         <x-small-user tema="R$ {{ $totalgasto }}" txt="Total de valor gasto" icon='fas fa-user-plus'
+         link="/meus/agendamentos/empresa/{{ $idEmpresa }}/finalizados?search={{ $clientesBusca->name }}" />
+        </div>
 
 
     </div>

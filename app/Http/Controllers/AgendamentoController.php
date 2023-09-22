@@ -924,6 +924,11 @@ class AgendamentoController extends Controller
 
 
         $idEmpresa = $agendamentos->pluck('cadastro_de_empresas_id')->first();
+        $gasto =  $agendamentos->pluck('valorTotalAgendamento')->toArray();
+
+        $totalgasto = array_sum($gasto);
+        $totalgasto = number_format($totalgasto, 2, ',', '.');
+
 
         return view('Empresa.DadosMeuCliente', [
             'clientesBusca' =>  $clientesBusca,
@@ -931,7 +936,8 @@ class AgendamentoController extends Controller
             'numeroDoPedidos' =>  $numeroDoPedidos,
             'idEmpresa' =>  $idEmpresa,
             'numeroDeCanelados'=> $numeroDeCanelados,
-            'porcentagemDeCancelamento' => $porcentagemDeCancelamento
+            'porcentagemDeCancelamento' => $porcentagemDeCancelamento,
+            'totalgasto' => $totalgasto
         ]);
     }
 }
