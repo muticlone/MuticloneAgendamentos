@@ -734,24 +734,30 @@ class AgendamentoController extends Controller
     }
 
 
-    public function showMeusClientes($id)
+    public function showMeusClientes($id, $status)
     {
 
         $user = auth()->user();
 
         $empresa = cadastro_de_empresa::findOrFail($id);
-
+        $search = request('search');
         if ($user->id != $empresa->user_id) {
             return redirect('/dashboard');
         } else {
 
-            $idsClientes = Agendamento::where('cadastro_de_empresas_id', $id)
-                ->where('finalizado', 1)
-                ->where('cancelado', 0)
-                ->distinct()
-                ->pluck('user_id')
-                ->toArray();
 
+                if( $search){
+
+                }
+
+
+
+            $idsClientes = Agendamento::where('cadastro_de_empresas_id', $id)
+                    ->where('finalizado', 1)
+                    ->where('cancelado', 0)
+                    ->distinct()
+                    ->pluck('user_id')
+                    ->toArray();
 
 
             $dadosClientes = Agendamento::where('cadastro_de_empresas_id', $id)
@@ -769,17 +775,76 @@ class AgendamentoController extends Controller
                 $datas['updated_at'] = date('d/m/Y', strtotime($datas['updated_at']));
             }
 
-            $clientes =  User::whereIn('id', $idsClientes)->paginate(15);
-            // Sua coleção de clientes já ordenada
-            $clientesOrdenados = $clientes->sortBy(function ($cliente) use ($dadosClientes) {
-                foreach ($dadosClientes as $dados) {
-                    if ($dados['user_id'] == $cliente->id) {
-                        return \Carbon\Carbon::createFromFormat('d/m/Y', $dados['updated_at']);
+
+
+
+
+
+                $clientes =  User::whereIn('id',  $idsClientes)->paginate(15);
+
+
+
+
+            $clientesBusca =  User::whereIn('id', $idsClientes)->get();
+
+            $nomesDoscleintes = [];
+
+            foreach ($clientesBusca as $busca) {
+                $nomesDoscleintes[] = $busca->name;
+            }
+
+
+
+            $clientesOrdenados=[];
+
+            if ($status == 'ativos') {
+
+                $clientesOrdenados = $clientes->sortByDesc(function ($cliente) use ($dadosClientes) {
+                    $latestUpdatedAt = null;
+
+                    foreach ($dadosClientes as $dados) {
+                        if ($dados['user_id'] == $cliente->id) {
+                            $updatedAt = \Carbon\Carbon::createFromFormat('d/m/Y', $dados['updated_at']);
+
+                            // Verifica se esta é a data de atualização mais recente para este cliente
+                            if ($latestUpdatedAt === null || $updatedAt->greaterThan($latestUpdatedAt)) {
+                                $latestUpdatedAt = $updatedAt;
+                            }
+                        }
                     }
-                }
-            })->values();
+
+                    return $latestUpdatedAt;
+                })->values();
+            } elseif ($status == 'clientesnaoatendido') {
 
 
+                $clientesOrdenados = $clientes->sortBy(function ($cliente) use ($dadosClientes) {
+                    foreach ($dadosClientes as $dados) {
+                        if ($dados['user_id'] == $cliente->id) {
+                            return \Carbon\Carbon::createFromFormat('d/m/Y', $dados['updated_at']);
+                        }
+                    }
+                })->values();
+            }elseif ($status == 'busca'){
+
+
+                 $nomes = Agendamento::where('cadastro_de_empresas_id', $id);
+
+
+                    $idCliente = $nomes->distinct()
+                    ->join('users as agendamento_users', 'agendamentos.user_id', '=', 'agendamento_users.id')
+                    ->where('agendamento_users.name', '=', $search)
+                    ->pluck('agendamento_users.id');
+
+                    $clientesOrdenados =  User::where('id',  $idCliente)->paginate(1);
+
+
+            }
+
+
+            else {
+                return back();
+            }
         }
 
 
@@ -789,6 +854,7 @@ class AgendamentoController extends Controller
             'clientes' => $clientes,
             'empresa' =>  $empresa,
             'dadosClientes' =>  $dadosClientes,
+            'nomesDoscleintes' => $nomesDoscleintes
 
 
         ]);

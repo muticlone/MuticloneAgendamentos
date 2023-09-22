@@ -80,7 +80,7 @@
 
                                 </a> --}}
 
-                                <a href="{{ route('dados.meus.clientes', ['id' => $emp->id]) }}"
+                                <a href="{{ route('dados.meus.clientes', ['id' => $emp->id,'status' => 'ativos']) }}"
                                     class="btn btn-sm btn-outline-info btndashboard bt btnDashoard"
 
 

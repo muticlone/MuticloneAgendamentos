@@ -73,7 +73,7 @@ Route::put('/avaliacao/{id}', [AgendamentoController::class, 'avaliacaoPedidoCli
 Route::put('/reagendar/{id}', [AgendamentoController::class, 'ReagendarPedidoEmpresaEcliente'])->middleware('auth');
 
 
-Route::get('/dados/meus/clientes/{id}', [AgendamentoController::class, 'showMeusClientes'])->name('dados.meus.clientes')->middleware('auth', 'company_or_root');
+Route::get('/dados/meus/clientes/{id}/{status}', [AgendamentoController::class, 'showMeusClientes'])->name('dados.meus.clientes')->middleware('auth', 'company_or_root');
 
 
 
