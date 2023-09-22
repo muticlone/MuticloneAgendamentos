@@ -7,19 +7,6 @@
     <div class="row g-12">
 
 
-        {{-- <div class=" conteiner-search  col-8">
-            <form action="/home/empresas" method="GET">
-
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="search" name="search" placeholder="Procurar...">
-                    <button class="btn btn-outline-secondary custom-btn" type="submit">
-                        <ion-icon name="search-outline" class="iconCentralizar"></ion-icon>
-                        Buscar
-                    </button>
-                </div>
-            </form>
-
-        </div> --}}
 
         <div class="conteiner-search  col-8">
             <form action="/home/empresas" method="GET" id="searchForm">
@@ -34,24 +21,11 @@
 
 
         <x-carousel/>
-        @if (count($Cadastro_empresa) > 0)
 
-            @if ($search)
-                <div class="pt-1">
-                    <div class="alert alert-success" role="alert">
-                        Buscando por : "{{ $search }}" <a href="/home/empresas">Ver todos</a>
-                    </div>
-                </div>
-            @else
-                <div class="pt-1">
-                    <div class="alert alert-light" role="alert" align="center">
-                        Todos os empresas disponíveis
-                    </div>
+        <x-alert-busca-home :count="$Cadastro_empresa" search="{{ $search }}"
+        txt="Todos os empresas disponíveis" linktodos="home/empresas"/>
 
 
-                </div>
-            @endif
-        @endif
 
     </div>
 
@@ -83,55 +57,11 @@
 
             @if (($index + 1) % 10 == 0)
     </div>
+
     <div class="row g-12 pt-2">
         @endif
         @endforeach
 
-    </div>
-
-    {{-- paginação --}}
-    <div class="pagination-container">
-        <div class="py-4 d-flex justify-content-center">
-            <ul class="pagination">
-                {{-- <!-- Página Anterior --> --}}
-                @if ($Cadastro_empresa->appends(['search' => $search])->onFirstPage())
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-                    </li>
-                @else
-                    <li class="page-item">
-                        <a class="page-link"
-                            href="{{ $Cadastro_empresa->appends(['search' => $search])->previousPageUrl() }}">Anterior</a>
-                    </li>
-                @endif
-
-                {{-- <!-- Números de página --> --}}
-                @for ($i = 1; $i <= $Cadastro_empresa->lastPage(); $i++)
-                    @if ($i == $Cadastro_empresa->currentPage())
-                        <li class="page-item active" aria-current="page">
-                            <span class="page-link">{{ $i }}</span>
-                        </li>
-                    @else
-                        <li class="page-item">
-                            <a class="page-link"
-                                href="{{ $Cadastro_empresa->appends(['search' => $search])->url($i) }}">{{ $i }}</a>
-                        </li>
-                    @endif
-                @endfor
-
-                {{-- <!-- Próxima Página --> --}}
-                @if ($Cadastro_empresa->appends(['search' => $search])->hasMorePages())
-                    <li class="page-item">
-                        <a class="page-link"
-                            href="{{ $Cadastro_empresa->appends(['search' => $search])->nextPageUrl() }}">Próxima</a>
-                    </li>
-                @else
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Próxima</a>
-                    </li>
-                @endif
-            </ul>
-        </div>
     </div>
 
 
@@ -145,9 +75,13 @@
         </div>
     @elseif(count($Cadastro_empresa) == 0)
         <div class="alert alert-warning pt-2" role="alert">
-            Não há eventos disponíveis
+            Não há empresas disponíveis
         </div>
     @endif
+
+
+
+    <x-pagination :paginatedItems="$Cadastro_empresa" />
 
 
 

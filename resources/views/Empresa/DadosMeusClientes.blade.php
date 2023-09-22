@@ -26,7 +26,7 @@
 
 
 
-    <div class="col-md-9 offset-md-1 pt-2">
+<div class="col-md-9 offset-md-1 pt-2">
 
         <div class="row">
 
@@ -36,6 +36,10 @@
                 </div>
             </form>
         </div>
+
+        <x-alert-busca-agendamento search="{{ $search }}"
+        href="/dados/meus/clientes/{{ $empresa->id }}/ativos"/>
+
         <div class="table-responsive">
             <table class="table align-middle">
                 <thead>
@@ -71,7 +75,9 @@
 
 
                                 <x-btn-whatsapp numero="{{ str_replace(['(', ')', ' ', '-'], '', $cliente->phone) }}"
-                                    mensagem="Olá! {{ $cliente->name }} Sentimos sua falta e estamos ansiosos para recebê-lo de volta. Como podemos ajudar você hoje?" />
+                                    mensagem="Olá! {{ $cliente->name }} Sentimos sua falta e estamos ansiosos para recebê-lo de volta. Como podemos ajudar você hoje?"
+                                    detalhes="{{ $cliente->id }}" idempresa="{{ $empresa->id }}"
+                                    />
 
 
                             </td>

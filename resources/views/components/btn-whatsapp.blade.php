@@ -1,5 +1,5 @@
 <div>
-    @props(['numero' => '', 'mensagem' => ''])
+    @props(['numero' => '', 'mensagem' => '' ,'detalhes'=>'' , 'idempresa' => ''])
 
     <a href="https://wa.me/55{{ str_replace(['(', ')', ' ', '-'], '', $numero) }}?text={{ $mensagem }}"
         class="btn  btn-outline-success btnwhts  btn-sm rounded float-end vertical-align-middle  btnMeusClientes "
@@ -8,7 +8,7 @@
         <x-svg-Whatsapp width="10" height="10" margin="2px"/>
         Whatsapp
      </a>
-     <a href="/" class="btn btn-sm btn-outline-info btndashboard rounded float-end vertical-align-middle btnMeusClientes  ">
+     <a href="{{ route('dados.meu.cliente', ['id' => $detalhes, 'idempresa' => $idempresa]) }}" class="btn btn-sm btn-outline-info btndashboard rounded float-end vertical-align-middle btnMeusClientes  ">
 
         Detalhes
 

@@ -370,10 +370,13 @@ class AgendamentoController extends Controller
                     // Verifica se há resultados para o nome de cliente pesquisado
                     if (count($idsCliente) > 0) {
                         $query->whereIn('user_id', $idsCliente);
-                    } else if (true) {
-                        $query->where('formaDepagamentoAgendamento', '=', $search);
-                    } else {
+                    } else if (is_numeric($search)) {
+
                         $query->where('numeroDoPedido', '=',  $search);
+
+                    } else if (true){
+
+                        $query->where('formaDepagamentoAgendamento', '=', $search);
                     }
                 }
             } else {
@@ -502,6 +505,7 @@ class AgendamentoController extends Controller
     public function cancelarPedidoEmpresa(Request $request)
     {
 
+
         $urlAnterior = URL::previous();
 
 
@@ -511,6 +515,7 @@ class AgendamentoController extends Controller
         $agendamento->finalizado = false;
         $agendamento->cancelado = true;
         $agendamento->motivoCancelamento =  $motivoCacelamento;
+        $agendamento->save();
 
         $empresa =  $agendamento->cadastro_de_empresas_id;
 
@@ -746,18 +751,17 @@ class AgendamentoController extends Controller
         } else {
 
 
-                if( $search){
-
-                }
+            if ($search) {
+            }
 
 
 
             $idsClientes = Agendamento::where('cadastro_de_empresas_id', $id)
-                    ->where('finalizado', 1)
-                    ->where('cancelado', 0)
-                    ->distinct()
-                    ->pluck('user_id')
-                    ->toArray();
+                ->where('finalizado', 1)
+                ->where('cancelado', 0)
+                ->distinct()
+                ->pluck('user_id')
+                ->toArray();
 
 
             $dadosClientes = Agendamento::where('cadastro_de_empresas_id', $id)
@@ -780,7 +784,7 @@ class AgendamentoController extends Controller
 
 
 
-                $clientes =  User::whereIn('id',  $idsClientes)->paginate(15);
+            $clientes =  User::whereIn('id',  $idsClientes)->paginate(15);
 
 
 
@@ -795,7 +799,7 @@ class AgendamentoController extends Controller
 
 
 
-            $clientesOrdenados=[];
+            $clientesOrdenados = [];
 
             if ($status == 'ativos') {
 
@@ -825,24 +829,19 @@ class AgendamentoController extends Controller
                         }
                     }
                 })->values();
-            }elseif ($status == 'busca'){
+            } elseif ($status == 'busca') {
 
 
-                 $nomes = Agendamento::where('cadastro_de_empresas_id', $id);
+                $nomes = Agendamento::where('cadastro_de_empresas_id', $id);
 
 
-                    $idCliente = $nomes->distinct()
+                $idCliente = $nomes->distinct()
                     ->join('users as agendamento_users', 'agendamentos.user_id', '=', 'agendamento_users.id')
                     ->where('agendamento_users.name', '=', $search)
                     ->pluck('agendamento_users.id');
 
-                    $clientesOrdenados =  User::where('id',  $idCliente)->paginate(1);
-
-
-            }
-
-
-            else {
+                $clientesOrdenados =  User::where('id',  $idCliente)->paginate(1);
+            } else {
                 return back();
             }
         }
@@ -854,9 +853,85 @@ class AgendamentoController extends Controller
             'clientes' => $clientes,
             'empresa' =>  $empresa,
             'dadosClientes' =>  $dadosClientes,
-            'nomesDoscleintes' => $nomesDoscleintes
+            'nomesDoscleintes' => $nomesDoscleintes,
+            'search' => $search,
+
+        ]);
+    }
 
 
+    public function showMeuCliente($id, $idempresa)
+    {
+
+
+        $user = auth()->user();
+
+        $empresa = cadastro_de_empresa::findOrFail($idempresa);
+
+        $idsClientes = Agendamento::where('cadastro_de_empresas_id', $idempresa)
+            ->where('finalizado', 1)
+            ->where('cancelado', 0)
+            ->distinct()
+            ->pluck('user_id')
+            ->toArray();
+
+
+
+        $encontrado = false;
+        foreach ($idsClientes as $cliente) {
+            if ($id == $cliente) {
+                $encontrado = true;
+                break;
+            }
+        }
+
+
+
+        if ($encontrado == false)  {
+            return redirect('/dashboard');
+        } else {
+
+
+
+            $clientesBusca =  User::findOrFail($id);
+            $agendamentos = Agendamento::where('user_id', $id)
+            ->where('cadastro_de_empresas_id',$idempresa)
+            ->where('finalizado', 1)
+            ->where('cancelado', 0)
+            ->get();
+
+            $agendamentoscancelados = Agendamento::where('user_id', $id)
+            ->where('cadastro_de_empresas_id',$idempresa)
+            ->where('cancelado', 1)
+            ->get();
+
+
+
+        }
+
+        $numeroDoPedidos = count($agendamentos);
+
+        $numeroDeCanelados = count( $agendamentoscancelados);
+
+        $totalDepedidos =  $numeroDoPedidos +  $numeroDeCanelados;
+
+        if (  $totalDepedidos > 0) {
+            $porcentagemDeCancelamento = ($numeroDeCanelados /   $totalDepedidos) * 100;
+        } else {
+            $porcentagemDeCancelamento = 0;
+        }
+        $porcentagemDeCancelamento = number_format(  $porcentagemDeCancelamento,2);
+
+
+        $idEmpresa = $agendamentos->pluck('cadastro_de_empresas_id')->first();
+
+        return view('Empresa.DadosMeuCliente', [
+            'clientesBusca' =>  $clientesBusca,
+            'agendamentos' =>  $agendamentos,
+            'numeroDoPedidos' =>  $numeroDoPedidos,
+            'idEmpresa' =>  $idEmpresa,
+            'numeroDeCanelados'=> $numeroDeCanelados,
+            'porcentagemDeCancelamento' => $porcentagemDeCancelamento
         ]);
     }
 }

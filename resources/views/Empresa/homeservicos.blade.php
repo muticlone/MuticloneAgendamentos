@@ -20,28 +20,11 @@
 
         <x-carousel />
 
-        @if (count($servico) > 0)
-
-            @if ($search)
-                <div class="pt-1">
-                    <div class="alert alert-success" role="alert">
-                        Buscando por : "{{ $search }}" <a href="/">Ver todos</a>
-                    </div>
-                </div>
-            @else
-                <div class="pt-1">
-
-                    <div class="alert alert-light" role="alert" align="center">
-                        Todos os serviços disponíveis <a href="{{ route('home.sevico.categorias') }}">Link para
-                            Categorias</a>
-
-                    </div>
+        <x-alert-busca-home :count="$servico" search="{{ $search }}"
+        txt="Todos os serviços disponíveis" txt2="Link para Categorias"
+        link="{{ route('home.sevico.categorias') }}"/>
 
 
-                </div>
-            @endif
-
-        @endif
     </div>
 
 
