@@ -26,7 +26,10 @@ class Agendamento extends Model
         'dataHorarioAgendamento',
         'user_id',
         'cadastro_de_empresas_id',
-        'numeroDoPedido'
+        'numeroDoPedido',
+        'data_hora_finalizacao_agendamento',
+        'data_hora_cancelamento_agendamento',
+
 
 
 

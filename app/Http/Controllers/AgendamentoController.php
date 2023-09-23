@@ -52,15 +52,6 @@ class AgendamentoController extends Controller
         $servico = cadastro_de_servico::whereIn('id', $idArray)->get();
 
 
-
-
-
-
-
-
-
-
-
         $empresa = cadastro_de_empresa::findOrFail($idEmpresa);
         $empresa_id = $empresa->id;
         $empresa_id_criptografado = encrypt($empresa_id);
@@ -405,16 +396,16 @@ class AgendamentoController extends Controller
                 case 'finalizados':
                     $query->where('finalizado', 1)
                         ->where('cancelado', 0)
-                        ->orderBy('updated_at', 'desc');
+                        ->orderBy('data_hora_finalizacao_agendamento', 'desc');
                     break;
                 case 'cancelados':
                     $query->where('cancelado', 1)
-                        ->orderBy('updated_at', 'desc');
+                        ->orderBy('data_hora_cancelamento_agendamento', 'desc');
                     break;
 
                 case 'todos':
                     $query->where('cadastro_de_empresas_id', $id)
-                        ->orderBy('updated_at', 'desc');
+                        ->orderBy('data_hora_finalizacao_agendamento', 'desc');
                     break;
             }
 
@@ -498,6 +489,7 @@ class AgendamentoController extends Controller
         $agendamento = Agendamento::findOrFail($request->id);
         $empresa =  $agendamento->cadastro_de_empresas_id;
         $agendamento->finalizado = true;
+        $agendamento->data_hora_finalizacao_agendamento = Carbon::now();
         $agendamento->save();
         return redirect('/meus/agendamentos/empresa/' .  $empresa . '/finalizados')->with('msg', 'Finalizado com sucesso!');
     }
@@ -515,6 +507,7 @@ class AgendamentoController extends Controller
         $agendamento->finalizado = false;
         $agendamento->cancelado = true;
         $agendamento->motivoCancelamento =  $motivoCacelamento;
+        $agendamento->data_hora_cancelamento_agendamento = Carbon::now();
         $agendamento->save();
 
         $empresa =  $agendamento->cadastro_de_empresas_id;
@@ -631,11 +624,11 @@ class AgendamentoController extends Controller
             case 'finalizados':
                 $query->where('finalizado', 1)
                     ->where('cancelado', 0)
-                    ->orderBy('updated_at', 'desc');
+                    ->orderBy('data_hora_finalizacao_agendamento', 'desc');
                 break;
             case 'cancelados':
                 $query->where('cancelado', 1)
-                    ->orderBy('updated_at', 'desc');
+                    ->orderBy('data_hora_cancelamento_agendamento', 'desc');
                 break;
 
             case 'todos':
@@ -768,7 +761,7 @@ class AgendamentoController extends Controller
                 ->where('finalizado', 1)
                 ->where('cancelado', 0)
                 ->select('user_id')
-                ->selectRaw('max(updated_at) as updated_at')
+                ->selectRaw('max(data_hora_finalizacao_agendamento) as data_hora_finalizacao_agendamento')
                 ->groupBy('user_id')
                 ->get()
                 ->toArray();
@@ -776,7 +769,7 @@ class AgendamentoController extends Controller
 
 
             foreach ($dadosClientes as &$datas) {
-                $datas['updated_at'] = date('d/m/Y', strtotime($datas['updated_at']));
+                $datas['data_hora_finalizacao_agendamento'] = date('d/m/Y', strtotime($datas['data_hora_finalizacao_agendamento']));
             }
 
 
@@ -808,7 +801,7 @@ class AgendamentoController extends Controller
 
                     foreach ($dadosClientes as $dados) {
                         if ($dados['user_id'] == $cliente->id) {
-                            $updatedAt = \Carbon\Carbon::createFromFormat('d/m/Y', $dados['updated_at']);
+                            $updatedAt = \Carbon\Carbon::createFromFormat('d/m/Y', $dados['data_hora_finalizacao_agendamento']);
 
                             // Verifica se esta é a data de atualização mais recente para este cliente
                             if ($latestUpdatedAt === null || $updatedAt->greaterThan($latestUpdatedAt)) {
@@ -825,7 +818,7 @@ class AgendamentoController extends Controller
                 $clientesOrdenados = $clientes->sortBy(function ($cliente) use ($dadosClientes) {
                     foreach ($dadosClientes as $dados) {
                         if ($dados['user_id'] == $cliente->id) {
-                            return \Carbon\Carbon::createFromFormat('d/m/Y', $dados['updated_at']);
+                            return \Carbon\Carbon::createFromFormat('d/m/Y', $dados['data_hora_finalizacao_agendamento']);
                         }
                     }
                 })->values();
@@ -905,6 +898,35 @@ class AgendamentoController extends Controller
             ->where('cancelado', 1)
             ->get();
 
+            $agendamentosnaoconfirmados = Agendamento::where('user_id', $id)
+            ->where('cadastro_de_empresas_id',$idempresa)
+            ->where('finalizado', 0)
+            ->where('confirmado', 0)
+            ->where('cancelado', 0)
+            ->get();
+
+            $agendamentonaoavaliado = Agendamento::where('user_id', $id)
+            ->where('cadastro_de_empresas_id',$idempresa)
+            ->where('finalizado', 1)
+            ->where('cancelado', 0)
+            ->where('nota', null)
+            ->get();
+
+            $data = Agendamento::where('user_id', $id)
+            ->where('cadastro_de_empresas_id',$idempresa)
+            ->where('finalizado', 1)
+            ->where('cancelado', 0)
+            ->selectRaw('max(data_hora_finalizacao_agendamento) as data_hora_finalizacao_agendamento')
+            ->pluck('data_hora_finalizacao_agendamento');
+
+            $originalDateString = $data[0];
+            $carbonDate = Carbon::parse($originalDateString);
+            $formattedDate = $carbonDate->format('d-m-Y');
+
+
+
+
+
 
 
         }
@@ -912,6 +934,10 @@ class AgendamentoController extends Controller
         $numeroDoPedidos = count($agendamentos);
 
         $numeroDeCanelados = count( $agendamentoscancelados);
+
+        $numeroDenaoconfirmados = count(  $agendamentosnaoconfirmados);
+
+        $numeroDenaoavaliados = count(   $agendamentonaoavaliado);
 
         $totalDepedidos =  $numeroDoPedidos +  $numeroDeCanelados;
 
@@ -937,7 +963,10 @@ class AgendamentoController extends Controller
             'idEmpresa' =>  $idEmpresa,
             'numeroDeCanelados'=> $numeroDeCanelados,
             'porcentagemDeCancelamento' => $porcentagemDeCancelamento,
-            'totalgasto' => $totalgasto
+            'totalgasto' => $totalgasto,
+            'numeroDenaoconfirmados' =>  $numeroDenaoconfirmados,
+            'numeroDenaoavaliados' =>  $numeroDenaoavaliados,
+            'formattedDate' => $formattedDate,
         ]);
     }
 }

@@ -63,7 +63,7 @@
                             <td>
                                 @foreach ($dadosClientes as $dados)
                                     @if ($dados['user_id'] == $cliente->id)
-                                        {{ \Carbon\Carbon::createFromFormat('d/m/Y', $dados['updated_at'])->format('d-m-Y') }}
+                                        {{ \Carbon\Carbon::createFromFormat('d/m/Y', $dados['data_hora_finalizacao_agendamento'])->format('d-m-Y') }}
                                     @endif
                                 @endforeach
                             </td>

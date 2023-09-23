@@ -30,6 +30,15 @@
     </div>
 
     <div class="row g-12">
+
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
+            <x-small-user tema="{{ $formattedDate }}" txt="Último agendamento"
+            link="#"
+            icon='fa fa-calendar'
+            />
+
+        </div>
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
             <x-small-user tema="{{ $numeroDoPedidos }}" txt="Todal de agendamentos finalizados"
@@ -38,6 +47,25 @@
             />
 
         </div>
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
+            <x-small-user tema="{{$numeroDenaoconfirmados  }} " txt="Agendamentos aguardando confirmar"
+            link="/meus/agendamentos/empresa/{{ $idEmpresa }}/pendentes?search={{ $clientesBusca->name }}"
+            icon='fas fa-user-plus'
+            />
+
+        </div>
+
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
+            <x-small-user tema="{{  $numeroDenaoavaliados }}" txt="Agendamentos não avaliado pelo cliente"
+            link="/meus/agendamentos/empresa/{{ $idEmpresa }}/finalizados?search={{ $clientesBusca->name }}"
+            icon='fas fa-user-plus'
+            />
+
+        </div>
+
+
 
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
@@ -52,6 +80,7 @@
          <x-small-user tema="R$ {{ $totalgasto }}" txt="Total de valor gasto" icon='fas fa-user-plus'
          link="/meus/agendamentos/empresa/{{ $idEmpresa }}/finalizados?search={{ $clientesBusca->name }}" />
         </div>
+
 
 
     </div>

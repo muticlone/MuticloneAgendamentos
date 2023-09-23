@@ -95,6 +95,27 @@
                                 <input type="text" class="form-control campodesablitado"
                                     value="{{ $agendamento->formaDepagamentoAgendamento }}">
                             </div>
+                            @if ($agendamento->data_hora_cancelamento_agendamento!== null)
+
+                            <div class="mb-3">
+                                <h6 class="card-title">Data do cancelamento </h6>
+                                <input type="datetime-local" class="form-control campodesablitado"
+                                    id="dataHorarioAgendamento" name="dataHorarioAgendamento"
+                                    aria-describedby="validationTooltipUsernamePrepend"
+                                    value="{{ $agendamento->data_hora_cancelamento_agendamento }}" />
+                            </div>
+                            @endif
+
+                            @if ($agendamento->data_hora_finalizacao_agendamento!== null)
+
+                            <div class="mb-3">
+                                <h6 class="card-title">Data da finalização </h6>
+                                <input type="datetime-local" class="form-control campodesablitado"
+                                    id="dataHorarioAgendamento" name="dataHorarioAgendamento"
+                                    aria-describedby="validationTooltipUsernamePrepend"
+                                    value="{{ $agendamento->data_hora_finalizacao_agendamento }}" />
+                            </div>
+                            @endif
                             <div class="mb-3">
                                 <h6 class="card-title">Data do agendamento</h6>
                                 <input type="datetime-local" class="form-control campodesablitado"
