@@ -78,14 +78,14 @@
         </div>
 
 
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+        {{-- <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
             <x-small-user tema="{{  $numeroDenaoavaliados }}" txt="Agendamentos não avaliado pelo cliente"
             link="/meus/agendamentos/empresa/{{ $idEmpresa }}/finalizados?search={{ $clientesBusca->name }}"
             icon='fas fa-user-plus'
             />
 
-        </div>
+        </div> --}}
 
 
 
@@ -102,6 +102,11 @@
         <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
             <x-graficoPizza tema="Formas de pagamento"  />
         </div>
+
+        <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
+            <x-grafico-donut tema="Produtos mais agendados" idgrafico="donutChart" />
+        </div>
+
 
     </div>
 
@@ -136,9 +141,13 @@
 
     <script>
         var formasContagem = @json(  $formaPagamentoContagemTotal );
+        var ProdutosContagem = @json($produtosTotal);
+
     </script>
 
     <script src="{{ asset('/js/graficopizza.js') }}"></script>
+    <script src="{{ asset('/js/GraficoDounut.js') }}"></script>
+
 
 
 

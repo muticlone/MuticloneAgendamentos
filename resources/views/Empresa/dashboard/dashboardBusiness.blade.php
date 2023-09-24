@@ -93,14 +93,14 @@
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
             <x-small-user tema="{{ $quantidadedepedidos }}" txt="Total de Pedidos" icon='fas fa-shopping-cart'
-            link="/meus/agendamentos/empresa/{{ $idempresa }}/finalizados" class="small-box-footer" />
+                link="/meus/agendamentos/empresa/{{ $idempresa }}/finalizados" class="small-box-footer" />
 
         </div>
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
 
             <x-small-user tema="{{ $quantidadedepedidosmesatual }}" txt="Pedidos mês atual" icon='fas fa-shopping-cart'
-            link="/meus/agendamentos/empresa/{{ $idempresa }}/finalizados" class="small-box-footer" />
+                link="/meus/agendamentos/empresa/{{ $idempresa }}/finalizados" class="small-box-footer" />
 
         </div>
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
@@ -125,8 +125,7 @@
 
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
-            <x-small-user tema="{{ $clientetotal }}" txt="Clientes total"
-                icon='fas fa-user-plus'
+            <x-small-user tema="{{ $clientetotal }}" txt="Clientes total" icon='fas fa-user-plus'
                 link="/dados/meus/clientes/{{ $idempresa }}/ativos" />
         </div>
     </div>
@@ -275,128 +274,45 @@
 
         </div>
 
+
+
+
+
+
+
+
+    </div>
+    <div class="row g-12">
+
+
         <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
-            <div class="card card-info">
-                <div class="card-header">
-                    <h3 class="card-title">Faturamento Anual</h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
 
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="chart">
-                        <div class="chartjs-size-monitor">
-                            <div class="chartjs-size-monitor-expand">
-                                <div class=""></div>
-                            </div>
-                            <div class="chartjs-size-monitor-shrink">
-                                <div class=""></div>
-                            </div>
-                        </div>
-                        <canvas id="myStackedBarChart"
-                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 367px;"
-                            width="734" height="500" class="chartjs-render-monitor"></canvas>
-                    </div>
-                </div>
+            <x-grafico-donut tema="Produtos mais agendados no mês atual" idgrafico="donutChartmesAtual" />
 
-            </div>
+        </div>
+        <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
+            <x-grafico-donut tema="Produtos mais agendados" idgrafico="donutChart" />
+
         </div>
 
-
-
         <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
-            {{-- <div class="card card-info">
-                <div class="card-header">
-                    <h3 class="card-title">Formas de pagamento</h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-
-                    </div>
-                </div>
-                <div class="card-body">
-
-                    <canvas id="pieChart"
-                        style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 312px;"
-                        width="624" height="500" class="chartjs-render-monitor"></canvas>
-                </div>
-
-            </div> --}}
-
             <x-graficoPizza tema="Formas de pagamento" />
 
-        </div>
-        <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
-            <div class="card card-info">
-                <div class="card-header">
-                    <h3 class="card-title">Produtos mais agendados no mês atual </h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
 
-                    </div>
-                </div>
-                <div class="card-body">
-                    <canvas id="donutChartmesAtual"
-                        style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 601px;"></canvas>
-                </div>
-            </div>
-        </div>
 
+        </div>
 
 
         <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
-            <div class="card card-info">
-                <div class="card-header">
-                    <h3 class="card-title">Produtos mais agendados</h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
 
-                    </div>
-                </div>
-                <div class="card-body">
-                    <canvas id="donutChart"
-                        style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 601px;"></canvas>
-                </div>
-            </div>
+            <x-grafico-coluna tema="Faturamento Anual" idgrafico="faruramentoAnual" />
         </div>
 
         <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
-            <div class="card card-info">
-                <div class="card-header">
-                    <h3 class="card-title">Pedidos por Mês</h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
 
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="chart">
-                        <div class="chartjs-size-monitor">
-                            <div class="chartjs-size-monitor-expand">
-                                <div class=""></div>
-                            </div>
-                            <div class="chartjs-size-monitor-shrink">
-                                <div class=""></div>
-                            </div>
-                        </div>
-                        <canvas id="myStackedBarChartClientes"
-                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 367px;"
-                            width="734" height="500" class="chartjs-render-monitor"></canvas>
-                    </div>
-                </div>
-
-            </div>
+            <x-grafico-coluna tema="Pedidos por mês" idgrafico="PedidosPorMes" />
         </div>
+
 
     </div>
 
@@ -436,231 +352,20 @@
 
     <script>
         var formasContagem = @json($formaPagamentoContagemTotal);
+        var ProdutosContagem = @json($produtosTotal);
+        var ProdutosContagemmesatual = @json($produtosmensal);
+        var faruramentoAnual = @json($valorPorMes);
+        var pedidosPorMes = @json($clientePormes);
+
     </script>
 
     <script src="{{ asset('/js/graficopizza.js') }}"></script>
 
-    <script>
+    <script src="{{ asset('/js/GraficoDounut.js') }}"></script>
+
+    <script src="{{ asset('/js/graficoColuna.js') }}"></script>
 
 
-
-        function generateVariedColors(count) {
-            const scale = chroma.scale(['#FF5733', '#33FFB4', '#FFFF00', '#1E90FF', '#5F9EA0']).mode('lch').colors(count);
-            return scale;
-        }
-
-        var donutChartCanvas = document.getElementById('donutChart').getContext('2d');
-
-        var ProdutosContagem = @json($produtosTotal);
-
-        // Filtra para remover entradas com valores igual a zero
-        ProdutosContagem = Object.fromEntries(Object.entries(ProdutosContagem).filter(([key, value]) => value !== 0));
-
-        var labelsprodutosPagamento = Object.keys(ProdutosContagem);
-        var dataprodutos = Object.values(ProdutosContagem);
-
-        // Gerar cores variadas baseadas no número de fatias
-        var backgroundColorsprodutos = generateVariedColors(labelsprodutosPagamento.length);
-
-        // Dados do gráfico
-        var data = {
-            labels: labelsprodutosPagamento,
-            datasets: [{
-                data: dataprodutos,
-                backgroundColor: backgroundColorsprodutos
-            }]
-        };
-
-        // Opções do gráfico
-        var donutOptions = {
-            maintainAspectRatio: false,
-            responsive: true,
-            legend: {
-                display: true,
-            },
-            cutoutPercentage: 50, // Define o tamanho do "buraco" no meio do gráfico
-        };
-
-        // Criando o gráfico Donut
-        var donutChart = new Chart(donutChartCanvas, {
-            type: 'doughnut',
-            data: data,
-            options: donutOptions
-        });
-
-        var donutChartCanvas = document.getElementById('donutChartmesAtual').getContext('2d');
-
-        var ProdutosContagemmesatual = @json($produtosmensal);
-
-        // Filtra para remover entradas com valores igual a zero
-        ProdutosContagemmesatual = Object.fromEntries(Object.entries(ProdutosContagemmesatual).filter(([key, value]) =>
-            value !== 0));
-
-        var labelsprodutosmesatual = Object.keys(ProdutosContagemmesatual);
-        var dataprodutosmesatual = Object.values(ProdutosContagemmesatual);
-
-        // Gerar cores variadas baseadas no número de fatias
-        var backgroundColorsprodutos = generateVariedColors(labelsprodutosPagamento.length);
-
-        // Dados do gráfico
-        var data = {
-            labels: labelsprodutosmesatual,
-            datasets: [{
-                data: dataprodutosmesatual,
-                backgroundColor: backgroundColorsprodutos
-            }]
-        };
-
-        // Opções do gráfico
-        var donutOptions = {
-            maintainAspectRatio: false,
-            responsive: true,
-            legend: {
-                display: true,
-            },
-            cutoutPercentage: 50, // Define o tamanho do "buraco" no meio do gráfico
-        };
-
-        // Criando o gráfico Donut
-        var donutChart = new Chart(donutChartCanvas, {
-            type: 'doughnut',
-            data: data,
-            options: donutOptions
-        });
-
-
-
-
-        var stackedBarCtx = document.getElementById('myStackedBarChart').getContext('2d');
-        var valorPorMes = @json($valorPorMes);
-
-        var meses = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
-            'November', 'December'
-        ];
-
-        var dadosMeses = meses.map(function(mes) {
-            return valorPorMes[mes] || 0;
-        });
-
-        var stackedBarData = {
-            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
-                'Novembro', 'Outubro', 'Dezembro'
-            ],
-            datasets: [{
-                label: 'Faturamento',
-                data: dadosMeses,
-                backgroundColor: 'RGB(91, 192, 222)',
-            }]
-        };
-
-        var stackedBarOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    stacked: true
-                },
-                y: {
-                    stacked: true,
-                    ticks: {
-                        // Formatação para os valores do eixo y
-                        callback: function(value, index, values) {
-
-                            return 'R$ ' + value.toFixed(2); // Formatação como moeda (com 2 casas decimais)
-                        }
-                    }
-                }
-            },
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            var label = context.dataset.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            var formattedValue = context.parsed.y.toLocaleString('pt-BR', {
-                                style: 'currency',
-                                currency: 'BRL'
-                            });
-                            label += 'R$ ' + formattedValue; // Formatação como moeda (com 2 casas decimais)
-                            return label;
-                        }
-                    }
-                }
-            }
-        };
-
-        var myStackedBarChart = new Chart(stackedBarCtx, {
-            type: 'bar',
-            data: stackedBarData,
-            options: stackedBarOptions
-        });
-
-        var stackedBarCtx = document.getElementById('myStackedBarChartClientes').getContext('2d');
-        var valorPorMes = @json($clientePormes);
-
-
-
-        var meses = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
-            'November', 'December'
-        ];
-
-        var dadosMeses = meses.map(function(mes) {
-            return valorPorMes[mes] || 0;
-        });
-
-        var stackedBarData = {
-            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
-                'Novembro', 'Outubro', 'Dezembro'
-            ],
-            datasets: [{
-                label: 'Pedidos por mês',
-                data: dadosMeses,
-                backgroundColor: 'RGB(91, 192, 222)',
-            }]
-        };
-
-        var stackedBarOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    stacked: true
-                },
-                y: {
-                    stacked: true,
-                    ticks: {
-                        // Formatação para os valores do eixo y
-                        callback: function(value, index, values) {
-                            return value.toFixed(0); // Formatação como moeda (com 2 casas decimais)
-                        }
-                    }
-                }
-            },
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            var label = context.dataset.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            label += context.parsed.y.toFixed(
-                                0); // Formatação como moeda (com 2 casas decimais)
-                            return label;
-                        }
-                    }
-                }
-            }
-        };
-
-        var myStackedBarChart = new Chart(stackedBarCtx, {
-            type: 'bar',
-            data: stackedBarData,
-            options: stackedBarOptions
-        });
-    </script>
 
 
     <script>

@@ -25,7 +25,10 @@ class dashboardBusinessController extends Controller
         if ($user->id != $empresa->user_id) {
             return redirect('/dashboard');
         } else {
-            $agendamentos =  Agendamento::where('cadastro_de_empresas_id', $id)->where('finalizado', 1)->get();
+            $agendamentos =  Agendamento::where('cadastro_de_empresas_id', $id)
+            ->where('finalizado', 1)
+            ->where('cancelado', 0)
+            ->get();
 
             $agendamentoscancelados =  Agendamento::where('cadastro_de_empresas_id', $id)->where('cancelado', 1)->get();
             $cancelado = $agendamentoscancelados->pluck('cancelado')->toArray();
@@ -116,6 +119,8 @@ class dashboardBusinessController extends Controller
 
             $produto = $agendamentos->pluck('nomeServiçoAgendamento')->flatten()->toArray();
             $produtosTotal = array_count_values($produto);
+
+
 
             $numeroMesAtual = Carbon::now()->month;
             $MesAtual = Agendamento::where('cadastro_de_empresas_id', $id)

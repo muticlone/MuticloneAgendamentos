@@ -184,23 +184,31 @@ class MeusClientesController extends Controller
                 ->where('cancelado', 0)
                 ->get();
 
-            $agendamentoFormasdepagamento = Agendamento::where('user_id', $id)
+            $agendamentograficos = Agendamento::where('user_id', $id)
                 ->where('cadastro_de_empresas_id', $idempresa)
                 ->where('finalizado', 1)
                 ->where('cancelado', 0)
                 ->distinct()
-                ->pluck('formaDepagamentoAgendamento')
-                ->toArray();
-
-                $formaPagamentoContagemTotal = array_count_values(  $agendamentoFormasdepagamento);
+                ->get();
 
 
+                $formaPagamentoContagemTotal = [];
+                $formasPagamento = $agendamentograficos->pluck('formaDepagamentoAgendamento')->toArray();
+                $formaPagamentoContagemTotal = array_count_values($formasPagamento);
+
+
+            $produto = $agendamentograficos->pluck('nomeServiçoAgendamento')->flatten()->toArray();
+            $produtosTotal = array_count_values($produto);
 
 
 
 
-            //     $valorMaisRepetido = $agendamentoFormadepagamento->mode();
-            //     dd($valorMaisRepetido);
+
+
+
+
+
+
 
             $agendamentonaoavaliado = Agendamento::where('user_id', $id)
                 ->where('cadastro_de_empresas_id', $idempresa)
@@ -267,7 +275,8 @@ class MeusClientesController extends Controller
             'numeroDenaoavaliados' =>  $numeroDenaoavaliados,
             'datadoultimoagendamento' =>  $datadoultimoagendamento,
             'dataprimeiroagendamento' => $dataprimeiroagendamento,
-            'formaPagamentoContagemTotal' =>   $formaPagamentoContagemTotal
+            'formaPagamentoContagemTotal' =>   $formaPagamentoContagemTotal,
+            'produtosTotal' =>    $produtosTotal,
         ]);
     }
 }
