@@ -213,7 +213,7 @@
             </div>
 
         </div>
-        {{-- sair --}}
+
         <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
             <div class="card card-info">
                 <div class="card-header">
@@ -308,7 +308,7 @@
 
 
         <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
-            <div class="card card-info">
+            {{-- <div class="card card-info">
                 <div class="card-header">
                     <h3 class="card-title">Formas de pagamento</h3>
                     <div class="card-tools">
@@ -319,20 +319,16 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="chartjs-size-monitor">
-                        <div class="chartjs-size-monitor-expand">
-                            <div class=""></div>
-                        </div>
-                        <div class="chartjs-size-monitor-shrink">
-                            <div class=""></div>
-                        </div>
-                    </div>
+
                     <canvas id="pieChart"
                         style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 312px;"
                         width="624" height="500" class="chartjs-render-monitor"></canvas>
                 </div>
 
-            </div>
+            </div> --}}
+
+            <x-graficoPizza tema="Formas de pagamento" />
+
         </div>
         <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
             <div class="card card-info">
@@ -351,6 +347,8 @@
                 </div>
             </div>
         </div>
+
+
 
         <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
             <div class="card card-info">
@@ -435,55 +433,15 @@
 
 
 
+
     <script>
-        var ctx = document.getElementById('pieChart').getContext('2d');
-        var formasContagem = @json($formasContagem);
+        var formasContagem = @json($formaPagamentoContagemTotal);
+    </script>
 
-        // Filtra para remover entradas com valores igual a zero
-        formasContagem = Object.fromEntries(Object.entries(formasContagem).filter(([key, value]) => value !== 0));
+    <script src="{{ asset('/js/graficopizza.js') }}"></script>
 
-        var labelsFormaPagamento = Object.keys(formasContagem);
-        var dataFormaPagamento = Object.values(formasContagem);
+    <script>
 
-        // Mapeia as chaves para rótulos personalizados, se necessário
-        var labelsPersonalizados = labelsFormaPagamento.map(function(label) {
-            if (label === 'Dinheiro') {
-                return 'Pagamento em Dinheiro';
-            } else {
-                return label; // Mantém os outros rótulos
-            }
-        });
-
-        var data = {
-            labels: labelsPersonalizados,
-            datasets: [{
-                data: dataFormaPagamento,
-                backgroundColor: ['#FFFF00',
-                    '#1E90FF',
-                    'green',
-                    '#ADFF2F',
-                    'orange',
-                    '#DAA520',
-                    '#5F9EA0'
-                ]
-            }]
-        };
-
-        var options = {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'right'
-                }
-            }
-        };
-
-        var pieChart = new Chart(ctx, {
-            type: 'pie',
-            data: data,
-            options: options
-        });
 
 
         function generateVariedColors(count) {

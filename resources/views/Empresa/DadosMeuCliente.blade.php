@@ -24,21 +24,33 @@
 
 
         </strong><br>
-        Celular: {{ $clientesBusca->phone }}<br>
-        E-mail:{{ $clientesBusca->email }}
+        Celular: {{ $clientesBusca->phone }}
+
 
     </div>
 
     <div class="row g-12">
-
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
-            <x-small-user tema="{{ $formattedDate }}" txt="Último agendamento"
+            <x-small-user tema="{{  $dataprimeiroagendamento }}" txt="Cliente desde"
             link="#"
             icon='fa fa-calendar'
             />
 
         </div>
+
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
+            <x-small-user tema="{{  $datadoultimoagendamento }}" txt="Último agendamento"
+            link="#"
+            icon='fa fa-calendar'
+            />
+
+        </div>
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+            <x-small-user tema="R$ {{ $totalgasto }}" txt="Total de valor gasto" icon='fas fa-user-plus'
+            link="/meus/agendamentos/empresa/{{ $idEmpresa }}/finalizados?search={{ $clientesBusca->name }}" />
+           </div>
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
             <x-small-user tema="{{ $numeroDoPedidos }}" txt="Todal de agendamentos finalizados"
@@ -49,12 +61,22 @@
         </div>
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
+
+
+            <x-agendamentos-cancelados Porcentagemdepedidoscancelados="{{ $porcentagemDeCancelamento }} %"
+            quantidadedepedidoscacenlados="{{ $numeroDeCanelados }}"
+            link="/meus/agendamentos/empresa/{{ $idEmpresa }}/cancelados?search={{ $clientesBusca->name }}" />
+
+        </div>
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
             <x-small-user tema="{{$numeroDenaoconfirmados  }} " txt="Agendamentos aguardando confirmar"
             link="/meus/agendamentos/empresa/{{ $idEmpresa }}/pendentes?search={{ $clientesBusca->name }}"
             icon='fas fa-user-plus'
             />
 
         </div>
+
 
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
@@ -67,21 +89,19 @@
 
 
 
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
 
 
-            <x-agendamentos-cancelados Porcentagemdepedidoscancelados="{{ $porcentagemDeCancelamento }} %"
-            quantidadedepedidoscacenlados="{{ $numeroDeCanelados }}"
-            link="/meus/agendamentos/empresa/{{ $idEmpresa }}/cancelados?search={{ $clientesBusca->name }}" />
 
+
+
+    </div>
+
+    <div class="row g-12">
+
+        <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
+            <x-graficoPizza tema="Formas de pagamento"  />
         </div>
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-         <x-small-user tema="R$ {{ $totalgasto }}" txt="Total de valor gasto" icon='fas fa-user-plus'
-         link="/meus/agendamentos/empresa/{{ $idEmpresa }}/finalizados?search={{ $clientesBusca->name }}" />
-        </div>
-
-
 
     </div>
 
@@ -114,6 +134,11 @@
     <!-- Load Portuguese language file -->
     <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/locales/pt-BR.js"></script>
 
+    <script>
+        var formasContagem = @json(  $formaPagamentoContagemTotal );
+    </script>
+
+    <script src="{{ asset('/js/graficopizza.js') }}"></script>
 
 
 

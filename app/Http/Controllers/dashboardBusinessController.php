@@ -78,7 +78,7 @@ class dashboardBusinessController extends Controller
             for ($mes = 1; $mes <= 12; $mes++) {
                 $agendamentoFaturamentoanual = Agendamento::where('cadastro_de_empresas_id', $id)
                     ->where('finalizado', 1)
-                    ->whereMonth('updated_at', $mes)
+                    ->whereMonth('data_hora_finalizacao_agendamento', $mes)
                     ->get();
 
                 $valorRecebidoMes = $agendamentoFaturamentoanual->sum('valorTotalAgendamento');
@@ -120,7 +120,7 @@ class dashboardBusinessController extends Controller
             $numeroMesAtual = Carbon::now()->month;
             $MesAtual = Agendamento::where('cadastro_de_empresas_id', $id)
                 ->where('finalizado', 1)
-                ->whereMonth('updated_at', $numeroMesAtual)->get();
+                ->whereMonth('data_hora_finalizacao_agendamento', $numeroMesAtual)->get();
 
 
             $produtosmaisAgendadosMesatual =  $MesAtual->pluck('nomeServiçoAgendamento')->flatten()->toArray();
@@ -140,7 +140,7 @@ class dashboardBusinessController extends Controller
             for ($mes = 1; $mes <= 12; $mes++) {
                 $MesAtualgrafico = Agendamento::where('cadastro_de_empresas_id', $id)
                     ->where('finalizado', 1)
-                    ->whereMonth('updated_at', $mes)->get();
+                    ->whereMonth('data_hora_finalizacao_agendamento', $mes)->get();
                 $finalizadografico = $MesAtualgrafico->pluck('finalizado')->toArray(); // Change 'finalizadografico' to 'finalizado'
                 $contagemFinalizadosgrafico = array_count_values($finalizadografico);
                 $quantidadedepedidosgratico = $contagemFinalizadosgrafico[1] ?? 0;
@@ -165,7 +165,7 @@ class dashboardBusinessController extends Controller
             'idempresa' => $idempresa, 'faturamentoAnual' =>  $faturamentoAnual,
             'valorPorMes' =>  $valorPorMes,
             'clientePormes' =>  $clientePormes,
-            'formasContagem' =>  $formaPagamentoContagemTotal,
+            'formaPagamentoContagemTotal' =>  $formaPagamentoContagemTotal,
             'valorMesAtual' =>  $valorMesAtual,
             'ValorFaltaParaChegarNaMetaAnual' =>  $ValorFaltaParaChegarNaMetaAnual,
             'metaAnual' =>  $metaAnual,

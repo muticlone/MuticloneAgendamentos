@@ -6,6 +6,7 @@ use App\Http\Controllers\CadastroServicoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BrowsershotController;
 use App\Http\Controllers\dashboardBusinessController;
+use App\Http\Controllers\MeusClientesController;
 use App\Http\Middleware\PreventBackHistory;
 
 use Illuminate\Support\Facades\Http;
@@ -73,8 +74,8 @@ Route::put('/avaliacao/{id}', [AgendamentoController::class, 'avaliacaoPedidoCli
 Route::put('/reagendar/{id}', [AgendamentoController::class, 'ReagendarPedidoEmpresaEcliente'])->middleware('auth');
 
 
-Route::get('/dados/meus/clientes/{id}/{status}', [AgendamentoController::class, 'showMeusClientes'])->name('dados.meus.clientes')->middleware('auth', 'company_or_root');
-Route::get('/dados/meu/cliente/{id}/{idempresa}', [AgendamentoController::class, 'showMeuCliente'])->name('dados.meu.cliente')->middleware('auth', 'company_or_root');
+Route::get('/dados/meus/clientes/{id}/{status}', [MeusClientesController::class, 'showMeusClientes'])->name('dados.meus.clientes')->middleware('auth', 'company_or_root');
+Route::get('/dados/meu/cliente/{id}/{idempresa}', [MeusClientesController::class, 'showMeuCliente'])->name('dados.meu.cliente')->middleware('auth', 'company_or_root');
 
 
 Route::get('/cadastro/servicos/{id}', [CadastroServicoController::class, 'create'])->name('cadastro.servicos')->middleware('auth', 'company_or_root');
