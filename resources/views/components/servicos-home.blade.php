@@ -48,9 +48,8 @@
 
                     </div>
 
-                    <p class="card-text  "></p>
 
-                    {{-- <p class="card-text paragrafo-limitado " id="meu-paragrafo">{{($servico_descricaosevico)}}</p>  --}}
+
 
                     <a href="/servicos/dados/{{ $servico_id }}" class="btn btn-sm  btn-primary btg ">
 

@@ -20,10 +20,10 @@
         </div>
 
 
-        <x-carousel/>
+        <x-carousel />
 
-        <x-alert-busca-home :count="$Cadastro_empresa" search="{{ $search }}"
-        txt="Todos os empresas disponíveis" linktodos="home/empresas"/>
+        <x-alert-busca-home :count="$Cadastro_empresa" search="{{ $search }}" txt="Todos os empresas disponíveis"
+            linktodos="home/empresas" />
 
 
 
@@ -31,30 +31,31 @@
 
 
 
-
     <div class="row g-12 pt-2">
         @foreach ($Cadastro_empresa as $index => $empresa)
             <div class="col-auto pt-2">
-                <div class="card cardlayout" >
-                    <a href="/empresas/dados/{{ $empresa->id }}">
-                        <img src="/img/logo_empresas/{{ $empresa->image }}" class=" img_tela_home" class="img-logo"
-                            alt="{{ $empresa->razaoSocial }}">
-                    </a>
+                <a href="/empresas/dados/{{ $empresa->id }}" class="card-link link">
 
-                    <div class="image-and-rating">
-                        <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="3.5"
-                            data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-show-clear="false"
-                            data-size="xs">
-                    </div>
-                    <div class="card-body txt">
-                        <p class="card-text">{{ $empresa->nomeFantasia }}</p>
-                        <p class="card-text">{{ $empresa->area_atuacao }}</p>
+                    <div class="card cardlayout ">
 
-                        <a href="/empresas/dados/{{ $empresa->id }}" class="btn btn-sm btn-primary btg">Detalhes</a>
+                            <img src="/img/logo_empresas/{{ $empresa->image }}" class=" img_tela_home" class="img-logo"
+                                alt="{{ $empresa->razaoSocial }}">
+
+
+                        <div class="image-and-rating">
+                            <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="3.5"
+                                data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-show-clear="false"
+                                data-size="xs">
+                        </div>
+                        <div class="card-body txt">
+                            <p class="card-text">{{ $empresa->nomeFantasia }}</p>
+                            <p class="card-text">{{ $empresa->area_atuacao }}</p>
+
+                            <a href="/empresas/dados/{{ $empresa->id }}" class="btn btn-sm btn-primary btg">Detalhes</a>
+                        </div>
                     </div>
-                </div>
             </div>
-
+            </a>
             @if (($index + 1) % 10 == 0)
     </div>
 
