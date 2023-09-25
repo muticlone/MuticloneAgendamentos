@@ -750,14 +750,15 @@ svg {
 }
 
 
+/* Estilos padrão para .cardlayout */
 .cardlayout {
     width: 14rem;
 }
 
-/* celular */
+/* Estilos para telas menores que 479px (celular) */
 @media (max-width: 479px) {
     .cardlayout {
-        width: 20rem;
+        width: 100%; /* Use a largura total da tela */
     }
 
     .conteiner-search {
@@ -766,25 +767,20 @@ svg {
         top: 23%;
         transform: translateY(-50%);
         left: 16%;
-
-
     }
-
 
     .btn-extra-sm {
         font-size: 10px;
         padding: 3px 8px;
     }
-
-
 }
-@media (max-width: 575px) {
+
+/* Estilos para telas maiores que 479px, mas menores que 575px */
+@media (min-width: 480px) and (max-width: 575px) {
     .cardlayout {
-        width: 26rem;
+        width: 20rem; /* Ajuste o tamanho conforme necessário */
     }
 }
-
-
 
 
 
