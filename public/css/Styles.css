@@ -751,7 +751,7 @@ svg {
 
 
 .cardlayout {
-    width: 12rem;
+    width: 14rem;
 }
 
 /* celular */
@@ -778,6 +778,17 @@ svg {
 
 
 }
+@media (max-width: 575px) {
+    .cardlayout {
+        width: 26rem;
+    }
+}
+
+
+
+
+
+
 
 
 
@@ -819,6 +830,12 @@ select.select-meus-agendamentos.select2-hidden-accessible+.select2-container .se
 
 .txtcenter{
     text-align: center;
+}
+
+
+.link {
+    text-decoration: none;
+    color: #333; /* Esta é uma cor de exemplo. Substitua pelo código de cor desejado. */
 }
 
 

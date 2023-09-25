@@ -33,47 +33,14 @@
 
 <div class="row g-12 pt-2">
 
-    @foreach ($servicos as $index => $servico)
-        <div class="col-auto pt-2">
-            <div class="card" style="width: 12rem ;">
-
-                <img src="/img/logo_servicos/{{ $servico->imageservico }}" class=" img_tela_home" class="img-logo"
-                    alt="{{ $servico->nomeServico }}">
-
-
-                <div class="image-and-rating">
-
-
-                    <input id="input6" name="input-6" class="rating rating-loading pt-br" value="5"
-                        data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-show-clear="false"
-                        data-size="xs">
-
-
-                </div>
-
-
-
-
-
-
-
-                <div class="card-body txt">
-                    <p class="card-text">{{ $servico->nomeServico }}</p>
-
-                    {{-- <p class="card-text paragrafo-limitado " id="meu-paragrafo">{{($servico->descricaosevico)}}</p>  --}}
-
-                    <a href="/servicos/dados/{{ $servico->id }}" class="btn btn-sm btn-primary btg">
-
-
-                        Agendar
-
-
-
-                    </a>
-
-                </div>
-            </div>
-        </div>
+    @foreach ($servicos as $index => $servicos)
+    <div class="col-lg-3 col-sm-6 col-md-6 pt-2"> <!-- Defina o tamanho da coluna aqui, como col-6 para metade da largura -->
+        <x-servicos-home servico_id="{{ $servicos->id }}"
+        servico_imageservico="{{ $servicos->imageservico  }}"
+        servico_nomeServico="{{ $servicos->nomeServico }}"
+        servico_valorDoServico="{{ $servicos->valorDoServico }}"
+        />
+    </div>
 
         @if (($index + 1) % 10 == 0)
 </div>
@@ -84,7 +51,7 @@
 </div>
 
 
-<x-pagination :paginatedItems="$servicos" />
+
 
 
 

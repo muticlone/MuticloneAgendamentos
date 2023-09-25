@@ -365,26 +365,10 @@
 
     <script src="{{ asset('/js/graficoColuna.js') }}"></script>
 
+    <script src="{{ asset('/js/mascara.js') }}"></script>
 
 
 
-    <script>
-        $(document).ready(function() {
-            $('.mascValor').inputmask({
-                alias: 'numeric',
-                rightAlign: false,
-                radixPoint: ',',
-                groupSeparator: '.',
-                autoGroup: true,
-                digits: 2,
-                digitsOptional: false,
-                placeholder: '0',
-                allowMinus: false,
-                prefix: 'R$ ',
-                clearMaskOnLostFocus: false // Mantém a máscara após perder o foco
-            });
-        });
-    </script>
 
     <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 

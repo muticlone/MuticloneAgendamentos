@@ -5,6 +5,7 @@
 @section('conteudo')
   <!-- estilos do AdminLTE -->
 
+
     <div class="col-md-10 offset-md-1 pt-1 ">
         <div class="row g-12">
 
