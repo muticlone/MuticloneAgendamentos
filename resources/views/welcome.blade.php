@@ -34,10 +34,10 @@
     <div class="row g-12 pt-2">
         @foreach ($Cadastro_empresa as $index => $empresa)
             <div class="col-auto pt-2">
-                <div class="col-lg-3 col-sm-6 col-md-6 pt-2">
+
                     <a href="/empresas/dados/{{ $empresa->id }}" class="card-link link">
 
-                        <div class="card cardlayout ">
+                        <div class="card  cardlayoutempresa">
 
                                 <img src="/img/logo_empresas/{{ $empresa->image }}" class=" img_tela_home" class="img-logo"
                                     alt="{{ $empresa->razaoSocial }}">
@@ -55,8 +55,9 @@
                                 <a href="/empresas/dados/{{ $empresa->id }}" class="btn btn-sm btn-primary btg">Detalhes</a>
                             </div>
                         </div>
+
                     </a>
-                </div>
+
 
             </div>
 

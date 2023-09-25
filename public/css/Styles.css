@@ -755,6 +755,11 @@ svg {
     width: 14rem;
 }
 
+.cardlayoutempresa {
+    width: 20rem;
+}
+
+
 /* Estilos para telas menores que 479px (celular) */
 @media (max-width: 479px) {
     .cardlayout {
@@ -780,7 +785,29 @@ svg {
     .cardlayout {
         width: 20rem; /* Ajuste o tamanho conforme necessário */
     }
+
+    .cardlayoutempresa {
+        width: 26rem;
+    }
 }
+
+
+@media (min-width: 500px) and (max-width: 1200px) {
+
+
+    .cardlayoutempresa {
+        width: 26rem;
+    }
+}
+
+@media (min-width: 800px) and (max-width: 1000px) {
+
+
+    .cardlayoutempresa {
+        width: 40rem;
+    }
+}
+
 
 
 
