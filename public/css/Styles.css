@@ -375,19 +375,6 @@ svg {
     overflow: hidden;
 
 }
-.img_tela_home_servico {
-    margin-top: 15px;
-    margin-left: 8px;
-
-    min-width: 65px;
-    min-height: 65px;
-    max-width: 65px;
-    max-height: 65px;
-    border-radius: 10px;
-    border: 1px solid #D3D3D3;
-    overflow: hidden;
-
-}
 
 .img_meus_agedamentos {
 
@@ -466,15 +453,6 @@ svg {
 
 
 .image-and-rating {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    margin-left: 80px;
-    margin-top: -60px;
-
-}
-
-.image-and-rating-servico {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
@@ -792,30 +770,7 @@ svg {
         width: 100%; /* Use a largura total da tela */
     }
     .cardlayoutempresa {
-        width: 10rem;
-    }
-
-    .img_tela_home_servico {
-        margin-top: 15px;
-        margin-left: 8px;
-
-        min-width: 40px;
-        min-height: 40px;
-        max-width: 40px;
-        max-height: 40px;
-        border-radius: 10px;
-        border: 1px solid #D3D3D3;
-        overflow: hidden;
-
-    }
-
-    .image-and-rating-servico {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        margin-left: 50px;
-        margin-top: -40px;
-
+        width: 22rem;
     }
 
     .conteiner-search {

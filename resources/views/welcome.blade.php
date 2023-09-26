@@ -47,14 +47,14 @@
 
                     <div class="card  cardlayoutempresa" >
 
-                        <img src="/img/logo_empresas/{{ $empresa['image'] }}" class="img_tela_home_servico"
+                        <img src="/img/logo_empresas/{{ $empresa['image'] }}" class=" img_tela_home"
                             alt="{{$empresa['razaoSocial'] }}">
 
                         @php
                             $empresaId = $empresa['id'];
                             $mediaNotas = isset($mediaNotasPorEmpresa[$empresaId]) ? $mediaNotasPorEmpresa[$empresaId] : 0;
                         @endphp
-                        <div class="image-and-rating-servico">
+                        <div class="image-and-rating">
                             <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="{{ $mediaNotas  }}"
                                 data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-show-clear="false"
                                 data-size="xs">
