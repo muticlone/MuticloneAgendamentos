@@ -12,7 +12,15 @@
             <form action="/home/empresas" method="GET" id="searchForm">
 
 
-                <x-select-empresa-home :empresa="$Cadastro_empresa" width="100" />
+
+                <select id="select-empresaHome" class="js-buscacategoria select2 form-select"
+                data-placeholder="Busque por uma empresa"  style="width: 100%" name="search">
+                    <option value="" disabled selected>Busque por uma empresa</option>
+                    @foreach ($empresasOrdenadasPaginadas as $empresaBusca)
+                        <option class="custom-option img-flag"
+                        value="{{ $empresaBusca['nomeFantasia']  }}" data-img-src="/img/logo_empresas/{{ $empresaBusca['image'] }}">{{ $empresaBusca['nomeFantasia'] }}</option>
+                    @endforeach
+                </select>
 
 
             </form>
@@ -32,31 +40,34 @@
 
 
     <div class="row g-12 pt-2">
-        @foreach ($Cadastro_empresa as $index => $empresa)
+        @foreach ($empresasOrdenadasPaginadas as $index => $empresa)
             <div class="col-auto pt-2">
 
-                    <a href="/empresas/dados/{{ $empresa->id }}" class="card-link link">
+                <a href="/empresas/dados/{{ $empresa['id'] }}" class="card-link link">
 
-                        <div class="card  cardlayoutempresa">
+                    <div class="card  cardlayoutempresa">
 
-                                <img src="/img/logo_empresas/{{ $empresa->image }}" class=" img_tela_home" class="img-logo"
-                                    alt="{{ $empresa->razaoSocial }}">
+                        <img src="/img/logo_empresas/{{ $empresa['image'] }}" class=" img_tela_home" class="img-logo"
+                            alt="{{$empresa['razaoSocial'] }}">
 
-
-                            <div class="image-and-rating">
-                                <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="3.5"
-                                    data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-show-clear="false"
-                                    data-size="xs">
-                            </div>
-                            <div class="card-body txt">
-                                <p class="card-text">{{ $empresa->nomeFantasia }}</p>
-                                <p class="card-text">{{ $empresa->area_atuacao }}</p>
-
-                                <a href="/empresas/dados/{{ $empresa->id }}" class="btn btn-sm btn-primary btg">Detalhes</a>
-                            </div>
+                        @php
+                            $empresaId = $empresa['id'];
+                            $mediaNotas = isset($mediaNotasPorEmpresa[$empresaId]) ? $mediaNotasPorEmpresa[$empresaId] : 0;
+                        @endphp
+                        <div class="image-and-rating">
+                            <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="{{ $mediaNotas  }}"
+                                data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-show-clear="false"
+                                data-size="xs">
                         </div>
+                        <div class="card-body txt">
+                            <p class="card-text">{{ $empresa['nomeFantasia'] }}</p>
+                            <p class="card-text">{{ $empresa['area_atuacao'] }}</p>
 
-                    </a>
+                            <a href="/empresas/dados/{{$empresa['id'] }}" class="btn btn-sm btn-primary btg">Detalhes</a>
+                        </div>
+                    </div>
+
+                </a>
 
 
             </div>
@@ -74,12 +85,12 @@
 
 
 
-    @if (count($Cadastro_empresa) == 0 && $search)
+    @if (count($empresasOrdenadasPaginadas) == 0 && $search)
         <div class="alert alert-warning pt-2" role="alert">
             Não foi possível encontrar nenhuma empresa ou serviço com: "{{ $search }}" <a href="/home/empresas">Ver
                 todos</a>
         </div>
-    @elseif(count($Cadastro_empresa) == 0)
+    @elseif(count($empresasOrdenadasPaginadas) == 0)
         <div class="alert alert-warning pt-2" role="alert">
             Não há empresas disponíveis
         </div>
@@ -87,7 +98,7 @@
 
 
 
-    <x-pagination :paginatedItems="$Cadastro_empresa" />
+    <x-pagination :paginatedItems="$empresasOrdenadasPaginadas" />
 
 
 
@@ -101,6 +112,6 @@
 
 
     <script src="/js/carrosel.js"></script>
-
+    <script src="/js/select2.js"></script>
 
 @endsection

@@ -3,6 +3,8 @@
     'servico_valorDoServico' => '',
     ])
 
+
+
     <div class="col-auto pt-2">
         <a href="/servicos/dados/{{ $servico_id }}" class="card-link link">
             <div class="card cardlayout ">
@@ -27,7 +29,7 @@
 
 
 
-                <div class="card-body ">
+                <div class="card-body nomedosevico">
                     <p class="card-text" align="center">
                         {{ ucfirst($servico_nomeServico) }}
 
