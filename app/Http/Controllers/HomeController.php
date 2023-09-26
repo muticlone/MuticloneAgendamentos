@@ -94,6 +94,7 @@ class HomeController extends Controller
                 }
             }
 
+
             // ordenar as empresas pela media das avaliação delas
             $empresasOrdenadas = collect($empresa)->sortByDesc(function ($empr) use ($mediaNotasPorEmpresa) {
                 return isset($mediaNotasPorEmpresa[$empr->id]) ? $mediaNotasPorEmpresa[$empr->id] : 0;
@@ -183,7 +184,7 @@ class HomeController extends Controller
         $Admempresa = User::where('id', $empresa->user_id)->first()->toArray();
 
 
-        $user = auth()->user();
+
 
 
 
@@ -191,18 +192,18 @@ class HomeController extends Controller
             ->whereNotNull('nota')
             ->whereNotNull('comentario')
             ->whereNotNull('user_id')
+            ->orderBy('updated_at', 'desc')
             ->get();
+
+
 
         $notas = $agendamentos->pluck('nota');
         $media = $notas->avg();
 
-        $user_id = $agendamentos->pluck('user_id');
-
-        $useragendamento = User::whereIn('id', $user_id)->get();
-        $nome =  $useragendamento->pluck('name');
 
 
 
+        $userAll = User::all();
 
 
 
@@ -211,7 +212,7 @@ class HomeController extends Controller
             'Admempresa' =>  $Admempresa, 'servico' => $servico,
 
             'media' =>  $media, 'agendamentos' => $agendamentos,
-            'nome' =>  $nome
+            'nome' =>   $userAll
         ]);
     }
 

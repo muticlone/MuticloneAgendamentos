@@ -21,16 +21,26 @@
                 </div>
                 <div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab">
                     <div class="list-group-item">
-                        @foreach ($agendamentos as $index => $agendamento)
+                        @foreach ($NomeUser as $Nome)
+                        @php
+                            $agendamentoEncontrado = false;
+                        @endphp
 
+                        @foreach ($agendamentos as $index => $agendamento)
+                            @if ($agendamento->user_id == $Nome->id)
+                                {{ $Nome->name }}
                                 </br> {{ $agendamento->comentario }}
                                 <input id="input-6" name="input-6" class="rating rating-loading pt-br"
                                     value="{{ $agendamento->nota }}" data-min="0" data-max="5" data-step="0.1"
                                     data-readonly="true" data-size="xs" data-show-clear="false">
-
+                                @php
+                                    $agendamentoEncontrado = true;
+                                @endphp
+                            @endif
                         @endforeach
 
 
+                    @endforeach
 
                     </div>
 
