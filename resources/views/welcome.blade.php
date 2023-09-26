@@ -45,26 +45,30 @@
 
                 <a href="/empresas/dados/{{ $empresa['id'] }}" class="card-link link">
 
-                    <div class="card  cardlayoutempresa">
+                    <div class="card  cardlayoutempresa" >
 
-                        <img src="/img/logo_empresas/{{ $empresa['image'] }}" class=" img_tela_home" class="img-logo"
+                        <img src="/img/logo_empresas/{{ $empresa['image'] }}" class="img_tela_home_servico"
                             alt="{{$empresa['razaoSocial'] }}">
 
                         @php
                             $empresaId = $empresa['id'];
                             $mediaNotas = isset($mediaNotasPorEmpresa[$empresaId]) ? $mediaNotasPorEmpresa[$empresaId] : 0;
                         @endphp
-                        <div class="image-and-rating">
+                        <div class="image-and-rating-servico">
                             <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="{{ $mediaNotas  }}"
                                 data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-show-clear="false"
                                 data-size="xs">
                         </div>
-                        <div class="card-body txt">
-                            <p class="card-text">{{ $empresa['nomeFantasia'] }}</p>
-                            <p class="card-text">{{ $empresa['area_atuacao'] }}</p>
+                        <div class="card-body" >
+                            <p class="card-text">{{ ucfirst($empresa['nomeFantasia']) }}</p>
+                            {{-- <p class="card-text">{{ucfirst($empresa['area_atuacao']) }}</p> --}}
 
+
+                        </div>
+                        <div class="card-body pt-2" >
                             <a href="/empresas/dados/{{$empresa['id'] }}" class="btn btn-sm btn-primary btg">Detalhes</a>
                         </div>
+
                     </div>
 
                 </a>
