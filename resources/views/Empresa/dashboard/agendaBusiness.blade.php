@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-<x-menu-dashoard empresa_id="{{ $idempresa }}" />
+<x-menu-dashoard empresa_id="{{ $idempresa }}" cor="dark"/>
 
 @stop
 
