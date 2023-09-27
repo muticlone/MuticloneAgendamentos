@@ -169,7 +169,7 @@
 
                             $encryptedIduncio = encrypt($servico_id);
                             ?>
-
+                            {{-- aqui --}}
                             <input type="hidden" name="idServiçoAgendamento[]" value="{{ $encryptedIduncio}}">
 
                         </td>

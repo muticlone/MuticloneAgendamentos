@@ -521,10 +521,6 @@ svg {
 
 }
 
-
-
-
-
 ::-webkit-scrollbar-thumb {
     height: 20px;
     /* Defina a altura desejada aqui */
@@ -554,6 +550,13 @@ svg {
     max-height: 270px;
     /* Ajuste a altura máxima conforme necessário */
     min-height: 260px;
+    overflow: auto;
+}
+
+.comentavaliacao {
+    max-height: 120px;
+    /* Ajuste a altura máxima conforme necessário */
+    min-height: 120px;
     overflow: auto;
 }
 

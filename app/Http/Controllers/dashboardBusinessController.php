@@ -8,6 +8,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Agendamento;
+use App\Models\User;
 use Carbon\Carbon;
 
 
@@ -21,7 +22,7 @@ class dashboardBusinessController extends Controller
         $porcentagem_atingidaanual = 0;
         $porcentagem_atingidamensal = 0;
 
-        $metaAnual =  $empresa->metaDeFaturamento; //sair
+        $metaAnual =  $empresa->metaDeFaturamento;
         if ($user->id != $empresa->user_id) {
             return redirect('/dashboard');
         } else {
@@ -201,6 +202,44 @@ class dashboardBusinessController extends Controller
         $empresa->save();
 
         return back()->with('msg', 'salvo!');
+    }
+
+    public function agendaBusiness($id){
+
+        $agendamentos =  Agendamento::where('cadastro_de_empresas_id', $id)
+        ->where('confirmado', 1)
+        ->where('finalizado', 0)
+        ->where('cancelado', 0)
+        ->get();
+        $users = User::all();
+        $ids = [];
+        foreach ($users as $user) {
+            $ids[] = $user->id;
+        }
+
+        $eventos = [];
+        foreach ($agendamentos as $evento) {
+            $title = '';
+            if (in_array($evento->user_id, $ids)) {
+                $user = $users->where('id', $evento->user_id)->first();
+                $title = $user->name;
+            }
+
+            $eventos[] = [
+                'title' => $title,
+                'start' => $evento->dataHorarioAgendamento,
+
+            ];
+        }
+
+
+
+
+
+
+
+        return view('Empresa.dashboard.agendaBusiness', ['eventos'=> $eventos,]);
+
     }
 
 

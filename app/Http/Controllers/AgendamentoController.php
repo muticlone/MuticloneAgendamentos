@@ -81,8 +81,12 @@ class AgendamentoController extends Controller
 
     public function storeProdutounico($id)
     {
+
+
+
         $user = auth()->user();
         $servico = cadastro_de_servico::where('id', $id)->first();
+
 
         $idEmpresa = $servico->cadastro_de_empresas_id;
         $empresa = cadastro_de_empresa::findOrFail($idEmpresa);
@@ -214,7 +218,10 @@ class AgendamentoController extends Controller
         $user = auth()->user();
 
         $idservico = $request->input('idServiçoAgendamento');
+
+
         $idEmpresa =  $request->input('cadastro_de_empresas_id');
+
 
         $formaDepagamentoAgendamentoincript = $request->input('formaDepagamentoAgendamento');
         $formaDepagamentoAgendamento = decrypt($formaDepagamentoAgendamentoincript);
@@ -232,6 +239,8 @@ class AgendamentoController extends Controller
                 $decryptedValue = Crypt::decrypt($encryptedValue);
                 $idServico[] = $decryptedValue;
             }
+
+            //aqui
 
             $empresa = cadastro_de_empresa::findOrFail($empresa_id_desencriptado);
 
@@ -693,6 +702,7 @@ class AgendamentoController extends Controller
 
 
         $empresa = cadastro_de_empresa::whereIn('id', $idempresa)->get()->toArray();
+        $servicos = cadastro_de_servico::where('cadastro_de_empresas_id', $idempresa)->get()->toArray();
 
 
 
@@ -700,6 +710,7 @@ class AgendamentoController extends Controller
             'agendamentos' => $agendamentos,
             'user' => $user,
             'empresa' =>  $empresa,
+            'servicos' => $servicos,
 
         ]);
     }
@@ -715,8 +726,10 @@ class AgendamentoController extends Controller
 
 
         $nota = intval($request->input('nota'));
+        $notaservico[] = $request->input('notaservico');
 
         $comentario =  $request->comentario;
+
 
 
 
@@ -729,6 +742,9 @@ class AgendamentoController extends Controller
 
         return redirect('/meus/agendamentos/finalizados')->with('msg', 'Enviado com sucesso!');
     }
+
+
+
 
 
 

@@ -23,7 +23,7 @@
     <div class="col-lg-5 col-sm-12 col-md-12 pt-2">
         <form action="#" method="GET" id="searchForm">
 
-            <x-select-empresa-home :empresa="$empresa"  nome="Busque por suas empresas"/>
+            <x-select-empresa-home :empresa="$empresa" nome="Busque por suas empresas" />
         </form>
     </div>
 
@@ -37,7 +37,6 @@
                     Buscando por: "{{ $search }}" <a href="/dashboard">Visualizar todas as suas empresas</a>
                 </div>
             </div>
-
         @endif
 
         <div class="table-responsive">
@@ -67,9 +66,8 @@
                             <td>
 
                                 <a href="/dashboard/edit/{{ $emp->id }}"
-                                    class="btn btn-sm btn-outline-warning btndashboard bt btnDashoard"
-
-                                    <x-svg-edit width="14" height="14" margin="3px" />
+                                    class="btn btn-sm btn-outline-warning btndashboard bt btnDashoard" <x-svg-edit
+                                    width="14" height="14" margin="3px" />
 
                                 </a>
                                 {{--
@@ -80,17 +78,14 @@
 
                                 </a> --}}
 
-                                <a href="{{ route('dados.meus.clientes', ['id' => $emp->id,'status' => 'ativos']) }}"
-                                    class="btn btn-sm btn-outline-info btndashboard bt btnDashoard"
-
-
-                                    <x-svg-meus-clientes width="14" height="14" margin="3px" />
+                                <a href="{{ route('dados.meus.clientes', ['id' => $emp->id, 'status' => 'ativos']) }}"
+                                    class="btn btn-sm btn-outline-info btndashboard bt btnDashoard" <x-svg-meus-clientes
+                                    width="14" height="14" margin="3px" />
                                 </a>
 
                                 <a href="/dados/servicos/{{ $emp->id }}"
-                                    class="btn btn-sm btn-outline-info btndashboard bt btnDashoard"
-
-                                    <x-svg-meusservicos width="14" height="14" margin="3px" />
+                                    class="btn btn-sm btn-outline-info btndashboard bt btnDashoard" <x-svg-meusservicos
+                                    width="14" height="14" margin="3px" />
                                 </a>
 
 
@@ -102,7 +97,13 @@
                                 </a>
 
 
-                                @if($temagendamentos)
+                                @if ($temagendamentos)
+                                    <a href="{{ route('agenda.business', ['id' => $emp->id]) }}"
+                                        class="btn btn-sm btn-outline-info btndashboardservico btnDashoard">
+
+                                        <x-svgCalendardatefill nome="Agenda" width="14" height="14"
+                                            margin="3px" />
+                                    </a>
                                     <a href="{{ route('dashboard.business', ['id' => $emp->id]) }}"
                                         class="btn btn-sm btn-outline-info btndashboardservico btnDashoard">
 

@@ -135,7 +135,7 @@
                                         value="{{ $agendamento->formaDepagamentoAgendamento }}">
                                 </div>
                                 <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-                                    <form id="FormReagendar"  action="/reagendar/{{ $agendamento->id }}" method="POST">
+                                    <form id="FormReagendar" action="/reagendar/{{ $agendamento->id }}" method="POST">
                                         @csrf
                                         @method('PUT')
 
@@ -143,7 +143,7 @@
                                         <input type="datetime-local" class="form-control  campodesablitado"
                                             id="dataHorarioAgendamento" name="dataHorarioAgendamento"
                                             aria-describedby="validationTooltipUsernamePrepend"
-                                            value="{{ $agendamento->dataHorarioAgendamento }}" required/>
+                                            value="{{ $agendamento->dataHorarioAgendamento }}" required />
                                     </form>
                                 </div>
 
@@ -153,8 +153,7 @@
                                     agendamento_cancelado="{{ $agendamento->cancelado }}" />
 
 
-                                <x-btn-agendamento-detalhes
-                                    agendamento_finalizado="{{ $agendamento->finalizado }}"
+                                <x-btn-agendamento-detalhes agendamento_finalizado="{{ $agendamento->finalizado }}"
                                     agendamento_id="{{ $agendamento->id }}"
                                     agendamento_cancelado="{{ $agendamento->cancelado }}"
                                     agendamento_motivoCancelamento="{{ $agendamento->motivoCancelamento }}"
@@ -172,12 +171,42 @@
                                                 <label for="nota" class="control-label"> Avalie o atendimento </label>
                                                 <input id="nota" name="nota" class="rating rating-loading pt-br"
                                                     data-min="0" data-max="5" data-step="1" data-show-clear="false">
+                                                {{-- <div class="comentavaliacao ">
+
+
+                                                    @foreach ($agendamento->nomeServiçoAgendamento as $index => $nome)
+
+
+                                                    <div>
+                                                        {{ $nome }}
+                                                        <input id="notaservico_{{ $index }}"
+                                                            name="notaservico[]" class="rating rating-loading pt-br"
+                                                            data-min="0" data-max="5" data-step="1"
+                                                            data-show-clear="false">
+                                                    </div>
+
+
+
+
+                                                @endforeach --}}
+
+
+
+                                                </div>
 
                                                 <textarea class="form-control" name="comentario" cols="50" placeholder="Faça um breve comentário" minlength="15"
-                                                    maxlength="250" rows="3"></textarea>
+                                                    maxlength="250" rows="3" required> </textarea>
+
+
+
+
                                                 </br>
                                                 <button type="submit" class="btn btn-info btn-sm">Avaliar</button>
+
                                             </form>
+
+
+
                                         </div>
                                     @else
                                         <div align="center">
@@ -191,7 +220,7 @@
                                                     value="{{ $agendamento->nota }}">
 
                                                 <textarea class="form-control" name="comentario" cols="50" placeholder="Faça um breve comentário" minlength="15"
-                                                    maxlength="250" rows="3">{{ $agendamento->comentario }}</textarea>
+                                                    maxlength="250" rows="3" required>{{ $agendamento->comentario }}</textarea>
                                                 </br>
                                                 <button type="submit" class="btn btn-info btn-sm">Reavaliar</button>
                                             </form>
@@ -229,8 +258,9 @@
                             <div class="card-body">
                                 <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3856.!2d0!3d0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7463b12bfda1035%3A0x373937af9e59ad56!2s{{ $empresaItem['logradouro'] }}%20%2C%20{{ $empresaItem['numero_endereco'] }}%20-%20{{ $empresaItem['bairro'] }}%2C%20{{ $empresaItem['cidade'] }}%20-%20{{ $empresaItem['uf'] }}%2C%2045065-000!5e0!3m2!1spt-BR!2sbr!4v1675985984301!5m2!1spt-BR!2sbr"
-                                    width="100%" height="100%" style="border: 0; border-radius: 10px;" allowfullscreen=""
-                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    width="100%" height="100%" style="border: 0; border-radius: 10px;"
+                                    allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 
                                 <h5 class="vertical-align-middle">
