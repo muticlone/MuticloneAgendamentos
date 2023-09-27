@@ -5,7 +5,7 @@
 @section('content_header')
 
 
-
+<x-menu-dashoard empresa_id="{{ $idempresa }}" />
 
 @stop
 

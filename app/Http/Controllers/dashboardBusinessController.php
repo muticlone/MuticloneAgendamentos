@@ -206,30 +206,41 @@ class dashboardBusinessController extends Controller
 
     public function agendaBusiness($id){
 
-        $agendamentos =  Agendamento::where('cadastro_de_empresas_id', $id)
-        ->where('confirmado', 1)
-        ->where('finalizado', 0)
-        ->where('cancelado', 0)
-        ->get();
-        $users = User::all();
-        $ids = [];
-        foreach ($users as $user) {
-            $ids[] = $user->id;
-        }
 
-        $eventos = [];
-        foreach ($agendamentos as $evento) {
-            $title = '';
-            if (in_array($evento->user_id, $ids)) {
-                $user = $users->where('id', $evento->user_id)->first();
-                $title = $user->name;
+        $user = auth()->user();
+        $empresa = cadastro_de_empresa::findOrFail($id);
+        $idempresa = $empresa->id;
+
+
+        if ($user->id != $empresa->user_id) {
+            return redirect('/dashboard');
+        }else{
+            $agendamentos =  Agendamento::where('cadastro_de_empresas_id', $id)
+            ->where('confirmado', 1)
+            ->where('finalizado', 0)
+            ->where('cancelado', 0)
+            ->get();
+            $users = User::all();
+            $ids = [];
+            foreach ($users as $user) {
+                $ids[] = $user->id;
             }
 
-            $eventos[] = [
-                'title' => $title,
-                'start' => $evento->dataHorarioAgendamento,
+            $eventos = [];
+            foreach ($agendamentos as $evento) {
+                $title = '';
+                if (in_array($evento->user_id, $ids)) {
+                    $user = $users->where('id', $evento->user_id)->first();
+                    $title = $user->name;
+                }
 
-            ];
+                $eventos[] = [
+                    'title' => $title,
+                    'start' => $evento->dataHorarioAgendamento,
+
+                ];
+            }
+
         }
 
 
@@ -238,7 +249,11 @@ class dashboardBusinessController extends Controller
 
 
 
-        return view('Empresa.dashboard.agendaBusiness', ['eventos'=> $eventos,]);
+
+        return view('Empresa.dashboard.agendaBusiness', ['eventos'=> $eventos,
+                    'idempresa' =>  $idempresa,
+
+        ]);
 
     }
 

@@ -66,7 +66,7 @@
                             <td>
 
                                 <a href="/dashboard/edit/{{ $emp->id }}"
-                                    class="btn btn-sm btn-outline-warning btndashboard bt btnDashoard" <x-svg-edit
+                                    class="btn btn-sm btn-outline-warning btndashboard  btnDashoard"<x-svg-edit
                                     width="14" height="14" margin="3px" />
 
                                 </a>
@@ -79,18 +79,18 @@
                                 </a> --}}
 
                                 <a href="{{ route('dados.meus.clientes', ['id' => $emp->id, 'status' => 'ativos']) }}"
-                                    class="btn btn-sm btn-outline-info btndashboard bt btnDashoard" <x-svg-meus-clientes
+                                    class="btn btn-sm btn-outline-info btndashboard  btnDashoard" <x-svg-meus-clientes
                                     width="14" height="14" margin="3px" />
                                 </a>
 
                                 <a href="/dados/servicos/{{ $emp->id }}"
-                                    class="btn btn-sm btn-outline-info btndashboard bt btnDashoard" <x-svg-meusservicos
+                                    class="btn btn-sm btn-outline-info btndashboard  btnDashoard" <x-svg-meusservicos
                                     width="14" height="14" margin="3px" />
                                 </a>
 
 
                                 <a href="{{ route('meus.clientes.agendamentos.empresa', ['id' => $emp->id, 'status' => 'ativos']) }}"
-                                    class="btn btn-sm btn-outline-warning btndashboardservico bt btnDashoard">
+                                    class="btn btn-sm btn-outline-warning btndashboardservico  btnDashoard">
 
 
                                     <x-svg-meus-agendamentos width="14" height="14" margin="3px" />

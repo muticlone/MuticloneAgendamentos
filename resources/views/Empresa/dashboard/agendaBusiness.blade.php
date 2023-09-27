@@ -4,12 +4,12 @@
 
 @section('content_header')
 
-
-
+<x-menu-dashoard empresa_id="{{ $idempresa }}" />
 
 @stop
 
 @section('content')
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
 
     <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/css/star-rating.min.css" media="all"
@@ -20,6 +20,10 @@
 
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/locales/pt-br.js'></script>
+
+
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var eventos = <?php echo json_encode($eventos); ?>;
@@ -28,11 +32,12 @@
                 initialView: 'dayGridMonth',
                 locale: 'pt-br',
                 events: eventos,
-                height: '700px'
+                height: '600px'
             });
             calendar.render();
         });
     </script>
+
 
     <div class="col-lg-12 col-sm-12 col-md-12 pt-2">
         <div id='calendar'></div>
