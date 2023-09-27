@@ -119,7 +119,7 @@
     <div class="row g-12">
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
-            <x-small-user tema="{{ $clientemesatual }}" txt="Clientes mês atual" icon='fas fa-user-plus' link="#" />
+        <x-small-user tema="{{ $clientemesatual }}" txt="Clientes mês atual" icon='fas fa-user-plus' link="#" />
 
         </div>
 
