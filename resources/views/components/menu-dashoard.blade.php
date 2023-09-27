@@ -16,7 +16,7 @@
 
                 <a href="/dashboard" class="btn btn-sm btn-outline-info btndashboardservico">
 
-                    <x-svg-business width="14" height="14" margin="3px" nome="Meus négocios" />
+                    <x-svg-business width="14" height="14" margin="3px" nome="Négocios" />
 
                 </a>
 
@@ -24,7 +24,7 @@
                 <a href="{{ route('dados.meus.clientes', ['id' => $empresa_id, 'status' => 'ativos']) }}"
                     class="btn btn-sm btn-outline-info btndashboardservico">
 
-                    <x-svg-meus-clientes width="14" height="14" margin="3px" />
+                    <x-svg-meus-clientes nome="Clientes" width="14" height="14" margin="3px" />
 
                 </a>
 
@@ -32,7 +32,7 @@
                     class="btn btn-sm btn-outline-warning btndashboardservico">
 
 
-                    <x-svg-meusservicos width="14" height="14" margin="3px" />
+                    <x-svg-meusservicos  nome="Serviços" width="14" height="14" margin="3px" />
                 </a>
 
 
@@ -41,7 +41,7 @@
                     class="btn btn-sm btn-outline-warning btndashboardservico">
 
 
-                    <x-svg-meus-agendamentos width="14" height="14" margin="3px" />
+                    <x-svg-meus-agendamentos nome="Pedidos" width="14" height="14" margin="3px" />
                 </a>
 
 
@@ -49,7 +49,7 @@
                 <a href="{{ route('agenda.business', ['id' => $empresa_id]) }}"
                     class="btn btn-sm btn-outline-info btndashboardservico">
 
-                    <x-svgCalendardatefill nome="Agenda" width="14" height="14" margin="3px" />
+                    <x-svgCalendardatefill nome="Agendas" width="14" height="14" margin="3px" />
                 </a>
                 <a href="{{ route('dashboard.business', ['id' => $empresa_id]) }}"
                     class="btn btn-sm btn-outline-info btndashboardservico">

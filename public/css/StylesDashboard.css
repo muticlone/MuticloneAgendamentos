@@ -73,9 +73,10 @@
         color: black;
         border-color: #D3D3D3;
         margin-top: 5px;
-        min-width: 120px;
+        min-width: 90px;
 
-        max-width: 120px;
+        max-width: 90px;
+        min-height: 60px;
 
     }
 
