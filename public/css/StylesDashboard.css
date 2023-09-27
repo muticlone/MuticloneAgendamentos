@@ -60,6 +60,27 @@
 
 }
 
+/* Estilos para telas menores que 479px (celular) */
+@media (max-width: 479px) {
+
+    .btndashboardservico {
+
+
+        justify-content: center;
+        /* Centraliza o texto horizontalmente */
+        align-items: center;
+        /* Centraliza o texto verticalmente */
+        color: black;
+        border-color: #D3D3D3;
+        margin-top: 5px;
+        min-width: 120px;
+
+        max-width: 120px;
+
+    }
+
+}
+
 
 
 

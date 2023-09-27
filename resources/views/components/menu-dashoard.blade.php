@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="col-lg-12 col-sm-12 col-md-12 pt-2" align="center">
+            <div class="col-12 pt-2" align="center">
 
                 <a href="/dashboard"
                     class="btn btn-sm btn-outline-info btndashboardservico">
