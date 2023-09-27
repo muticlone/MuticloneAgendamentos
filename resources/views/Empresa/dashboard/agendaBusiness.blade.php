@@ -28,7 +28,7 @@
                 initialView: 'dayGridMonth',
                 locale: 'pt-br',
                 events: eventos,
-                height: '490px'
+
             });
             calendar.render();
         });
