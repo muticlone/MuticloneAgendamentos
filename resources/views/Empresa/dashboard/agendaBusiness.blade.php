@@ -28,15 +28,15 @@
                 initialView: 'dayGridMonth',
                 locale: 'pt-br',
                 events: eventos,
-
+                height: '800px'
             });
             calendar.render();
         });
     </script>
 
-
+    <div class="col-lg-12 col-sm-12 col-md-12 pt-2">
         <div id='calendar'></div>
-
+    </div>
 
 
 
