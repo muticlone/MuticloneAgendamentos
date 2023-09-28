@@ -75,6 +75,7 @@
                 <a href="/empresas/dados/{{ $empresa['id'] }}" class="btn btn-sm btn-primary btg">Detalhes</a>
 
             </div>
+
         @endforeach
     </div>
 

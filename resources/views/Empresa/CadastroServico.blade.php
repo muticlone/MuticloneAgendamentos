@@ -164,7 +164,7 @@
 
                             </span>
                             <textarea class="form-control" name="descricaosevico" id="resutservico" rows="3"
-                                placeholder="Descrição sobre seu negócio" minlength="15" maxlength="250"
+                                placeholder="Descrição sobre seu negócio" minlength="15" maxlength="131"
                                 aria-describedby="validationTooltipUsernamePrepend" required></textarea>
                             <div class="invalid-tooltip ">
                                 Por favor, digite uma breve descrição sobre o serviço de mo minimo quize caracteres
