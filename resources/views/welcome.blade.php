@@ -68,8 +68,7 @@
 
 
                         <h2 class="fw-normal">{{ ucfirst($empresa['nomeFantasia']) }}</h2>
-                        <p>{{ $empresa['descricao'] }}</p>
-
+                      <p class="text-justify-sm">{{ $empresa['descricao'] }}</p>
                     </div>
                 </a>
                 <a href="/empresas/dados/{{ $empresa['id'] }}" class="btn btn-sm btn-primary btg">Detalhes</a>
