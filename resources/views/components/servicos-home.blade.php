@@ -13,7 +13,7 @@
                     alt="{{ $servico_nomeServico }}">
 
 
-                <div class="image-and-rating">
+                <div class="">
 
 
                     <input id="input6" name="input-6" class="rating rating-loading pt-br" value="5"

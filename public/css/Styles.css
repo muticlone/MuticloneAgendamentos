@@ -366,11 +366,11 @@ svg {
     margin-top: 15px;
     margin-left: 8px;
 
-    min-width: 65px;
-    min-height: 65px;
-    max-width: 65px;
-    max-height: 65px;
-    border-radius: 10px;
+    min-width: 80px;
+    min-height: 80px;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 50%;
     border: 1px solid #D3D3D3;
     overflow: hidden;
 
@@ -456,8 +456,8 @@ svg {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    margin-left: 80px;
-    margin-top: -60px;
+    margin-left: 90px;
+    margin-top: -180px;
 
 }
 
@@ -762,9 +762,9 @@ svg {
     width: 14rem;
 }
 
-.cardlayoutempresa {
+/* .cardlayoutempresa {
     width: 12rem;
-}
+} */
 
 
 /* Estilos para telas menores que 479px (celular) */
@@ -772,9 +772,9 @@ svg {
     .cardlayout {
         width: 100%; /* Use a largura total da tela */
     }
-    .cardlayoutempresa {
+    /* .cardlayoutempresa {
         width: 21rem;
-    }
+    } */
 
     .conteiner-search {
         position: relative;
@@ -796,29 +796,32 @@ svg {
         width: 20rem; /* Ajuste o tamanho conforme necessário */
     }
 
-    .cardlayoutempresa {
+    /* .cardlayoutempresa {
         width: 26rem;
-    }
+    } */
 }
 
 
-@media (min-width: 500px) and (max-width: 1200px) {
+/* @media (min-width: 500px) and (max-width: 1200px) {
 
 
     .cardlayoutempresa {
         width: 12rem;
     }
-}
+} */
 
-@media (min-width: 800px) and (max-width: 1000px) {
+/* @media (min-width: 800px) and (max-width: 1000px) {
 
 
     .cardlayoutempresa {
         width: 40rem;
     }
+} */
+
+.novohomeempresa{
+    min-height: 300px;
+    max-height: 300px;
 }
-
-
 
 
 

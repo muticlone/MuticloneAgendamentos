@@ -14,11 +14,12 @@
 
 
                 <select id="select-empresaHome" class="js-buscacategoria select2 form-select"
-                data-placeholder="Busque por uma empresa"  style="width: 100%" name="search">
+                    data-placeholder="Busque por uma empresa" style="width: 100%" name="search">
                     <option value="" disabled selected>Busque por uma empresa</option>
                     @foreach ($empresasOrdenadasPaginadas as $empresaBusca)
-                        <option class="custom-option img-flag"
-                        value="{{ $empresaBusca['nomeFantasia']  }}" data-img-src="/img/logo_empresas/{{ $empresaBusca['image'] }}">{{ $empresaBusca['nomeFantasia'] }}</option>
+                        <option class="custom-option img-flag" value="{{ $empresaBusca['nomeFantasia'] }}"
+                            data-img-src="/img/logo_empresas/{{ $empresaBusca['image'] }}">
+                            {{ $empresaBusca['nomeFantasia'] }}</option>
                     @endforeach
                 </select>
 
@@ -39,51 +40,42 @@
 
 
 
-    <div class="row g-12 pt-2">
+
+    <div class="row ">
         @foreach ($empresasOrdenadasPaginadas as $index => $empresa)
-            <div class="col-auto pt-2">
+            <div class="col-lg-4">
+                <a href="/empresas/dados/{{ $empresa['id'] }}" class="card-header">
+                    <div class="novohomeempresa">
+                        <div align="center">
 
-                <a href="/empresas/dados/{{ $empresa['id'] }}" class="card-link link">
 
-                    <div class="card  cardlayoutempresa" >
 
-                        <img src="/img/logo_empresas/{{ $empresa['image'] }}" class=" img_tela_home"
-                            alt="{{$empresa['razaoSocial'] }}">
+                            <img src="/img/logo_empresas/{{ $empresa['image'] }}" class=" img_tela_home"
+                                alt="{{ $empresa['razaoSocial'] }}">
 
-                        @php
-                            $empresaId = $empresa['id'];
-                            $mediaNotas = isset($mediaNotasPorEmpresa[$empresaId]) ? $mediaNotasPorEmpresa[$empresaId] : 0;
-                        @endphp
+                            @php
+                                $empresaId = $empresa['id'];
+                                $mediaNotas = isset($mediaNotasPorEmpresa[$empresaId]) ? $mediaNotasPorEmpresa[$empresaId] : 0;
+                            @endphp
 
-                        <div class="image-and-rating">
-                            <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="{{ $mediaNotas  }}"
-                                data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-show-clear="false"
-                                data-size="xs">
+                            <div class="pt-1">
+                                <input id="input-6" name="input-6" class="rating rating-loading pt-br"
+                                    value="{{ $mediaNotas }}" data-min="0" data-max="5" data-step="0.1"
+                                    data-readonly="true" data-show-clear="false" data-size="xs">
+                            </div>
                         </div>
-                        <div class="card-body" >
-                            <p class="card-text">{{ ucfirst($empresa['nomeFantasia']) }}</p>
-                            {{-- <p class="card-text">{{ucfirst($empresa['area_atuacao']) }}</p> --}}
 
 
-                        </div>
-                        <div class="card-body pt-2" >
-                            <a href="/empresas/dados/{{$empresa['id'] }}" class="btn btn-sm btn-primary btg">Detalhes</a>
-                        </div>
+
+                        <h2 class="fw-normal">{{ ucfirst($empresa['nomeFantasia']) }}</h2>
+                        <p>{{ $empresa['descricao'] }}</p>
 
                     </div>
-
                 </a>
-
+                <a href="/empresas/dados/{{ $empresa['id'] }}" class="btn btn-sm btn-primary btg">Detalhes</a>
 
             </div>
-
-            @if (($index + 1) % 10 == 0)
-    </div>
-
-    <div class="row g-12 pt-2">
-        @endif
         @endforeach
-
     </div>
 
 

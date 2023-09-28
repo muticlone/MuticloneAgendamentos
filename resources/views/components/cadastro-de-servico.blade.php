@@ -166,7 +166,7 @@
 
                         </span>
                         <textarea class="form-control" name="descricaosevico" rows="3"
-                        placeholder="Descrição sobre seu negócio" minlength="15" maxlength="250"
+                        placeholder="Descrição sobre seu negócio" minlength="15" maxlength="131"
                         aria-describedby="validationTooltipUsernamePrepend"
 
                         required >{{$descricao}}</textarea>

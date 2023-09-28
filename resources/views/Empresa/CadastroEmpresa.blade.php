@@ -410,7 +410,7 @@
                                 <div class="input-group mb-3">
 
                                     <textarea class="form-control" id="result" name="descricao" rows="3"
-                                        placeholder="Descrição sobre seu negócio" minlength="63" maxlength="250"
+                                        placeholder="Descrição sobre seu negócio" minlength="63" maxlength="131"
                                         aria-describedby="validationTooltipUsernamePrepend" required></textarea>
 
 
