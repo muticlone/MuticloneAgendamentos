@@ -757,28 +757,14 @@ svg {
 }
 
 
-/* Estilos padrão para .cardlayout */
-/* .cardlayout {
-    width: 14rem;
-} */
 
-/* .cardlayoutempresa {
-    width: 12rem;
-} */
 
 
 /* Estilos para telas menores que 479px (celular) */
 @media (max-width: 479px) {
 
 
-    /* .cardlayout {
-        width: 100%;
-    } */
 
-
-    /* .cardlayoutempresa {
-        width: 21rem;
-    } */
 
     .conteiner-search {
         position: relative;
@@ -792,35 +778,17 @@ svg {
         font-size: 10px;
         padding: 3px 8px;
     }
+
+    .novohomeempresa{
+        min-height: auto;
+        max-height: auto;
+    }
+
+    .novohomeservico{
+        min-height: auto;
+        max-height: auto;
+    }
 }
-
-/* Estilos para telas maiores que 479px, mas menores que 575px */
-/* @media (min-width: 480px) and (max-width: 575px) {
-    .cardlayout {
-        width: 20rem;
-    }
-
-    .cardlayoutempresa {
-        width: 26rem;
-    }
-} */
-
-
-/* @media (min-width: 500px) and (max-width: 1200px) {
-
-
-    .cardlayoutempresa {
-        width: 12rem;
-    }
-} */
-
-/* @media (min-width: 800px) and (max-width: 1000px) {
-
-
-    .cardlayoutempresa {
-        width: 40rem;
-    }
-} */
 
 .novohomeempresa{
     min-height: 300px;
