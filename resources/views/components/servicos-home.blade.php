@@ -22,12 +22,16 @@
 
                         </div>
 
+                        <style>
+                            .text-justify {
+                              text-align: justify;
+                          }
+                      </style>
 
-
-                        <h2 class="fw-normal">{{ ucfirst($servico_nomeServico) }} </h2>
+                        <h2 class="fw-normal text-center">{{ ucfirst($servico_nomeServico) }} </h2>
                         <h5> R${{ $servico_valorDoServico }}</h6>
 
-                        <p>{{  ucfirst($descricaoservico) }}</p>
+                        <p class="text-justify">{{  ucfirst($descricaoservico) }}</p>
 
                     </div>
                 </a>

@@ -64,17 +64,22 @@
                                     data-readonly="true" data-show-clear="false" data-size="xs">
                             </div>
                         </div>
+                        <style>
+                              .text-justify {
+                                text-align: justify;
+                            }
+                        </style>
 
+                        <h2 class="fw-normal text-center">{{ ucfirst($empresa['nomeFantasia']) }}</h2>
+                        <p class="text-justify">{{ $empresa['descricao'] }}</p>
 
-
-                        <h2 class="fw-normal">{{ ucfirst($empresa['nomeFantasia']) }}</h2>
-                      <p class="text-justify-sm">{{ $empresa['descricao'] }}</p>
                     </div>
+
                 </a>
+
                 <a href="/empresas/dados/{{ $empresa['id'] }}" class="btn btn-sm btn-primary btg">Detalhes</a>
 
             </div>
-
         @endforeach
     </div>
 
