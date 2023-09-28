@@ -461,7 +461,7 @@ svg {
 
 }
 
-.nomedosevico{
+.nomedosevico {
     margin-top: -10px;
 }
 
@@ -673,7 +673,7 @@ svg {
     min-width: 110px
 }
 
-.btnwhts{
+.btnwhts {
     color: black;
     border-color: #D3D3D3;
     /* Cor do contorno do botão btn-outline-info */
@@ -779,21 +779,36 @@ svg {
         padding: 3px 8px;
     }
 
-    .novohomeservico,
-    .novohomeempresa {
-        min-height: 0;
-        max-height: 0;
-    }
+
+
+
+
 }
 
-.novohomeempresa{
+
+
+
+.novohomeempresa {
     min-height: 300px;
     max-height: 300px;
 }
 
-.novohomeservico{
+.novohomeservico {
     min-height: 340px;
     max-height: 340px;
+}
+
+@media not all and (max-width: 479px) {
+    .novohomeempresa {
+        min-height: 300px;
+        max-height: 300px;
+    }
+
+    .novohomeservico {
+        min-height: 340px;
+        max-height: 340px;
+    }
+
 }
 
 
@@ -837,14 +852,15 @@ select.select-meus-agendamentos.select2-hidden-accessible+.select2-container .se
 
 }
 
-.txtcenter{
+.txtcenter {
     text-align: center;
 }
 
 
 .link {
     text-decoration: none;
-    color: #333; /* Esta é uma cor de exemplo. Substitua pelo código de cor desejado. */
+    color: #333;
+    /* Esta é uma cor de exemplo. Substitua pelo código de cor desejado. */
 }
 
 .caption .caption-badge.caption-secondary,
