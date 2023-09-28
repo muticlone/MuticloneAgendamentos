@@ -4,10 +4,13 @@ const express = require('express');
 
 const app = express();
 
+const privateKeyPath = 'key.pem'; // Caminho para key.pem
+const certificatePath = 'cert.pem'; // Caminho para cert.pem
+
 https.createServer({
-  key: fs.readFileSync('path/to/key.pem'),
-  cert: fs.readFileSync('path/to/cert.pem')
+  key: fs.readFileSync(privateKeyPath),
+  cert: fs.readFileSync(certificatePath)
 }, app)
 .listen(3000, () => {
-  console.log('Aplicativo rodando na http://35.199.106.13:8989/');
+  console.log('Aplicativo rodando na https://seu_endereco:3000/');
 });
