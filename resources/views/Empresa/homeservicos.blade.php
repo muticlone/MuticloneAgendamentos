@@ -29,7 +29,7 @@
 
     <div class="row 4">
         @foreach ($servico as $index => $servicos)
-            <div class="col-lg-4"> <!-- Defina o tamanho da coluna aqui, como col-6 para metade da largura -->
+            <div class="col-lg-4">
                 <x-servicos-home servico_id="{{ $servicos->id }}" servico_imageservico="{{ $servicos->imageservico }}"
                     servico_nomeServico="{{ $servicos->nomeServico }}"
                     servico_valorDoServico="{{ $servicos->valorDoServico }}"

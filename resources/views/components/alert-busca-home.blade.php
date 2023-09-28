@@ -14,7 +14,7 @@
     @else
         <div class="pt-1">
 
-            <div class="alert alert-light" role="alert" align="center">
+            <div class="alert alert-light txtlink" role="alert" align="center">
                 {{ $txt }} <a href="{{ $link  }}">{{ $txt2 }}</a>
 
             </div>
