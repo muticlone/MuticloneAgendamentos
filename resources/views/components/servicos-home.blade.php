@@ -25,6 +25,7 @@
                         <style>
                             .text-justify {
                               text-align: justify;
+                              font-size: 22px
                           }
                       </style>
 
