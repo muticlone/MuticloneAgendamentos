@@ -316,6 +316,8 @@
     <script src="/js/mascara.js"></script>
     <script src="/js/validacaoformulario.js"></script>
 
+    <link rel="manifest" href="/manifest.json">
+
 
 
 

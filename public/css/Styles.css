@@ -792,18 +792,23 @@ svg {
 }
 
 
-@media (min-width: 992px) {
+@media (min-width: 991px) {
     .novohomeempresa {
         min-height: 300px;
         max-height: 300px;
     }
 
     .novohomeservico {
-        min-height: 340px;
-        max-height: 340px;
+        min-height: 360px;
+        max-height: 360px;
     }
 
 }
+
+
+
+
+
 
 
 

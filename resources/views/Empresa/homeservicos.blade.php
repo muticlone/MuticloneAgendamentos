@@ -27,9 +27,9 @@
     </div>
 
 
-    <div class="row 4">
+    <div class="row">
         @foreach ($servico as $index => $servicos)
-            <div class="col-lg-4">
+            <div class="col-lg-4 col-sm-6 col-md-6">
                 <x-servicos-home servico_id="{{ $servicos->id }}" servico_imageservico="{{ $servicos->imageservico }}"
                     servico_nomeServico="{{ $servicos->nomeServico }}"
                     servico_valorDoServico="{{ $servicos->valorDoServico }}"
