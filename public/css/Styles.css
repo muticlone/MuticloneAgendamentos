@@ -779,14 +779,10 @@ svg {
         padding: 3px 8px;
     }
 
-    .novohomeempresa{
-        min-height: auto;
-        max-height: auto;
-    }
-
-    .novohomeservico{
-        min-height: auto;
-        max-height: auto;
+    .novohomeservico,
+    .novohomeempresa {
+        min-height: 0;
+        max-height: 0;
     }
 }
 
