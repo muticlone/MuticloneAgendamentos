@@ -64,14 +64,10 @@
                                     data-readonly="true" data-show-clear="false" data-size="xs">
                             </div>
                         </div>
-                        <style>
-                              .text-justify {
-                                text-align: justify;
-                            }
-                        </style>
+
 
                         <h2 class="fw-normal text-center">{{ ucfirst($empresa['nomeFantasia']) }}</h2>
-                        <p class="text-justify">{{ $empresa['descricao'] }}</p>
+                        <p>{{ $empresa['descricao'] }}</p>
 
                     </div>
 
