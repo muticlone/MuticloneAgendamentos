@@ -23,10 +23,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-$(document).ready(function () {
+    $(document).ready(function () {
     $('.js-buscacategoria').select2({
         theme: 'bootstrap-5',
         placeholder: 'Selecione um serviço',
+        maximumInputLength: 30,
         language: {
             noResults: function () {
                 return "Nenhum resultado encontrado";

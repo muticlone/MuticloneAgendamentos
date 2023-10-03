@@ -12,7 +12,7 @@
             </li>
         @endif
 
-        @foreach ($paginatedItems->getUrlRange(1, $paginatedItems->lastPage()) as $page => $url)
+        @foreach ($paginatedItems->getUrlRange(max(1, $paginatedItems->currentPage() - 2), min($paginatedItems->currentPage() + 2, $paginatedItems->lastPage())) as $page => $url)
             @if ($page == $paginatedItems->currentPage())
                 <li class="page-item active" aria-current="page">
                     <span class="page-link">{{ $page }}</span>

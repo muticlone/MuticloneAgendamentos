@@ -9,8 +9,14 @@
         <div class=" conteiner-search  col-8">
             <form action="/" method="GET" id="searchForm">
 
-
-                <x-select-servico-home :servico="$servico" />
+                {{-- <x-select-servico-home :servico="$servicoBusca" /> --}}
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="search" name="search" placeholder="Procurar...">
+                    <button class="btn btn-outline-secondary custom-btn" type="submit">
+                        <ion-icon name="search-outline" class="iconCentralizar"></ion-icon>
+                        Buscar
+                    </button>
+                </div>
 
 
             </form>

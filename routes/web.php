@@ -38,7 +38,7 @@ Route::get('/empresas/dados/{id}', [HomeController::class, 'show']);
 Route::get('/', [HomeController::class, 'showServicos'])->name('home.servicos');
 Route::get('/servicos/categorias', [HomeController::class, 'categorias'])->name('home.sevico.categorias');
 Route::get('/busca/categorias', [HomeController::class, 'Showcategorias'])->name('busca.sevico.categorias');
-
+Route::get('/busca/servicos/json', [HomeController::class, 'busca'])->name('busca.sevico.json');
 
 
 

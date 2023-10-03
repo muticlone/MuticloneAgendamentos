@@ -150,6 +150,10 @@ class HomeController extends Controller
 
         $servico = $query->orderBy('id', 'desc')->paginate(20);
 
+        $servicoBusca =  cadastro_de_servico::all();
+
+
+
 
         $paginatedItems = new LengthAwarePaginator(
             $servico->items(),
@@ -159,8 +163,13 @@ class HomeController extends Controller
             ['path' => route('home.servicos'), 'query' => ['search' => $search]]
         );
 
-        return view('Empresa.homeservicos', compact('search', 'paginatedItems', 'servico'));
+
+        return view('Empresa.homeservicos', compact('search', 'paginatedItems', 'servico',  'servicoBusca'
+
+
+        ));
     }
+
 
 
 
