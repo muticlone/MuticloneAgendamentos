@@ -769,7 +769,7 @@ svg {
     .conteiner-search {
         position: relative;
         z-index: 2;
-        top: 41%;
+        top: 20%;
         transform: translateY(-50%);
         left: 16%;
     }
