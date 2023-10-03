@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f146ac9306bcaeb3a788a51e22d0a9f8",
+    "content-hash": "822efc39de205d4718b14c01b36f5ad2",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -10594,7 +10594,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
         "kartik-v/bootstrap-star-rating": 20
     },

@@ -1,4 +1,4 @@
-@props(['empresa_id' => '','cor'=> 'info'])
+{{-- @props(['empresa_id' => '','cor'=> 'info'])
 
 <div>
 
@@ -79,4 +79,4 @@
 
 
 
-</div>
+</div> --}}

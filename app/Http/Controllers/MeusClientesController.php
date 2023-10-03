@@ -7,7 +7,9 @@ use App\Models\cadastro_de_servico;
 use App\Models\cadastro_de_empresa;
 use App\Models\Agendamento;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use Dompdf\Adapter\PDFLib;
 
 class MeusClientesController extends Controller
 {
@@ -132,6 +134,8 @@ class MeusClientesController extends Controller
     }
 
 
+
+
     public function showMeuCliente($id, $idempresa)
     {
 
@@ -149,6 +153,7 @@ class MeusClientesController extends Controller
 
 
 
+
         $encontrado = false;
         foreach ($idsClientes as $cliente) {
             if ($id == $cliente) {
@@ -157,9 +162,15 @@ class MeusClientesController extends Controller
             }
         }
 
+        if (!$encontrado) {
+
+            return redirect('/dashboard');
+        }
+
+        if ($user->id != $empresa->user_id) {
 
 
-        if ($encontrado == false) {
+
             return redirect('/dashboard');
         } else {
 
@@ -192,9 +203,9 @@ class MeusClientesController extends Controller
                 ->get();
 
 
-                $formaPagamentoContagemTotal = [];
-                $formasPagamento = $agendamentograficos->pluck('formaDepagamentoAgendamento')->toArray();
-                $formaPagamentoContagemTotal = array_count_values($formasPagamento);
+            $formaPagamentoContagemTotal = [];
+            $formasPagamento = $agendamentograficos->pluck('formaDepagamentoAgendamento')->toArray();
+            $formaPagamentoContagemTotal = array_count_values($formasPagamento);
 
 
             $produto = $agendamentograficos->pluck('nomeServiçoAgendamento')->flatten()->toArray();
@@ -233,7 +244,7 @@ class MeusClientesController extends Controller
                 ->max('data_hora_finalizacao_agendamento');
 
 
-            $dataprimeiroagendamento = date('d/m/Y', strtotime( $dataprimeiro));
+            $dataprimeiroagendamento = date('d/m/Y', strtotime($dataprimeiro));
 
             $numeroDoPedidos = count($agendamentos);
 
@@ -263,6 +274,8 @@ class MeusClientesController extends Controller
 
 
 
+
+
         return view('Empresa.DadosMeuCliente', [
             'clientesBusca' =>  $clientesBusca,
             'agendamentos' =>  $agendamentos,
@@ -278,5 +291,135 @@ class MeusClientesController extends Controller
             'formaPagamentoContagemTotal' =>   $formaPagamentoContagemTotal,
             'produtosTotal' =>    $produtosTotal,
         ]);
+    }
+
+
+    public function showrelatorioMeuCliente($id, $idempresa)
+    {
+
+
+        $user = auth()->user();
+
+        $empresa = cadastro_de_empresa::findOrFail($idempresa);
+        $idsClientes = Agendamento::where('cadastro_de_empresas_id', $idempresa)
+            ->where('finalizado', 1)
+            ->where('cancelado', 0)
+            ->distinct()
+            ->pluck('user_id')
+            ->toArray();
+
+
+
+        $encontrado = false;
+        foreach ($idsClientes as $cliente) {
+            if ($id == $cliente) {
+                $encontrado = true;
+                break;
+            }
+        }
+
+        if (!$encontrado) {
+
+            return redirect('/dashboard');
+        }
+
+        if ($user->id != $empresa->user_id) {
+            return redirect('/dashboard');
+        } else {
+
+            $clientesBusca =  User::findOrFail($id);
+
+            $dataprimeiro = Agendamento::where('user_id', $id)
+                ->where('cadastro_de_empresas_id', $idempresa)
+                ->where('finalizado', 1)
+                ->where('cancelado', 0)
+                ->max('data_hora_finalizacao_agendamento');
+
+
+            $dataprimeiroagendamento = date('d/m/Y', strtotime($dataprimeiro));
+
+            $dataultimo = Agendamento::where('user_id', $id)
+                ->where('cadastro_de_empresas_id', $idempresa)
+                ->where('finalizado', 1)
+                ->where('cancelado', 0)
+                ->max('data_hora_finalizacao_agendamento');
+
+            $datadoultimoagendamento = date('d/m/Y', strtotime($dataultimo));
+
+            $agendamentos = Agendamento::where('user_id', $id)
+            ->where('cadastro_de_empresas_id', $idempresa)
+            ->where('finalizado', 1)
+            ->where('cancelado', 0)
+            ->get();
+
+
+
+            $gasto =  $agendamentos->pluck('valorTotalAgendamento')->toArray();
+
+            $totalgasto = array_sum($gasto);
+            $totalgasto = number_format($totalgasto, 2, ',', '.');
+
+            $agendamentoscancelados = Agendamento::where('user_id', $id)
+            ->where('cadastro_de_empresas_id', $idempresa)
+            ->where('cancelado', 1)
+            ->get();
+
+            $agendamentosnaoconfirmados = Agendamento::where('user_id', $id)
+            ->where('cadastro_de_empresas_id', $idempresa)
+            ->where('finalizado', 0)
+            ->where('confirmado', 0)
+            ->where('cancelado', 0)
+            ->get();
+
+            $numeroDeCanelados = count($agendamentoscancelados);
+            $numeroDoPedidos = count($agendamentos);
+            $numeroDenaoconfirmados = count($agendamentosnaoconfirmados);
+
+
+            $totalDepedidos =  $numeroDoPedidos +  $numeroDeCanelados;
+
+            if ($totalDepedidos > 0) {
+                $porcentagemDeCancelamento = ($numeroDeCanelados /   $totalDepedidos) * 100;
+            } else {
+                $porcentagemDeCancelamento = 0;
+            }
+            $porcentagemDeCancelamento = number_format($porcentagemDeCancelamento, 2);
+
+
+            $agendamentograficos = Agendamento::where('user_id', $id)
+                ->where('cadastro_de_empresas_id', $idempresa)
+                ->where('finalizado', 1)
+                ->where('cancelado', 0)
+                ->distinct()
+                ->get();
+
+
+
+                $formasPagamento = $agendamentograficos->pluck('formaDepagamentoAgendamento')
+                ->unique()
+                ->toArray();
+
+                $produto = $agendamentograficos->pluck('nomeServiçoAgendamento')->flatten()->toArray();
+
+            $dados = [
+                'nome' => $clientesBusca->name,
+                'email' => $clientesBusca->email,
+                'contato' => $clientesBusca->phone,
+                'clienteDesDe' =>   $dataprimeiroagendamento,
+                'ultimoAgendamento' => $datadoultimoagendamento,
+                'totalGasto' =>  $totalgasto,
+                'PedidosCanelados' =>  $numeroDeCanelados,
+                'numeroDoPedidos' =>      $numeroDoPedidos,
+                'numeroDenaoconfirmados'=> $numeroDenaoconfirmados,
+                'porcentagemDeCancelamento' =>  $porcentagemDeCancelamento,
+
+            ];
+
+            $pdf = Pdf::loadView('Empresa.Relatorio', compact('dados' ,'formasPagamento','produto'));
+
+
+            return response($pdf->output())->header('Content-Type', 'application/pdf');
+
+        }
     }
 }
