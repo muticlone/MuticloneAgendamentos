@@ -5,7 +5,7 @@
 @section('content_header')
 
 
-<x-menu-dashoard empresa_id="{{ $idempresa }}" />
+    <x-menu-dashoard empresa_id="{{ $idempresa }}" />
 
 @stop
 
@@ -119,7 +119,7 @@
     <div class="row g-12">
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
-        <x-small-user tema="{{ $clientemesatual }}" txt="Clientes mês atual" icon='fas fa-user-plus' link="#" />
+            <x-small-user tema="{{ $clientemesatual }}" txt="Clientes mês atual" icon='fas fa-user-plus' link="#" />
 
         </div>
 
@@ -283,38 +283,36 @@
 
     </div>
     <div class="row g-12">
+        @if ($produtosmensal)
+            <div class="col-lg-6 col-md-12 col-sm-12 pt-2">
+                <!-- Conteúdo do gráfico 1 -->
+                <x-grafico-donut tema="Produtos mais agendados no mês atual" idgrafico="donutChartmesAtual" />
+            </div>
 
+        @endif
 
-        <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
-
-            <x-grafico-donut tema="Produtos mais agendados no mês atual" idgrafico="donutChartmesAtual" />
-
-        </div>
-        <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
+        <div class="col-lg-6 col-md-12 col-sm-12 pt-2">
+            <!-- Conteúdo do gráfico 2 -->
             <x-grafico-donut tema="Produtos mais agendados" idgrafico="donutChart" />
-
         </div>
 
-        <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
+        <div class="col-lg-6 col-md-12 col-sm-12 pt-2">
+            <!-- Conteúdo do gráfico 3 -->
             <x-graficoPizza tema="Formas de pagamento" />
-
-
-
         </div>
 
-
-        <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
-
+        <div class="col-lg-6 col-md-12 col-sm-12 pt-2">
+            <!-- Conteúdo do gráfico 4 -->
             <x-grafico-coluna tema="Faturamento Anual" idgrafico="faruramentoAnual" />
         </div>
 
-        <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
-
+        <div class="col-lg-6 col-md-12 col-sm-12 pt-2">
+            <!-- Conteúdo do gráfico 5 -->
             <x-grafico-coluna tema="Pedidos por mês" idgrafico="PedidosPorMes" />
         </div>
-
-
     </div>
+
+
 
 
 
@@ -356,7 +354,6 @@
         var ProdutosContagemmesatual = @json($produtosmensal);
         var faruramentoAnual = @json($valorPorMes);
         var pedidosPorMes = @json($clientePormes);
-
     </script>
 
     <script src="{{ asset('/js/graficopizza.js') }}"></script>

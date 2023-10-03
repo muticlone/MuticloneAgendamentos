@@ -12,11 +12,9 @@
             </div>
         </div>
         <div class="card-body">
-
-                <canvas id="{{ $idgrafico }}"
-                    style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 367px;"
-                    width="734" height="500" class="chartjs-render-monitor"></canvas>
-            </div>
+            <canvas id="{{ $idgrafico }}"
+                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 367px;"
+                width="734" height="500" class="chartjs-render-monitor"></canvas>
         </div>
 
     </div>

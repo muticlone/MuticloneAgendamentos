@@ -123,6 +123,8 @@ class dashboardBusinessController extends Controller
 
 
 
+
+
             $numeroMesAtual = Carbon::now()->month;
             $MesAtual = Agendamento::where('cadastro_de_empresas_id', $id)
                 ->where('finalizado', 1)
@@ -131,6 +133,7 @@ class dashboardBusinessController extends Controller
 
             $produtosmaisAgendadosMesatual =  $MesAtual->pluck('nomeServiçoAgendamento')->flatten()->toArray();
             $produtosmensal = array_count_values($produtosmaisAgendadosMesatual);
+
 
             $userIdmesatual =  $MesAtual->pluck('user_id')->toArray();
             $clientesMesatual = array_count_values($userIdmesatual);
