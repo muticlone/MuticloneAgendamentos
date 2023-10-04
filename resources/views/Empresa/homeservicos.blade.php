@@ -10,8 +10,9 @@
             <form action="/" method="GET" id="searchForm">
 
                 {{-- <x-select-servico-home :servico="$servicoBusca" /> --}}
+
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="search" name="search" placeholder="Procurar...">
+                    <input type="search" class="form-control" id="search" name="search" placeholder="Procurar...">
                     <button class="btn btn-outline-secondary custom-btn" type="submit">
                         <ion-icon name="search-outline" class="iconCentralizar"></ion-icon>
                         Buscar
@@ -39,9 +40,7 @@
                 <x-servicos-home servico_id="{{ $servicos->id }}" servico_imageservico="{{ $servicos->imageservico }}"
                     servico_nomeServico="{{ $servicos->nomeServico }}"
                     servico_valorDoServico="{{ $servicos->valorDoServico }}"
-                    descricaoservico="{{$servicos->descricaosevico}}"
-                    media="3.5"
-                    />
+                    descricaoservico="{{ $servicos->descricaosevico }}" media="3.5" />
             </div>
         @endforeach
     </div>

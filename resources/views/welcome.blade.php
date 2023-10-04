@@ -12,8 +12,8 @@
             <form action="/home/empresas" method="GET" id="searchForm">
 
 
-
-                {{-- <select id="select-empresaHome" class="js-buscacategoria select2 form-select"
+                {{--
+            <select id="select-empresaHome" class="js-buscacategoria select2 form-select"
                     data-placeholder="Busque por uma empresa" style="width: 100%" name="search">
                     <option value="" disabled selected>Busque por uma empresa</option>
                     @foreach ($empresasOrdenadasPaginadas as $empresaBusca)
@@ -22,6 +22,7 @@
                             {{ $empresaBusca['nomeFantasia'] }}</option>
                     @endforeach
                 </select> --}}
+
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" id="search" name="search" placeholder="Procurar...">
                     <button class="btn btn-outline-secondary custom-btn" type="submit">
@@ -29,6 +30,7 @@
                         Buscar
                     </button>
                 </div>
+
 
             </form>
 

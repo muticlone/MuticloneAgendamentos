@@ -38,7 +38,12 @@ Route::get('/empresas/dados/{id}', [HomeController::class, 'show']);
 Route::get('/', [HomeController::class, 'showServicos'])->name('home.servicos');
 Route::get('/servicos/categorias', [HomeController::class, 'categorias'])->name('home.sevico.categorias');
 Route::get('/busca/categorias', [HomeController::class, 'Showcategorias'])->name('busca.sevico.categorias');
-Route::get('/busca/servicos/json', [HomeController::class, 'busca'])->name('busca.sevico.json');
+
+
+// Route::get('/get-servicos', [HomeController::class, 'getServicos'])->name('get.servicos');
+
+
+
 
 
 
@@ -106,7 +111,11 @@ Route::get('/dashboard/business/{id}', [dashboardBusinessController::class, 'das
 Route::put('/atualizarmeta/{id}', [dashboardBusinessController::class, 'atualizarmeta'])->middleware('auth', 'company_or_root');
 Route::get('/agenda/business/{id}', [dashboardBusinessController::class, 'agendaBusiness'])->name('agenda.business')->middleware('auth', 'company_or_root');
 
+Route::get('/relatorio/clientes/{id}', [dashboardBusinessController::class, 'relatorioclientes'])->name('relatorio.clientes')->middleware('auth', 'company_or_root');
+
+Route::get('/relatorio/financeiro/{id}', [dashboardBusinessController::class, 'relatoriofinanceiro'])->name('relatorio.financeiro')->middleware('auth', 'company_or_root');
 
 
 
+Route::get('/relatorio/produtos/{id}', [dashboardBusinessController::class, 'relatorioProdutos'])->name('relatorio.produtos')->middleware('auth', 'company_or_root');
 

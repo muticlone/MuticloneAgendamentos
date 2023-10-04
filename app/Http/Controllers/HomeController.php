@@ -38,9 +38,6 @@ class HomeController extends Controller
                     ->orWhere('nomeFantasia', 'like', '%' . $search . '%')
                     ->orWhere('area_atuacao', 'like', '%' . $search . '%');
             })->get();
-
-
-
         } else {
 
 
@@ -48,79 +45,79 @@ class HomeController extends Controller
             $empresa = cadastro_de_empresa::orderBy('id', 'desc')->get();
         }
         $Cadastro_empresa = cadastro_de_empresa::orderBy('id', 'desc')->paginate(20);
-            $idis = [];
+        $idis = [];
 
-            foreach ($empresa as  $empresas) {
-                $idis[] =  $empresas->id;
+        foreach ($empresa as  $empresas) {
+            $idis[] =  $empresas->id;
+        }
+
+
+
+
+
+        $agendamentos = Agendamento::whereIn('cadastro_de_empresas_id', $idis)
+            ->whereNotNull('nota')
+            ->whereNotNull('comentario')
+            ->get();
+
+
+
+        $notasPorEmpresa = [];
+
+        foreach ($agendamentos as $agendamento) {
+            $cadastro_de_empresas_id = $agendamento->cadastro_de_empresas_id;
+            $nota = $agendamento->nota;
+
+            if (!isset($notasPorEmpresa[$cadastro_de_empresas_id])) {
+                $notasPorEmpresa[$cadastro_de_empresas_id] = [];
             }
 
 
+            $notasPorEmpresa[$cadastro_de_empresas_id][] = $nota;
+        }
 
 
 
-            $agendamentos = Agendamento::whereIn('cadastro_de_empresas_id', $idis)
-                ->whereNotNull('nota')
-                ->whereNotNull('comentario')
-                ->get();
+        $mediaNotasPorEmpresa = [];
 
-
-
-            $notasPorEmpresa = [];
-
-            foreach ($agendamentos as $agendamento) {
-                $cadastro_de_empresas_id = $agendamento->cadastro_de_empresas_id;
-                $nota = $agendamento->nota;
-
-                if (!isset($notasPorEmpresa[$cadastro_de_empresas_id])) {
-                    $notasPorEmpresa[$cadastro_de_empresas_id] = [];
-                }
-
-
-                $notasPorEmpresa[$cadastro_de_empresas_id][] = $nota;
+        foreach ($notasPorEmpresa as $empresaId => $notasDaEmpresa) {
+            if (count($notasDaEmpresa) > 0) {
+                $somaNotas = array_sum($notasDaEmpresa);
+                $mediaNotas = $somaNotas / count($notasDaEmpresa);
+                $mediaNotasPorEmpresa[$empresaId] = $mediaNotas;
+            } else {
+                // Se a empresa não tiver notas, defina a média como 0 ou outro valor padrão
+                $mediaNotasPorEmpresa[$empresaId] = 0;
             }
+        }
 
 
-
-            $mediaNotasPorEmpresa = [];
-
-            foreach ($notasPorEmpresa as $empresaId => $notasDaEmpresa) {
-                if (count($notasDaEmpresa) > 0) {
-                    $somaNotas = array_sum($notasDaEmpresa);
-                    $mediaNotas = $somaNotas / count($notasDaEmpresa);
-                    $mediaNotasPorEmpresa[$empresaId] = $mediaNotas;
-                } else {
-                    // Se a empresa não tiver notas, defina a média como 0 ou outro valor padrão
-                    $mediaNotasPorEmpresa[$empresaId] = 0;
-                }
-            }
+        // ordenar as empresas pela media das avaliação delas
+        $empresasOrdenadas = collect($empresa)->sortByDesc(function ($empr) use ($mediaNotasPorEmpresa) {
+            return isset($mediaNotasPorEmpresa[$empr->id]) ? $mediaNotasPorEmpresa[$empr->id] : 0;
+        })->values();
 
 
-            // ordenar as empresas pela media das avaliação delas
-            $empresasOrdenadas = collect($empresa)->sortByDesc(function ($empr) use ($mediaNotasPorEmpresa) {
-                return isset($mediaNotasPorEmpresa[$empr->id]) ? $mediaNotasPorEmpresa[$empr->id] : 0;
-            })->values();
+        function paginateCollectionWithBaseUrl($items, $perPage = 15, $page = null, $baseUrl = null, $options = [])
+        {
+            $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+            $items = $items instanceof Collection ? $items : Collection::make($items);
 
+            $paginator = new LengthAwarePaginator(
+                array_values($items->forPage($page, $perPage)->toArray()),
+                $items->count(),
+                $perPage,
+                $page,
+                $options
+            );
 
-            function paginateCollectionWithBaseUrl($items, $perPage = 15, $page = null, $baseUrl = null, $options = [])
-            {
-                $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-                $items = $items instanceof Collection ? $items : Collection::make($items);
+            // Defina a URL base para a paginação
+            $paginator->setPath($baseUrl);
 
-                $paginator = new LengthAwarePaginator(
-                    array_values($items->forPage($page, $perPage)->toArray()),
-                    $items->count(),
-                    $perPage,
-                    $page,
-                    $options
-                );
+            return $paginator;
+        }
 
-                // Defina a URL base para a paginação
-                $paginator->setPath($baseUrl);
-
-                return $paginator;
-            }
-
-            $empresasOrdenadasPaginadas = paginateCollectionWithBaseUrl($empresasOrdenadas, 20, null, '/home/empresas');
+        $empresasOrdenadasPaginadas = paginateCollectionWithBaseUrl($empresasOrdenadas, 50, null, '/home/empresas');
 
 
 
@@ -134,6 +131,21 @@ class HomeController extends Controller
 
         ]);
     }
+
+
+    // public function buscaEmpresa(Request $request){
+    //     // Obtém o termo de pesquisa da consulta HTTP
+    //     $searchTerm = $request->input('search');
+
+    //     // Consulta o banco de dados para encontrar empresas que correspondem ao termo de pesquisa
+    //     $empresas = cadastro_de_empresa::where('nome', 'LIKE', '%' . $searchTerm . '%')->get();
+
+    //     return response()->json($empresas);
+    // }
+
+
+
+
 
     public function showServicos()
     {
@@ -164,7 +176,11 @@ class HomeController extends Controller
         );
 
 
-        return view('Empresa.homeservicos', compact('search', 'paginatedItems', 'servico',  'servicoBusca'
+        return view('Empresa.homeservicos', compact(
+            'search',
+            'paginatedItems',
+            'servico',
+            'servicoBusca'
 
 
         ));

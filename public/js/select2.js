@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
     $('.js-buscacategoria').select2({
         theme: 'bootstrap-5',
         placeholder: 'Selecione um serviço',
-        maximumInputLength: 30,
         language: {
             noResults: function () {
                 return "Nenhum resultado encontrado";
@@ -50,4 +49,5 @@ document.addEventListener('DOMContentLoaded', function() {
         return $option;
     }
 });
+
 
