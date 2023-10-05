@@ -12,7 +12,7 @@
 
     <div class="btn-group" role="group" aria-label="Basic example">
         <a href="{{ route('dados.meu.cliente.ranks', ['idempresa' => $empresa_id]) }}"
-            class="btn btn-sm btn-outline-info btndashboard">Ranks</a>
+            class="btn btn-sm btn-outline-info btndashboard">Ranking</a>
     </div>
 
 </div>

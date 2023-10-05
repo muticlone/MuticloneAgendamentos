@@ -106,15 +106,17 @@ class MeusClientesController extends Controller
             } elseif ($status == 'busca') {
 
 
-                $nomes = Agendamento::where('cadastro_de_empresas_id', $id);
+
+                $idsClientes = Agendamento::where('cadastro_de_empresas_id', $id)
+                    ->where('finalizado', 1)
+                    ->where('cancelado', 0)
+                    ->pluck('user_id')
+                    ->toArray();
 
 
-                $idCliente = $nomes->distinct()
-                    ->join('users as agendamento_users', 'agendamentos.user_id', '=', 'agendamento_users.id')
-                    ->where('agendamento_users.name', '=', $search)
-                    ->pluck('agendamento_users.id');
-
-                $clientesOrdenados =  User::where('id',  $idCliente)->paginate(1);
+                $clientesOrdenados = User::whereIn('id', $idsClientes)
+                    ->where('name',  'like', '%' . $search . '%')
+                    ->paginate(20);
             } else {
                 return back();
             }
@@ -437,44 +439,35 @@ class MeusClientesController extends Controller
 
             $search = request('searchBuscaranks');
 
-            if($search){
+            if ($search) {
 
                 $idsClientes = Agendamento::where('cadastro_de_empresas_id', $idempresa)
-                ->where('finalizado', 1)
-                ->where('cancelado', 0)
-                ->pluck('user_id')
-                ->toArray();
+                    ->where('finalizado', 1)
+                    ->where('cancelado', 0)
+                    ->pluck('user_id')
+                    ->toArray();
 
 
 
 
-            $contagemClientes = array_count_values($idsClientes);
+                $contagemClientes = array_count_values($idsClientes);
 
-            $clienteComMaisAgendamentos = User::whereIn('id', $idsClientes)
-            ->where('name',  'like', '%' . $search . '%')
-            ->paginate(20);
-
-
-
-
-
-
-
-            }else{
+                $clienteComMaisAgendamentos = User::whereIn('id', $idsClientes)
+                    ->where('name',  'like', '%' . $search . '%')
+                    ->paginate(20);
+            } else {
                 $idsClientes = Agendamento::where('cadastro_de_empresas_id', $idempresa)
-                ->where('finalizado', 1)
-                ->where('cancelado', 0)
-                ->pluck('user_id')
-                ->toArray();
+                    ->where('finalizado', 1)
+                    ->where('cancelado', 0)
+                    ->pluck('user_id')
+                    ->toArray();
 
 
 
 
-            $contagemClientes = array_count_values($idsClientes);
+                $contagemClientes = array_count_values($idsClientes);
 
-            $clienteComMaisAgendamentos = User::whereIn('id', $idsClientes)->paginate(20);
-
-
+                $clienteComMaisAgendamentos = User::whereIn('id', $idsClientes)->paginate(20);
             }
 
 
@@ -508,8 +501,10 @@ class MeusClientesController extends Controller
 
 
 
-            return view('Empresa.DadosMeuranks',
-             compact('nomeEQuantidade', 'idempresa', 'clienteComMaisAgendamentos' ,'search'));
+            return view(
+                'Empresa.DadosMeuClientesRanks',
+                compact('nomeEQuantidade', 'idempresa', 'clienteComMaisAgendamentos', 'search')
+            );
         }
     }
 }

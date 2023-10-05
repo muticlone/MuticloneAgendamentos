@@ -25,9 +25,8 @@
 
             <form action="{{ route('dados.meus.clientes', ['id' => $empresa->id, 'status' => 'busca']) }}" method="GET"
                 id="searchForm">
-                <div class="col-md-4 pt-1">
-                    <x-select-meus-agendamentos :agendamento="$nomesDoscleintes" :value="$nomesDoscleintes" width="100%" />
-                </div>
+
+                <x-btn-busca idbtn="search" name="search" />
             </form>
         </div>
 
@@ -80,7 +79,18 @@
                 </tbody>
             </table>
         </div>
+        @if ($clientesOrdenados->count() === 0 && $search)
+            <div class="alert alert-warning pt-2" role="alert">
+                Não foi possível encontrar nenhuma serviço com: "{{ $search }}"</a>
+            </div>
+        @elseif($clientesOrdenados->count() === 0)
+            <div class="alert alert-warning pt-2" role="alert">
+                Não há eventos disponíveis
+            </div>
+        @endif
     </div>
+
+
     <x-pagination :paginatedItems="$clientes" />
 
 @endsection
