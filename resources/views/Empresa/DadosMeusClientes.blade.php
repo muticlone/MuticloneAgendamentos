@@ -11,34 +11,27 @@
 
 
     <div class="col-lg-12 col-sm-12 col-md-12 pt-2" align="center">
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <a href="{{ route('dados.meus.clientes', ['id' => $empresa->id, 'status' => 'ativos']) }}"
-                class="btn btn-sm btn-outline-info btndashboard">Ativos</a>
-        </div>
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <a href="{{ route('dados.meus.clientes', ['id' => $empresa->id, 'status' => 'clientesnaoatendido']) }}"
-                class="btn btn-sm btn-outline-info btndashboard">Clientes não atendidos</a>
-        </div>
 
+        <x-meu-meus-clientes empresa_id="{{ $empresa->id }}" />
 
 
     </div>
 
 
 
-<div class="col-md-9 offset-md-1 pt-2">
+    <div class="col-md-9 offset-md-1 pt-2">
 
         <div class="row">
 
-            <form action="{{ route('dados.meus.clientes', ['id' => $empresa->id, 'status' => 'busca']) }}" method="GET" id="searchForm">
+            <form action="{{ route('dados.meus.clientes', ['id' => $empresa->id, 'status' => 'busca']) }}" method="GET"
+                id="searchForm">
                 <div class="col-md-4 pt-1">
                     <x-select-meus-agendamentos :agendamento="$nomesDoscleintes" :value="$nomesDoscleintes" width="100%" />
                 </div>
             </form>
         </div>
 
-        <x-alert-busca-agendamento search="{{ $search }}"
-        href="/dados/meus/clientes/{{ $empresa->id }}/ativos"/>
+        <x-alert-busca-agendamento search="{{ $search }}" href="/dados/meus/clientes/{{ $empresa->id }}/ativos" />
 
         <div class="table-responsive">
             <table class="table align-middle">
@@ -76,8 +69,7 @@
 
                                 <x-btn-whatsapp numero="{{ str_replace(['(', ')', ' ', '-'], '', $cliente->phone) }}"
                                     mensagem="Olá! {{ $cliente->name }} Sentimos sua falta e estamos ansiosos para recebê-lo de volta. Como podemos ajudar você hoje?"
-                                    detalhes="{{ $cliente->id }}" idempresa="{{ $empresa->id }}"
-                                    />
+                                    detalhes="{{ $cliente->id }}" idempresa="{{ $empresa->id }}" />
 
 
                             </td>

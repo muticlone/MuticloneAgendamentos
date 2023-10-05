@@ -65,6 +65,21 @@ class dashboardBusinessController extends Controller
             $clientetotal = count($clientes);
 
 
+            $clienteMaisFrequente = array_search(max($clientes), $clientes);
+
+            $clienteComMaisAgendamentos = User::where('id', $clienteMaisFrequente)->first();
+
+            $quantidadeRepeticoes = $clientes[$clienteMaisFrequente];
+
+            $nomeClienteMaisFrequente =  $clienteComMaisAgendamentos->name;
+
+            $partesDoNome = explode(" ",  $nomeClienteMaisFrequente);
+
+            // Pega o primeiro elemento do array resultante
+            $nomeClienteMaisFrequente = $partesDoNome[0];
+
+
+
 
 
             $faturamentoAnual = array_sum($valorRecebidoNumerico);
@@ -197,6 +212,10 @@ class dashboardBusinessController extends Controller
             'media' =>  $media,
             'Porcentagemdepedidoscancelados' => $Porcentagemdepedidoscancelados,
             'quantidadedepedidoscacenlados' => $quantidadedepedidoscacenlados,
+            'quantidadeRepeticoes' =>  $quantidadeRepeticoes,
+            'nomeClienteMaisFrequente' => $nomeClienteMaisFrequente,
+            'idcliente' =>  $clienteMaisFrequente,
+
         ]);
     }
 
@@ -251,6 +270,13 @@ class dashboardBusinessController extends Controller
             $clientetotal = count($clientes);
 
 
+            $clienteMaisFrequente = array_search(max($clientes), $clientes);
+
+            $clienteComMaisAgendamentos = User::where('id', $clienteMaisFrequente)->first();
+
+            $quantidadeRepeticoes = $clientes[$clienteMaisFrequente];
+
+
             $userIdmesatual =  $MesAtual->pluck('user_id')->toArray();
             $clientesMesatual = array_count_values($userIdmesatual);
             $clientemesatual = count($clientesMesatual);
@@ -267,6 +293,8 @@ class dashboardBusinessController extends Controller
                 'Cancelados/confirmados' => $totalDepedidosConfirmadosEcancelados,
                 'totalDeClientes' =>  $clientetotal,
                 'clientemesatual' => $clientemesatual,
+                'clienteComMaisAgendamentos' =>  $clienteComMaisAgendamentos->name,
+                'quantidadeRepeticoes' =>   $quantidadeRepeticoes
 
             ];
 

@@ -11,13 +11,15 @@
 
                 {{-- <x-select-servico-home :servico="$servicoBusca" /> --}}
 
-                <div class="input-group mb-3">
+                {{-- <div class="input-group mb-3">
                     <input type="search" class="form-control" id="search" name="search" placeholder="Procurar...">
                     <button class="btn btn-outline-secondary custom-btn" type="submit">
                         <ion-icon name="search-outline" class="iconCentralizar"></ion-icon>
                         Buscar
                     </button>
-                </div>
+                </div> --}}
+
+                <x-btn-busca idbtn="search" name="search" />
 
 
             </form>

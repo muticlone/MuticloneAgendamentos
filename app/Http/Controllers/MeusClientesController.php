@@ -347,10 +347,10 @@ class MeusClientesController extends Controller
             $datadoultimoagendamento = date('d/m/Y', strtotime($dataultimo));
 
             $agendamentos = Agendamento::where('user_id', $id)
-            ->where('cadastro_de_empresas_id', $idempresa)
-            ->where('finalizado', 1)
-            ->where('cancelado', 0)
-            ->get();
+                ->where('cadastro_de_empresas_id', $idempresa)
+                ->where('finalizado', 1)
+                ->where('cancelado', 0)
+                ->get();
 
 
 
@@ -360,16 +360,16 @@ class MeusClientesController extends Controller
             $totalgasto = number_format($totalgasto, 2, ',', '.');
 
             $agendamentoscancelados = Agendamento::where('user_id', $id)
-            ->where('cadastro_de_empresas_id', $idempresa)
-            ->where('cancelado', 1)
-            ->get();
+                ->where('cadastro_de_empresas_id', $idempresa)
+                ->where('cancelado', 1)
+                ->get();
 
             $agendamentosnaoconfirmados = Agendamento::where('user_id', $id)
-            ->where('cadastro_de_empresas_id', $idempresa)
-            ->where('finalizado', 0)
-            ->where('confirmado', 0)
-            ->where('cancelado', 0)
-            ->get();
+                ->where('cadastro_de_empresas_id', $idempresa)
+                ->where('finalizado', 0)
+                ->where('confirmado', 0)
+                ->where('cancelado', 0)
+                ->get();
 
             $numeroDeCanelados = count($agendamentoscancelados);
             $numeroDoPedidos = count($agendamentos);
@@ -395,11 +395,11 @@ class MeusClientesController extends Controller
 
 
 
-                $formasPagamento = $agendamentograficos->pluck('formaDepagamentoAgendamento')
+            $formasPagamento = $agendamentograficos->pluck('formaDepagamentoAgendamento')
                 ->unique()
                 ->toArray();
 
-                $produto = $agendamentograficos->pluck('nomeServiçoAgendamento')->flatten()->toArray();
+            $produto = $agendamentograficos->pluck('nomeServiçoAgendamento')->flatten()->toArray();
 
             $dados = [
                 'nome' => $clientesBusca->name,
@@ -410,16 +410,106 @@ class MeusClientesController extends Controller
                 'totalGasto' =>  $totalgasto,
                 'PedidosCanelados' =>  $numeroDeCanelados,
                 'numeroDoPedidos' =>      $numeroDoPedidos,
-                'numeroDenaoconfirmados'=> $numeroDenaoconfirmados,
+                'numeroDenaoconfirmados' => $numeroDenaoconfirmados,
                 'porcentagemDeCancelamento' =>  $porcentagemDeCancelamento,
 
             ];
 
-            $pdf = Pdf::loadView('Empresa.Relatorio', compact('dados' ,'formasPagamento','produto'));
+            $pdf = Pdf::loadView('Empresa.Relatorio', compact('dados', 'formasPagamento', 'produto'));
 
 
             return response($pdf->output())->header('Content-Type', 'application/pdf');
+        }
+    }
 
+    public function showMeuClienteranks($idempresa)
+    {
+
+        $user = auth()->user();
+
+        $empresa = cadastro_de_empresa::findOrFail($idempresa);
+
+        $idempresa = $empresa->id;
+
+        if ($user->id != $empresa->user_id) {
+            return redirect('/dashboard');
+        } else {
+
+            $search = request('searchBuscaranks');
+
+            if($search){
+
+                $idsClientes = Agendamento::where('cadastro_de_empresas_id', $idempresa)
+                ->where('finalizado', 1)
+                ->where('cancelado', 0)
+                ->pluck('user_id')
+                ->toArray();
+
+
+
+
+            $contagemClientes = array_count_values($idsClientes);
+
+            $clienteComMaisAgendamentos = User::whereIn('id', $idsClientes)
+            ->where('name',  'like', '%' . $search . '%')
+            ->paginate(20);
+
+
+
+
+
+
+
+            }else{
+                $idsClientes = Agendamento::where('cadastro_de_empresas_id', $idempresa)
+                ->where('finalizado', 1)
+                ->where('cancelado', 0)
+                ->pluck('user_id')
+                ->toArray();
+
+
+
+
+            $contagemClientes = array_count_values($idsClientes);
+
+            $clienteComMaisAgendamentos = User::whereIn('id', $idsClientes)->paginate(20);
+
+
+            }
+
+
+
+
+            $nomeEQuantidade = [];
+
+            foreach ($clienteComMaisAgendamentos as $cliente) {
+                $nome = $cliente->name;
+                $phone = $cliente->phone;
+                $id = $cliente->id;
+                $quantidade = isset($contagemClientes[$cliente->id]) ? $contagemClientes[$cliente->id] : 0;
+
+
+                $clienteInfo = [
+                    'nome' => $nome,
+                    'quantidade' => $quantidade,
+                    'phone' => $phone,
+                    'id' => $id,
+                ];
+
+
+                $nomeEQuantidade[] = $clienteInfo;
+            }
+
+            //ordernar maior quantidade no topo
+            usort($nomeEQuantidade, function ($a, $b) {
+                return $b['quantidade'] - $a['quantidade'];
+            });
+
+
+
+
+            return view('Empresa.DadosMeuranks',
+             compact('nomeEQuantidade', 'idempresa', 'clienteComMaisAgendamentos' ,'search'));
         }
     }
 }

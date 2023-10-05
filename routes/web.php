@@ -81,7 +81,11 @@ Route::put('/reagendar/{id}', [AgendamentoController::class, 'ReagendarPedidoEmp
 
 Route::get('/dados/meus/clientes/{id}/{status}', [MeusClientesController::class, 'showMeusClientes'])->name('dados.meus.clientes')->middleware('auth', 'company_or_root');
 Route::get('/dados/meu/cliente/{id}/{idempresa}', [MeusClientesController::class, 'showMeuCliente'])->name('dados.meu.cliente')->middleware('auth', 'company_or_root');
+Route::get('/cliente/ranks/{idempresa}', [MeusClientesController::class, 'showMeuClienteranks'])->name('dados.meu.cliente.ranks')->middleware('auth', 'company_or_root');
 Route::get('/relatorio/meu/cliente/{id}/{idempresa}', [MeusClientesController::class, 'showrelatorioMeuCliente'])->name('relatorio.meu.cliente')->middleware('auth', 'company_or_root');
+
+
+
 
 Route::get('/cadastro/servicos/{id}', [CadastroServicoController::class, 'create'])->name('cadastro.servicos')->middleware('auth', 'company_or_root');
 Route::post('/cadastrar/servico/{id}', [CadastroServicoController::class, 'store'])->name('cadastrar.servico')->middleware('auth', 'company_or_root');

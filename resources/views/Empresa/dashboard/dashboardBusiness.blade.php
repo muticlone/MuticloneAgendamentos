@@ -172,6 +172,17 @@
             <x-small-user tema="{{ $clientetotal }}" txt="Clientes total" icon='fas fa-user-plus'
                 link="/dados/meus/clientes/{{ $idempresa }}/ativos" />
         </div>
+
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
+            <x-small-user tema="{{ ucfirst($nomeClienteMaisFrequente )}} " txt="Quantidade de pedidos: {{ $quantidadeRepeticoes }}" icon='fas fa-user-plus'
+             btntxt="Mais informação, cliente com a maior frequência "
+             link="/dados/meu/cliente/{{ $idcliente }}/{{ $idempresa }}"
+             />
+        </div>
+
+
+
     </div>
 
     @if ($metaAnual > 0)

@@ -71,6 +71,15 @@
                 <td> {{ $dados['clientemesatual'] }}</td>
             </tr>
 
+            <tr>
+                <td>Cliente com a maior frequência</td>
+                <td> {{ $dados['clienteComMaisAgendamentos'] }}</td>
+            </tr>
+            <tr>
+                <td>Quantidade de agendamentos feitos por {{ $dados['clienteComMaisAgendamentos'] }}</td>
+                <td> {{ $dados['quantidadeRepeticoes'] }}</td>
+            </tr>
+
 
 
 
