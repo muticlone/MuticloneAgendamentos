@@ -24,7 +24,7 @@
 
         </div>
         <div class="icon">
-            <i class="ion ion-stats-bars"></i>
+            <i class="fas fa-user-plus"></i>
         </div>
         <a href="{{ $link }}" class="small-box-footer">
             <font style="vertical-align: inherit;">

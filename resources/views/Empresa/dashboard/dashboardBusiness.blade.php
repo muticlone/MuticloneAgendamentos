@@ -21,38 +21,34 @@
                 <div class="col-3" >
                     <form action="/relatorio/clientes/{{ $idempresa }}">
 
-                        <button type="submit" class="btn btn-info " >
-
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-filetype-pdf" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z"/>
-                              </svg>
-                              Relatório clientes
-                        </button>
+                        <x-btn-relatorio nome="Relatório clientes" />
                     </form>
                 </div>
                 <div class="col-3" >
                     <form action="/relatorio/financeiro/{{ $idempresa }}">
 
-                        <button type="submit" class="btn btn-info " >
+                        <x-btn-relatorio nome="Relatório financeiro" />
 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-filetype-pdf" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z"/>
-                              </svg>
-                              Relatório financeiro
-                        </button>
+
                     </form>
                 </div>
 
                 <div class="col-3" >
                     <form action="/relatorio/produtos/{{ $idempresa }}">
 
-                        <button type="submit" class="btn btn-info " >
+                        <x-btn-relatorio nome="Relatório Produtos" />
 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-filetype-pdf" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z"/>
-                              </svg>
-                              Relatório Produtos
-                        </button>
+
+                    </form>
+                </div>
+
+
+                <div class="col-3" >
+                    <form action="/relatorio/ranking/{{ $idempresa }}">
+
+                        <x-btn-relatorio nome="Relatório ranking" />
+
+
                     </form>
                 </div>
 
@@ -136,36 +132,47 @@
 
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
-            <x-small-user tema="{{ $quantidadedepedidos }}" txt="Total de Pedidos" icon='fas fa-shopping-cart'
+            <x-small-user tema="{{ $quantidadedepedidos }}" txt="Pedidos finalizados" icon='fas fa-shopping-cart'
                 link="/meus/agendamentos/empresa/{{ $idempresa }}/finalizados" class="small-box-footer" />
 
         </div>
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
-
-            <x-small-user tema="{{ $quantidadedepedidosmesatual }}" txt="Pedidos mês atual" icon='fas fa-shopping-cart'
-                link="/meus/agendamentos/empresa/{{ $idempresa }}/finalizados" class="small-box-footer" />
+            <x-small-user tema="{{  $numeroDenaoconfirmados }}" txt="Pedidos aguardando confirmar" icon='fas fa-shopping-cart'
+                link="/meus/agendamentos/empresa/{{ $idempresa }}/pendentes" class="small-box-footer" />
 
         </div>
+
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
-            <x-agendamentos-cancelados Porcentagemdepedidoscancelados="{{ $Porcentagemdepedidoscancelados }}"
-                quantidadedepedidoscacenlados="{{ $quantidadedepedidoscacenlados }}"
-                link="/meus/agendamentos/empresa/{{ $idempresa }}/cancelados" />
+
+
+
+            <x-small-user tema="{{$quantidadedepedidoscacenlados  }}" txt="Pedidos cancelados {{ $Porcentagemdepedidoscancelados}}"
+            link="/meus/agendamentos/empresa/{{ $idempresa }}/cancelados"
+            icon='fa fa-times'
+            />
 
         </div>
 
-
-
-
-
-    </div>
-    <div class="row g-12">
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
-            <x-small-user tema="{{ $clientemesatual }}" txt="Clientes mês atual" icon='fas fa-user-plus' link="#" />
+            <x-small-user tema="{{ $agendamentosconfirmados }}" txt="Pedidos confirmados" icon='fas fa-shopping-cart'
+                link="/meus/agendamentos/empresa/{{ $idempresa }}/confirmados" class="small-box-footer" />
 
         </div>
+
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
+            <x-small-user tema="{{  $todosOspedidos }}" txt="Todos os Pedidos" icon='fas fa-shopping-cart'
+                link="/meus/agendamentos/empresa/{{ $idempresa }}/todos" class="small-box-footer" />
+
+        </div>
+
+
+
+
+
 
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
@@ -177,13 +184,29 @@
 
             <x-small-user tema="{{ ucfirst($nomeClienteMaisFrequente )}} " txt="Quantidade de pedidos: {{ $quantidadeRepeticoes }}" icon='fas fa-user-plus'
              btntxt="Mais informação, cliente com a maior frequência "
-             link="/dados/meu/cliente/{{ $idcliente }}/{{ $idempresa }}"
+             link="/cliente/ranks/{{ $idempresa }}"
              />
         </div>
 
 
 
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
+
+            <x-small-user tema="{{ $quantidadedepedidosmesatual }}" txt="Pedidos mês atual" icon='fas fa-shopping-cart'
+                link="/meus/agendamentos/empresa/{{ $idempresa }}/finalizados" class="small-box-footer" />
+
+        </div>
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
+            <x-small-user tema="{{ $clientemesatual }}" txt="Clientes mês atual" icon='fas fa-user-plus' link="#" />
+
+        </div>
+
+
+
     </div>
+
 
     @if ($metaAnual > 0)
         <label for="valorDaMetaAnual">Faturamento anual</label>

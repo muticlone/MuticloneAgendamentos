@@ -46,10 +46,32 @@ class dashboardBusinessController extends Controller
             $contagemFinalizados = array_count_values($finalizado);
             $quantidadedepedidos = $contagemFinalizados[1] ?? 0;
 
-            $totalDepedidosConfirmadosEcancelados =   $quantidadedepedidos +  $quantidadedepedidoscacenlados;
+            $agendamentosnaoconfirmados =  Agendamento::where('cadastro_de_empresas_id', $id)
+            ->where('finalizado', 0)
+            ->where('confirmado', 0)
+            ->where('cancelado', 0)
+            ->get();
+
+            $agendamentosconfirmados =  Agendamento::where('cadastro_de_empresas_id', $id)
+            ->where('finalizado', 0)
+            ->where('confirmado', 1)
+            ->where('cancelado', 0)
+            ->get();
 
 
-            $Porcetagemcancelados = ($quantidadedepedidoscacenlados /   $totalDepedidosConfirmadosEcancelados) * 100;
+            $numeroconfirmados = count($agendamentosconfirmados);
+
+
+            $numeroDenaoconfirmados = count($agendamentosnaoconfirmados);
+
+
+
+
+            $todosOspedidos =
+            $quantidadedepedidos +  $quantidadedepedidoscacenlados +  $numeroDenaoconfirmados +  $numeroconfirmados;
+
+
+            $Porcetagemcancelados = ($quantidadedepedidoscacenlados /   $todosOspedidos) * 100;
             $Porcentagemdepedidoscancelados = number_format($Porcetagemcancelados, 2, '.', '') . '%';
 
             $idempresa =  $agendamentos->pluck('cadastro_de_empresas_id')->first();
@@ -215,217 +237,13 @@ class dashboardBusinessController extends Controller
             'quantidadeRepeticoes' =>  $quantidadeRepeticoes,
             'nomeClienteMaisFrequente' => $nomeClienteMaisFrequente,
             'idcliente' =>  $clienteMaisFrequente,
-
+            'todosOspedidos' => $todosOspedidos,
+            'numeroDenaoconfirmados' =>  $numeroDenaoconfirmados,
+            'agendamentosconfirmados' => $numeroconfirmados
         ]);
     }
 
-    public function relatorioclientes($id)
-    {
 
-
-
-        $user = auth()->user();
-        $empresa = cadastro_de_empresa::findOrFail($id);
-
-        if ($user->id != $empresa->user_id) {
-            return redirect('/dashboard');
-        } else {
-
-            $agendamentos =  Agendamento::where('cadastro_de_empresas_id', $id)
-                ->where('finalizado', 1)
-                ->where('cancelado', 0)
-                ->get();
-
-
-            $numeroMesAtual = Carbon::now()->month;
-            $MesAtual = Agendamento::where('cadastro_de_empresas_id', $id)
-                ->where('finalizado', 1)
-                ->whereMonth('data_hora_finalizacao_agendamento', $numeroMesAtual)->get();
-
-
-            $finalizado =  $agendamentos->pluck('finalizado')->toArray();
-            $contagemFinalizados = array_count_values($finalizado);
-            $quantidadeTotalDePedidos = $contagemFinalizados[1] ?? 0;
-
-            $finalizadomesatual =  $MesAtual->pluck('finalizado')->toArray();
-            $contagemFinalizadosmesatual = array_count_values($finalizadomesatual);
-            $quantidadedepedidosmesatual = $contagemFinalizadosmesatual[1] ?? 0;
-
-
-            $agendamentoscancelados =  Agendamento::where('cadastro_de_empresas_id', $id)->where('cancelado', 1)->get();
-            $cancelado = $agendamentoscancelados->pluck('cancelado')->toArray();
-            $contagemcancelado = array_count_values($cancelado);
-            $quantidadedepedidoscacenlados = $contagemcancelado[1] ?? 0;
-
-            $totalDepedidosConfirmadosEcancelados =   $quantidadeTotalDePedidos +  $quantidadedepedidoscacenlados;
-
-
-            $Porcetagemcancelados = ($quantidadedepedidoscacenlados /   $totalDepedidosConfirmadosEcancelados) * 100;
-            $Porcentagemdepedidoscancelados = number_format($Porcetagemcancelados, 2, '.', '') . '%';
-
-
-            $userId =  $agendamentos->pluck('user_id')->toArray();
-
-            $clientes = array_count_values($userId);
-            $clientetotal = count($clientes);
-
-
-            $clienteMaisFrequente = array_search(max($clientes), $clientes);
-
-            $clienteComMaisAgendamentos = User::where('id', $clienteMaisFrequente)->first();
-
-            $quantidadeRepeticoes = $clientes[$clienteMaisFrequente];
-
-
-            $userIdmesatual =  $MesAtual->pluck('user_id')->toArray();
-            $clientesMesatual = array_count_values($userIdmesatual);
-            $clientemesatual = count($clientesMesatual);
-
-
-
-
-            $dados = [
-                'nome' => $empresa->nomeFantasia,
-                'quantidadeTotalDePedidos'  => $quantidadeTotalDePedidos,
-                'quantidadedepedidosmesatual' => $quantidadedepedidosmesatual,
-                'quantidadedepedidoscacenlados' => $quantidadedepedidoscacenlados,
-                'taxaCancelamento' =>  $Porcentagemdepedidoscancelados,
-                'Cancelados/confirmados' => $totalDepedidosConfirmadosEcancelados,
-                'totalDeClientes' =>  $clientetotal,
-                'clientemesatual' => $clientemesatual,
-                'clienteComMaisAgendamentos' =>  $clienteComMaisAgendamentos->name,
-                'quantidadeRepeticoes' =>   $quantidadeRepeticoes
-
-            ];
-
-
-
-
-
-            $pdf = Pdf::loadView('Empresa.dashboard.relatorioClientes', compact('dados'));
-
-            //
-
-
-            return response($pdf->output())->header('Content-Type', 'application/pdf');
-        }
-    }
-
-    public function relatoriofinanceiro($id)
-    {
-
-
-
-        $user = auth()->user();
-        $empresa = cadastro_de_empresa::findOrFail($id);
-
-        if ($user->id != $empresa->user_id) {
-            return redirect('/dashboard');
-        } else {
-
-            $agendamentos =  Agendamento::where('cadastro_de_empresas_id', $id)
-                ->where('finalizado', 1)
-                ->where('cancelado', 0)
-                ->get();
-
-
-
-            $metaAnual =  $empresa->metaDeFaturamento;
-            $metaFormatada =  'R$ ' . number_format($metaAnual, 2, ',', '.');
-            $metamensal = $metaAnual / 12;
-            $metamensalFormatada =   'R$ ' . number_format($metamensal, 2, ',', '.');
-
-
-
-            $valorPorMes = [];
-
-            $mesAtual = Carbon::now()->locale('pt_BR')->monthName;
-
-            for ($mes = 1; $mes <= 12; $mes++) {
-                $agendamentoFaturamentoanual = Agendamento::where('cadastro_de_empresas_id', $id)
-                    ->where('finalizado', 1)
-                    ->whereMonth('data_hora_finalizacao_agendamento', $mes)
-                    ->get();
-
-                $valorRecebidoMes = $agendamentoFaturamentoanual->sum('valorTotalAgendamento');
-
-                $nomeMes = Carbon::createFromDate(null, $mes, null)->locale('pt_BR')->monthName;
-                $valorPorMes[$nomeMes] = $valorRecebidoMes;
-
-                if ($nomeMes === $mesAtual) {
-                    $valorMesAtual = $valorRecebidoMes;
-                    $metamensal = $metaAnual / 12;
-                    $ValorFaltaParaChegarNaMetamensal = $metamensal - $valorMesAtual;
-                    if ($metaAnual > 0) {
-                        $porcentagem_atingidamensal = ($valorMesAtual / $metamensal) * 100;
-                        if ($porcentagem_atingidamensal > 100) {
-                            $porcentagem_atingidamensal = 100;
-                        }
-                    }
-                }
-            }
-
-
-
-            $valorRecebido =  $agendamentos->pluck('valorTotalAgendamento')->toArray();
-            $valorRecebidoNumerico = array_map('intval', $valorRecebido);
-            $faturamentoAnual = array_sum($valorRecebidoNumerico);
-
-
-
-            $formaPagamentoContagemTotal = [];
-            $formasPagamento = $agendamentos->pluck('formaDepagamentoAgendamento')->toArray();
-            $formaPagamentoContagemTotal[] = array_count_values($formasPagamento);
-
-            $produto = $agendamentos->pluck('nomeServiçoAgendamento')->flatten()->toArray();
-            $produtosTotal = array_count_values($produto);
-
-
-            $dados = [
-
-                'metaAnual' =>  $metaFormatada,
-                'metamensal' =>   $metamensalFormatada,
-                'faturamentoAnual' =>  $faturamentoAnual,
-            ];
-
-
-
-
-
-            $pdf = Pdf::loadView('Empresa.dashboard.relatoriofinanceiro', compact('dados', 'valorPorMes', 'formaPagamentoContagemTotal', 'produtosTotal'));
-
-            //
-
-
-            return response($pdf->output())->header('Content-Type', 'application/pdf');
-        }
-    }
-
-    public function relatorioProdutos($id)
-    {
-
-
-        $user = auth()->user();
-        $empresa = cadastro_de_empresa::findOrFail($id);
-
-        if ($user->id != $empresa->user_id) {
-            return redirect('/dashboard');
-        } else {
-
-            $agendamentos =  Agendamento::where('cadastro_de_empresas_id', $id)
-                ->where('finalizado', 1)
-                ->where('cancelado', 0)
-                ->get();
-
-            $produto = $agendamentos->pluck('nomeServiçoAgendamento')->flatten()->toArray();
-            $produtosTotal = array_count_values($produto);
-
-            $pdf = Pdf::loadView('Empresa.dashboard.relatorioprodutos', compact('produtosTotal'));
-
-
-            return response($pdf->output())->header('Content-Type', 'application/pdf');
-        }
-    }
 
     public function atualizarmeta($id,  Request $request)
     {

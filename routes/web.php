@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\OpenAIController;
+use App\Http\Controllers\RelatorioController;
 use App\Http\Controllers\RootController;
 use Illuminate\Support\Facades\Auth;
 
@@ -82,7 +83,6 @@ Route::put('/reagendar/{id}', [AgendamentoController::class, 'ReagendarPedidoEmp
 Route::get('/dados/meus/clientes/{id}/{status}', [MeusClientesController::class, 'showMeusClientes'])->name('dados.meus.clientes')->middleware('auth', 'company_or_root');
 Route::get('/dados/meu/cliente/{id}/{idempresa}', [MeusClientesController::class, 'showMeuCliente'])->name('dados.meu.cliente')->middleware('auth', 'company_or_root');
 Route::get('/cliente/ranks/{idempresa}', [MeusClientesController::class, 'showMeuClienteranks'])->name('dados.meu.cliente.ranks')->middleware('auth', 'company_or_root');
-Route::get('/relatorio/meu/cliente/{id}/{idempresa}', [MeusClientesController::class, 'showrelatorioMeuCliente'])->name('relatorio.meu.cliente')->middleware('auth', 'company_or_root');
 
 
 
@@ -115,11 +115,12 @@ Route::get('/dashboard/business/{id}', [dashboardBusinessController::class, 'das
 Route::put('/atualizarmeta/{id}', [dashboardBusinessController::class, 'atualizarmeta'])->middleware('auth', 'company_or_root');
 Route::get('/agenda/business/{id}', [dashboardBusinessController::class, 'agendaBusiness'])->name('agenda.business')->middleware('auth', 'company_or_root');
 
-Route::get('/relatorio/clientes/{id}', [dashboardBusinessController::class, 'relatorioclientes'])->name('relatorio.clientes')->middleware('auth', 'company_or_root');
 
-Route::get('/relatorio/financeiro/{id}', [dashboardBusinessController::class, 'relatoriofinanceiro'])->name('relatorio.financeiro')->middleware('auth', 'company_or_root');
-
+Route::get('/relatorio/meu/cliente/{id}/{idempresa}', [RelatorioController::class, 'showrelatorioMeuCliente'])->name('relatorio.meu.cliente')->middleware('auth', 'company_or_root');
 
 
-Route::get('/relatorio/produtos/{id}', [dashboardBusinessController::class, 'relatorioProdutos'])->name('relatorio.produtos')->middleware('auth', 'company_or_root');
+
+Route::get('/relatorio/clientes/{id}', [RelatorioController::class, 'relatorioclientes'])->name('relatorio.clientes')->middleware('auth', 'company_or_root');
+Route::get('/relatorio/financeiro/{id}', [RelatorioController::class, 'relatoriofinanceiro'])->name('relatorio.financeiro')->middleware('auth', 'company_or_root');
+Route::get('/relatorio/produtos/{id}', [RelatorioController::class, 'relatorioProdutos'])->name('relatorio.produtos')->middleware('auth', 'company_or_root');
 

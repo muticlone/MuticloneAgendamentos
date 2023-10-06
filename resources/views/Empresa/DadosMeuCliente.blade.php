@@ -67,29 +67,58 @@
            </div>
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
-            <x-small-user tema="{{ $numeroDoPedidos }}" txt="Todal de agendamentos finalizados"
+            <x-small-user tema="{{ $numeroDoPedidos }}" txt="Pedidos finalizados"
             link="/meus/agendamentos/empresa/{{ $idEmpresa }}/finalizados?search={{ $clientesBusca->name }}"
             icon='fas fa-user-plus'
             />
 
         </div>
+
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
-
-
-            <x-agendamentos-cancelados Porcentagemdepedidoscancelados="{{ $porcentagemDeCancelamento }} %"
-            quantidadedepedidoscacenlados="{{ $numeroDeCanelados }}"
-            link="/meus/agendamentos/empresa/{{ $idEmpresa }}/cancelados?search={{ $clientesBusca->name }}" />
+            <x-small-user tema="{{ $numeroDeconfirmados }}" txt="Pedidos cofirmados"
+            link="/meus/agendamentos/empresa/{{ $idEmpresa }}/confirmados?search={{ $clientesBusca->name }}"
+            icon='fas fa-user-plus'
+            />
 
         </div>
+
+
+
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
-            <x-small-user tema="{{$numeroDenaoconfirmados  }} " txt="Agendamentos aguardando confirmar"
+            <x-small-user tema="{{$numeroDenaoconfirmados  }} " txt="Pedidos aguardando confirmar"
             link="/meus/agendamentos/empresa/{{ $idEmpresa }}/pendentes?search={{ $clientesBusca->name }}"
             icon='fas fa-user-plus'
             />
 
         </div>
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
+
+            <x-small-user tema="{{ $numeroDeCanelados }}" txt="Pedidos Cancelados {{ $porcentagemDeCancelamento }} %"
+            link="/meus/agendamentos/empresa/{{ $idEmpresa }}/cancelados?search={{ $clientesBusca->name }}"
+            icon='fa fa-times'
+            />
+
+
+
+        </div>
+
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
+
+            <x-small-user tema="{{ $totalDepedidos }}" txt="Total de pedidos"
+            link="/meus/agendamentos/empresa/{{ $idEmpresa }}/cancelados?search={{ $clientesBusca->name }}"
+            icon='fas fa-user-plus'
+            />
+
+
+
+        </div>
+
+
+
 
 
         {{-- <div class="col-lg-4 col-sm-12 col-md-12 pt-2">

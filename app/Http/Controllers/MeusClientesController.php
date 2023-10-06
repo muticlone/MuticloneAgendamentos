@@ -179,7 +179,7 @@ class MeusClientesController extends Controller
 
 
             $clientesBusca =  User::findOrFail($id);
-            $agendamentos = Agendamento::where('user_id', $id)
+            $agendamentosfinalizados = Agendamento::where('user_id', $id)
                 ->where('cadastro_de_empresas_id', $idempresa)
                 ->where('finalizado', 1)
                 ->where('cancelado', 0)
@@ -194,6 +194,13 @@ class MeusClientesController extends Controller
                 ->where('cadastro_de_empresas_id', $idempresa)
                 ->where('finalizado', 0)
                 ->where('confirmado', 0)
+                ->where('cancelado', 0)
+                ->get();
+
+            $agendamentosconfirmados = Agendamento::where('user_id', $id)
+                ->where('cadastro_de_empresas_id', $idempresa)
+                ->where('finalizado', 0)
+                ->where('confirmado', 1)
                 ->where('cancelado', 0)
                 ->get();
 
@@ -248,7 +255,7 @@ class MeusClientesController extends Controller
 
             $dataprimeiroagendamento = date('d/m/Y', strtotime($dataprimeiro));
 
-            $numeroDoPedidos = count($agendamentos);
+            $numeroDoPedidos = count($agendamentosfinalizados);
 
             $numeroDeCanelados = count($agendamentoscancelados);
 
@@ -256,7 +263,9 @@ class MeusClientesController extends Controller
 
             $numeroDenaoavaliados = count($agendamentonaoavaliado);
 
-            $totalDepedidos =  $numeroDoPedidos +  $numeroDeCanelados;
+            $numeroDeconfirmados = count( $agendamentosconfirmados);
+
+            $totalDepedidos =  $numeroDoPedidos +  $numeroDeCanelados + $numeroDenaoconfirmados +   $numeroDeconfirmados;
 
             if ($totalDepedidos > 0) {
                 $porcentagemDeCancelamento = ($numeroDeCanelados /   $totalDepedidos) * 100;
@@ -266,8 +275,8 @@ class MeusClientesController extends Controller
             $porcentagemDeCancelamento = number_format($porcentagemDeCancelamento, 2);
 
 
-            $idEmpresa = $agendamentos->pluck('cadastro_de_empresas_id')->first();
-            $gasto =  $agendamentos->pluck('valorTotalAgendamento')->toArray();
+            $idEmpresa = $agendamentosfinalizados->pluck('cadastro_de_empresas_id')->first();
+            $gasto =  $agendamentosfinalizados->pluck('valorTotalAgendamento')->toArray();
 
             $totalgasto = array_sum($gasto);
             $totalgasto = number_format($totalgasto, 2, ',', '.');
@@ -280,7 +289,7 @@ class MeusClientesController extends Controller
 
         return view('Empresa.DadosMeuCliente', [
             'clientesBusca' =>  $clientesBusca,
-            'agendamentos' =>  $agendamentos,
+            'agendamentos' =>  $agendamentosfinalizados,
             'numeroDoPedidos' =>  $numeroDoPedidos,
             'idEmpresa' =>  $idEmpresa,
             'numeroDeCanelados' => $numeroDeCanelados,
@@ -292,137 +301,13 @@ class MeusClientesController extends Controller
             'dataprimeiroagendamento' => $dataprimeiroagendamento,
             'formaPagamentoContagemTotal' =>   $formaPagamentoContagemTotal,
             'produtosTotal' =>    $produtosTotal,
+            'numeroDeconfirmados' => $numeroDeconfirmados,
+            'totalDepedidos' =>  $totalDepedidos,
         ]);
     }
 
 
-    public function showrelatorioMeuCliente($id, $idempresa)
-    {
 
-
-        $user = auth()->user();
-
-        $empresa = cadastro_de_empresa::findOrFail($idempresa);
-        $idsClientes = Agendamento::where('cadastro_de_empresas_id', $idempresa)
-            ->where('finalizado', 1)
-            ->where('cancelado', 0)
-            ->distinct()
-            ->pluck('user_id')
-            ->toArray();
-
-
-
-        $encontrado = false;
-        foreach ($idsClientes as $cliente) {
-            if ($id == $cliente) {
-                $encontrado = true;
-                break;
-            }
-        }
-
-        if (!$encontrado) {
-
-            return redirect('/dashboard');
-        }
-
-        if ($user->id != $empresa->user_id) {
-            return redirect('/dashboard');
-        } else {
-
-            $clientesBusca =  User::findOrFail($id);
-
-            $dataprimeiro = Agendamento::where('user_id', $id)
-                ->where('cadastro_de_empresas_id', $idempresa)
-                ->where('finalizado', 1)
-                ->where('cancelado', 0)
-                ->max('data_hora_finalizacao_agendamento');
-
-
-            $dataprimeiroagendamento = date('d/m/Y', strtotime($dataprimeiro));
-
-            $dataultimo = Agendamento::where('user_id', $id)
-                ->where('cadastro_de_empresas_id', $idempresa)
-                ->where('finalizado', 1)
-                ->where('cancelado', 0)
-                ->max('data_hora_finalizacao_agendamento');
-
-            $datadoultimoagendamento = date('d/m/Y', strtotime($dataultimo));
-
-            $agendamentos = Agendamento::where('user_id', $id)
-                ->where('cadastro_de_empresas_id', $idempresa)
-                ->where('finalizado', 1)
-                ->where('cancelado', 0)
-                ->get();
-
-
-
-            $gasto =  $agendamentos->pluck('valorTotalAgendamento')->toArray();
-
-            $totalgasto = array_sum($gasto);
-            $totalgasto = number_format($totalgasto, 2, ',', '.');
-
-            $agendamentoscancelados = Agendamento::where('user_id', $id)
-                ->where('cadastro_de_empresas_id', $idempresa)
-                ->where('cancelado', 1)
-                ->get();
-
-            $agendamentosnaoconfirmados = Agendamento::where('user_id', $id)
-                ->where('cadastro_de_empresas_id', $idempresa)
-                ->where('finalizado', 0)
-                ->where('confirmado', 0)
-                ->where('cancelado', 0)
-                ->get();
-
-            $numeroDeCanelados = count($agendamentoscancelados);
-            $numeroDoPedidos = count($agendamentos);
-            $numeroDenaoconfirmados = count($agendamentosnaoconfirmados);
-
-
-            $totalDepedidos =  $numeroDoPedidos +  $numeroDeCanelados;
-
-            if ($totalDepedidos > 0) {
-                $porcentagemDeCancelamento = ($numeroDeCanelados /   $totalDepedidos) * 100;
-            } else {
-                $porcentagemDeCancelamento = 0;
-            }
-            $porcentagemDeCancelamento = number_format($porcentagemDeCancelamento, 2);
-
-
-            $agendamentograficos = Agendamento::where('user_id', $id)
-                ->where('cadastro_de_empresas_id', $idempresa)
-                ->where('finalizado', 1)
-                ->where('cancelado', 0)
-                ->distinct()
-                ->get();
-
-
-
-            $formasPagamento = $agendamentograficos->pluck('formaDepagamentoAgendamento')
-                ->unique()
-                ->toArray();
-
-            $produto = $agendamentograficos->pluck('nomeServiçoAgendamento')->flatten()->toArray();
-
-            $dados = [
-                'nome' => $clientesBusca->name,
-                'email' => $clientesBusca->email,
-                'contato' => $clientesBusca->phone,
-                'clienteDesDe' =>   $dataprimeiroagendamento,
-                'ultimoAgendamento' => $datadoultimoagendamento,
-                'totalGasto' =>  $totalgasto,
-                'PedidosCanelados' =>  $numeroDeCanelados,
-                'numeroDoPedidos' =>      $numeroDoPedidos,
-                'numeroDenaoconfirmados' => $numeroDenaoconfirmados,
-                'porcentagemDeCancelamento' =>  $porcentagemDeCancelamento,
-
-            ];
-
-            $pdf = Pdf::loadView('Empresa.Relatorio', compact('dados', 'formasPagamento', 'produto'));
-
-
-            return response($pdf->output())->header('Content-Type', 'application/pdf');
-        }
-    }
 
     public function showMeuClienteranks($idempresa)
     {
