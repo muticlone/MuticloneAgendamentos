@@ -21,7 +21,7 @@
                 <div class="col-3" >
                     <form action="/relatorio/clientes/{{ $idempresa }}">
 
-                        <x-btn-relatorio nome="Relatório clientes" />
+                        <x-btn-relatorio nome="Relatório pedidos" />
                     </form>
                 </div>
                 <div class="col-3" >
@@ -138,8 +138,25 @@
         </div>
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
+            <x-small-user tema="{{ $agendamentosconfirmados }}" txt="Pedidos confirmados" icon='fas fa-shopping-cart'
+                link="/meus/agendamentos/empresa/{{ $idempresa }}/confirmados" class="small-box-footer" />
+
+        </div>
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
             <x-small-user tema="{{  $numeroDenaoconfirmados }}" txt="Pedidos aguardando confirmar" icon='fas fa-shopping-cart'
                 link="/meus/agendamentos/empresa/{{ $idempresa }}/pendentes" class="small-box-footer" />
+
+        </div>
+
+
+
+
+
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
+            <x-small-user tema="{{  $todosOspedidos }}" txt="Todos os Pedidos" icon='fas fa-shopping-cart'
+                link="/meus/agendamentos/empresa/{{ $idempresa }}/todos" class="small-box-footer" />
 
         </div>
 
@@ -152,20 +169,6 @@
             link="/meus/agendamentos/empresa/{{ $idempresa }}/cancelados"
             icon='fa fa-times'
             />
-
-        </div>
-
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-
-            <x-small-user tema="{{ $agendamentosconfirmados }}" txt="Pedidos confirmados" icon='fas fa-shopping-cart'
-                link="/meus/agendamentos/empresa/{{ $idempresa }}/confirmados" class="small-box-footer" />
-
-        </div>
-
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-
-            <x-small-user tema="{{  $todosOspedidos }}" txt="Todos os Pedidos" icon='fas fa-shopping-cart'
-                link="/meus/agendamentos/empresa/{{ $idempresa }}/todos" class="small-box-footer" />
 
         </div>
 

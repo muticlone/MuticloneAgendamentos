@@ -198,7 +198,7 @@ class RelatorioController extends Controller
 
             $finalizado =  $agendamentos->pluck('finalizado')->toArray();
             $contagemFinalizados = array_count_values($finalizado);
-            $quantidadeTotalDePedidos = $contagemFinalizados[1] ?? 0;
+            $quantidadeTotalDePedidosfinalizados = $contagemFinalizados[1] ?? 0;
 
             $finalizadomesatual =  $MesAtual->pluck('finalizado')->toArray();
             $contagemFinalizadosmesatual = array_count_values($finalizadomesatual);
@@ -210,10 +210,30 @@ class RelatorioController extends Controller
             $contagemcancelado = array_count_values($cancelado);
             $quantidadedepedidoscacenlados = $contagemcancelado[1] ?? 0;
 
-            $totalDepedidosConfirmadosEcancelados =   $quantidadeTotalDePedidos +  $quantidadedepedidoscacenlados;
+            $agendamentosconfirmados =  Agendamento::where('cadastro_de_empresas_id', $id)
+            ->where('finalizado', 0)
+            ->where('confirmado', 1)
+            ->where('cancelado', 0)
+            ->get();
+
+            $agendamentosNaoconfirmados =  Agendamento::where('cadastro_de_empresas_id', $id)
+            ->where('finalizado', 0)
+            ->where('confirmado', 0)
+            ->where('cancelado', 0)
+            ->get();
+
+            $numeroconfirmados = count( $agendamentosconfirmados);
+            $numerodenaoconfirmados = count( $agendamentosNaoconfirmados);
 
 
-            $Porcetagemcancelados = ($quantidadedepedidoscacenlados /   $totalDepedidosConfirmadosEcancelados) * 100;
+
+
+
+            $totaldepedidos =
+            $quantidadeTotalDePedidosfinalizados +  $quantidadedepedidoscacenlados + $numeroconfirmados +  $numerodenaoconfirmados;
+
+
+            $Porcetagemcancelados = ($quantidadedepedidoscacenlados /   $totaldepedidos) * 100;
             $Porcentagemdepedidoscancelados = number_format($Porcetagemcancelados, 2, '.', '') . '%';
 
 
@@ -239,17 +259,17 @@ class RelatorioController extends Controller
 
             $dados = [
                 'nome' => $empresa->nomeFantasia,
-                'quantidadeTotalDePedidos'  => $quantidadeTotalDePedidos,
+                'quantidadeTotalDePedidosfinalizados'  => $quantidadeTotalDePedidosfinalizados,
                 'quantidadedepedidosmesatual' => $quantidadedepedidosmesatual,
                 'quantidadedepedidoscacenlados' => $quantidadedepedidoscacenlados,
                 'taxaCancelamento' =>  $Porcentagemdepedidoscancelados,
-                'Cancelados/confirmados' => $totalDepedidosConfirmadosEcancelados,
+                'Cancelados/confirmados' => $totaldepedidos,
                 'totalDeClientes' =>  $clientetotal,
                 'clientemesatual' => $clientemesatual,
                 'clienteComMaisAgendamentos' =>  $clienteComMaisAgendamentos->name,
                 'quantidadeRepeticoes' =>   $quantidadeRepeticoes,
-
-
+               'numeroconfirmados' => $numeroconfirmados ,
+               'numerodenaoconfirmados' => $numerodenaoconfirmados ,
             ];
 
 
