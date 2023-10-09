@@ -69,6 +69,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Agendamento');
     }
 
+    public function avaliacao_produto(){
+        return $this->hasMany('App\Models\avaliacao_produto');
+    }
+
 
 
 }

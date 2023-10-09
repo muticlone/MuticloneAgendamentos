@@ -35,4 +35,10 @@ class cadastro_de_servico extends Model
     }
 
 
+    public function avaliacao_produto(){
+        return $this->hasMany('App\Models\avaliacao_produto');
+    }
+
+
+
 }

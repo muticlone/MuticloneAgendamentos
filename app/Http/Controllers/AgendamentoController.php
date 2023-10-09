@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\cadastro_de_servico;
 use App\Models\cadastro_de_empresa;
+use App\Models\avaliacao_produto;
 use App\Models\Agendamento;
 use App\Models\User;
 use Carbon\Carbon;
@@ -138,19 +139,21 @@ class AgendamentoController extends Controller
 
 
             $empresa_id_desencriptado = decrypt($idEmpresa);
-            $decryptedArray = [];
+            $decryptedArrayidservico = [];
 
             foreach ($idservico as $encryptedValue) {
                 $decryptedValue = Crypt::decrypt($encryptedValue);
-                $decryptedArray[] = $decryptedValue;
+                $decryptedArrayidservico[] = $decryptedValue;
             }
+
+
 
 
 
             $empresa = cadastro_de_empresa::findOrFail($empresa_id_desencriptado);
 
             $servico = cadastro_de_servico::where('cadastro_de_empresas_id', $empresa_id_desencriptado)
-                ->whereIn('id',  $decryptedArray)
+                ->whereIn('id',  $decryptedArrayidservico)
                 ->get();
         } catch (DecryptException $e) {
 
@@ -206,6 +209,7 @@ class AgendamentoController extends Controller
         $agendamento->user_id = $user_id;
         $agendamento->cadastro_de_empresas_id  =  $idempresa;
         $agendamento->numeroDoPedido = $numeroDoPedido;
+        $agendamento->idServicos =  $decryptedArrayidservico;
 
 
         $agendamento->save();
@@ -239,6 +243,7 @@ class AgendamentoController extends Controller
                 $decryptedValue = Crypt::decrypt($encryptedValue);
                 $idServico[] = $decryptedValue;
             }
+
 
             //aqui
 
@@ -301,7 +306,7 @@ class AgendamentoController extends Controller
         $agendamento->user_id = $user_id;
         $agendamento->cadastro_de_empresas_id  =  $idempresa;
         $agendamento->numeroDoPedido = $numeroDoPedido;
-
+        $agendamento->idServicos = $idServico;
 
         $agendamento->save();
 
@@ -697,6 +702,25 @@ class AgendamentoController extends Controller
             ->get();
 
 
+        $agendamento = $user->agendamentos()
+            ->where('id', $id)
+            ->first();
+        $nomesServicos = $agendamento->nomeServiçoAgendamento;
+        $idsServicos = $agendamento->idServicos;
+        $dados = [];
+
+
+
+        for ($i = 0; $i < count($nomesServicos); $i++) {
+            $dados[] = [
+                'nome' => $nomesServicos[$i],
+                'idsevico' => $idsServicos[$i]
+            ];
+        }
+
+
+
+
 
         $idempresa = $agendamentos->pluck('cadastro_de_empresas_id');
 
@@ -711,6 +735,7 @@ class AgendamentoController extends Controller
             'user' => $user,
             'empresa' =>  $empresa,
             'servicos' => $servicos,
+            'dados' => $dados,
 
         ]);
     }
@@ -723,12 +748,71 @@ class AgendamentoController extends Controller
 
     public function avaliacaoPedidoCliente(Request $request)
     {
+        $user = auth()->user();
+
 
 
         $nota = intval($request->input('nota'));
         $notaservico[] = $request->input('notaservico');
 
+
+
         $comentario =  $request->comentario;
+
+        $idServicos = [];
+        $idServicos[] = $request->input('idservico');
+
+        $notaservico = [];
+        $notaservico[] = $request->input('notaservico');
+
+
+        $idempresa = $request->input('idempresa');
+
+        // Verifique se ambos os arrays têm o mesmo tamanho antes de continuar
+        if (count($idServicos) === count($notaservico)) {
+            $resultado = [];
+
+
+            for ($i = 0; $i < count($idServicos); $i++) {
+
+                $idServico = $idServicos[$i];
+                $notaServico = $notaservico[$i];
+
+
+                $resultado[] = [
+                    'idServico' => $idServico,
+                    'notaServico' => $notaServico,
+                ];
+            }
+        }
+        foreach ($resultado as $resut) {
+
+            $notasevico =   $resut['notaServico'];
+
+
+            $id = $resut['idServico'];
+        }
+
+        $count = count($id);
+        for ($i = 0; $i < $count; $i++) {
+            $id = $resut['idServico'][$i];
+            $notasevico =   $resut['notaServico'][$i];
+            $avaliacaoServico = new avaliacao_produto();
+            $avaliacaoServico->idServicos = $id;
+            $avaliacaoServico->nota =  $notasevico;
+            $avaliacaoServico->usuario_id = $user->id;
+            $avaliacaoServico->business_id =  $idempresa;
+
+
+            $avaliacaoServico->save();
+
+
+            $avaliacaoServico->unsetRelation('idServicos');
+        }
+
+
+
+
 
 
 
@@ -742,10 +826,4 @@ class AgendamentoController extends Controller
 
         return redirect('/meus/agendamentos/finalizados')->with('msg', 'Enviado com sucesso!');
     }
-
-
-
-
-
-
 }

@@ -168,27 +168,32 @@
                                                 @csrf
                                                 @method('PUT')
 
+                                                @foreach ($empresa as $empresaid)
+                                                    <input type="hidden" name="idempresa" value="{{  $empresaid['id'] }}">
+                                                @endforeach
+
                                                 <label for="nota" class="control-label"> Avalie o atendimento </label>
                                                 <input id="nota" name="nota" class="rating rating-loading pt-br"
                                                     data-min="0" data-max="5" data-step="1" data-show-clear="false">
-                                                {{-- <div class="comentavaliacao ">
+                                                <div class="comentavaliacao ">
 
 
-                                                    @foreach ($agendamento->nomeServiçoAgendamento as $index => $nome)
-
-
-                                                    <div>
-                                                        {{ $nome }}
-                                                        <input id="notaservico_{{ $index }}"
-                                                            name="notaservico[]" class="rating rating-loading pt-br"
-                                                            data-min="0" data-max="5" data-step="1"
-                                                            data-show-clear="false">
-                                                    </div>
+                                                    @foreach ($dados as $dado)
+                                                        <div>
+                                                            {{ $dado['nome'] }}
+                                                            <input id="notaservico_{{ $dado['idsevico'] }}"
+                                                                name="notaservico[]" class="rating rating-loading pt-br"
+                                                                data-min="0" data-max="5" data-step="1"
+                                                                data-show-clear="false">
 
 
 
 
-                                                @endforeach --}}
+                                                            <input type="hidden" name="idservico[]"
+                                                                value="{{ $dado['idsevico'] }}">
+
+                                                        </div>
+                                                    @endforeach
 
 
 
@@ -214,13 +219,15 @@
                                                 @csrf
                                                 @method('PUT')
 
+
+
                                                 <label for="nota" class="control-label">Revise sua nota</label>
                                                 <input id="nota" name="nota" class="rating rating-loading pt-br"
                                                     data-min="0" data-max="5" data-step="1" data-show-clear="false"
                                                     value="{{ $agendamento->nota }}">
 
-                                                <textarea class="form-control" name="comentario" cols="50" placeholder="Faça um breve comentário" minlength="15"
-                                                    maxlength="250" rows="3" required>{{ $agendamento->comentario }}</textarea>
+                                                <textarea class="form-control" name="comentario" cols="50" placeholder="Faça um breve comentário"
+                                                    minlength="15" maxlength="250" rows="3" required>{{ $agendamento->comentario }}</textarea>
                                                 </br>
                                                 <button type="submit" class="btn btn-info btn-sm">Reavaliar</button>
                                             </form>

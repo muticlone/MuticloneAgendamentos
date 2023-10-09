@@ -14,6 +14,7 @@ class Agendamento extends Model
         'duracaohorasAgendamento' => 'array',
         'duracaominutosAgendamento' => 'array',
         'valorUnitatioAgendamento' => 'array',
+        'idServicos' => 'array',
     ];
 
     protected $fillable = [
@@ -29,6 +30,7 @@ class Agendamento extends Model
         'numeroDoPedido',
         'data_hora_finalizacao_agendamento',
         'data_hora_cancelamento_agendamento',
+        'idServicos',
 
 
 
