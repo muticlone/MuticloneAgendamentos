@@ -9,6 +9,7 @@ use App\Models\cadastro_de_servico;
 use App\Models\cadastro_de_empresa;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Session;
+use App\Models\avaliacao_produto;
 
 
 
@@ -87,7 +88,18 @@ class CadastroServicoController extends Controller
 
 
 
-        return view('Empresa.DadosServico', ['servico' => $servico, 'empresa' => $empresa]);
+        $avaliacao =   avaliacao_produto::where('idServicos',$id)->where('business_id',$id_empresa)->get();
+        $notas = $avaliacao->pluck('nota');
+
+        $media = $notas->avg();
+
+        $dados= [
+            'media' => $media
+        ];
+
+
+
+        return view('Empresa.DadosServico', ['servico' => $servico, 'empresa' => $empresa,'dados' => $dados ]);
     }
 
     public function showMeusServicos($id)

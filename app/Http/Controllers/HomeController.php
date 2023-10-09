@@ -11,8 +11,9 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Agendamento;
+use App\Models\avaliacao_produto;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -159,10 +160,26 @@ class HomeController extends Controller
                     ->orWhere('descricaosevico', 'like', '%' . $search . '%');
             });
         }
+        $servico = $query
+            ->leftJoin('avaliacao_produtos', 'cadastro_de_servicos.id', '=', 'avaliacao_produtos.idServicos')
+            ->select('cadastro_de_servicos.*', DB::raw('AVG(avaliacao_produtos.nota) as media'))
+            ->groupBy('cadastro_de_servicos.id')
+            ->orderByDesc('media')
+            ->paginate(20);
 
-        $servico = $query->orderBy('id', 'desc')->paginate(20);
+
+
+
+
+
+
+
+
 
         $servicoBusca =  cadastro_de_servico::all();
+
+
+
 
 
 
@@ -180,7 +197,8 @@ class HomeController extends Controller
             'search',
             'paginatedItems',
             'servico',
-            'servicoBusca'
+            'servicoBusca',
+
 
 
         ));

@@ -42,8 +42,14 @@
                 <x-servicos-home servico_id="{{ $servicos->id }}" servico_imageservico="{{ $servicos->imageservico }}"
                     servico_nomeServico="{{ $servicos->nomeServico }}"
                     servico_valorDoServico="{{ $servicos->valorDoServico }}"
-                    descricaoservico="{{ $servicos->descricaosevico }}" media="3.5" />
+                    descricaoservico="{{ $servicos->descricaosevico }}"
+                    media="{{ $servicos->media  }}"
+                    />
             </div>
+
+
+
+
         @endforeach
     </div>
 

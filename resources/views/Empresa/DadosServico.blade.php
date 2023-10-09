@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('conteudo')
-  <!-- estilos do AdminLTE -->
+    <!-- estilos do AdminLTE -->
 
 
     <div class="col-md-10 offset-md-1 pt-1 ">
@@ -13,37 +13,27 @@
 
             <div class="col-lg-6 col-sm-12 col-md-12 pt-2 "align="center">
 
-                <div class="col-lg-6 col-sm-12 col-md-12 pt-2 ">
-                    <img src="/img/logo_servicos/{{ $servico->imageservico }}" class="img-fluid  img_dados_empresa"
-                        alt="{{ $servico->nomeServico }}">
-                </div>
+
+                <img src="/img/logo_servicos/{{ $servico->imageservico }}" class="img-fluid  img_dados_empresa"
+                    alt="{{ $servico->nomeServico }}">
 
 
-
-
-
-
-
-                {{-- Avaliação --}}
-                {{-- <x-comment_ratings :agendamentos="$agendamentos" valueAvaliacao="{{  $media }}" :NomeUser="  $nome "
-                comentario="Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos" />
-                --}}
-
-
-
-
+                <x-commen-tratings-servicos media="{{ $dados['media'] }}" />
 
 
             </div>
-            <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
+
+
+
+            <div class="col-lg-6 col-sm-12 col-md-12 pt-2 ">
 
                 <div class="card">
-                    <h5 class="card-header">{{ucfirst(strtolower($servico->nomeServico))  }}</h5>
+                    <h5 class="card-header">{{ ucfirst(strtolower($servico->nomeServico)) }}</h5>
                     <div class="card-body">
 
 
-                        <p class="card-text txt_dados_empresa">{{ucfirst(strtolower($servico->descricaosevico))  }}</p>
-                        <h5 class="card-title">R$ {{ number_format($servico->valorDoServico , 2, ',', '.') }}</h5>
+                        <p class="card-text txt_dados_empresa">{{ ucfirst(strtolower($servico->descricaosevico)) }}</p>
+                        <h5 class="card-title">R$ {{ number_format($servico->valorDoServico, 2, ',', '.') }}</h5>
                         <h5 class="card-title">Formas de Pagamento</h5>
                         <ul id="items-list">
                             @foreach ($empresa->formaDePagamento as $formadepagamento)
@@ -83,8 +73,8 @@
 
 
                                 {{ $empresa->nomeFantasia }}
-                                <img src="/img/logo_empresas/{{ $empresa->image }}"
-                                    class="img-fluid  img_logoDadosServico" alt="{{ $empresa->razaoSocial }}">
+                                <img src="/img/logo_empresas/{{ $empresa->image }}" class="img-fluid  img_logoDadosServico"
+                                    alt="{{ $empresa->razaoSocial }}">
                             </a>
 
                         </p>
