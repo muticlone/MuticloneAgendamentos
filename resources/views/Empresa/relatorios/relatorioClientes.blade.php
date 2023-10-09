@@ -50,7 +50,7 @@
 
 
             <tr>
-                <td>Total de clientes</td>
+                <td>Total de clientes com pedidos finalizados</td>
                 <td> {{ $dados['totalDeClientes'] }}</td>
             </tr>
             {{-- <tr>

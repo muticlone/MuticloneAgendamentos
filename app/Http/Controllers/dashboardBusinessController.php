@@ -210,6 +210,12 @@ class dashboardBusinessController extends Controller
 
             $notas = $agendamentos->pluck('nota');
             $media = $notas->avg();
+
+
+
+
+
+
         }
 
         return view('Empresa.dashboard.dashboardBusiness', [

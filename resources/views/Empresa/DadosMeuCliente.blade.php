@@ -117,6 +117,19 @@
 
         </div>
 
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
+
+            <x-small-user tema="{{ $posicao }}" txt="Posição no ranking cliente mais frequentes"
+            link="/meus/agendamentos/empresa/{{ $idEmpresa }}/cancelados?search={{ $clientesBusca->name }}"
+            icon='fas fa-star'
+            />
+
+
+
+        </div>
+
+
 
 
 

@@ -263,7 +263,7 @@ class MeusClientesController extends Controller
 
             $numeroDenaoavaliados = count($agendamentonaoavaliado);
 
-            $numeroDeconfirmados = count( $agendamentosconfirmados);
+            $numeroDeconfirmados = count($agendamentosconfirmados);
 
             $totalDepedidos =  $numeroDoPedidos +  $numeroDeCanelados + $numeroDenaoconfirmados +   $numeroDeconfirmados;
 
@@ -280,6 +280,61 @@ class MeusClientesController extends Controller
 
             $totalgasto = array_sum($gasto);
             $totalgasto = number_format($totalgasto, 2, ',', '.');
+
+
+            //numero onde o cliente esta no rank dos mais frequentes
+
+            $idsClientes = Agendamento::where('cadastro_de_empresas_id', $idempresa)
+
+            ->where('finalizado', 1)
+            ->where('cancelado', 0)
+            ->pluck('user_id')
+            ->toArray();
+
+            $contagemClientes = array_count_values($idsClientes);
+
+            $clienteComMaisAgendamentos = User::whereIn('id', $idsClientes)->paginate(20);
+
+
+            $nomeEQuantidade = [];
+
+            foreach ($clienteComMaisAgendamentos as $cliente) {
+                $nome = $cliente->name;
+                $phone = $cliente->phone;
+                $id = $cliente->id;
+                $quantidade = isset($contagemClientes[$cliente->id]) ? $contagemClientes[$cliente->id] : 0;
+
+
+                $clienteInfo = [
+                    'nome' => $nome,
+                    'quantidade' => $quantidade,
+                    'phone' => $phone,
+                    'id' => $id,
+                ];
+
+
+                $nomeEQuantidade[] = $clienteInfo;
+            }
+
+            //ordernar maior quantidade no topo
+            usort($nomeEQuantidade, function ($a, $b) {
+                return $b['quantidade'] - $a['quantidade'];
+            });
+
+            $clienteBuscado = $clientesBusca->name;
+            $posicao = -1; // Inicializa a posição como -1 (caso o cliente não seja encontrado)
+
+            // Percorre o array $nomeEQuantidade para encontrar o cliente desejado
+            foreach ($nomeEQuantidade as $index => $cliente) {
+                if ($cliente['nome'] === $clienteBuscado) {
+                    $posicao = $index + 1;
+                    break; // Sai do loop quando o cliente é encontrado
+                }
+            }
+
+
+
+
         }
 
 
@@ -303,6 +358,7 @@ class MeusClientesController extends Controller
             'produtosTotal' =>    $produtosTotal,
             'numeroDeconfirmados' => $numeroDeconfirmados,
             'totalDepedidos' =>  $totalDepedidos,
+            'posicao' => $posicao
         ]);
     }
 
@@ -382,7 +438,6 @@ class MeusClientesController extends Controller
             usort($nomeEQuantidade, function ($a, $b) {
                 return $b['quantidade'] - $a['quantidade'];
             });
-
 
 
 

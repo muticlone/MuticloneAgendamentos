@@ -258,22 +258,24 @@
                 </div>
             @endif
 
-
             <div class="col-lg-12 col-sm-12 col-md-12 pt-2">
                 <label for="title">Data e horário</label>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">
                         <x-svg_horario width="16" height="16"
                             title="Digite último horário disponível para esse serviço" />
-
                     </span>
                     <input type="datetime-local" class="form-control" name="dataHorarioAgendamento"
-                        aria-describedby="validationTooltipUsernamePrepend" required />
+                        aria-describedby="validationTooltipUsernamePrepend" required min="<?= date('Y-m-d\TH:i'); ?>" />
                     <div class="invalid-tooltip">
-                        Por favor, digite Data e horário para o agedamento
+                        Por favor, digite Data e horário para o agendamento
                     </div>
                 </div>
             </div>
+
+
+
+
             <div class="col-lg-12 col-sm-12 col-md-12 pt-2">
 
 
