@@ -49,10 +49,13 @@ class CadastroServicoController extends Controller
         // $requestImage->move(public_path('img/logo_serviços/' . $nome_da_pasta), $imageName);
 
         $data = $request->all();
-
-        $valorDoServico = $_POST['valorDoServico'];
+        $data = $request->all();
+        $valorDoServico = $data['valorDoServico'];
         $valorDoServico = str_replace('R$ ', '', $valorDoServico); // Remove o prefixo "R$ "
+        $valorDoServico = str_replace('.', '', $valorDoServico); // Remove todos os pontos de milhares
         $valorDoServico = str_replace(',', '.', $valorDoServico); // Substitui a vírgula por um ponto
+        $data['valorDoServico'] = $valorDoServico; // Atualiza o valor no array de dados
+
 
 
         if ($request->hasFile('imageservico') && $request->file('imageservico')->isValid()) {
@@ -202,12 +205,13 @@ class CadastroServicoController extends Controller
         $servico = cadastro_de_servico::findOrFail($request->id);
 
 
+
         $data = $request->all();
-
-
-        $valorDoServico = $_POST['valorDoServico'];
+        $valorDoServico = $data['valorDoServico'];
         $valorDoServico = str_replace('R$ ', '', $valorDoServico); // Remove o prefixo "R$ "
+        $valorDoServico = str_replace('.', '', $valorDoServico); // Remove todos os pontos de milhares
         $valorDoServico = str_replace(',', '.', $valorDoServico); // Substitui a vírgula por um ponto
+        $data['valorDoServico'] = $valorDoServico; // Atualiza o valor no array de dados
 
 
 
