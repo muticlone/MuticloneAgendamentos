@@ -245,7 +245,7 @@ class AgendamentoController extends Controller
             }
 
 
-            //aqui
+
 
             $empresa = cadastro_de_empresa::findOrFail($empresa_id_desencriptado);
 
@@ -471,7 +471,41 @@ class AgendamentoController extends Controller
             $clienteagendamento = Agendamento::findOrfail($id);
             $id_user = $clienteagendamento->user_id;
             $users = User::findOrfail($id_user);
+
+
+        $nomesServicos = $clienteagendamento->nomeServiçoAgendamento;
+        $idsServicos = $clienteagendamento->idServicos;
+        $iduser = $clienteagendamento->user_id;
+        $idagendamento = $clienteagendamento->id;
+
+        $dados = [];
+
+        $notaProduto = avaliacao_produto::where('usuario_id',   $iduser)
+        ->where('agendamentoID' ,$idagendamento)
+        ->get();
+
+
+
+
+       $notasProdutos = [];
+       foreach ( $notaProduto as $notapr){
+        $notasProdutos[]= $notapr->nota;
+       }
+
+
+        for ($i = 0; $i < count($nomesServicos); $i++) {
+            $nota = $notasProdutos[$i] ?? 0;
+            $dados[] = [
+                'nome' => $nomesServicos[$i],
+                'idsevico' => $idsServicos[$i],
+                'nota' => $nota,
+            ];
         }
+
+
+        }
+
+
 
 
         return view(
@@ -480,6 +514,7 @@ class AgendamentoController extends Controller
                 'agendamento' =>  $clienteagendamento,
                 'user' =>   $users,
                 'empresa' => $empresa,
+                'dados' => $dados
             ]
 
 
