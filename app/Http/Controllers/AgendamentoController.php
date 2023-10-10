@@ -707,16 +707,36 @@ class AgendamentoController extends Controller
             ->first();
         $nomesServicos = $agendamento->nomeServiçoAgendamento;
         $idsServicos = $agendamento->idServicos;
+        $iduser = $agendamento->user_id;
+        $idagendamento = $agendamento->id;
+
         $dados = [];
 
+        $notaProduto = avaliacao_produto::where('usuario_id',   $iduser)
+        ->where('agendamentoID' ,$idagendamento)
+        ->get();
+
+
+
+
+       $notasProdutos = [];
+       foreach ( $notaProduto as $notapr){
+        $notasProdutos[]= $notapr->nota;
+       }
 
 
         for ($i = 0; $i < count($nomesServicos); $i++) {
+            $nota = $notasProdutos[$i] ?? 0;
             $dados[] = [
                 'nome' => $nomesServicos[$i],
-                'idsevico' => $idsServicos[$i]
+                'idsevico' => $idsServicos[$i],
+                'nota' => $nota,
             ];
         }
+
+
+
+
 
 
 
@@ -729,13 +749,13 @@ class AgendamentoController extends Controller
         $servicos = cadastro_de_servico::where('cadastro_de_empresas_id', $idempresa)->get()->toArray();
 
 
-
         return view('Agedamentos.Clientes.ClientesDetalhesAgendamentos', [
             'agendamentos' => $agendamentos,
             'user' => $user,
             'empresa' =>  $empresa,
             'servicos' => $servicos,
             'dados' => $dados,
+
 
         ]);
     }
@@ -759,16 +779,66 @@ class AgendamentoController extends Controller
 
         $comentario =  $request->comentario;
 
-        $idServicos = [];
-        $idServicos[] = $request->input('idservico');
+        $idServicosincrpit = [];
+        $idServicosincrpit[] = $request->input('idservico');
+        $idempresaincrpt = $request->input('idempresa');
+        $agendamentoIDincript = $request->input('agendamentoID');
+
+        foreach ( $idServicosincrpit as $subarray) {
+            $decryptedSubarray = [];
+            foreach ($subarray as $item) {
+                $decryptedSubarray[] = decrypt($item);
+            }
+            $idServicos[] = $decryptedSubarray;
+        }
+
+        $idempresa= decrypt($idempresaincrpt);
+        $agendamentoID =  decrypt($agendamentoIDincript);
+
+
+
 
         $notaservico = [];
         $notaservico[] = $request->input('notaservico');
 
 
-        $idempresa = $request->input('idempresa');
 
-        // Verifique se ambos os arrays têm o mesmo tamanho antes de continuar
+
+
+
+        $validator = Validator::make($request->all(), [
+            'comentario' => [
+                'required',
+                'string',
+
+            ],
+            'nota' => [
+                'required',
+                'integer',
+
+            ],
+            'notaservico' => [
+                'required',
+                'array',
+
+            ],
+            'idservico' => [
+                'required',
+                'array',
+            ],
+            'idempresa' => [
+                'required',
+
+
+            ],
+        ]);
+
+
+        if ($validator->fails()) {
+            return back()->with('msgErro', 'Preencha todos os campos');
+        }
+
+
         if (count($idServicos) === count($notaservico)) {
             $resultado = [];
 
@@ -802,6 +872,7 @@ class AgendamentoController extends Controller
             $avaliacaoServico->nota =  $notasevico;
             $avaliacaoServico->usuario_id = $user->id;
             $avaliacaoServico->business_id =  $idempresa;
+            $avaliacaoServico->agendamentoID = $agendamentoID;
 
 
             $avaliacaoServico->save();
@@ -824,6 +895,108 @@ class AgendamentoController extends Controller
         $agendamento->save();
 
 
-        return redirect('/meus/agendamentos/finalizados')->with('msg', 'Enviado com sucesso!');
+
+        return back()->with('msg', 'Avaliado com sucesso!!');
+    }
+
+    public function reavaliacaoPedidoCliente(Request $request){
+
+
+
+        $user = auth()->user();
+
+
+
+        $nota = intval($request->input('nota'));
+        $notaservico[] = $request->input('notaservico');
+
+
+
+        $comentario =  $request->comentario;
+
+        $idServicosincrpit = [];
+        $idServicosincrpit[] = $request->input('idservico');
+        $idempresaincrpt = $request->input('idempresa');
+        $agendamentoIDincript = $request->input('agendamentoID');
+
+        foreach ( $idServicosincrpit as $subarray) {
+            $decryptedSubarray = [];
+            foreach ($subarray as $item) {
+                $decryptedSubarray[] = decrypt($item);
+            }
+            $idServicos[] = $decryptedSubarray;
+        }
+
+        $idempresa= decrypt($idempresaincrpt);
+        $agendamentoID =  decrypt($agendamentoIDincript);
+
+
+
+
+        $notaservico = [];
+        $notaservico[] = $request->input('notaservico');
+
+
+
+        if (count($idServicos) === count($notaservico)) {
+            $resultado = [];
+
+
+            for ($i = 0; $i < count($idServicos); $i++) {
+
+                $idServico = $idServicos[$i];
+                $notaServico = $notaservico[$i];
+
+
+                $resultado[] = [
+                    'idServico' => $idServico,
+                    'notaServico' => $notaServico,
+                ];
+            }
+        }
+        foreach ($resultado as $resut) {
+
+
+
+            $id = $resut['idServico'];
+        }
+
+
+        $count = count($id);
+        for ($i = 0; $i < $count; $i++) {
+            $idServico = $resut['idServico'][$i];
+            $notaServico = $resut['notaServico'][$i];
+
+            $avaliacaoServico = avaliacao_produto::where('idServicos', $idServico)
+            ->where('agendamentoID' ,   $agendamentoID)
+            ->first();
+
+
+
+
+            if ($avaliacaoServico) {
+
+                $avaliacaoServico->nota = $notaServico;
+
+
+                $avaliacaoServico->save();
+            }
+        }
+
+
+
+
+        $agendamento = Agendamento::findOrFail($request->id);
+
+        $agendamento->nota = $nota;
+        $agendamento->comentario =  $comentario;
+        $agendamento->save();
+
+
+
+        return back()->with('msg', 'Atualizado  com sucesso!!');
+
+
+
     }
 }

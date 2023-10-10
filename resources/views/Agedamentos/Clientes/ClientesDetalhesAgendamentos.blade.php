@@ -169,8 +169,9 @@
                                                 @method('PUT')
 
                                                 @foreach ($empresa as $empresaid)
-                                                    <input type="hidden" name="idempresa" value="{{  $empresaid['id'] }}">
+                                                    <input type="hidden" name="idempresa" value="{{ encrypt($empresaid['id'])  }}">
                                                 @endforeach
+                                                <input type="hidden" name="agendamentoID" value="{{ encrypt($agendamento->id)   }}">
 
                                                 <label for="nota" class="control-label"> Avalie o atendimento </label>
                                                 <input id="nota" name="nota" class="rating rating-loading pt-br"
@@ -190,7 +191,7 @@
 
 
                                                             <input type="hidden" name="idservico[]"
-                                                                value="{{ $dado['idsevico'] }}">
+                                                                value="{{  encrypt($dado['idsevico'])  }}">
 
                                                         </div>
                                                     @endforeach
@@ -214,16 +215,42 @@
                                         </div>
                                     @else
                                         <div align="center">
-                                            <form action="/avaliacao/{{ $agendamento->id }}" method="POST">
+                                            <form action="/reavaliacao/{{ $agendamento->id }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
 
 
+                                                @foreach ($empresa as $empresaid)
+                                                    <input type="hidden" name="idempresa" value="{{ encrypt($empresaid['id'])  }}">
+                                                @endforeach
+
+                                                <input type="hidden" name="agendamentoID" value="{{ encrypt($agendamento->id)   }}">
 
                                                 <label for="nota" class="control-label">Revise sua nota</label>
                                                 <input id="nota" name="nota" class="rating rating-loading pt-br"
                                                     data-min="0" data-max="5" data-step="1" data-show-clear="false"
                                                     value="{{ $agendamento->nota }}">
+
+
+
+                                                    @foreach ($dados as $dado)
+                                                        <div>
+                                                            {{ $dado['nome'] }}
+                                                            <input id="notaservico_{{ $dado['idsevico'] }}"
+                                                                name="notaservico[]" class="rating rating-loading pt-br"
+                                                                data-min="0" data-max="5" data-step="1"
+                                                                data-show-clear="false" required
+                                                                value="{{ $dado['nota'] }}"
+                                                                >
+
+
+
+
+                                                            <input type="hidden" name="idservico[]"
+                                                                value="{{  encrypt($dado['idsevico'])  }}">
+
+                                                        </div>
+                                                    @endforeach
 
                                                 <textarea class="form-control" name="comentario" cols="50" placeholder="Faça um breve comentário"
                                                     minlength="15" maxlength="250" rows="3" required>{{ $agendamento->comentario }}</textarea>

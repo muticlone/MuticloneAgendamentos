@@ -9,6 +9,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Agendamento;
+use App\Models\avaliacao_produto;
 use App\Models\User;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -144,6 +145,11 @@ class RelatorioController extends Controller
             foreach ($contagem as $servico => $quantidade) {
                 $produtos[] = ['servico' => $servico, 'quantidade' => $quantidade];
             }
+
+
+
+
+
 
 
 

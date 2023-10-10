@@ -228,6 +228,17 @@
 
 
     <main>
+
+        @if (session('customMessages'))
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach (session('customMessages') as $message)
+                        <li>{{ $message }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="container-fluid">
             <div class="row">
                 @if (session('msg'))
