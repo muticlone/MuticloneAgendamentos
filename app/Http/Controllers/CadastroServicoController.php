@@ -11,6 +11,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Session;
 use App\Models\avaliacao_produto;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class CadastroServicoController extends Controller
 {
@@ -88,9 +89,9 @@ class CadastroServicoController extends Controller
         $empresa = cadastro_de_empresa::findOrFail($id_empresa);
 
         $avaliacoes = avaliacao_produto::where('idServicos', $id)
-        ->where('business_id', $id_empresa)
-        ->orderBy('created_at', 'desc')
-        ->get();
+            ->where('business_id', $id_empresa)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         $dadosuser = [];
 
@@ -117,8 +118,9 @@ class CadastroServicoController extends Controller
 
 
 
-        return view('Empresa.DadosServico', ['servico' => $servico, 'empresa' => $empresa, 'dados' => $dados,
-        'dadosuser' => $dadosuser
+        return view('Empresa.DadosServico', [
+            'servico' => $servico, 'empresa' => $empresa, 'dados' => $dados,
+            'dadosuser' => $dadosuser
         ]);
     }
 
@@ -146,9 +148,24 @@ class CadastroServicoController extends Controller
             })->where('cadastro_de_empresas_id', $id)->paginate($registrosPorPagina);
         } else {
 
+            // $servicos = cadastro_de_servico::where('cadastro_de_empresas_id', $id)
+            //     ->orderBy('id', 'desc')
+            //     ->paginate($registrosPorPagina);
+
             $servicos = cadastro_de_servico::where('cadastro_de_empresas_id', $id)
-                ->orderBy('id', 'desc')
-                ->paginate($registrosPorPagina);
+            ->leftJoin('avaliacao_produtos', 'cadastro_de_servicos.id', '=', 'avaliacao_produtos.idServicos')
+            ->select('cadastro_de_servicos.*', DB::raw('AVG(avaliacao_produtos.nota) as media'))
+            ->groupBy('cadastro_de_servicos.id')
+            ->orderBy('id', 'desc')
+            ->paginate($registrosPorPagina);
+
+
+
+            $notaProduto = avaliacao_produto::where('business_id',   $id)
+                ->get();
+
+
+
         }
 
 

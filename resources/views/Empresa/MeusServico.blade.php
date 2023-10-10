@@ -23,7 +23,7 @@
 
 
 
-                <x-select-servico-home :servico="$servicos" nome="Busque um serviço"/>
+                <x-select-servico-home :servico="$servicos" nome="Busque um serviço" />
 
             </form>
 
@@ -57,7 +57,6 @@
             </a>
         </div>
     </div>
-
 @elseif($search && $link == null)
     <div class="alert alert-warning" role="alert">
         Buscando por: "{{ $search }}" Nenhum resultado encontrado
@@ -78,12 +77,14 @@
     <thead>
         <tr>
             <th scope="col"></th>
-
+            <th></th>
             @if (count($servicos) > 0)
                 <th scope="col">Seus Serviços</th>
+
             @else
                 <th scope="col">Você ainda não serviços </th>
             @endif
+
 
 
         </tr>
@@ -94,13 +95,27 @@
 
                 <td class="tabelas">
                     <div class="list-group">
+
+
+
                         <a class="list-group-item list-group-item-action" href="/servicos/dados/{{ $servico->id }}">
                             <img src="/img/logo_servicos/{{ $servico->imageservico }}" alt="{{ $servico->nomeServico }}"
                                 class="imgtabela">
                             {{ $servico->nomeServico }}
+
                         </a>
 
+
                     </div>
+                    </div>
+                </td>
+                <td>
+
+                        <input id="mediaHomeservico" name="mediaHomeservico" class="rating rating-loading pt-br"
+                        value="  {{ $servico->media }}" data-min="0" data-max="5" data-step="0.1"
+                        data-size="xs" data-readonly="true" data-show-clear="false">
+
+
                 </td>
                 <td>
 
@@ -117,11 +132,19 @@
 
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-outline-danger btndashboardservico mr-3 btnmeusServicos">
+                            <button type="submit"
+                                class="btn btn-sm btn-outline-danger btndashboardservico mr-3 btnmeusServicos">
                                 {{-- apagar --}}
                                 <x-svg-deletar width="14" height="14" margin="3px" />
 
                             </button>
+
+
+                            <a href="/edit/servicos/"
+                                class="btn btn-sm btn-outline-info btndashboardservico mr-3 btnmeusServicos">
+                                {{-- detalhes --}}
+                               Detalhes
+                            </a>
 
                         </form>
 
