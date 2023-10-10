@@ -48,18 +48,20 @@
                                 $somaminutos = 0;
                                 $somahoras = 0;
 
-                            @endphp
-
-                            @foreach ($agendamento->duracaominutosAgendamento as $minutos)
-                                @php
+                                foreach ($agendamento->duracaominutosAgendamento as $minutos) {
                                     $somaminutos += $minutos;
-                                @endphp
-                            @endforeach
-                            @foreach ($agendamento->duracaohorasAgendamento as $horas)
-                                @php
+                                }
+
+                                foreach ($agendamento->duracaohorasAgendamento as $horas) {
                                     $somahoras += $horas;
-                                @endphp
-                            @endforeach
+                                }
+
+                                // Converte os minutos extras em horas, se houver mais de 59 minutos
+                                if ($somaminutos >= 60) {
+                                    $somahoras += floor($somaminutos / 60);
+                                    $somaminutos = $somaminutos % 60;
+                                }
+                            @endphp
 
                             <div class=" produtosDetalhesAgendamentos" id="carrinho">
                                 <table class="table">
@@ -318,103 +320,100 @@
 
         </div>
 
-        <div class="row g-12">
-            <div class="col-lg-12 col-sm-12 col-md-12 pt-2 ">
+
+        <div class="col-lg-12 col-sm-12 col-md-12 pt-2 ">
 
 
-                @foreach ($empresa as $empresaItem)
-                    <div>
-                        <div class="card">
+            @foreach ($empresa as $empresaItem)
+                <div>
+                    <div class="card">
 
 
-                            <div class="card-body">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3856.!2d0!3d0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7463b12bfda1035%3A0x373937af9e59ad56!2s{{ $empresaItem['logradouro'] }}%20%2C%20{{ $empresaItem['numero_endereco'] }}%20-%20{{ $empresaItem['bairro'] }}%2C%20{{ $empresaItem['cidade'] }}%20-%20{{ $empresaItem['uf'] }}%2C%2045065-000!5e0!3m2!1spt-BR!2sbr!4v1675985984301!5m2!1spt-BR!2sbr"
-                                    width="100%" height="100%" style="border: 0; border-radius: 10px;"
-                                    allowfullscreen="" loading="lazy"
-                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <div class="card-body">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3856.!2d0!3d0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7463b12bfda1035%3A0x373937af9e59ad56!2s{{ $empresaItem['logradouro'] }}%20%2C%20{{ $empresaItem['numero_endereco'] }}%20-%20{{ $empresaItem['bairro'] }}%2C%20{{ $empresaItem['cidade'] }}%20-%20{{ $empresaItem['uf'] }}%2C%2045065-000!5e0!3m2!1spt-BR!2sbr!4v1675985984301!5m2!1spt-BR!2sbr"
+                                width="100%" height="100%" style="border: 0; border-radius: 10px;" allowfullscreen=""
+                                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 
-                                <h5 class="vertical-align-middle">
-                                    Local: {{ ucfirst(strtolower($empresaItem['nomeFantasia'])) }}
-                                    <img src="/img/logo_empresas/{{ $empresaItem['image'] }}"
-                                        class="img-fluid imgdetalheagendamento mx-1"
-                                        alt="{{ $empresaItem['razaoSocial'] }}">
+                            <h5 class="vertical-align-middle">
+                                Local: {{ ucfirst(strtolower($empresaItem['nomeFantasia'])) }}
+                                <img src="/img/logo_empresas/{{ $empresaItem['image'] }}"
+                                    class="img-fluid imgdetalheagendamento mx-1" alt="{{ $empresaItem['razaoSocial'] }}">
 
-                                </h5>
-                                <h5 class="vertical-align-middle pt-2">
-                                    {{-- <x-svgplaneta width="20" height="20" margin="2px" /> --}}
+                            </h5>
+                            <h5 class="vertical-align-middle pt-2">
+                                {{-- <x-svgplaneta width="20" height="20" margin="2px" /> --}}
 
-                                    Endereço
-                                </h5>
-                                <span class="vertical-align-middle">
-                                    <x-svglcursor width="20" height="20" margin="2px" />
-                                    Rua:
-                                    {{ ucfirst(strtolower($empresaItem['logradouro'])) }}
-                                </span>
-                                <span class="vertical-align-middle">
-                                    <x-svglcursor width="20" height="20" margin="2px" />
-                                    N°: {{ $empresaItem['numero_endereco'] }}
-                                </span>
-                                <span class="vertical-align-middle">
-                                    <x-svglcursor width="20" height="20" margin="2px" />
-                                    Bairro:
-                                    {{ ucfirst(strtolower($empresaItem['bairro'])) }}
-                                </span>
-                                <span class="vertical-align-middle">
-                                    <x-svglcursor width="20" height="20" margin="2px" />
-                                    Cidade:
-                                    {{ ucfirst(strtolower($empresaItem['cidade'])) }}
-                                </span>
-                                <span class="vertical-align-middle">
-                                    <x-svglcursor width="20" height="20" margin="2px" />
+                                Endereço
+                            </h5>
+                            <span class="vertical-align-middle">
+                                <x-svglcursor width="20" height="20" margin="2px" />
+                                Rua:
+                                {{ ucfirst(strtolower($empresaItem['logradouro'])) }}
+                            </span>
+                            <span class="vertical-align-middle">
+                                <x-svglcursor width="20" height="20" margin="2px" />
+                                N°: {{ $empresaItem['numero_endereco'] }}
+                            </span>
+                            <span class="vertical-align-middle">
+                                <x-svglcursor width="20" height="20" margin="2px" />
+                                Bairro:
+                                {{ ucfirst(strtolower($empresaItem['bairro'])) }}
+                            </span>
+                            <span class="vertical-align-middle">
+                                <x-svglcursor width="20" height="20" margin="2px" />
+                                Cidade:
+                                {{ ucfirst(strtolower($empresaItem['cidade'])) }}
+                            </span>
+                            <span class="vertical-align-middle">
+                                <x-svglcursor width="20" height="20" margin="2px" />
 
-                                    Estado: {{ $empresaItem['uf'] }}
+                                Estado: {{ $empresaItem['uf'] }}
 
-                                </span>
+                            </span>
 
-                                <h5 class="vertical-align-middle pt-2">
-
-
-                                    Contato
-                                </h5>
-
-                                <span class="vertical-align-middle">
-                                    <x-svgtelefone width="20" height="20" margin="2px" />
+                            <h5 class="vertical-align-middle pt-2">
 
 
+                                Contato
+                            </h5>
 
-                                    Telefone: {{ $empresaItem['telefone'] }}
-
-                                </span>
-
-
-                                <span class="vertical-align-middle pt-2">
-                                    <x-svgcelular width="20" height="20" margin="2px" />
-                                    Celular: {{ $empresaItem['celular'] }}
+                            <span class="vertical-align-middle">
+                                <x-svgtelefone width="20" height="20" margin="2px" />
 
 
 
-                                </span>
+                                Telefone: {{ $empresaItem['telefone'] }}
+
+                            </span>
+
+
+                            <span class="vertical-align-middle pt-2">
+                                <x-svgcelular width="20" height="20" margin="2px" />
+                                Celular: {{ $empresaItem['celular'] }}
+
+
+
+                            </span>
 
 
 
 
 
-                                <div class="pt-1">
-                                    <a href="/empresas/dados/{{ $empresaItem['id'] }}"
-                                        class="btn btn-primary">Detalhes</a>
-
-                                </div>
+                            <div class="pt-1">
+                                <a href="/empresas/dados/{{ $empresaItem['id'] }}" class="btn btn-primary">Detalhes</a>
 
                             </div>
+
                         </div>
-
                     </div>
-                @endforeach
 
-            </div>
-            {{-- <div class="col-lg-6 col-sm-12 col-md-12 pt-2 ">
+                </div>
+            @endforeach
+
+        </div>
+        {{-- <div class="col-lg-6 col-sm-12 col-md-12 pt-2 ">
                 <div class="card">
                     <div class="card-header">
                         Mensagens
@@ -434,10 +433,10 @@
                     </div>
                 </div>
             </div> --}}
-        </div>
-
-
     </div>
+
+
+
 
 
 

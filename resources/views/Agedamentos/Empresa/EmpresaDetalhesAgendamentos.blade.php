@@ -56,18 +56,20 @@
                         $somaminutos = 0;
                         $somahoras = 0;
 
-                    @endphp
-
-                    @foreach ($agendamento->duracaominutosAgendamento as $minutos)
-                        @php
+                        foreach ($agendamento->duracaominutosAgendamento as $minutos) {
                             $somaminutos += $minutos;
-                        @endphp
-                    @endforeach
-                    @foreach ($agendamento->duracaohorasAgendamento as $horas)
-                        @php
+                        }
+
+                        foreach ($agendamento->duracaohorasAgendamento as $horas) {
                             $somahoras += $horas;
-                        @endphp
-                    @endforeach
+                        }
+
+                        // Converte os minutos extras em horas, se houver mais de 59 minutos
+                        if ($somaminutos >= 60) {
+                            $somahoras += floor($somaminutos / 60);
+                            $somaminutos = $somaminutos % 60;
+                        }
+                    @endphp
 
                     <div class=" produtosDetalhesAgendamentos" id="carrinho">
                         <table class="table">
