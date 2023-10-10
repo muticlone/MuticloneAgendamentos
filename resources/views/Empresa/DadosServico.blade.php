@@ -18,7 +18,7 @@
                     alt="{{ $servico->nomeServico }}">
 
 
-                <x-commen-tratings-servicos media="{{ $dados['media'] }}" />
+                <x-commen-tratings-servicos media="{{ $dados['media'] }}" :dadosuser="$dadosuser" />
 
 
             </div>

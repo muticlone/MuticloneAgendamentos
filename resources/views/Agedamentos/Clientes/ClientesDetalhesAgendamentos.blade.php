@@ -174,7 +174,7 @@
 
                                                 <label for="nota" class="control-label"> Avalie o atendimento </label>
                                                 <input id="nota" name="nota" class="rating rating-loading pt-br"
-                                                    data-min="0" data-max="5" data-step="1" data-show-clear="false">
+                                                    data-min="0" data-max="5" data-step="1" data-show-clear="false" required>
                                                 <div class="comentavaliacao ">
 
 
@@ -184,7 +184,7 @@
                                                             <input id="notaservico_{{ $dado['idsevico'] }}"
                                                                 name="notaservico[]" class="rating rating-loading pt-br"
                                                                 data-min="0" data-max="5" data-step="1"
-                                                                data-show-clear="false">
+                                                                data-show-clear="false" required>
 
 
 
@@ -199,8 +199,7 @@
 
                                                 </div>
 
-                                                <textarea class="form-control" name="comentario" cols="50" placeholder="Faça um breve comentário" minlength="15"
-                                                    maxlength="250" rows="3" required> </textarea>
+                                                <textarea class="form-control" name="comentario" cols="50" placeholder="Faça um breve comentário" minlength="15" maxlength="250" rows="3" required></textarea>
 
 
 

@@ -10,8 +10,7 @@ use App\Models\cadastro_de_empresa;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Session;
 use App\Models\avaliacao_produto;
-
-
+use App\Models\User;
 
 class CadastroServicoController extends Controller
 {
@@ -81,25 +80,43 @@ class CadastroServicoController extends Controller
 
 
 
-
         $servico = cadastro_de_servico::findOrFail($id);
         $id_empresa = $servico->cadastro_de_empresas_id;
         $empresa = cadastro_de_empresa::findOrFail($id_empresa);
 
+        $avaliacoes = avaliacao_produto::where('idServicos', $id)
+        ->where('business_id', $id_empresa)
+        ->orderBy('created_at', 'desc')
+        ->get();
 
+        $dadosuser = [];
 
-        $avaliacao =   avaliacao_produto::where('idServicos',$id)->where('business_id',$id_empresa)->get();
-        $notas = $avaliacao->pluck('nota');
+        foreach ($avaliacoes as $avaliacao) {
+            $usuario = User::find($avaliacao->usuario_id);
 
+            if ($usuario) {
+                $dadosuser[] = [
+                    'nome' => $usuario->name,
+                    'nota' => $avaliacao->nota
+                ];
+            }
+        }
+
+        $notas = $avaliacoes->pluck('nota');
         $media = $notas->avg();
 
-        $dados= [
-            'media' => $media
+        $dados = [
+            'media' => $media,
+            'dadosuser' => $dadosuser
         ];
 
 
 
-        return view('Empresa.DadosServico', ['servico' => $servico, 'empresa' => $empresa,'dados' => $dados ]);
+
+
+        return view('Empresa.DadosServico', ['servico' => $servico, 'empresa' => $empresa, 'dados' => $dados,
+        'dadosuser' => $dadosuser
+        ]);
     }
 
     public function showMeusServicos($id)
@@ -127,8 +144,8 @@ class CadastroServicoController extends Controller
         } else {
 
             $servicos = cadastro_de_servico::where('cadastro_de_empresas_id', $id)
-            ->orderBy('id', 'desc')
-            ->paginate($registrosPorPagina);
+                ->orderBy('id', 'desc')
+                ->paginate($registrosPorPagina);
         }
 
 
@@ -223,7 +240,4 @@ class CadastroServicoController extends Controller
 
         return redirect('/dados/servicos/' . $servico->cadastro_de_empresas_id)->with('msg', 'Evento excluído com sucesso!');
     }
-
-
-
 }
