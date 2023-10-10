@@ -110,13 +110,14 @@
 
 
 
+                    @if (!$agendamento->cancelado == 1)
+                        <p class="card-text">
+                            Duração total:
+                            {{ $somahoras }} horas
+                            {{ $somaminutos }} minutos
 
-                    <p class="card-text">
-                        Duração total:
-                        {{ $somahoras }} horas
-                        {{ $somaminutos }} minutos
-
-                    </p>
+                        </p>
+                    @endif
 
 
 
@@ -127,27 +128,37 @@
 
 
                     <div class="row g-12">
-                        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-                            <h5 class="card-title">Valor total à pagar </h5>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text">R$</span>
-                                <input type="text" class="form-control campodesablitado"
-                                    value="{{ number_format($agendamento->valorTotalAgendamento, 2, ',', '.') }}">
+                        @if (!$agendamento->cancelado == 1)
+
+
+                            <div class="col-lg-3 col-sm-12 col-md-12 pt-2">
+                                @if ($agendamento->finalizado == 1)
+                                    <h6 class="card-title">Valor Pago </h6>
+                                @else
+                                    <h6 class="card-title">Valor total à pagar </h6>
+                                @endif
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">R$</span>
+                                    <input type="text" class="form-control campodesablitado"
+                                        value="{{ number_format($agendamento->valorTotalAgendamento, 2, ',', '.') }}">
+
+                                </div>
 
                             </div>
+                            <div class="col-lg-3 col-sm-12 col-md-12 pt-2">
 
-                        </div>
-                        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-                            <h5 class="card-title">Forma de pagamento</h5>
-                            <input type="text" class="form-control campodesablitado"
-                                value="{{ $agendamento->formaDepagamentoAgendamento }}">
-                        </div>
-                        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+                                <h6 class="card-title">Forma de pagamento</h6>
+                                <input type="text" class="form-control campodesablitado"
+                                    value="{{ $agendamento->formaDepagamentoAgendamento }}">
+                            </div>
+                        @endif
+                        <div class="col-lg-3 col-sm-12 col-md-12 pt-2">
                             <form id="FormReagendar" action="/reagendar/{{ $agendamento->id }}" method="POST">
                                 @csrf
                                 @method('PUT')
 
-                                <h5 class="card-title">Data do agendamento</h5>
+                                <h6 class="card-title">Data do agendamento</h6>
                                 <input type="datetime-local" class="form-control  campodesablitado"
                                     id="dataHorarioAgendamento" name="dataHorarioAgendamento"
                                     aria-describedby="validationTooltipUsernamePrepend"
@@ -155,6 +166,30 @@
                             </form>
                         </div>
 
+                        @if ($agendamento->finalizado == 1)
+                            <div class="col-lg-3 col-sm-12 col-md-12 pt-2">
+
+
+                                <h6 class="card-title">Data da finalização</h6>
+                                <input type="datetime-local" class="form-control  campodesablitado"
+                                    id="dataHorarioAgendamentofinalizacao" name="dataHorarioAgendamentofinalizacao"
+                                    aria-describedby="validationTooltipUsernamePrepend"
+                                    value="{{ $agendamento->data_hora_finalizacao_agendamento }}" required />
+
+                            </div>
+                        @endif
+                        @if ($agendamento->cancelado == 1)
+                            <div class="col-lg-3 col-sm-12 col-md-12 pt-2">
+
+
+                                <h6 class="card-title">Data do Cancelamento</h6>
+                                <input type="datetime-local" class="form-control  campodesablitado"
+                                    id="dataHorarioAgendamentofinalizacao" name="dataHorarioAgendamentofinalizacao"
+                                    aria-describedby="validationTooltipUsernamePrepend"
+                                    value="{{ $agendamento->data_hora_cancelamento_agendamento }}" required />
+
+                            </div>
+                        @endif
 
 
                         <x-status-agendamento agendamento_confirmado="{{ $agendamento->confirmado }}"
@@ -162,6 +197,8 @@
                             agendamento_cancelado="{{ $agendamento->cancelado }}" />
 
                         </br>
+
+
 
 
 
@@ -204,7 +241,8 @@
 
 
 
-                                        <input type="hidden" name="idservico[]" value="{{ encrypt($dado['idsevico']) }}">
+                                        <input type="hidden" name="idservico[]"
+                                            value="{{ encrypt($dado['idsevico']) }}">
                                     @endforeach
                                 </div>
                                 <p>Nome do cliente :
