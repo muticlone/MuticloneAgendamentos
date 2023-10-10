@@ -135,7 +135,7 @@ class CadastroServicoController extends Controller
         $search = request('search');
 
 
-        $registrosPorPagina = 4;
+        $registrosPorPagina = 20;
         if ($search) {
 
             $servicos = cadastro_de_servico::where(function ($query) use ($search) {

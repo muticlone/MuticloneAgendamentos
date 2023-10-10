@@ -572,10 +572,11 @@ svg {
     overflow: auto;
 }
 
+
 .produtosDetalhesAgendamentos {
     margin-right: -14px;
     max-height: 160px;
-    min-height: 160px;
+
     overflow: auto;
     scroll-behavior: auto;
     cursor: pointer;
