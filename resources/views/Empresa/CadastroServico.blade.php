@@ -84,7 +84,7 @@
 
                         </span>
                         <input type="time" class="form-control" name="horario_incial_atedimento"
-                            aria-describedby="validationTooltipUsernamePrepend" required />
+                            aria-describedby="validationTooltipUsernamePrepend" required value="08:00"/>
                         <div class="invalid-tooltip">
                             Digite o horário de início do atendimento para esse serviço
                         </div>
@@ -101,7 +101,7 @@
 
                         </span>
                         <input type="time" class="form-control" name="horario_final_atedimento"
-                            aria-describedby="validationTooltipUsernamePrepend" required />
+                            aria-describedby="validationTooltipUsernamePrepend" required value="18:00"/>
                         <div class="invalid-tooltip">
                             Por favor, digite último horário disponível para esse serviço
                         </div>

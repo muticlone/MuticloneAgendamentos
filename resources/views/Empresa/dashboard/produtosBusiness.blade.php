@@ -4,6 +4,15 @@
 
 @section('content_header')
 
+    <div class="col-3">
+        <form action="/relatorio/produtos/{{ $dados['idempresa'] }}">
+
+            <x-btn-relatorio nome="Relatório todos os produtos" />
+
+
+        </form>
+    </div>
+
 
 @stop
 
@@ -34,16 +43,96 @@
 
             </div>
         </div>
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+            <div class="info-box cards">
+                <span class="info-box-icon bg-info"><i class="far fa-flag"></i></span>
+                <div class="info-box-content ">
+                    <span class="info-box-text">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Favoritos</font>
+                        </font>
+                    </span>
+                    <span class="info-box-number">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">410</font>
+                        </font>
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
     <div class="row g-12">
         <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
 
-            <x-small-user tema="{{ $dados['numeroDeagendamentoComEsseProduto'] }}" txt="Quantidade de agendamentos"
+            <x-small-user tema="{{ $dados['numeroDeagendamentoComEsseProduto'] }}" txt="Quantidade de pedidos finalizados"
                 icon='fas fa-shopping-cart' class="small-box-footer" />
 
 
         </div>
-    </div>
+
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
+            <x-small-user tema="{{ $dados['numeroDeClientes'] }}" txt="Total de clientes para esse produto"
+                icon='fas fa-shopping-cart' class="small-box-footer" />
+
+
+        </div>
+
+        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+
+            <x-small-user tema="{{ $dados['nome'] }}" txt="Cliente mais frequente: {{ $dados['frequencia'] }}"
+                icon='fas fa-shopping-cart' class="small-box-footer" />
+
+
+        </div>
+
+
+
+    </div
+
+
+        <section class="content">
+            <div class="container-fluid">
+
+                <div class="row">
+                    @foreach ( $dadosavaliacao as $dado )
+                    <div class="col-md-4">
+
+                        <div class="timeline">
+
+
+
+                            <div>
+                                <i class="fas fa-user bg-green"></i>
+
+                                <div class="timeline-item">
+                                    <span class="time"><i class="fas fa-clock"></i> {{ $dado['data']  }}</span>
+                                    <div class="d-flex pt-2 mx-2">
+                                        <div class="mr-auto">{{ $dado['nome']  }}</div>
+                                        <input id="input-6" name="input-6" class="rating rating-loading pt-br ml-2"
+                                               value="{{ $dado['nota'] }}" data-min="0" data-max="5" data-step="0.1"
+                                               data-readonly="true" data-show-clear="false" data-size="xs">
+                                    </div>
+
+
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+
+        </section>
+
+        <x-pagination :paginatedItems="$avaliacao" />
 
 
 

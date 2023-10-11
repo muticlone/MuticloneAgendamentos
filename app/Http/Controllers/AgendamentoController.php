@@ -221,7 +221,8 @@ class AgendamentoController extends Controller
     {
         $user = auth()->user();
 
-        $idservico = $request->input('idServiçoAgendamento');
+        $idservicos = $request->input('idServiçoAgendamento');
+
 
 
         $idEmpresa =  $request->input('cadastro_de_empresas_id');
@@ -239,10 +240,11 @@ class AgendamentoController extends Controller
             $empresa_id_desencriptado = decrypt($idEmpresa);
             $idServico = [];
 
-            foreach ($idservico as $encryptedValue) {
+            foreach ($idservicos as $encryptedValue) {
                 $decryptedValue = Crypt::decrypt($encryptedValue);
-                $idServico[] = $decryptedValue;
+                $idServico[] = (int) $decryptedValue;
             }
+
 
 
 

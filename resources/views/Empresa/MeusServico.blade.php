@@ -134,7 +134,9 @@
                         <button type="button"
                             class="btn btn-sm btn-outline-danger btndashboardservico mr-3 btnmeusServicos"
                             data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            data-servico-id="{{ $servico->id }}">
+                            data-servico-id="{{ $servico->id }}"
+                            data-servico-nome="{{ $servico->nomeServico }}"
+                            >
 
                             <x-svg-deletar width="14" height="14" margin="3px" />
                         </button>
@@ -193,13 +195,13 @@
 
 <script>
     $('#exampleModal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var servicoId = button.data('servico-id'); // Get the value of the data-servico-id attribute
+        var button = $(event.relatedTarget);
+        var servicoId = button.data('servico-id');
+        var servicoNome = button.data('servico-nome');
 
-        // Insert the value into the modal
-        $('#servicoIdPlaceholder').text('Tem certeza que deseja excluir o produto? ' + servicoId);
+        $('#servicoIdPlaceholder').html('Tem certeza que deseja excluir o produto? <br>' + servicoNome);
 
-        // Change the form action to include the servicoId
+
         $('#deleteForm').attr('action', '/apagar/servicos/' + servicoId);
     });
 </script>
