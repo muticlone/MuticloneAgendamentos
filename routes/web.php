@@ -115,6 +115,9 @@ Route::get('root', [RootController::class, 'root'])
 Route::get('/dashboard/business/{id}', [dashboardBusinessController::class, 'dashboardBusiness'])->name('dashboard.business')->middleware('auth', 'company_or_root');
 Route::put('/atualizarmeta/{id}', [dashboardBusinessController::class, 'atualizarmeta'])->middleware('auth', 'company_or_root');
 Route::get('/agenda/business/{id}', [dashboardBusinessController::class, 'agendaBusiness'])->name('agenda.business')->middleware('auth', 'company_or_root');
+Route::get('/produtos/business/{id}/{idServicos}', [dashboardBusinessController::class, 'produtosBusiness'])->name('protudos.business')->middleware('auth', 'company_or_root');
+
+
 
 
 Route::get('/relatorio/meu/cliente/{id}/{idempresa}', [RelatorioController::class, 'showrelatorioMeuCliente'])->name('relatorio.meu.cliente')->middleware('auth', 'company_or_root');

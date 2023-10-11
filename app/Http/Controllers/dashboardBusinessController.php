@@ -8,9 +8,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Agendamento;
+use App\Models\avaliacao_produto;
 use App\Models\User;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 
 
 class dashboardBusinessController extends Controller
@@ -47,16 +49,16 @@ class dashboardBusinessController extends Controller
             $quantidadedepedidos = $contagemFinalizados[1] ?? 0;
 
             $agendamentosnaoconfirmados =  Agendamento::where('cadastro_de_empresas_id', $id)
-            ->where('finalizado', 0)
-            ->where('confirmado', 0)
-            ->where('cancelado', 0)
-            ->get();
+                ->where('finalizado', 0)
+                ->where('confirmado', 0)
+                ->where('cancelado', 0)
+                ->get();
 
             $agendamentosconfirmados =  Agendamento::where('cadastro_de_empresas_id', $id)
-            ->where('finalizado', 0)
-            ->where('confirmado', 1)
-            ->where('cancelado', 0)
-            ->get();
+                ->where('finalizado', 0)
+                ->where('confirmado', 1)
+                ->where('cancelado', 0)
+                ->get();
 
 
             $numeroconfirmados = count($agendamentosconfirmados);
@@ -68,7 +70,7 @@ class dashboardBusinessController extends Controller
 
 
             $todosOspedidos =
-            $quantidadedepedidos +  $quantidadedepedidoscacenlados +  $numeroDenaoconfirmados +  $numeroconfirmados;
+                $quantidadedepedidos +  $quantidadedepedidoscacenlados +  $numeroDenaoconfirmados +  $numeroconfirmados;
 
 
             $Porcetagemcancelados = ($quantidadedepedidoscacenlados /   $todosOspedidos) * 100;
@@ -210,12 +212,6 @@ class dashboardBusinessController extends Controller
 
             $notas = $agendamentos->pluck('nota');
             $media = $notas->avg();
-
-
-
-
-
-
         }
 
         return view('Empresa.dashboard.dashboardBusiness', [
@@ -315,5 +311,57 @@ class dashboardBusinessController extends Controller
             'idempresa' =>  $idempresa,
 
         ]);
+    }
+
+    public function produtosBusiness($id, $idServicos)
+    {
+
+        $servicos = cadastro_de_servico::where('id', $idServicos)
+            ->first();
+
+        $idServicos = intval($idServicos);
+        $agendamentos = Agendamento::whereRaw('JSON_CONTAINS(idServicos, ?)', json_encode($idServicos))
+            ->where('finalizado', 1)
+            ->where('cancelado', 0)
+            ->get();
+
+
+            $notaProduto = DB::table('avaliacao_produtos')
+            ->where('business_id', $id)
+            ->where('idServicos', $idServicos)
+            ->select(DB::raw('AVG(nota) as media'))
+            ->get();
+
+
+        $numeroDeAgendamentos =  $agendamentos->pluck('idServicos')->toArray();
+
+
+
+        $numerodeagendamento = count($numeroDeAgendamentos);
+
+        if ($notaProduto->count() > 0) {
+            $media = $notaProduto[0]->media;
+        } else {
+            $media = 0;
+        }
+
+
+        $dados = [
+            'numeroDeagendamentoComEsseProduto' =>   $numerodeagendamento,
+            'nomedoservico'    => $servicos->nomeServico,
+            'image' => $servicos->imageservico,
+            'media' => $media,
+        ];
+
+
+
+
+
+
+
+
+
+
+        return view('Empresa.dashboard.produtosBusiness', compact('dados'));
     }
 }

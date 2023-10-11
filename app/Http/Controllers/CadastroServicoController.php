@@ -161,8 +161,8 @@ class CadastroServicoController extends Controller
 
 
 
-            $notaProduto = avaliacao_produto::where('business_id',   $id)
-                ->get();
+            // $notaProduto = avaliacao_produto::where('business_id',   $id)
+            //     ->get();
 
 
 

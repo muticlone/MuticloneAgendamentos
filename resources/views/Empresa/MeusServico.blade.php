@@ -80,7 +80,6 @@
             <th></th>
             @if (count($servicos) > 0)
                 <th scope="col">Seus Serviços</th>
-
             @else
                 <th scope="col">Você ainda não serviços </th>
             @endif
@@ -111,40 +110,40 @@
                 </td>
                 <td>
 
-                        <input id="mediaHomeservico" name="mediaHomeservico" class="rating rating-loading pt-br"
-                        value="  {{ $servico->media }}" data-min="0" data-max="5" data-step="0.1"
-                        data-size="xs" data-readonly="true" data-show-clear="false">
+                    <input id="mediaHomeservico" name="mediaHomeservico" class="rating rating-loading pt-br"
+                        value="  {{ $servico->media }}" data-min="0" data-max="5" data-step="0.1" data-size="xs"
+                        data-readonly="true" data-show-clear="false">
 
 
                 </td>
                 <td>
 
-                    <div class="btn-group" role="group" aria-label="Basic example ">
-                        <form action="/apagar/servicos/{{ $servico->id }}" method="POST">
+                    <div>
 
 
-                            <a href="/edit/servicos/{{ $servico->id }}"
-                                class="btn btn-sm btn-outline-warning btndashboardservico mr-3 btnmeusServicos">
-                                {{-- editar --}}
-                                <x-svg-edit width="14" height="14" margin="3px" />
-                            </a>
+
+                        <a href="/edit/servicos/{{ $servico->id }}"
+                            class="btn btn-sm btn-outline-warning btndashboardservico mr-3 btnmeusServicos">
+                            {{-- editar --}}
+                            <x-svg-edit width="14" height="14" margin="3px" />
+                        </a>
 
 
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                class="btn btn-sm btn-outline-danger btndashboardservico mr-3 btnmeusServicos">
-                                {{-- apagar --}}
-                                <x-svg-deletar width="14" height="14" margin="3px" />
 
-                            </button>
+                        <!-- Button trigger modal -->
+                        <button type="button"
+                            class="btn btn-sm btn-outline-danger btndashboardservico mr-3 btnmeusServicos"
+                            data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-servico-id="{{ $servico->id }}">
 
+                            <x-svg-deletar width="14" height="14" margin="3px" />
+                        </button>
 
-                            <a href="/edit/servicos/"
-                                class="btn btn-sm btn-outline-info btndashboardservico mr-3 btnmeusServicos">
-                                {{-- detalhes --}}
-                               Detalhes
-                            </a>
+                        <a href="/produtos/business/{{ $servico->cadastro_de_empresas_id }}/{{ $servico->id }}"
+                            class="btn btn-sm btn-outline-info btndashboardservico mr-3 btnmeusServicos">
+                            {{-- detalhes --}}
+                            Detalhes
+                        </a>
 
                         </form>
 
@@ -156,6 +155,54 @@
         @endforeach
     </tbody>
 </table>
+
+
+
+<!-- Modal deletar -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Deletar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="servicoIdPlaceholder"></p>
+            </div>
+            <div class="modal-footer">
+
+                <form id="deleteForm" action="/apagar/servicos/" method="POST">
+
+                    <button type="button" class="btn btn-sm btn-outline-info btndashboardservico mr-3 btnmeusServicos"
+                    data-bs-dismiss="modal">Cancelar
+
+                </button>
+
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit"
+                        class="btn btn-sm btn-outline-danger btndashboardservico mr-3 btnmeusServicos">
+                        {{-- apagar --}}
+                        <x-svg-deletar width="14" height="14" margin="3px" />
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#exampleModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var servicoId = button.data('servico-id'); // Get the value of the data-servico-id attribute
+
+        // Insert the value into the modal
+        $('#servicoIdPlaceholder').text('Tem certeza que deseja excluir o produto? ' + servicoId);
+
+        // Change the form action to include the servicoId
+        $('#deleteForm').attr('action', '/apagar/servicos/' + servicoId);
+    });
+</script>
 
 
 {{-- paginação --}}
