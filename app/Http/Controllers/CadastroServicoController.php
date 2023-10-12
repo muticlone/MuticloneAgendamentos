@@ -10,6 +10,7 @@ use App\Models\cadastro_de_empresa;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Session;
 use App\Models\avaliacao_produto;
+use App\Models\produtos_favorito;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -84,6 +85,7 @@ class CadastroServicoController extends Controller
 
 
 
+
         $servico = cadastro_de_servico::findOrFail($id);
         $id_empresa = $servico->cadastro_de_empresas_id;
         $empresa = cadastro_de_empresa::findOrFail($id_empresa);
@@ -114,13 +116,23 @@ class CadastroServicoController extends Controller
             'dadosuser' => $dadosuser
         ];
 
+        $user = auth()->user();
+
+        $iduser=$user->id;
+
+        $favorios = produtos_favorito::where('idUsuario' , $iduser)->where('idProduto',$id)->first();
+
+        $dadosFavoritos = [
+            'favorito' => $favorios->favoritoProtudo ?? 0
+        ];
+
 
 
 
 
         return view('Empresa.DadosServico', [
             'servico' => $servico, 'empresa' => $empresa, 'dados' => $dados,
-            'dadosuser' => $dadosuser
+            'dadosuser' => $dadosuser , 'dadosFavoritos' =>    $dadosFavoritos
         ]);
     }
 

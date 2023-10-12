@@ -73,6 +73,12 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\avaliacao_produto');
     }
 
+    public function produtoFavorito(){
+        return $this->hasMany('App\Models\produto_favorito');
+    }
+
+
+
 
 
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\CadastroServicoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BrowsershotController;
 use App\Http\Controllers\dashboardBusinessController;
+use App\Http\Controllers\favoritosController;
 use App\Http\Controllers\MeusClientesController;
 use App\Http\Middleware\PreventBackHistory;
 
@@ -128,3 +129,5 @@ Route::get('/relatorio/clientes/{id}', [RelatorioController::class, 'relatoriocl
 Route::get('/relatorio/financeiro/{id}', [RelatorioController::class, 'relatoriofinanceiro'])->name('relatorio.financeiro')->middleware('auth', 'company_or_root');
 Route::get('/relatorio/produtos/{id}', [RelatorioController::class, 'relatorioProdutos'])->name('relatorio.produtos')->middleware('auth', 'company_or_root');
 
+Route::post('/favorito/produtos', [favoritosController::class, 'createfavoritoproduto'])->name('produto.favoritos')->middleware('auth');
+Route::delete('/favorito/produtos/drop', [favoritosController::class, 'dropfavoritoproduto'])->name('produto.favoritos.drop')->middleware('auth');

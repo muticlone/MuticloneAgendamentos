@@ -17,11 +17,34 @@
                 <img src="/img/logo_servicos/{{ $servico->imageservico }}" class="img-fluid  img_dados_empresa"
                     alt="{{ $servico->nomeServico }}">
 
+                @if ($dadosFavoritos['favorito']<1)
+
+
+                <form id="FormularioProdutoFavorito" action="{{ route('produto.favoritos') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="idservico" value="{{ encrypt($servico->id) }}" />
+                    <x-favoritos value="{{ $dadosFavoritos['favorito'] }}"/>
+                </form>
+                @else
+                <form id="FormularioProdutoFavoritodrop" action="{{ route('produto.favoritos.drop') }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="idservico" value="{{ encrypt($servico->id) }}" />
+                    <x-favoritos-drop value="{{ $dadosFavoritos['favorito'] }}"/>
+                </form>
+
+                @endif
 
                 <x-commen-tratings-servicos media="{{ $dados['media'] }}" :dadosuser="$dadosuser" />
 
 
+
+
             </div>
+
+
+
+
 
 
 

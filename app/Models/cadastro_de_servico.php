@@ -39,6 +39,10 @@ class cadastro_de_servico extends Model
         return $this->hasMany('App\Models\avaliacao_produto');
     }
 
+    public function produtoFavorito(){
+        return $this->hasMany('App\Models\produto_favorito');
+    }
+
 
 
 }

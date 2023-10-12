@@ -315,121 +315,122 @@ class dashboardBusinessController extends Controller
 
     public function produtosBusiness($id, $idServicos)
     {
+
+
+        $user = auth()->user();
         $empresa = cadastro_de_empresa::findOrFail($id);
-        $servicos = cadastro_de_servico::where('id', $idServicos)
-            ->first();
-
-        $idServicos = intval($idServicos);
-        // $agendamentos = Agendamento::whereRaw('JSON_CONTAINS(idServicos, ?)', json_encode($idServicos))
-        //     ->where('cadastro_de_empresas_id', $id)
-        //     ->where('finalizado', 1)
-        //     ->where('cancelado', 0)
-        //     ->get();
 
 
-        $agendamentos = Agendamento::where('cadastro_de_empresas_id', $id)
-            ->where('finalizado', 1)
-            ->where('cancelado', 0)
-            ->whereRaw("JSON_CONTAINS(idServicos, CAST(? AS JSON))", [$idServicos])
-            ->get();
+        if ($user->id != $empresa->user_id) {
+            return redirect('/dashboard');
+        } else {
 
-        $numeroDeAgendamentos = $agendamentos->pluck('idServicos')->flatten()->toArray();
-        $countedValues = array_count_values($numeroDeAgendamentos);
-        $repeatedValues = [];
-        foreach ($countedValues as $value => $count) {
-            if ($count > 1 || count($numeroDeAgendamentos) == 1) {
-                // Adicione o valor repetido $count vezes
-                for ($i = 0; $i < $count; $i++) {
-                    $repeatedValues[] = $value;
+
+            $servicos = cadastro_de_servico::where('id', $idServicos)
+                ->first();
+
+            $idServicos = intval($idServicos);
+
+
+
+            $agendamentos = Agendamento::where('cadastro_de_empresas_id', $id)
+                ->where('finalizado', 1)
+                ->where('cancelado', 0)
+                ->whereRaw("JSON_CONTAINS(idServicos, CAST(? AS JSON))", [$idServicos])
+                ->get();
+
+            $numeroDeAgendamentos = $agendamentos->pluck('idServicos')->flatten()->toArray();
+            $countedValues = array_count_values($numeroDeAgendamentos);
+            $repeatedValues = [];
+            foreach ($countedValues as $value => $count) {
+                if ($count > 1 || count($numeroDeAgendamentos) == 1) {
+                    // Adicione o valor repetido $count vezes
+                    for ($i = 0; $i < $count; $i++) {
+                        $repeatedValues[] = $value;
+                    }
                 }
             }
-        }
 
-        $numerodeagendamento = count($repeatedValues);
+            $numerodeagendamento = count($repeatedValues);
 
-        $userIds = $agendamentos->pluck('user_id')->toArray();
-        $numeroDeCliente = array_unique($userIds);
-        $numeroDeClientes = count($numeroDeCliente);
+            $userIds = $agendamentos->pluck('user_id')->toArray();
+            $numeroDeCliente = array_unique($userIds);
+            $numeroDeClientes = count($numeroDeCliente);
 
-        $counted = collect($userIds)->countBy();
+            $counted = collect($userIds)->countBy();
 
-        $numerodaFrequencia = $counted->max();
-        $quemMaisfrequentou =  $counted->sortDesc()->keys()->first();
+            $numerodaFrequencia = $counted->max();
+            $quemMaisfrequentou =  $counted->sortDesc()->keys()->first();
 
 
-        $cliente = User::findOrFail($quemMaisfrequentou);
-        $nomeCompleto = $cliente->name;
-        $partesDoNome = explode(' ', $nomeCompleto);
-        $primeiroNome = $partesDoNome[0];
-
+            $cliente = User::findOrFail($quemMaisfrequentou);
+            $nomeCompleto = $cliente->name;
+            $partesDoNome = explode(' ', $nomeCompleto);
+            $primeiroNome = $partesDoNome[0];
 
 
 
-        $mediaProduto = DB::table('avaliacao_produtos')
-            ->where('business_id', $id)
-            ->where('idServicos', $idServicos)
-            ->select(DB::raw('AVG(nota) as media'))
-            ->get();
+
+            $mediaProduto = DB::table('avaliacao_produtos')
+                ->where('business_id', $id)
+                ->where('idServicos', $idServicos)
+                ->select(DB::raw('AVG(nota) as media'))
+                ->get();
 
 
             $avaliacao = avaliacao_produto::where('business_id', $id)
-            ->where('idServicos', $idServicos)
-            ->orderBy('updated_at' ,'desc')
-            ->paginate(20);
+                ->where('idServicos', $idServicos)
+                ->orderBy('updated_at', 'desc')
+                ->paginate(20);
 
-        $dadoos = [];
+            $dadosavaliacao = [];
 
-        foreach ($avaliacao as $avaliacaoItem) {
-            $nota = $avaliacaoItem->nota;
-            $data = $avaliacaoItem->updated_at;
-            $dataFormatada = \Carbon\Carbon::parse($data)->format('d/m/Y');
-            $usuario = User::find($avaliacaoItem->usuario_id);
+            foreach ($avaliacao as $avaliacaoItem) {
+                $nota = $avaliacaoItem->nota;
+                $data = $avaliacaoItem->updated_at;
+                $dataFormatada = \Carbon\Carbon::parse($data)->format('d/m/Y');
+                $usuario = User::find($avaliacaoItem->usuario_id);
 
-            if ($usuario) {
-                $nome = $usuario->name;
-            } else {
-                $nome = 'Sem Nome';
+                if ($usuario) {
+                    $nome = $usuario->name;
+                } else {
+                    $nome = 'Sem Nome';
+                }
+
+                $dadosavaliacao[] = [
+                    'nome' => $nome,
+                    'nota' => $nota,
+                    'data' =>  $dataFormatada,
+                ];
             }
 
-            $dadosavaliacao[] = [
-                'nome' => $nome,
-                'nota' => $nota,
-                'data' =>  $dataFormatada,
+
+
+
+            if ($mediaProduto->count() > 0) {
+                $media = $mediaProduto[0]->media;
+            } else {
+                $media = 0;
+            }
+
+
+            $dados = [
+                'numeroDeagendamentoComEsseProduto' =>   $numerodeagendamento,
+                'nomedoservico'    => $servicos->nomeServico,
+                'image' => $servicos->imageservico,
+                'media' => $media,
+                'idempresa' => $empresa->id,
+                'numeroDeClientes' => $numeroDeClientes,
+                'nome' =>  $primeiroNome,
+                'frequencia' =>  $numerodaFrequencia,
             ];
         }
 
 
 
 
-        if ($mediaProduto->count() > 0) {
-            $media = $mediaProduto[0]->media;
-        } else {
-            $media = 0;
-        }
 
 
-        $dados = [
-            'numeroDeagendamentoComEsseProduto' =>   $numerodeagendamento,
-            'nomedoservico'    => $servicos->nomeServico,
-            'image' => $servicos->imageservico,
-            'media' => $media,
-            'idempresa' => $empresa->id,
-            'numeroDeClientes' => $numeroDeClientes,
-            'nome' =>  $primeiroNome,
-            'frequencia' =>  $numerodaFrequencia,
-        ];
-
-
-
-
-
-
-
-
-
-
-
-
-        return view('Empresa.dashboard.produtosBusiness', compact('dados','dadosavaliacao','avaliacao'));
+        return view('Empresa.dashboard.produtosBusiness', compact('dados', 'dadosavaliacao', 'avaliacao'));
     }
 }
