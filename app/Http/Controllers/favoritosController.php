@@ -66,16 +66,25 @@ class favoritosController extends Controller
         $query = cadastro_de_servico::query();
         $search = request('search');
         if ($search) {
-
+            $servico = $query
+                ->leftJoin('avaliacao_produtos', 'cadastro_de_servicos.id', '=', 'avaliacao_produtos.idServicos')
+                ->whereIn('cadastro_de_servicos.id', $idservicos)
+                ->select('cadastro_de_servicos.*', DB::raw('AVG(avaliacao_produtos.nota) as media'))
+                ->groupBy('cadastro_de_servicos.id')
+                ->orderByDesc('media')
+                ->where('nomeServico', 'like', '%' . $search . '%')
+                ->paginate(20);
+        } else {
+            $servico = $query
+                ->leftJoin('avaliacao_produtos', 'cadastro_de_servicos.id', '=', 'avaliacao_produtos.idServicos')
+                ->whereIn('cadastro_de_servicos.id', $idservicos)
+                ->select('cadastro_de_servicos.*', DB::raw('AVG(avaliacao_produtos.nota) as media'))
+                ->groupBy('cadastro_de_servicos.id')
+                ->orderByDesc('media')
+                ->paginate(20);
         }
 
-        $servico = $query
-        ->leftJoin('avaliacao_produtos', 'cadastro_de_servicos.id', '=', 'avaliacao_produtos.idServicos')
-        ->whereIn('cadastro_de_servicos.id', $idservicos)
-        ->select('cadastro_de_servicos.*', DB::raw('AVG(avaliacao_produtos.nota) as media'))
-        ->groupBy('cadastro_de_servicos.id')
-        ->orderByDesc('media')
-        ->paginate(20);
+
 
 
         $paginatedItems = new LengthAwarePaginator(
@@ -89,6 +98,6 @@ class favoritosController extends Controller
 
 
 
-        return view('favoritos.MeusfavoritosProduto',compact('servico',  'paginatedItems') );
+        return view('favoritos.MeusfavoritosProduto',compact('servico',  'paginatedItems','search') );
     }
 }

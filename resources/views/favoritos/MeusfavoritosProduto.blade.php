@@ -7,7 +7,7 @@
     <div class="row g-12">
 
         <div class=" conteiner-search-favoritos  col-8">
-            <form action="/" method="GET" id="searchForm">
+            <form action="{{ route('meusFavoritos.produtos') }}" method="GET" id="searchForm">
 
 
                 <x-btn-busca idbtn="search" name="search" />
@@ -20,8 +20,13 @@
 
         <x-carousel />
 
-
-
+        @if ($search)
+            <div class="pt-1">
+                <div class="alert alert-success" role="alert">
+                    Buscando por : "{{ $search }}" <a href="/meus/favoritos/produtos">Ver todos</a>
+                </div>
+            </div>
+        @endif
     </div>
 
 
@@ -31,14 +36,8 @@
                 <x-servicos-home servico_id="{{ $servicos->id }}" servico_imageservico="{{ $servicos->imageservico }}"
                     servico_nomeServico="{{ $servicos->nomeServico }}"
                     servico_valorDoServico="{{ $servicos->valorDoServico }}"
-                    descricaoservico="{{ $servicos->descricaosevico }}"
-                    media="{{ $servicos->media  }}"
-                    />
+                    descricaoservico="{{ $servicos->descricaosevico }}" media="{{ $servicos->media }}" />
             </div>
-
-
-
-
         @endforeach
     </div>
 
