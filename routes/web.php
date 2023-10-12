@@ -131,3 +131,6 @@ Route::get('/relatorio/produtos/{id}', [RelatorioController::class, 'relatorioPr
 
 Route::post('/favorito/produtos', [favoritosController::class, 'createfavoritoproduto'])->name('produto.favoritos')->middleware('auth');
 Route::delete('/favorito/produtos/drop', [favoritosController::class, 'dropfavoritoproduto'])->name('produto.favoritos.drop')->middleware('auth');
+
+Route::get('meus/favoritos/produtos', [favoritosController::class, 'meusFavoritosProdutos'])->name('meusFavoritos.produtos')->middleware('auth');
+

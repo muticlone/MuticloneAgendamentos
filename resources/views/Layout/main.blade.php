@@ -100,6 +100,17 @@
                                         </a>
                                     </li>
                                 @endif
+                                @if (Auth::user()->produtos_favoritos->count() > 0)
+                                    <li class="nav-item">
+
+                                        <a class="nav-link active text-nowrap" aria-current="page"
+                                            href="{{ route('meusFavoritos.produtos') }}">
+
+                                            Meus produtos favoritos
+                                        </a>
+                                    </li>
+                                @endif
+
                                 @if (Auth::user()->user_type == 'company')
                                     <li class="nav-item">
 

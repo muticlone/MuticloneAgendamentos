@@ -15,12 +15,13 @@ class produtos_favorito extends Model
         'idProduto',
     ];
 
-    public function sevicosfavorito(){
+    public function sevicosfavorito()
+    {
         return $this->hasMany('App\Models\cadastro_de_servico');
     }
 
-    public function user(){
-        return $this->belongsTo('App\Models\User');
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'idUsuario');
     }
-
 }

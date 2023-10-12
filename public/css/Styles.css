@@ -246,6 +246,17 @@ svg {
 
 }
 
+.conteiner-search-favoritos{
+    position: relative;
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 16%;
+
+}
+
+
+
 .conteiner-searchCategoria {
     position: relative;
     z-index: 2;
@@ -770,7 +781,6 @@ svg {
 
 
 
-
     .conteiner-search {
         position: relative;
         z-index: 2;
@@ -778,6 +788,8 @@ svg {
         transform: translateY(-50%);
         left: 16%;
     }
+
+
 
     .btn-extra-sm {
         font-size: 10px;
