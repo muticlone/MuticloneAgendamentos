@@ -37,15 +37,10 @@
                     </div>
                 </div>
 
-                <style>
-                    .star {
-                        margin-left: 18px;
-                        margin-top: 18px;
-                    }
-                </style>
+
                 <div class="widget-user-image">
                     <img class="img-circle elevation-3 img-fluid" style="width: 110px; height: 110px;"
-                        src="/img/logo_servicos/{{ $dados['image'] }}" alt="User Avatar">
+                        src="/img/logo_servicos/{{ $dados['image'] }}" alt="{{ ucfirst($dados['nomedoservico']) }}">
                 </div>
                 <div class="card-footer">
                     <div class="row">

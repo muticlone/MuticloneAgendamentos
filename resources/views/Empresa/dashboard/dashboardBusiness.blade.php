@@ -16,345 +16,437 @@
         rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all"
         rel="stylesheet" type="text/css" />
-        <div class="pt-2">
-            <div class="row g-12">
-                <div class="col-3" >
-                    <form action="/relatorio/clientes/{{ $idempresa }}">
-
-                        <x-btn-relatorio nome="Relatório pedidos" />
-                    </form>
-                </div>
-                <div class="col-3" >
-                    <form action="/relatorio/financeiro/{{ $idempresa }}">
-
-                        <x-btn-relatorio nome="Relatório financeiro" />
-
-
-                    </form>
-                </div>
-
-                <div class="col-3" >
-                    <form action="/relatorio/produtos/{{ $idempresa }}">
-
-                        <x-btn-relatorio nome="Relatório Produtos" />
-
-
-                    </form>
-                </div>
-
-
-                <div class="col-3" >
-                    <form action="/relatorio/ranking/{{ $idempresa }}">
-
-                        <x-btn-relatorio nome="Relatório ranking" />
-
-
-                    </form>
-                </div>
-
-
-            </div>
-
-
-        </div>
-
-    <div class="row g-12">
-
-
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-
-
-            <div class="info-box mb-3 cards">
-                <img src="/img/logo_empresas/{{ $empresa->image }}" class="img-fluid  img_dashboardbusiness"
-                    alt="{{ $empresa->razaoSocial }}">
-                <div class="info-box-content">
-                    <span class="info-box-text">{{ $empresa->nomeFantasia }}</span>
-                    <span class="info-box-number">
-                        <input id="input-6" name="input-6" class="rating rating-loading pt-br" value="{{ $media }}"
-                            data-min="0" data-max="5" data-step="0.1" data-readonly="true" data-show-clear="false"
-                            data-size="xs">
-
-                    </span>
-                </div>
-
-            </div>
-
-
-
-
-        </div>
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-            <div class="info-box mb-3 cards">
-                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">
-                        <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">Novos Clientes no mês atual</font>
-                        </font>
-                    </span>
-                    <span class="info-box-number">
-                        <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">2.000</font>
-                        </font>
-                    </span>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-            <div class="info-box cards">
-                <span class="info-box-icon bg-info"><i class="far fa-flag"></i></span>
-                <div class="info-box-content ">
-                    <span class="info-box-text">
-                        <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">Favoritos</font>
-                        </font>
-                    </span>
-                    <span class="info-box-number">
-                        <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">410</font>
-                        </font>
-                    </span>
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-    </div>
-
-    <div class="row g-12">
-
-
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-
-            <x-small-user tema="{{ $quantidadedepedidos }}" txt="Pedidos finalizados" icon='fas fa-shopping-cart'
-                link="/meus/agendamentos/empresa/{{ $idempresa }}/finalizados" class="small-box-footer" />
-
-        </div>
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-
-            <x-small-user tema="{{ $agendamentosconfirmados }}" txt="Pedidos confirmados" icon='fas fa-shopping-cart'
-                link="/meus/agendamentos/empresa/{{ $idempresa }}/confirmados" class="small-box-footer" />
-
-        </div>
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-
-            <x-small-user tema="{{  $numeroDenaoconfirmados }}" txt="Pedidos aguardando confirmar" icon='fas fa-shopping-cart'
-                link="/meus/agendamentos/empresa/{{ $idempresa }}/pendentes" class="small-box-footer" />
-
-        </div>
-
-
-
-
-
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-
-            <x-small-user tema="{{  $todosOspedidos }}" txt="Todos os Pedidos" icon='fas fa-shopping-cart'
-                link="/meus/agendamentos/empresa/{{ $idempresa }}/todos" class="small-box-footer" />
-
-        </div>
-
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-
-
-
-
-            <x-small-user tema="{{$quantidadedepedidoscacenlados  }}" txt="Pedidos cancelados {{ $Porcentagemdepedidoscancelados}}"
-            link="/meus/agendamentos/empresa/{{ $idempresa }}/cancelados"
-            icon='fa fa-times'
-            />
-
-        </div>
-
-
-
-
-
-
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-
-            <x-small-user tema="{{ $clientetotal }}" txt="Clientes total" icon='fas fa-user-plus'
-                link="/dados/meus/clientes/{{ $idempresa }}/ativos" />
-        </div>
-
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-
-            <x-small-user tema="{{ ucfirst($nomeClienteMaisFrequente )}} " txt="Quantidade de pedidos: {{ $quantidadeRepeticoes }}" icon='fas fa-user-plus'
-             btntxt="Mais informação, cliente com a maior frequência "
-             link="/cliente/ranks/{{ $idempresa }}"
-             />
-        </div>
-
-
-
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-
-
-            <x-small-user tema="{{ $quantidadedepedidosmesatual }}" txt="Pedidos mês atual" icon='fas fa-shopping-cart'
-                link="/meus/agendamentos/empresa/{{ $idempresa }}/finalizados" class="small-box-footer" />
-
-        </div>
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-
-            <x-small-user tema="{{ $clientemesatual }}" txt="Clientes mês atual" icon='fas fa-user-plus' link="#" />
-
-        </div>
-
-
-
-    </div>
-
-
-    @if ($metaAnual > 0)
-        <label for="valorDaMetaAnual">Faturamento anual</label>
-    @else
-        <label for="valorDaMetaAnual">Crie uma meta de faturamento anual</label>
-    @endif
-
-
-
-    <form action="/atualizarmeta/{{ $idempresa }}" method="POST">
-        @csrf
-        @method('PUT')
+    <div class="pt-2">
         <div class="row g-12">
-            <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
+            <div class="col-3">
+                <form action="/relatorio/clientes/{{ $idempresa }}">
 
-                <input type="text" class="form-control mascValor" id="valorDaMetaAnual" name="valorDaMetaAnual"
-                    placeholder="Valor da meta anual" value="{{ $metaAnual }}"
-                    aria-describedby="validationTooltipUsernamePrepend" inputmode="numeric" required />
+                    <x-btn-relatorio nome="Relatório pedidos" />
+                </form>
+            </div>
+            <div class="col-3">
+                <form action="/relatorio/financeiro/{{ $idempresa }}">
 
+                    <x-btn-relatorio nome="Relatório financeiro" />
+
+
+                </form>
             </div>
 
-            <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
+            <div class="col-3">
+                <form action="/relatorio/produtos/{{ $idempresa }}">
 
-                <button type="submit" class="btn btn-info ">Salvar</button>
+                    <x-btn-relatorio nome="Relatório Produtos" />
+
+
+                </form>
             </div>
+
+
+            <div class="col-3">
+                <form action="/relatorio/ranking/{{ $idempresa }}">
+
+                    <x-btn-relatorio nome="Relatório ranking" />
+
+
+                </form>
+            </div>
+
+
         </div>
 
-    </form>
 
+    </div>
 
     <div class="row g-12">
 
+        <div class="col-lg-12 col-sm-12 col-md-12 pt-2 ">
 
+            <div class="card card-widget widget-user">
 
-
-        <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
-            <div class="card card-info">
-                <div class="card-header">
-                    <h3 class="card-title">Faturamento Mensal</h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-
+                <div class="widget-user-header bg-info ">
+                    <div class="star">
+                        <input id="input-6" name="input-6" class="rating rating-loading pt-br "
+                            value="{{ $media }}" data-min="0" data-max="5" data-step="0.1" data-readonly="true"
+                            data-show-clear="false" data-size="xs" style="margin: 0 auto; display: block;">
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="">
-                        <img src="/img/logo_empresas/{{ $empresa->image }}" class="img-fluid  img_dashboardbusiness"
-                            alt="{{ $empresa->razaoSocial }}">
-                        <div class="info-box-content">
-                            <span class="info-box-text">Volor recebido no mês atual</span>
-                            <span class="info-box-number">
-                                {{ 'R$ ' . number_format($valorMesAtual, 2, ',', '.') }}
-                            </span>
-                            <div class="progress">
-                                <div class="progress-bar bg-info" style="width: {{ $porcentagem_atingidamensal }}%">
-                                </div>
+
+
+                <div class="widget-user-image">
+                    <img class="img-circle elevation-3 img-fluid" style="width: 110px; height: 110px;"
+                        src="/img/logo_empresas/{{ $empresa->image }}" alt="{{ $empresa->razaoSocial }}">
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-sm-12  mx-2 ">
+                            <div class="description-block">
+                                <span class="info-box-number">
+                                    <h3 class="widget-user-username">{{ ucfirst($empresa->nomeFantasia) }}</h3>
+                                </span>
                             </div>
-                            <span class="progress-description">
-                                @if ($porcentagem_atingidamensal == 100)
-                                    {{ number_format($porcentagem_atingidamensal, 2, ',', '.') }}%
-                                    </br>
-                                    Meta mensal concluida
-                                @else
-                                    {{ number_format($porcentagem_atingidamensal, 2, ',', '.') }}% da
-                                    Meta mensal {{ 'R$ ' . number_format($metamensal, 2, ',', '.') }}
-                                    <br />
-                                    @if ($ValorFaltaParaChegarNaMetamensal > 0)
-                                        Falta R$
-                                        {{ 'R$ ' . number_format($ValorFaltaParaChegarNaMetamensal, 2, ',', '.') }}
+                        </div>
+                    </div>
+                    <div class="row g-12">
+                        <div class="col-lg-4 col-sm-12 col-md-12 ">
+                            <x-cardadminlte ico="far fa-star" tema="Usuários que favoritaram" info="" />
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-md-12 ">
+                            <div class="description-block">
+                                <span class="info-box-number">
+                                    <x-cardadminlte ico="fas fa-users" tema="Novos Clientes no mês atual" info="" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <span class="info-box-number">
+                                    <x-cardadminlte ico="far fa-star" tema="teste" info="teste" />
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-12">
+
+                        <div class="col-lg-4 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <span class="info-box-number">
+                                    <x-small-user tema="{{ $quantidadedepedidos }}" txt="Pedidos finalizados"
+                                        icon='fas fa-shopping-cart'
+                                        link="/meus/agendamentos/empresa/{{ $idempresa }}/finalizados"
+                                        class="small-box-footer" />
+
+
+
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-4 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <x-small-user tema="{{ $agendamentosconfirmados }}" txt="Pedidos confirmados"
+                                    icon='fas fa-shopping-cart'
+                                    link="/meus/agendamentos/empresa/{{ $idempresa }}/confirmados"
+                                    class="small-box-footer" />
+
+                            </div>
+
+
+
+                        </div>
+
+
+                        <div class="col-lg-4 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <span class="info-box-number">
+
+                                    <x-small-user tema="{{ $numeroDenaoconfirmados }}" txt="Pedidos aguardando confirmar"
+                                        icon='fas fa-shopping-cart'
+                                        link="/meus/agendamentos/empresa/{{ $idempresa }}/pendentes"
+                                        class="small-box-footer" />
+
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <span class="info-box-number">
+
+                                    <x-small-user tema="{{ $todosOspedidos }}" txt="Todos os Pedidos"
+                                        icon='fas fa-shopping-cart'
+                                        link="/meus/agendamentos/empresa/{{ $idempresa }}/todos"
+                                        class="small-box-footer" />
+
+                                </span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <span class="info-box-number">
+
+
+                                    <x-small-user tema="{{ $quantidadedepedidoscacenlados }}"
+                                        txt="Pedidos cancelados {{ $Porcentagemdepedidoscancelados }}"
+                                        link="/meus/agendamentos/empresa/{{ $idempresa }}/cancelados"
+                                        icon='fa fa-times' />
+
+
+                                </span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <span class="info-box-number">
+
+                                    <x-small-user tema="{{ $clientetotal }}" txt="Clientes total"
+                                        icon='fas fa-user-plus' link="/dados/meus/clientes/{{ $idempresa }}/ativos" />
+                                </span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <span class="info-box-number">
+
+                                    <x-small-user tema="{{ ucfirst($nomeClienteMaisFrequente) }} "
+                                        txt="{{ $quantidadeRepeticoes }}" icon='fas fa-user-plus'
+                                        btntxt="Mais informação, cliente com a maior frequência "
+                                        link="/cliente/ranks/{{ $idempresa }}" />
+
+                                </span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <span class="info-box-number">
+
+
+                                    <x-small-user tema="{{ $quantidadedepedidosmesatual }}" txt="Pedidos mês atual"
+                                        icon='fas fa-shopping-cart'
+                                        link="/meus/agendamentos/empresa/{{ $idempresa }}/finalizados"
+                                        class="small-box-footer" />
+                                </span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <span class="info-box-number">
+
+
+                                    <x-small-user tema="{{ $clientemesatual }}" txt="Clientes mês atual"
+                                        icon='fas fa-user-plus' link="#" />
+
+                                </span>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row g-12">
+
+                        <div class="col-lg-12 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <span class="info-box-number">
+                                    @if ($metaAnual > 0)
+                                        <label for="valorDaMetaAnual">Meta de faturamento anual</label>
+                                    @else
+                                        <label for="valorDaMetaAnual">Crie uma meta de faturamento anual</label>
                                     @endif
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <span class="info-box-number">
+                                    <form action="/atualizarmeta/{{ $idempresa }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="row g-12">
+                                            <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
 
-                                @endif
+                                                <input type="text" class="form-control mascValor"
+                                                    id="valorDaMetaAnual" name="valorDaMetaAnual"
+                                                    placeholder="Valor da meta anual" value="{{ $metaAnual }}"
+                                                    aria-describedby="validationTooltipUsernamePrepend"
+                                                    inputmode="numeric" required />
 
-                            </span>
+                                            </div>
+
+                                            <div class="col-lg-1 col-sm-12 col-md-12 pt-2">
+
+                                                <button type="submit" class="btn btn-info ">Salvar</button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
+                    <div class="row g-12">
 
-        </div>
+                        <div class="col-lg-6 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <span class="info-box-number">
+                                    <div class="card card-info">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Faturamento Mensal</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
 
-        <div class="col-lg-6 col-sm-12 col-md-12 pt-2">
-            <div class="card card-info">
-                <div class="card-header">
-                    <h3 class="card-title">Faturamento Anual</h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="chart">
-                        <div class="chartjs-size-monitor">
-                            <div class="">
-
-                                <img src="/img/logo_empresas/{{ $empresa->image }}"
-                                    class="img-fluid  img_dashboardbusiness" alt="{{ $empresa->razaoSocial }}">
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Volor recebido no ano</span>
-                                    <span class="info-box-number">
-                                        {{ 'R$ ' . number_format($faturamentoAnual, 2, ',', '.') }}
-                                    </span>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-info"
-                                            style="width: {{ $porcentagem_atingidaanual }}%">
+                                            </div>
                                         </div>
+                                        <div class="card-body">
+                                            <div class="">
+                                                <img src="/img/logo_empresas/{{ $empresa->image }}"
+                                                    class="img-fluid  img_dashboardbusiness"
+                                                    alt="{{ $empresa->razaoSocial }}">
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">Volor recebido no mês atual</span>
+                                                    <span class="info-box-number">
+                                                        {{ 'R$ ' . number_format($valorMesAtual, 2, ',', '.') }}
+                                                    </span>
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-info"
+                                                            style="width: {{ $porcentagem_atingidamensal }}%">
+                                                        </div>
+                                                    </div>
+                                                    <span class="progress-description">
+                                                        @if ($porcentagem_atingidamensal == 100)
+                                                            {{ number_format($porcentagem_atingidamensal, 2, ',', '.') }}%
+                                                            </br>
+                                                            Meta mensal concluida
+                                                        @else
+                                                            {{ number_format($porcentagem_atingidamensal, 2, ',', '.') }}%
+                                                            da
+                                                            Meta mensal
+                                                            {{ 'R$ ' . number_format($metamensal, 2, ',', '.') }}
+                                                            <br />
+                                                            @if ($ValorFaltaParaChegarNaMetamensal > 0)
+                                                                Falta R$
+                                                                {{ 'R$ ' . number_format($ValorFaltaParaChegarNaMetamensal, 2, ',', '.') }}
+                                                            @endif
+
+                                                        @endif
+
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
-                                    <span class="progress-description">
-                                        @if ($porcentagem_atingidaanual == 100)
-                                            {{ number_format($porcentagem_atingidaanual, 2, ',', '.') }}%
-                                            </br>
-                                            Meta anual concluida
-                                        @else
-                                            {{ number_format($porcentagem_atingidaanual, 2, ',', '.') }} % da
-                                            Meta anual {{ 'R$ ' . number_format($metaAnual, 2, ',', '.') }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <span class="info-box-number">
+                                    <div class="card card-info">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Faturamento Anual</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="chart">
+                                                <div class="chartjs-size-monitor">
+                                                    <div class="">
+
+                                                        <img src="/img/logo_empresas/{{ $empresa->image }}"
+                                                            class="img-fluid  img_dashboardbusiness"
+                                                            alt="{{ $empresa->razaoSocial }}">
+                                                        <div class="info-box-content">
+                                                            <span class="info-box-text">Volor recebido no ano</span>
+                                                            <span class="info-box-number">
+                                                                {{ 'R$ ' . number_format($faturamentoAnual, 2, ',', '.') }}
+                                                            </span>
+                                                            <div class="progress">
+                                                                <div class="progress-bar bg-info"
+                                                                    style="width: {{ $porcentagem_atingidaanual }}%">
+                                                                </div>
+                                                            </div>
+                                                            <span class="progress-description">
+                                                                @if ($porcentagem_atingidaanual == 100)
+                                                                    {{ number_format($porcentagem_atingidaanual, 2, ',', '.') }}%
+                                                                    </br>
+                                                                    Meta anual concluida
+                                                                @else
+                                                                    {{ number_format($porcentagem_atingidaanual, 2, ',', '.') }}
+                                                                    % da
+                                                                    Meta anual
+                                                                    {{ 'R$ ' . number_format($metaAnual, 2, ',', '.') }}
 
 
 
-                                            <br />
-                                            @if ($ValorFaltaParaChegarNaMetamensal > 0)
-                                                Falta
-                                                {{ 'R$ ' . number_format($ValorFaltaParaChegarNaMetaAnual, 2, ',', '.') }}
-                                            @endif
+                                                                    <br />
+                                                                    @if ($ValorFaltaParaChegarNaMetamensal > 0)
+                                                                        Falta
+                                                                        {{ 'R$ ' . number_format($ValorFaltaParaChegarNaMetaAnual, 2, ',', '.') }}
+                                                                    @endif
 
-                                        @endif
+                                                                @endif
+
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-12">
+                        @if ($produtosmensal)
+                            <div class="col-lg-6 col-sm-12 col-md-12">
+                                <div class="description-block">
+                                    <span class="info-box-number">
+
+
+
+                                        <x-grafico-donut tema="Produtos mais agendados no mês atual"
+                                            idgrafico="donutChartmesAtual" />
+
 
                                     </span>
                                 </div>
                             </div>
+                        @endif
+                        <div class="col-lg-6 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <span class="info-box-number">
+                                    <x-grafico-donut tema="Produtos mais agendados" idgrafico="donutChart" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <span class="info-box-number">
+                                    <x-graficoPizza tema="Formas de pagamento" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <span class="info-box-number">
+                                    <x-grafico-coluna tema="Faturamento Anual" idgrafico="faruramentoAnual" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <span class="info-box-number">
+                                    <x-grafico-coluna tema="Pedidos por mês" idgrafico="PedidosPorMes" />
+                                </span>
+                            </div>
                         </div>
                     </div>
+
                 </div>
 
             </div>
-
-
-
-
         </div>
-
 
 
 
@@ -363,35 +455,20 @@
 
 
     </div>
-    <div class="row g-12">
-        @if ($produtosmensal)
-            <div class="col-lg-6 col-md-12 col-sm-12 pt-2">
-                <!-- Conteúdo do gráfico 1 -->
-                <x-grafico-donut tema="Produtos mais agendados no mês atual" idgrafico="donutChartmesAtual" />
-            </div>
 
-        @endif
 
-        <div class="col-lg-6 col-md-12 col-sm-12 pt-2">
-            <!-- Conteúdo do gráfico 2 -->
-            <x-grafico-donut tema="Produtos mais agendados" idgrafico="donutChart" />
-        </div>
 
-        <div class="col-lg-6 col-md-12 col-sm-12 pt-2">
-            <!-- Conteúdo do gráfico 3 -->
-            <x-graficoPizza tema="Formas de pagamento" />
-        </div>
 
-        <div class="col-lg-6 col-md-12 col-sm-12 pt-2">
-            <!-- Conteúdo do gráfico 4 -->
-            <x-grafico-coluna tema="Faturamento Anual" idgrafico="faruramentoAnual" />
-        </div>
 
-        <div class="col-lg-6 col-md-12 col-sm-12 pt-2">
-            <!-- Conteúdo do gráfico 5 -->
-            <x-grafico-coluna tema="Pedidos por mês" idgrafico="PedidosPorMes" />
-        </div>
-    </div>
+
+
+
+
+
+
+
+
+
 
 
 
