@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agendamento;
 use Illuminate\Http\Request;
 
 
@@ -118,7 +119,7 @@ class CadastroServicoController extends Controller
 
         $user = auth()->user();
 
-        $iduser=$user->id;
+        $iduser=$user->id ?? 0;
 
         $favorios = produtos_favorito::where('idUsuario' , $iduser)->where('idProduto',$id)->first();
 
@@ -171,10 +172,20 @@ class CadastroServicoController extends Controller
             ->orderBy('id', 'desc')
             ->paginate($registrosPorPagina);
 
+            $idServicos = [];
+            foreach ( $servicos as $id){
+                $idServicos[] = $id->id;
+            }
 
 
-            // $notaProduto = avaliacao_produto::where('business_id',   $id)
-            //     ->get();
+
+            // $agendamento = Agendamento::where(function ($query) use ($idServicos) {
+            //     foreach ($idServicos as $id) {
+            //         $query->orWhereJsonContains('idServicos', $id);
+            //     }
+            // })->get();
+
+
 
 
 

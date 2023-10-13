@@ -85,7 +85,7 @@
                         </ul>
 
                         <a href="{{ route('cadastrar.agendamentoprodutouncio', ['id' => $servico->id]) }}"
-                            class="btn btn-primary">Agendar</a>
+                            class="btn btn-sm  btn-primary">Agendar</a>
 
                         <p class="card-text pt-2">Prestadora do serviço:
 

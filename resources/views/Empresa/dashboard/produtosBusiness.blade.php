@@ -4,14 +4,14 @@
 
 @section('content_header')
 
-    <div class="col-3">
+    {{-- <div class="col-3">
         <form action="/relatorio/produtos/{{ $dados['idempresa'] }}">
 
             <x-btn-relatorio nome="Relatório todos os produtos" />
 
 
         </form>
-    </div>
+    </div> --}}
 
 
 @stop
@@ -25,114 +25,154 @@
         rel="stylesheet" type="text/css" />
 
     <div class="row g-12">
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
+        <div class="col-lg-12 col-sm-12 col-md-12 pt-2 ">
 
+            <div class="card card-widget widget-user">
 
-
-            <div class="info-box mb-3 cards">
-                <img src="/img/logo_servicos/{{ $dados['image'] }}" class="img-fluid  img_dashboardbusiness" alt="">
-                <div class="info-box-content">
-                    <span class="info-box-text">{{ $dados['nomedoservico'] }}</span>
-                    <span class="info-box-number">
-                        <input id="input-6" name="input-6" class="rating rating-loading pt-br"
+                <div class="widget-user-header bg-info ">
+                    <div class="star">
+                        <input id="input-6" name="input-6" class="rating rating-loading pt-br "
                             value="{{ $dados['media'] }}" data-min="0" data-max="5" data-step="0.1" data-readonly="true"
-                            data-show-clear="false" data-size="xs">
-
-                    </span>
+                            data-show-clear="false" data-size="xs" style="margin: 0 auto; display: block;">
+                    </div>
                 </div>
 
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-            <div class="info-box cards">
-                <span class="info-box-icon bg-info"><i class="far fa-flag"></i></span>
-                <div class="info-box-content ">
-                    <span class="info-box-text">
-                        <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">Favoritos</font>
-                        </font>
-                    </span>
-                    <span class="info-box-number">
-                        <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">410</font>
-                        </font>
-                    </span>
+                <style>
+                    .star {
+                        margin-left: 18px;
+                        margin-top: 18px;
+                    }
+                </style>
+                <div class="widget-user-image">
+                    <img class="img-circle elevation-3 img-fluid" style="width: 110px; height: 110px;"
+                        src="/img/logo_servicos/{{ $dados['image'] }}" alt="User Avatar">
                 </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-sm-12  mx-2 ">
+                            <div class="description-block">
+                                <span class="info-box-number">
+                                    <h3 class="widget-user-username">{{ ucfirst($dados['nomedoservico']) }}</h3>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-12">
+                        <div class="col-lg-4 col-sm-12 col-md-12 ">
+                            <x-cardadminlte ico="far fa-star" tema="Usuários que favoritaram" info="{{ $dados['numeroDefavoritos'] }}" />
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-md-12 ">
+                            <div class="description-block">
+                                <span class="info-box-number">
+                                    <x-cardadminlte ico="far fa-star" tema="teste" info="teste" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-md-12">
+                            <div class="description-block">
+                                <span class="info-box-number">
+                                    <x-cardadminlte ico="far fa-star" tema="teste" info="teste" />
 
-            </div>
-
-        </div>
-
-    </div>
-    <div class="row g-12">
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-
-            <x-small-user tema="{{ $dados['numeroDeagendamentoComEsseProduto'] }}" txt="Quantidade de pedidos finalizados"
-                icon='fas fa-shopping-cart' class="small-box-footer" />
-
-
-        </div>
-
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-
-            <x-small-user tema="{{ $dados['numeroDeClientes'] }}" txt="Total de clientes para esse produto"
-                icon='fas fa-shopping-cart' class="small-box-footer" />
-
-
-        </div>
-
-        <div class="col-lg-4 col-sm-12 col-md-12 pt-2">
-
-            <x-small-user tema="{{ $dados['nome'] }}" txt="Cliente mais frequente: {{ $dados['frequencia'] }}"
-                icon='fas fa-shopping-cart' class="small-box-footer" />
-
-
-        </div>
-
-
-
-    </div
-
-
-        <section class="content">
-            <div class="container-fluid">
-
-                <div class="row">
-                    @foreach ( $dadosavaliacao as $dado )
-                    <div class="col-md-4">
-
-                        <div class="timeline">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-12">
+                        @if ($dados['numeroDeagendamentoComEsseProduto'] > 0)
+                            <div class="col-lg-4 col-sm-12 col-md-12">
+                                <div class="description-block">
+                                    <span class="info-box-number">
+                                        <x-small-user tema="{{ $dados['numeroDeagendamentoComEsseProduto'] }}"
+                                            txt="Pedidos finalizados" icon='fas fa-shopping-cart'
+                                            class="small-box-footer" />
 
 
-
-                            <div>
-                                <i class="fas fa-user bg-green"></i>
-
-                                <div class="timeline-item">
-                                    <span class="time"><i class="fas fa-clock"></i> {{ $dado['data']  }}</span>
-                                    <div class="d-flex pt-2 mx-2">
-                                        <div class="mr-auto">{{ $dado['nome']  }}</div>
-                                        <input id="input-6" name="input-6" class="rating rating-loading pt-br ml-2"
-                                               value="{{ $dado['nota'] }}" data-min="0" data-max="5" data-step="0.1"
-                                               data-readonly="true" data-show-clear="false" data-size="xs">
-                                    </div>
-
-
+                                    </span>
+                                </div>
+                            </div>
+                        @endif
+                        @if ($dados['numeroDeClientes'] > 0)
+                            <div class="col-lg-4 col-sm-12 col-md-12">
+                                <div class="description-block">
+                                    <span class="info-box-number">
+                                        <x-small-user tema="{{ $dados['numeroDeClientes'] }}"
+                                            txt="Clientes para esse produto" icon='fas fa-shopping-cart'
+                                            class="small-box-footer" />
+                                    </span>
 
                                 </div>
 
 
+
                             </div>
 
-                        </div>
+                            @if ($dados['nome'] > 0)
+                                <div class="col-lg-4 col-sm-12 col-md-12">
+                                    <div class="description-block">
+                                        <span class="info-box-number">
+
+                                            <x-small-user tema="{{ $dados['nome'] }}"
+                                                txt="Frequência: {{ $dados['frequencia'] }}"
+                                                icon='fas fa-shopping-cart' class="small-box-footer"
+                                                btntxt="Cliente mais frequente"/>
+
+                                        </span>
+
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
                     </div>
-                    @endforeach
+                    <div class="row g-12">
+                        @foreach ($dadosavaliacao as $dado)
+                            <div class="col-lg-4 col-sm-12 col-md-12">
+                                <div class="description-block">
+                                    <span class="info-box-number">
+                                        <div class="timeline">
+
+
+
+                                            <div>
+                                                <i class="fas fa-user bg-green"></i>
+
+                                                <div class="timeline-item">
+                                                    <span class="time"><i class="fas fa-clock"></i> {{ $dado['data'] }}</span>
+                                                    <div class="d-flex pt-2 mx-2">
+                                                        <div class="mr-auto">{{ $dado['nome'] }}</div>
+                                                        <input id="input-6" name="input-6" class="rating rating-loading pt-br ml-2"
+                                                            value="{{ $dado['nota'] }}" data-min="0" data-max="5" data-step="0.1"
+                                                            data-readonly="true" data-show-clear="false" data-size="xs">
+                                                    </div>
+
+
+
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </span>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
+
             </div>
+        </div>
+    </div>
 
-        </section>
 
-        <x-pagination :paginatedItems="$avaliacao" />
+
+
+
+
+
+
+
+    <x-pagination :paginatedItems="$avaliacao" />
 
 
 

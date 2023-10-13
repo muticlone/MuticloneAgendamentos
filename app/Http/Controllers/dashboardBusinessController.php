@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Agendamento;
 use App\Models\avaliacao_produto;
+use App\Models\produtos_favorito;
 use App\Models\User;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -315,23 +316,14 @@ class dashboardBusinessController extends Controller
 
     public function produtosBusiness($id, $idServicos)
     {
-
-
         $user = auth()->user();
         $empresa = cadastro_de_empresa::findOrFail($id);
-
 
         if ($user->id != $empresa->user_id) {
             return redirect('/dashboard');
         } else {
-
-
-            $servicos = cadastro_de_servico::where('id', $idServicos)
-                ->first();
-
+            $servicos = cadastro_de_servico::where('id', $idServicos)->first();
             $idServicos = intval($idServicos);
-
-
 
             $agendamentos = Agendamento::where('cadastro_de_empresas_id', $id)
                 ->where('finalizado', 1)
@@ -340,18 +332,22 @@ class dashboardBusinessController extends Controller
                 ->get();
 
             $numeroDeAgendamentos = $agendamentos->pluck('idServicos')->flatten()->toArray();
-            $countedValues = array_count_values($numeroDeAgendamentos);
-            $repeatedValues = [];
-            foreach ($countedValues as $value => $count) {
-                if ($count > 1 || count($numeroDeAgendamentos) == 1) {
-                    // Adicione o valor repetido $count vezes
-                    for ($i = 0; $i < $count; $i++) {
-                        $repeatedValues[] = $value;
+
+            if (count($numeroDeAgendamentos) > 0) {
+                $countedValues = array_count_values($numeroDeAgendamentos);
+                $repeatedValues = [];
+                foreach ($countedValues as $value => $count) {
+                    if ($count > 1 || count($numeroDeAgendamentos) == 1) {
+                        // Adicione o valor repetido $count vezes
+                        for ($i = 0; $i < $count; $i++) {
+                            $repeatedValues[] = $value;
+                        }
                     }
                 }
+                $numerodeagendamento = count($repeatedValues);
+            } else {
+                $numerodeagendamento = 0;
             }
-
-            $numerodeagendamento = count($repeatedValues);
 
             $userIds = $agendamentos->pluck('user_id')->toArray();
             $numeroDeCliente = array_unique($userIds);
@@ -359,24 +355,24 @@ class dashboardBusinessController extends Controller
 
             $counted = collect($userIds)->countBy();
 
-            $numerodaFrequencia = $counted->max();
-            $quemMaisfrequentou =  $counted->sortDesc()->keys()->first();
-
-
-            $cliente = User::findOrFail($quemMaisfrequentou);
-            $nomeCompleto = $cliente->name;
-            $partesDoNome = explode(' ', $nomeCompleto);
-            $primeiroNome = $partesDoNome[0];
-
-
-
+            if (count($counted) > 0) {
+                $numerodaFrequencia = $counted->max();
+                $quemMaisfrequentou = $counted->sortDesc()->keys()->first();
+                $cliente = User::findOrFail($quemMaisfrequentou);
+                $nomeCompleto = $cliente->name;
+                $partesDoNome = explode(' ', $nomeCompleto);
+                $primeiroNome = $partesDoNome[0];
+            } else {
+                $numerodaFrequencia = 0;
+                $quemMaisfrequentou = null;
+                $primeiroNome = '';
+            }
 
             $mediaProduto = DB::table('avaliacao_produtos')
                 ->where('business_id', $id)
                 ->where('idServicos', $idServicos)
                 ->select(DB::raw('AVG(nota) as media'))
                 ->get();
-
 
             $avaliacao = avaliacao_produto::where('business_id', $id)
                 ->where('idServicos', $idServicos)
@@ -404,14 +400,16 @@ class dashboardBusinessController extends Controller
                 ];
             }
 
-
-
-
             if ($mediaProduto->count() > 0) {
                 $media = $mediaProduto[0]->media;
             } else {
                 $media = 0;
             }
+
+            $favoritos = produtos_favorito::where('idProduto',$idServicos)->get();
+            $numeroDefavoritos = count($favoritos->pluck('idUsuario')->toArray());
+
+
 
 
             $dados = [
@@ -423,13 +421,9 @@ class dashboardBusinessController extends Controller
                 'numeroDeClientes' => $numeroDeClientes,
                 'nome' =>  $primeiroNome,
                 'frequencia' =>  $numerodaFrequencia,
+                'numeroDefavoritos' => $numeroDefavoritos
             ];
         }
-
-
-
-
-
 
         return view('Empresa.dashboard.produtosBusiness', compact('dados', 'dadosavaliacao', 'avaliacao'));
     }
