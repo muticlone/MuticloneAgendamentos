@@ -62,6 +62,15 @@ class CadastroEmpresaController extends Controller
 }
 
 public function edit($id){
+
+    try {
+        $id = decrypt($id);
+    } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+        return redirect('/dashboard');
+    }
+
+
     $user = auth()->user();
 
     $empresa = cadastro_de_empresa::findOrFail($id);

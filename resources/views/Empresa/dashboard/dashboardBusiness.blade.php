@@ -19,13 +19,13 @@
     <div class="pt-2">
         <div class="row g-12">
             <div class="col-3">
-                <form action="/relatorio/clientes/{{ $idempresa }}">
+                <form action="/relatorio/clientes/{{ encrypt($idempresa)  }}">
 
                     <x-btn-relatorio nome="Relatório pedidos" />
                 </form>
             </div>
             <div class="col-3">
-                <form action="/relatorio/financeiro/{{ $idempresa }}">
+                <form action="/relatorio/financeiro/{{ encrypt($idempresa) }}">
 
                     <x-btn-relatorio nome="Relatório financeiro" />
 
@@ -34,7 +34,7 @@
             </div>
 
             <div class="col-3">
-                <form action="/relatorio/produtos/{{ $idempresa }}">
+                <form action="/relatorio/produtos/{{ encrypt($idempresa) }}">
 
                     <x-btn-relatorio nome="Relatório Produtos" />
 
@@ -44,7 +44,7 @@
 
 
             <div class="col-3">
-                <form action="/relatorio/ranking/{{ $idempresa }}">
+                <form action="/relatorio/ranking/{{ encrypt($idempresa) }}">
 
                     <x-btn-relatorio nome="Relatório ranking" />
 
@@ -238,7 +238,7 @@
                             <div class="description-block">
                                 <span class="info-box-number">
                                     @if ($metaAnual > 0)
-                                        <label for="valorDaMetaAnual">Meta de faturamento anual</label>
+                                        <label for="valorDaMetaAnual">Meta de faturamento </label>
                                     @else
                                         <label for="valorDaMetaAnual">Crie uma meta de faturamento anual</label>
                                     @endif

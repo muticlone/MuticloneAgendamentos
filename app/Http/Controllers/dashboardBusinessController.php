@@ -24,6 +24,13 @@ class dashboardBusinessController extends Controller
     public function dashboardBusiness($id)
     {
 
+        try {
+            $id = decrypt($id);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
+
         $user = auth()->user();
         $empresa = cadastro_de_empresa::findOrFail($id);
         $porcentagem_atingidaanual = 0;
@@ -264,6 +271,13 @@ class dashboardBusinessController extends Controller
     public function agendaBusiness($id)
     {
 
+        try {
+            $id = decrypt($id);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
+
 
         $user = auth()->user();
         $empresa = cadastro_de_empresa::findOrFail($id);
@@ -314,8 +328,18 @@ class dashboardBusinessController extends Controller
         ]);
     }
 
-    public function produtosBusiness($id, $idServicos)
-    {
+    public function produtosBusiness($id, $idServicos){
+
+        try {
+            $id = decrypt($id);
+            $idServicos = decrypt($idServicos);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
+
+
+
         $user = auth()->user();
         $empresa = cadastro_de_empresa::findOrFail($id);
 

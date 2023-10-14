@@ -77,7 +77,9 @@ class CadastroServicoController extends Controller
 
         $cadastro_de_servico->create($data);
 
-        return redirect('/dados/servicos/' . $empresa->id)->with('msg', 'serviço criado com sucesso!');
+        $idempresa =  encrypt($empresa->id);
+
+        return redirect('/dados/servicos/' .  $idempresa)->with('msg', 'serviço criado com sucesso!');
     }
 
 
@@ -140,6 +142,12 @@ class CadastroServicoController extends Controller
     public function showMeusServicos($id)
     {
 
+        try {
+            $id = decrypt($id);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
         $user = auth()->user();
 
         $empresa = cadastro_de_empresa::findOrFail($id);
@@ -200,10 +208,16 @@ class CadastroServicoController extends Controller
         ]);
     }
 
-    public function edit($id)
+    public function edit($id){
 
+        // pagina edit/servicos
 
-    {
+        try {
+            $id = decrypt($id);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
 
 
 
@@ -217,7 +231,7 @@ class CadastroServicoController extends Controller
         $user = auth()->user();
 
 
-        // $registrosPaginados = cadastro_de_servico::where('cadastro_de_empresas_id', $id_empresa)->paginate(1);
+
 
 
         if (
@@ -242,46 +256,99 @@ class CadastroServicoController extends Controller
     public function update(Request $request, $id)
     {
 
-        $servico = cadastro_de_servico::findOrFail($request->id);
+        try {
+            $id = decrypt($id);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
+
+        $user = auth()->user();
+        $idEmpresa = cadastro_de_servico::where('id', $id)->pluck('cadastro_de_empresas_id')->first();
+        $empresa = cadastro_de_empresa::findOrFail( $idEmpresa);
+        if ($user->id != $empresa->user_id) {
+            return redirect('/dashboard');
+        } else {
+
+            $servico = cadastro_de_servico::findOrFail($id);
 
 
 
-        $data = $request->all();
-        $valorDoServico = $data['valorDoServico'];
-        $valorDoServico = str_replace('R$ ', '', $valorDoServico); // Remove o prefixo "R$ "
-        $valorDoServico = str_replace('.', '', $valorDoServico); // Remove todos os pontos de milhares
-        $valorDoServico = str_replace(',', '.', $valorDoServico); // Substitui a vírgula por um ponto
-        $data['valorDoServico'] = $valorDoServico; // Atualiza o valor no array de dados
+            $data = $request->all();
+            $valorDoServico = $data['valorDoServico'];
+            $valorDoServico = str_replace('R$ ', '', $valorDoServico); // Remove o prefixo "R$ "
+            $valorDoServico = str_replace('.', '', $valorDoServico); // Remove todos os pontos de milhares
+            $valorDoServico = str_replace(',', '.', $valorDoServico); // Substitui a vírgula por um ponto
+            $data['valorDoServico'] = $valorDoServico; // Atualiza o valor no array de dados
 
 
 
 
-        if ($request->hasFile('imageservico') && $request->file('imageservico')->isValid()) {
+            if ($request->hasFile('imageservico') && $request->file('imageservico')->isValid()) {
 
-            unlink(public_path('img/logo_servicos/' . $servico->imageservico));
-            $requestImage = $request->imageservico;
-            $extension = $requestImage->extension();
-            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-            $requestImage->move(public_path('img/logo_servicos'), $imageName);
-            $data['imageservico'] = $imageName;
+                unlink(public_path('img/logo_servicos/' . $servico->imageservico));
+                $requestImage = $request->imageservico;
+                $extension = $requestImage->extension();
+                $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+                $requestImage->move(public_path('img/logo_servicos'), $imageName);
+                $data['imageservico'] = $imageName;
+            }
+
+
+            $data['valorDoServico'] =    $valorDoServico;
+            cadastro_de_servico::findOrFail($servico->id)->update($data);
+
+            $idServico =  encrypt($servico->cadastro_de_empresas_id);
+
         }
 
 
-        $data['valorDoServico'] =    $valorDoServico;
-        cadastro_de_servico::findOrFail($servico->id)->update($data);
 
 
-
-        return redirect('/dados/servicos/' . $servico->cadastro_de_empresas_id)->with('msg', 'Atualizado com sucesso!');
+        return redirect('/dados/servicos/' . $idServico)->with('msg', 'Atualizado com sucesso!');
     }
 
     public function destroy($id)
     {
 
+
+
+        try {
+            $id = decrypt($id);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
+
+        $user = auth()->user();
+        $idEmpresa = cadastro_de_servico::where('id', $id)->pluck('cadastro_de_empresas_id')->first();
+        $empresa = cadastro_de_empresa::findOrFail( $idEmpresa);
+        if ($user->id != $empresa->user_id) {
+            return redirect('/dashboard');
+        } else {
+
+
         $servico = cadastro_de_servico::findOrFail($id);
 
+        if (produtos_favorito::where('idProduto', $id)->exists()) {
+            produtos_favorito::where('idProduto', $id)->delete();
+        }
         cadastro_de_servico::findOrFail($id)->delete();
 
-        return redirect('/dados/servicos/' . $servico->cadastro_de_empresas_id)->with('msg', 'Evento excluído com sucesso!');
+
+
+
+        $idServico =  encrypt($servico->cadastro_de_empresas_id);
+
+
+        }
+
+
+
+
+
+
+
+        return redirect('/dados/servicos/' .  $idServico)->with('msg', 'Evento excluído com sucesso!');
     }
 }

@@ -6,11 +6,11 @@
     <div class="col-md-9 offset-md-1 pt-2">
         <div class="col-lg-12 col-sm-12 col-md-12 pt-2" align="center">
 
-            <x-meu-meus-clientes empresa_id="{{ $idempresa }}" />
+            <x-meu-meus-clientes empresa_id="{{  encrypt($idempresa) }}" />
 
 
         </div>
-        <form action="/cliente/ranks/{{ $idempresa }}" method="GET" id="searchForm">
+        <form action="/cliente/ranks/{{ encrypt($idempresa) }}" method="GET" id="searchForm">
             <x-btn-busca idbtn="searchranks" name="searchBuscaranks" />
         </form>
 
@@ -49,7 +49,7 @@
                                     <x-btn-whatsapp
                                         numero="{{ str_replace(['(', ')', ' ', '-'], '', $clienteInfo['phone']) }}"
                                         mensagem="Olá!  {{ $clienteInfo['nome'] }} Sentimos sua falta e estamos ansiosos para recebê-lo de volta. Como podemos ajudar você hoje?"
-                                        detalhes="{{ $clienteInfo['id'] }}" idempresa="{{ $idempresa }}" />
+                                        detalhes="{{ encrypt($clienteInfo['id']) }}" idempresa="{{ encrypt($idempresa) }}" />
 
                                 </td>
 

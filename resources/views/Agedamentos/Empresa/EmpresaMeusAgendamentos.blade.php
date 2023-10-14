@@ -6,7 +6,7 @@
 
     <div class="col-12 pt-1 ">
 
-        <x-menu_agendamentos empresa_id="{{ $empresa->id }}" />
+        <x-menu_agendamentos empresa_id="{{ encrypt($empresa->id) }}" />
             @if (count($clienteagendamento) > 0)
 
             <x-agendamentos_clientes :clienteagendamento="$clienteagendamento"

@@ -6,7 +6,7 @@
     <div class="button-containerMeusClientesAgendamentosDetalhes">
         @if ($agendamento_confirmado == 0 && $agendamento_cancelado == 0)
             <div class="btnMeusClientesAgendamentoDetalhes">
-                <form action="/confirmar{{ $agendamento_id }}" method="POST">
+                <form action="/confirmar{{ encrypt($agendamento_id) }}" method="POST">
                     @csrf
                     @method('PUT')
 

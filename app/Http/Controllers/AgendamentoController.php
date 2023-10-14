@@ -320,6 +320,14 @@ class AgendamentoController extends Controller
 
     public function showAgendamentosEmpresa($id, $status)
     {
+    //modificar
+
+        try {
+            $id = decrypt($id);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
         $user = auth()->user();
         $empresa = cadastro_de_empresa::findOrFail($id);
         $search = request('search');
@@ -463,6 +471,17 @@ class AgendamentoController extends Controller
 
     public function showAgendamentosEmpresaDetalhes($id, $idEmpresa)
     {
+
+
+        try {
+            $id = decrypt($id);
+            $idEmpresa =  decrypt($idEmpresa);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
+
+
         $user = auth()->user();
 
         $empresa = cadastro_de_empresa::findOrFail($idEmpresa);
@@ -523,15 +542,44 @@ class AgendamentoController extends Controller
         );
     }
 
-    public function confirmarPedidoEmpresa(Request $request)
+    public function confirmarPedidoEmpresa(Request $request , $id)
     {
 
 
-        $agendamento = Agendamento::findOrFail($request->id);
-        $empresa =  $agendamento->cadastro_de_empresas_id;
-        $agendamento->confirmado = true;
-        $agendamento->save();
-        return redirect('/meus/agendamentos/empresa/' .  $empresa . '/ativos')->with('msg', 'Confirmado com sucesso!');
+        try {
+            $id = decrypt($id);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
+
+        $user = auth()->user();
+
+        $agendamento = Agendamento::findOrFail($id);
+
+        $idEmpresa = Agendamento::pluck('cadastro_de_empresas_id')->first();
+
+        $empresa = cadastro_de_empresa::findOrFail($idEmpresa);
+
+        if ($user->id != $empresa->user_id) {
+            return redirect('/dashboard');
+
+
+        }else{
+            $agendamento->confirmado = true;
+            $agendamento->save();
+
+            $empresa = encrypt($agendamento->cadastro_de_empresas_id) ;
+            return redirect('/meus/agendamentos/empresa/' .  $empresa . '/ativos')->with('msg', 'Confirmado com sucesso!');
+        }
+
+
+
+
+
+
+
+
     }
 
     public function finalizarPedidoEmpresa(Request $request)

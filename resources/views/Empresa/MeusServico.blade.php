@@ -122,7 +122,7 @@
 
 
 
-                        <a href="/edit/servicos/{{ $servico->id }}"
+                        <a href="/edit/servicos/{{ encrypt( $servico->id) }}"
                             class="btn btn-sm btn-outline-warning btndashboardservico mr-3 btnmeusServicos">
                             {{-- editar --}}
                             <x-svg-edit width="14" height="14" margin="3px" />
@@ -134,14 +134,14 @@
                         <button type="button"
                             class="btn btn-sm btn-outline-danger btndashboardservico mr-3 btnmeusServicos"
                             data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            data-servico-id="{{ $servico->id }}"
+                            data-servico-id="{{  encrypt( $servico->id)}}"
                             data-servico-nome="{{ $servico->nomeServico }}"
                             >
 
                             <x-svg-deletar width="14" height="14" margin="3px" />
                         </button>
 
-                        <a href="/produtos/business/{{ $servico->cadastro_de_empresas_id }}/{{ $servico->id }}"
+                        <a href="/produtos/business/{{ encrypt($servico->cadastro_de_empresas_id) }}/{{ encrypt($servico->id)  }}"
                             class="btn btn-sm btn-outline-info btndashboardservico mr-3 btnmeusServicos">
                             {{-- detalhes --}}
                             Detalhes

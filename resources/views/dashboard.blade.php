@@ -71,8 +71,9 @@
                                 </td>
                                 <td>
 
-                                    <a href="/dashboard/edit/{{ $emp->id }}"
-                                        class="btn btn-sm btn-outline-warning btndashboard  btnDashoard"<x-svg-edit
+                                    <a href="/dashboard/edit/{{ encrypt($emp->id)}}"
+                                        class="btn btn-sm btn-outline-warning btndashboard  btnDashoard"
+                                        <x-svg-edit
                                         width="14" height="14" margin="3px" />
 
                                     </a>
@@ -84,18 +85,23 @@
 
                                 </a> --}}
 
-                                    <a href="{{ route('dados.meus.clientes', ['id' => $emp->id, 'status' => 'ativos']) }}"
-                                        class="btn btn-sm btn-outline-info btndashboard  btnDashoard" <x-svg-meus-clientes
+                                    <a href="{{ route('dados.meus.clientes', ['id' => encrypt($emp->id), 'status' => 'ativos']) }}"
+                                        class="btn btn-sm btn-outline-info btndashboard  btnDashoard"
+                                        <x-svg-meus-clientes
                                         width="14" height="14" margin="3px" />
                                     </a>
 
-                                    <a href="/dados/servicos/{{ $emp->id }}"
-                                        class="btn btn-sm btn-outline-info btndashboard  btnDashoard" <x-svg-meusservicos
+                                    <a href="/dados/servicos/{{ encrypt($emp->id)  }}"
+                                        class="btn btn-sm btn-outline-info btndashboard  btnDashoard"
+                                        <x-svg-meusservicos
                                         width="14" height="14" margin="3px" />
                                     </a>
 
 
-                                    <a href="{{ route('meus.clientes.agendamentos.empresa', ['id' => $emp->id, 'status' => 'ativos']) }}"
+
+
+
+                                    <a href="{{ route('meus.clientes.agendamentos.empresa', ['id' => encrypt($emp->id), 'status' => 'ativos']) }}"
                                         class="btn btn-sm btn-outline-warning btndashboardservico  btnDashoard">
 
 
@@ -104,13 +110,13 @@
 
 
                                     @if ($temagendamentos)
-                                        <a href="{{ route('agenda.business', ['id' => $emp->id]) }}"
+                                        <a href="{{ route('agenda.business', ['id' =>  encrypt($emp->id)  ]) }}"
                                             class="btn btn-sm btn-outline-info btndashboardservico btnDashoard">
 
                                             <x-svgCalendardatefill nome="Agenda" width="14" height="14"
                                                 margin="3px" />
                                         </a>
-                                        <a href="{{ route('dashboard.business', ['id' => $emp->id]) }}"
+                                        <a href="{{ route('dashboard.business', ['id' => encrypt($emp->id)]) }}"
                                             class="btn btn-sm btn-outline-info btndashboardservico btnDashoard">
 
                                             <x-svg-dashboard width="14" height="14" margin="3px" />

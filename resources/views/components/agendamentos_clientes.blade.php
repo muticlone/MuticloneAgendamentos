@@ -153,13 +153,13 @@
 
                             @if ($agendamento->confirmado == 0 && $agendamento->cancelado == 0)
                                 <div class="d-flex justify-content-between">
-                                    <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => $agendamento->id, 'idEmpresa' => $empresa_id]) }}"
+                                    <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => encrypt($agendamento->id) , 'idEmpresa' => encrypt($empresa_id)]) }}"
                                         class="btn btn-warning position-relative d-inline-flex align-items-center">
                                         Detalhes
                                         <span class="badge rounded-pill bg-danger ms-2">5</span>
                                     </a>
 
-                                    <form action="/confirmar{{ $agendamento->id }}" method="POST" class="d-inline">
+                                    <form action="/confirmar{{ encrypt($agendamento->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('PUT')
                                         <button type="submit" id="ConfirmarAgendamento"

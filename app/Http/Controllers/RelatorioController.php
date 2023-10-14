@@ -22,6 +22,14 @@ class RelatorioController extends Controller
     {
 
 
+        try {
+            $id = decrypt($id);
+            $idempresa  = decrypt($idempresa);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
+
         $user = auth()->user();
 
         $empresa = cadastro_de_empresa::findOrFail($idempresa);
@@ -181,6 +189,13 @@ class RelatorioController extends Controller
     public function relatorioclientes($id)
     {
 
+        try {
+            $id = decrypt($id);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
+
 
 
         $user = auth()->user();
@@ -293,6 +308,13 @@ class RelatorioController extends Controller
 
     public function relatoriofinanceiro($id)
     {
+        try {
+            $id = decrypt($id);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
+
 
 
 
@@ -383,6 +405,14 @@ class RelatorioController extends Controller
 
     public function relatorioProdutos($id)
     {
+
+        try {
+            $id = decrypt($id);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
+
 
 
         $user = auth()->user();

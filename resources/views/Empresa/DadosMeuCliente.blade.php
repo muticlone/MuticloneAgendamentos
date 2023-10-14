@@ -29,7 +29,7 @@
         <br>
 
 
-        <form action="/relatorio/meu/cliente/{{ $clientesBusca->id }}/{{ $idEmpresa }}">
+        <form action="/relatorio/meu/cliente/{{  encrypt($clientesBusca->id)  }}/{{ encrypt( $idEmpresa )}}">
 
             <button type="submit" class="btn btn-info " >
 

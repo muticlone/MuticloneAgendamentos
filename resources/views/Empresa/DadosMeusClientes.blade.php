@@ -12,7 +12,7 @@
 
     <div class="col-lg-12 col-sm-12 col-md-12 pt-2" align="center">
 
-        <x-meu-meus-clientes empresa_id="{{ $empresa->id }}" />
+        <x-meu-meus-clientes empresa_id="{{ encrypt( $empresa->id) }}" />
 
 
     </div>
@@ -23,14 +23,14 @@
 
         <div class="row">
 
-            <form action="{{ route('dados.meus.clientes', ['id' => $empresa->id, 'status' => 'busca']) }}" method="GET"
+            <form action="{{ route('dados.meus.clientes', ['id' =>  encrypt( $empresa->id), 'status' => 'busca']) }}" method="GET"
                 id="searchForm">
 
                 <x-btn-busca idbtn="search" name="search" />
             </form>
         </div>
 
-        <x-alert-busca-agendamento search="{{ $search }}" href="/dados/meus/clientes/{{ $empresa->id }}/ativos" />
+        <x-alert-busca-agendamento search="{{ $search }}" href="/dados/meus/clientes/{{encrypt( $empresa->id)}}/ativos" />
 
         <div class="table-responsive">
             <table class="table align-middle">
@@ -66,9 +66,11 @@
 
 
 
+
+
                                 <x-btn-whatsapp numero="{{ str_replace(['(', ')', ' ', '-'], '', $cliente->phone) }}"
                                     mensagem="Olá! {{ $cliente->name }} Sentimos sua falta e estamos ansiosos para recebê-lo de volta. Como podemos ajudar você hoje?"
-                                    detalhes="{{ $cliente->id }}" idempresa="{{ $empresa->id }}" />
+                                    detalhes="{{  encrypt($cliente->id)  }}" idempresa="{{  encrypt($empresa->id) }}" />
 
 
                             </td>
@@ -86,7 +88,7 @@
         @elseif($clientesOrdenados->count() === 0)
             <div class="alert alert-warning pt-2" role="alert">
                 Não há eventos disponíveis
-            </div>
+        </div>
         @endif
     </div>
 

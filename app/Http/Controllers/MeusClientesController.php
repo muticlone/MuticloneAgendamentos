@@ -16,6 +16,15 @@ class MeusClientesController extends Controller
     public function showMeusClientes($id, $status)
     {
 
+
+        try {
+            $id = decrypt($id);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
+
+
         $user = auth()->user();
 
         $empresa = cadastro_de_empresa::findOrFail($id);
@@ -140,6 +149,14 @@ class MeusClientesController extends Controller
 
     public function showMeuCliente($id, $idempresa)
     {
+
+        try {
+            $idempresa = decrypt( $idempresa);
+            $id= decrypt($id);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
 
 
         $user = auth()->user();
@@ -367,6 +384,16 @@ class MeusClientesController extends Controller
 
     public function showMeuClienteranks($idempresa)
     {
+
+
+
+        try {
+            $idempresa = decrypt($idempresa);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
+
 
         $user = auth()->user();
 
