@@ -169,7 +169,7 @@
                                     </form>
                                 </div>
                             @elseif ($agendamento->finalizado == 1 && $agendamento->cancelado == 0)
-                                <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => $agendamento->id, 'idEmpresa' => $empresa_id]) }}"
+                                <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => encrypt($agendamento->id), 'idEmpresa' => encrypt($empresa_id)]) }}"
                                     class="btn btn-success position-relative">Detalhes
                                     <span
                                         class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -178,14 +178,14 @@
                                 </a>
                             @elseif ($agendamento->confirmado == 1 && $agendamento->cancelado == 0)
                                 <div class="d-flex justify-content-between">
-                                    <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => $agendamento->id, 'idEmpresa' => $empresa_id]) }}"
+                                    <a href="{{ route('meus.clientes.agendamentosdetalhes', ['id' => encrypt($agendamento->id), 'idEmpresa' => encrypt($empresa_id)]) }}"
                                         class="btn btn-info position-relative">Detalhes
                                         <span
                                             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                             5
                                         </span>
                                     </a>
-                                    <form action="/finalizar{{ $agendamento->id }}" method="POST">
+                                    <form action="/finalizar/{{ encrypt($agendamento->id) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <button type="submit" style="display: block;" id="FinalizarAgendamento"

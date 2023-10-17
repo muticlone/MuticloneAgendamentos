@@ -75,8 +75,8 @@ Route::get('/meus/agendamentos/{status}', [AgendamentoController::class, 'show_A
 
 
 Route::put('/confirmar{id}', [AgendamentoController::class, 'confirmarPedidoEmpresa'])->middleware('auth');
-Route::put('/finalizar{id}', [AgendamentoController::class, 'finalizarPedidoEmpresa'])->middleware('auth');
-Route::put('/cancelar{id}', [AgendamentoController::class, 'cancelarPedidoEmpresa'])->middleware('auth');
+Route::put('/finalizar/{id}', [AgendamentoController::class, 'finalizarPedidoEmpresa'])->middleware('auth');
+Route::put('/cancelar/{id}', [AgendamentoController::class, 'cancelarPedidoEmpresa'])->middleware('auth');
 Route::put('/avaliacao/{id}', [AgendamentoController::class, 'avaliacaoPedidoCliente'])->middleware('auth');
 Route::put('/reavaliacao/{id}', [AgendamentoController::class, 'reavaliacaoPedidoCliente'])->middleware('auth');
 Route::put('/reagendar/{id}', [AgendamentoController::class, 'ReagendarPedidoEmpresaEcliente'])->middleware('auth');

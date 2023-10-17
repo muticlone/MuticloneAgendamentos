@@ -320,7 +320,7 @@ class AgendamentoController extends Controller
 
     public function showAgendamentosEmpresa($id, $status)
     {
-    //modificar
+
 
         try {
             $id = decrypt($id);
@@ -330,32 +330,6 @@ class AgendamentoController extends Controller
         }
         $user = auth()->user();
         $empresa = cadastro_de_empresa::findOrFail($id);
-        $search = request('search');
-        $searchdate = request('searchdate');
-
-
-
-
-        $nomes = Agendamento::where('cadastro_de_empresas_id', $id);
-
-
-        $nomesClientes = $nomes->distinct()
-            ->join('users', 'agendamentos.user_id', '=', 'users.id')
-            ->pluck('users.name')
-            ->toArray();
-
-
-
-        $numerosDosPedidos = Agendamento::where('cadastro_de_empresas_id', $id)
-            ->pluck('numeroDoPedido')->toArray();
-
-        $formaDepagamentoAgendamento = Agendamento::where('cadastro_de_empresas_id', $id)
-            ->distinct()
-            ->pluck('formaDepagamentoAgendamento')
-            ->toArray();
-
-
-
 
 
 
@@ -364,6 +338,35 @@ class AgendamentoController extends Controller
         if ($user->id != $empresa->user_id) {
             return redirect('/dashboard');
         } else {
+
+
+            $search = request('search');
+            $searchdate = request('searchdate');
+
+
+
+
+            $nomes = Agendamento::where('cadastro_de_empresas_id', $id);
+
+
+            $nomesClientes = $nomes->distinct()
+                ->join('users', 'agendamentos.user_id', '=', 'users.id')
+                ->pluck('users.name')
+                ->toArray();
+
+
+
+            $numerosDosPedidos = Agendamento::where('cadastro_de_empresas_id', $id)
+                ->pluck('numeroDoPedido')->toArray();
+
+            $formaDepagamentoAgendamento = Agendamento::where('cadastro_de_empresas_id', $id)
+                ->distinct()
+                ->pluck('formaDepagamentoAgendamento')
+                ->toArray();
+
+
+
+
             if ($search || $searchdate) {
 
 
@@ -494,36 +497,34 @@ class AgendamentoController extends Controller
             $users = User::findOrfail($id_user);
 
 
-        $nomesServicos = $clienteagendamento->nomeServiçoAgendamento;
-        $idsServicos = $clienteagendamento->idServicos;
-        $iduser = $clienteagendamento->user_id;
-        $idagendamento = $clienteagendamento->id;
+            $nomesServicos = $clienteagendamento->nomeServiçoAgendamento;
+            $idsServicos = $clienteagendamento->idServicos;
+            $iduser = $clienteagendamento->user_id;
+            $idagendamento = $clienteagendamento->id;
 
-        $dados = [];
+            $dados = [];
 
-        $notaProduto = avaliacao_produto::where('usuario_id',   $iduser)
-        ->where('agendamentoID' ,$idagendamento)
-        ->get();
-
-
+            $notaProduto = avaliacao_produto::where('usuario_id',   $iduser)
+                ->where('agendamentoID', $idagendamento)
+                ->get();
 
 
-       $notasProdutos = [];
-       foreach ( $notaProduto as $notapr){
-        $notasProdutos[]= $notapr->nota;
-       }
 
 
-        for ($i = 0; $i < count($nomesServicos); $i++) {
-            $nota = $notasProdutos[$i] ?? 0;
-            $dados[] = [
-                'nome' => $nomesServicos[$i],
-                'idsevico' => $idsServicos[$i],
-                'nota' => $nota,
-            ];
-        }
+            $notasProdutos = [];
+            foreach ($notaProduto as $notapr) {
+                $notasProdutos[] = $notapr->nota;
+            }
 
 
+            for ($i = 0; $i < count($nomesServicos); $i++) {
+                $nota = $notasProdutos[$i] ?? 0;
+                $dados[] = [
+                    'nome' => $nomesServicos[$i],
+                    'idsevico' => $idsServicos[$i],
+                    'nota' => $nota,
+                ];
+            }
         }
 
 
@@ -542,7 +543,7 @@ class AgendamentoController extends Controller
         );
     }
 
-    public function confirmarPedidoEmpresa(Request $request , $id)
+    public function confirmarPedidoEmpresa($id)
     {
 
 
@@ -563,86 +564,130 @@ class AgendamentoController extends Controller
 
         if ($user->id != $empresa->user_id) {
             return redirect('/dashboard');
-
-
-        }else{
+        } else {
             $agendamento->confirmado = true;
             $agendamento->save();
 
-            $empresa = encrypt($agendamento->cadastro_de_empresas_id) ;
+            $empresa = encrypt($agendamento->cadastro_de_empresas_id);
             return redirect('/meus/agendamentos/empresa/' .  $empresa . '/ativos')->with('msg', 'Confirmado com sucesso!');
+        }
+    }
+
+    public function finalizarPedidoEmpresa($id)
+    {
+
+        try {
+            $id = decrypt($id);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
+
+        $user = auth()->user();
+
+        $agendamento = Agendamento::findOrFail($id);
+        $idempresa =  encrypt($agendamento->cadastro_de_empresas_id);
+        $empresa = cadastro_de_empresa::findOrFail(decrypt($idempresa));
+
+
+        if ($user->id != $empresa->user_id) {
+            return redirect('/dashboard');
+        } else {
+
+            $agendamento->finalizado = true;
+            $agendamento->data_hora_finalizacao_agendamento = Carbon::now();
+            $agendamento->save();
+        }
+
+
+
+        return redirect('/meus/agendamentos/empresa/' . $idempresa . '/finalizados')->with('msg', 'Finalizado com sucesso!');
+    }
+
+    public function cancelarPedidoEmpresa(Request $request, $id)
+    {
+
+
+
+        try {
+            $id = decrypt($id);
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
+
+        $user = auth()->user();
+
+        $agendamento = Agendamento::findOrFail($id);
+        $idempresa =  encrypt($agendamento->cadastro_de_empresas_id);
+        $empresa = cadastro_de_empresa::findOrFail(decrypt($idempresa));
+
+
+        if ($user->id != $empresa->user_id) {
+            return redirect('/dashboard');
+        } else {
+
+
+            $urlAnterior = URL::previous();
+            $motivoCacelamento =  $request->motivoCacelamento;
+
+            $agendamento->confirmado = false;
+            $agendamento->finalizado = false;
+            $agendamento->cancelado = true;
+            $agendamento->motivoCancelamento =  $motivoCacelamento;
+            $agendamento->data_hora_cancelamento_agendamento = Carbon::now();
+            $agendamento->save();
         }
 
 
 
 
 
-
-
-
-    }
-
-    public function finalizarPedidoEmpresa(Request $request)
-    {
-        $agendamento = Agendamento::findOrFail($request->id);
-        $empresa =  $agendamento->cadastro_de_empresas_id;
-        $agendamento->finalizado = true;
-        $agendamento->data_hora_finalizacao_agendamento = Carbon::now();
-        $agendamento->save();
-        return redirect('/meus/agendamentos/empresa/' .  $empresa . '/finalizados')->with('msg', 'Finalizado com sucesso!');
-    }
-
-    public function cancelarPedidoEmpresa(Request $request)
-    {
-
-
-        $urlAnterior = URL::previous();
-
-
-        $motivoCacelamento =  $request->motivoCacelamento;
-        $agendamento = Agendamento::findOrFail($request->id);
-        $agendamento->confirmado = false;
-        $agendamento->finalizado = false;
-        $agendamento->cancelado = true;
-        $agendamento->motivoCancelamento =  $motivoCacelamento;
-        $agendamento->data_hora_cancelamento_agendamento = Carbon::now();
-        $agendamento->save();
-
-        $empresa =  $agendamento->cadastro_de_empresas_id;
-
         if (Str::contains($urlAnterior, '/meus/clientes/agendamentos/detalhes/')) {
 
-            return redirect('/meus/agendamentos/empresa/' . $empresa . '/cancelados')->with('msg', 'Cancelado com sucesso!');
+            return redirect('/meus/agendamentos/empresa/' .  $idempresa . '/cancelados')->with('msg', 'Cancelado com sucesso!');
         } else {
             return redirect('/meus/agendamentos/cancelados')->with('msg', 'Cancelado com sucesso!');
         }
     }
 
-    public function ReagendarPedidoEmpresaEcliente(Request $request)
+    public function ReagendarPedidoEmpresaEcliente(Request $request, $id)
     {
+
+
+        try {
+            $id = decrypt($id);
+
+
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+
+            return redirect('/dashboard');
+        }
+        $agendamento = Agendamento::findOrFail($id);
+
+        $idempresa =  encrypt($agendamento->cadastro_de_empresas_id);
+      //  $empresa = cadastro_de_empresa::findOrFail(decrypt($idempresa));
 
 
         $urlAnterior = URL::previous();
         $novaData =  $request->dataHorarioAgendamento;
-        $agendamento = Agendamento::findOrFail($request->id);
+
         $agendamento->confirmado = false;
         $agendamento->finalizado = false;
         $agendamento->cancelado = false;
         $agendamento->dataHorarioAgendamento =   $novaData;
         $agendamento->save();
-        $empresa =  $agendamento->cadastro_de_empresas_id;
+
+
 
 
         if (Str::contains($urlAnterior, '/meus/clientes/agendamentos/detalhes/')) {
 
-            return redirect('/meus/agendamentos/empresa/' .  $empresa . '/pendentes')->with('msg', 'Reagendado com sucesso!');
+            return redirect('/meus/agendamentos/empresa/' .   $idempresa . '/pendentes')->with('msg', 'Reagendado com sucesso!');
         } else {
             return redirect('/meus/agendamentos/pendentes')->with('msg', 'Reagendado com sucesso!');
         }
     }
-
-
-
 
     public function show_Agendamentos_Clientes($status, Request $request)
     {
@@ -773,8 +818,6 @@ class AgendamentoController extends Controller
     }
 
 
-
-
     public function show_Agendamentos_Detalhes_Clientes($id)
     {
 
@@ -798,16 +841,16 @@ class AgendamentoController extends Controller
         $dados = [];
 
         $notaProduto = avaliacao_produto::where('usuario_id',   $iduser)
-        ->where('agendamentoID' ,$idagendamento)
-        ->get();
+            ->where('agendamentoID', $idagendamento)
+            ->get();
 
 
 
 
-       $notasProdutos = [];
-       foreach ( $notaProduto as $notapr){
-        $notasProdutos[]= $notapr->nota;
-       }
+        $notasProdutos = [];
+        foreach ($notaProduto as $notapr) {
+            $notasProdutos[] = $notapr->nota;
+        }
 
 
         for ($i = 0; $i < count($nomesServicos); $i++) {
@@ -846,11 +889,6 @@ class AgendamentoController extends Controller
     }
 
 
-
-
-
-
-
     public function avaliacaoPedidoCliente(Request $request)
     {
         $user = auth()->user();
@@ -869,7 +907,7 @@ class AgendamentoController extends Controller
         $idempresaincrpt = $request->input('idempresa');
         $agendamentoIDincript = $request->input('agendamentoID');
 
-        foreach ( $idServicosincrpit as $subarray) {
+        foreach ($idServicosincrpit as $subarray) {
             $decryptedSubarray = [];
             foreach ($subarray as $item) {
                 $decryptedSubarray[] = decrypt($item);
@@ -877,7 +915,7 @@ class AgendamentoController extends Controller
             $idServicos[] = $decryptedSubarray;
         }
 
-        $idempresa= decrypt($idempresaincrpt);
+        $idempresa = decrypt($idempresaincrpt);
         $agendamentoID =  decrypt($agendamentoIDincript);
 
 
@@ -984,7 +1022,8 @@ class AgendamentoController extends Controller
         return back()->with('msg', 'Avaliado com sucesso!!');
     }
 
-    public function reavaliacaoPedidoCliente(Request $request){
+    public function reavaliacaoPedidoCliente(Request $request)
+    {
 
 
 
@@ -1004,7 +1043,7 @@ class AgendamentoController extends Controller
         $idempresaincrpt = $request->input('idempresa');
         $agendamentoIDincript = $request->input('agendamentoID');
 
-        foreach ( $idServicosincrpit as $subarray) {
+        foreach ($idServicosincrpit as $subarray) {
             $decryptedSubarray = [];
             foreach ($subarray as $item) {
                 $decryptedSubarray[] = decrypt($item);
@@ -1012,7 +1051,7 @@ class AgendamentoController extends Controller
             $idServicos[] = $decryptedSubarray;
         }
 
-        $idempresa= decrypt($idempresaincrpt);
+        $idempresa = decrypt($idempresaincrpt);
         $agendamentoID =  decrypt($agendamentoIDincript);
 
 
@@ -1053,8 +1092,8 @@ class AgendamentoController extends Controller
             $notaServico = $resut['notaServico'][$i];
 
             $avaliacaoServico = avaliacao_produto::where('idServicos', $idServico)
-            ->where('agendamentoID' ,   $agendamentoID)
-            ->first();
+                ->where('agendamentoID',   $agendamentoID)
+                ->first();
 
 
 
@@ -1080,8 +1119,5 @@ class AgendamentoController extends Controller
 
 
         return back()->with('msg', 'Atualizado  com sucesso!!');
-
-
-
     }
 }

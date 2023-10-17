@@ -51,7 +51,7 @@
 
 
             <div class="btnMeusClientesAgendamentoDetalhes">
-                <form action="/cancelar{{ $agendamento_id }}" method="POST">
+                <form action="/cancelar/{{encrypt($agendamento_id)}}" method="POST">
                     @csrf
                     @method('PUT')
                     <button type="submit" style="display: block;" id="cancelarAgendamento"

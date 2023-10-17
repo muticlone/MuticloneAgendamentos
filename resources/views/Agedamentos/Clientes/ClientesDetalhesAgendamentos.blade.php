@@ -144,7 +144,7 @@
                                     </div>
                                 @endif
                                 <div class="col-lg-3 col-sm-12 col-md-12 pt-2">
-                                    <form id="FormReagendar" action="/reagendar/{{ $agendamento->id }}" method="POST">
+                                    <form id="FormReagendar" action="/reagendar/{{ encrypt($agendamento->id ) }}" method="POST">
                                         @csrf
                                         @method('PUT')
 
@@ -152,7 +152,9 @@
                                         <input type="datetime-local" class="form-control  campodesablitado"
                                             id="dataHorarioAgendamento" name="dataHorarioAgendamento"
                                             aria-describedby="validationTooltipUsernamePrepend"
-                                            value="{{ $agendamento->dataHorarioAgendamento }}" required />
+                                            value="{{ $agendamento->dataHorarioAgendamento }}" required
+                                            required min="<?= date('Y-m-d\TH:i'); ?>"
+                                            />
                                     </form>
                                 </div>
                                 @if ($agendamento->finalizado == 1)
