@@ -238,7 +238,7 @@ svg {
 .conteiner-search {
     position: relative;
     z-index: 2;
-    top: 36%;
+    top: 58%;
     transform: translateY(-50%);
     left: 16%;
 
@@ -777,7 +777,7 @@ svg {
 
 
 /* Estilos para telas menores que 479px (celular) */
-@media (max-width: 479px) {
+@media (max-width: 768px) {
 
 
 

@@ -21,6 +21,8 @@
                 aria-label="Slide 8"></button>
             <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="9"
                 aria-label="Slide 9"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="10"
+                aria-label="Slide 10"></button>
 
 
 
@@ -35,12 +37,12 @@
                 </div>
 
 
-                <div class="carousel-caption d-none d-lg-block">
+                {{-- <div class="carousel-caption d-none d-lg-block">
 
 
                     <h5 class="txt-carousel-caption ">Faça uma busca personalizada por serviços que atendam às suas
                         preferências.</h5>
-                </div>
+                </div> --}}
             </div>
             <div class="carousel-item" data-bs-interval="8000">
                 <div class="conteiner-img">
@@ -48,23 +50,13 @@
 
                 </div>
 
-                <div class="carousel-caption d-none d-lg-block">
+                {{-- <div class="carousel-caption d-none d-lg-block">
                     <h5 class="txt-carousel-caption ">Encontre os melhores serviços para suas necessidades!</h5>
-                </div>
+                </div> --}}
             </div>
 
 
-            <div class="carousel-item" data-bs-interval="8000">
-                <div class="container-img">
-                    <img src="/img/tatuagem.png" class="d-block w-100" alt="...">
 
-                </div>
-
-                <div class="carousel-caption d-none d-lg-block">
-                    <h5 class="txt-carousel-caption ">Encontre profissionais altamente qualificados para atender às suas
-                        demandas.</h5>
-                </div>
-            </div>
 
 
 
@@ -74,9 +66,9 @@
 
                 </div>
 
-                <div class="carousel-caption d-none d-lg-block">
+                {{-- <div class="carousel-caption d-none d-lg-block">
                     <h5 class="txt-carousel-caption ">Busque serviços especializados para otimizar o seu dia a dia.</h5>
-                </div>
+                </div> --}}
             </div>
 
             <div class="carousel-item" data-bs-interval="8000">
@@ -85,11 +77,11 @@
 
                 </div>
 
-                <div class="carousel-caption d-none d-lg-block">
+                {{-- <div class="carousel-caption d-none d-lg-block">
                     <h5 class="txt-carousel-caption ">Aqui você encontra tudo o que precisa em um só lugar: serviços de
                         qualidade,
                         confiança e variedade.</h5>
-                </div>
+                </div> --}}
             </div>
 
             <div class="carousel-item" data-bs-interval="8000">
@@ -98,11 +90,11 @@
 
                 </div>
 
-                <div class="carousel-caption d-none d-lg-block">
+                {{-- <div class="carousel-caption d-none d-lg-block">
                     <h5 class="txt-carousel-caption ">Encontre profissionais altamente qualificados para atender às suas
                         demandas.
                     </h5>
-                </div>
+                </div> --}}
             </div>
 
             <div class="carousel-item" data-bs-interval="8000">
@@ -111,10 +103,10 @@
 
                 </div>
 
-                <div class="carousel-caption d-none d-lg-block">
+                {{-- <div class="carousel-caption d-none d-lg-block">
 
                     <h5 class="txt-carousel-caption ">Encontre profissionais especializados em diversos setores.</h5>
-                </div>
+                </div> --}}
             </div>
 
             <div class="carousel-item" data-bs-interval="8000">
@@ -123,10 +115,10 @@
 
                 </div>
 
-                <div class="carousel-caption d-none d-lg-block">
+                {{-- <div class="carousel-caption d-none d-lg-block">
                     <h5 class="txt-carousel-caption ">Busque serviços especializados para otimizar o seu dia a dia.
                     </h5>
-                </div>
+                </div> --}}
             </div>
 
             <div class="carousel-item" data-bs-interval="8000">
@@ -135,10 +127,30 @@
 
                 </div>
 
-                <div class="carousel-caption d-none d-lg-block">
+                {{-- <div class="carousel-caption d-none d-lg-block">
                     <h5 class="txt-carousel-caption ">Explore soluções especializadas para aprimorar a sua rotina diária.
                     </h5>
+                </div> --}}
+            </div>
+
+            <div class="carousel-item" data-bs-interval="8000">
+                <div class="container-img">
+                    <img src="/img/jardineiro.png" class="d-block w-100" alt="...">
+
                 </div>
+
+                {{-- <div class="carousel-caption d-none d-lg-block">
+                    <h5 class="txt-carousel-caption ">Encontre profissionais altamente qualificados para atender às suas
+                        demandas.</h5>
+                </div> --}}
+            </div>
+            <div class="carousel-item" data-bs-interval="8000">
+                <div class="container-img">
+                    <img src="/img/personal.png" class="d-block w-100" alt="...">
+
+                </div>
+
+
             </div>
 
 
